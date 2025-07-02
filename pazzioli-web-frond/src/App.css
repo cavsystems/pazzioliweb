@@ -1,0 +1,7 @@
+@import "tailwindcss";
+/*estilos modulo auth*/
+.imagen-login-pazzioli{
+  transform: scale(0.5);
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
