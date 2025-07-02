@@ -17,13 +17,17 @@ export type InputProps<C extends React.ElementType = typeof OutlinedInput> =
   Omit<React.ComponentPropsWithoutRef<C>, 'as' | 'type'> & {
     as?: C | undefined; //permite pasar un componente personalizado como as, si no se pasa, se usara OutlinedInput por defecto
     label: string;
-    type?: 'text' | 'password' | 'email' | 'number';
+    type?: string |'text' | 'password' | 'email' | 'number';
     showPassword?: boolean | undefined; //para mostrar u ocultar la contraseña
-    Icon: React.ComponentType<any>;
+   handleClickShowPassword :()=> void;
+   handleMouseDownPassword:(event: React.MouseEvent<HTMLButtonElement>)=> void;
+   handleMouseUpPassword:(event: React.MouseEvent<HTMLButtonElement>)=> void
+    Icon: React.ComponentType<any> | undefined;
+    tipoicon?: 'password' | undefined; //para definir el tipo de icono que se mostrara
     
 };
 //Al usar generics <C extends React.ElementType>, as puede ser cualquier componente.
-function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, Icon,as, showPassword,...rest}: InputProps<C>) {
+function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, Icon,as, showPassword,tipoicon,...rest}: InputProps<C>) {
     const Component = as || OutlinedInput; //elige el componente real a renderizar.
 
 
@@ -34,11 +38,15 @@ function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, 
         type={type}
         endAdornment={
           <InputAdornment position="end">
-          {type==='password' ? <IconButton
+          {tipoicon ? <IconButton
               aria-label={
             showPassword  ? 'hide the password' : 'display the password'
               }
+              onClick={rest.handleClickShowPassword}    
+              onMouseDown={rest.handleMouseDownPassword}
+            onMouseUp={rest.handleMouseUpPassword}
               edge="end"
+              
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>:<IconButton >{ Icon && <Icon/>}</IconButton> }
