@@ -29,10 +29,18 @@ export type InputProps<C extends React.ElementType = typeof OutlinedInput> =
 //Al usar generics <C extends React.ElementType>, as puede ser cualquier componente.
 function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, Icon,as, showPassword,tipoicon,...rest}: InputProps<C>) {
     const Component = as || OutlinedInput; //elige el componente real a renderizar.
-
-
+const hasError = rest.error;
+ console.log(Icon)
     return <>
-     <InputLabel htmlFor="custom-input">{label}</InputLabel>
+     <InputLabel htmlFor="custom-input"  sx={{
+      color: hasError ? 'red' : 'black',
+      '&.Mui-focused': {
+        color: hasError ? 'red' : 'black',
+      },
+      '&.MuiInputLabel-shrink': {
+        color: hasError ? 'red' : 'black',
+      },
+    }}>{label}</InputLabel>
       <Component
         id="outlined-adornment-password"
         type={type}
@@ -46,6 +54,7 @@ function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, 
               onMouseDown={rest.handleMouseDownPassword}
             onMouseUp={rest.handleMouseUpPassword}
               edge="end"
+            
               
             >
               {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -53,6 +62,7 @@ function Input<C extends React.ElementType = typeof OutlinedInput>({label,type, 
           </InputAdornment>
         }
         label={label}
+         {...rest} 
       />
 
     
