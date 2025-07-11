@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { Login } from '../views/login/login'
+
 interface AuthState {
     isAuthenticated: boolean;
     user: any | null;
@@ -23,7 +23,7 @@ const initialauth:AuthState = {
   //el estado inicial es un objeto que contiene las propiedades que necesitamos para manejar el estado de
   initialState: initialauth,
   reducers: {
-  login(state, action:PayloadAction<{ token: string; user: any;proces:string }>){
+  Login(state, action:PayloadAction<{ token: string; user: any;proces:string }>){
    
 switch (action.payload.proces) {
     case 'en proceso':
@@ -63,5 +63,5 @@ switch (action.payload.proces) {
     },}
     
 })
-export const { login } = AuthSlice.actions
+export const { Login } = AuthSlice.actions
 export default AuthSlice.reducer

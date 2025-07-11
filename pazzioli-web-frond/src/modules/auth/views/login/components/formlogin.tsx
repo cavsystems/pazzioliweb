@@ -10,6 +10,7 @@ import type { SelectChangeEvent } from "@mui/material/Select";
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import TextField from "@mui/material/TextField";
 import FormHelperText from "@mui/material/FormHelperText";
+import { Authcontex } from "../../../authcontext/autcontext";
 //formulario de inicio de sesion
 type Inputs = {
   documento: string;
@@ -30,7 +31,9 @@ export function Formlogin() {
     password: '',
     empresa: '',
   }
+
 });
+const {login}=Authcontex()
     const [showPassword, setShowPassword] = React.useState(true);
     const [tipo, settipo] = React.useState('password');
 
@@ -53,8 +56,12 @@ const element= ()=>{
       };
   //funcion que se ejecuta al enviar el formulario
   //handleSubmit es una funcion de react-hook-form que se encarga de manejar el envio del formulario
-      const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
-
+      const onSubmit: SubmitHandler<Inputs> =async (data) => {
+  await login({
+    login:data.usuario,
+    password:data.password
+  })
+      }
     return (  
         <>
         <form className="flex flex-col gap-y-8" onSubmit={handleSubmit(onSubmit)}>

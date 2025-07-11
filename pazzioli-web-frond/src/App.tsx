@@ -8,6 +8,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Login } from './modules/auth/views/login/login';
+import { Inicio } from './modules/inicio/views/Inicio';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>} />
+      <Route path="/inicio" element={<Inicio/>} />
     </Routes>
      </BrowserRouter>
    
