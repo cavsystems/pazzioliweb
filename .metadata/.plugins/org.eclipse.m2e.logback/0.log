@@ -1,1 +1,13 @@
 2025-07-07 09:41:30,170 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2025-07-11 16:15:03,587 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-07-11 16:15:35,044 [Worker-2: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-07-11 16:15:38,783 [Worker-2: Update Maven projects configuration] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:pazzioli-web-backend:0.0.1-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-07-11 16:15:42,377 [Worker-2: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /pazzioli-web-backend/src/main/java
+2025-07-11 16:15:42,395 [Worker-2: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /pazzioli-web-backend/src/main/resources
+2025-07-11 16:15:42,787 [Worker-2: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /pazzioli-web-backend/src/main/resources
+2025-07-11 16:15:42,854 [Worker-2: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /pazzioli-web-backend/src/test/java
+2025-07-11 16:15:42,861 [Worker-2: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /pazzioli-web-backend/src/test/resources
+2025-07-11 16:15:48,339 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-07-11 16:15:48,414 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-07-11 16:15:48,432 [Worker-0: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\src\test\resources
+2025-07-11 16:15:48,694 [Worker-2: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 1 poms: local refresh takes 0,00 sec, refresh facades takes 6,00 sec, update config takes 7,00 sec 
