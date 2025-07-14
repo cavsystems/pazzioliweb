@@ -19,21 +19,8 @@ type Inputs = {
    empresa: string;
 };
 export function Formlogin() {
-  //react-hook-form para manejar el formulario
-  //con useForm se crea un hook que maneja el estado del formulario
-  //destructuramos el hook para obtener las funciones y variables que necesitamos
-  //control: para controlar el formulario
-   const { control, handleSubmit, register,  watch, formState: { errors } } = useForm({
-       mode: 'onBlur',
-  defaultValues: {
-    documento: '',
-    usuario: '',
-    password: '',
-    empresa: '',
-  }
+ 
 
-});
-const {login}=Authcontex()
     const [showPassword, setShowPassword] = React.useState(true);
     const [tipo, settipo] = React.useState('password');
 
@@ -54,14 +41,8 @@ const element= ()=>{
       const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
       };
-  //funcion que se ejecuta al enviar el formulario
-  //handleSubmit es una funcion de react-hook-form que se encarga de manejar el envio del formulario
-      const onSubmit: SubmitHandler<Inputs> =async (data) => {
-  await login({
-    login:data.usuario,
-    password:data.password
-  })
-      }
+  
+    
     return (  
         <>
         <form className="flex flex-col gap-y-8" onSubmit={handleSubmit(onSubmit)}>

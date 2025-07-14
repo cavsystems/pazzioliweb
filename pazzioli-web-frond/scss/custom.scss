@@ -1,0 +1,28 @@
+
+//aqui creare clase personalizables estilidas para adicionas en mis estilos de core
+//ui
+//aqui tanbien podemos cambiar algunas variables de corui como por ejemplo danger 
+//que da un color rojo le puedo especificar uno diferente aqui
+@use "sass:map";
+@use "@coreui/coreui/scss/variables" as *;
+$primary: #0074d9;
+$danger: rgba(231, 76, 60, 0.2);
+
+$custom-colors: (
+  "custom-background": #900
+);
+$custom-colors-login:(
+"back-ground-login":#F3F4F7
+);
+
+$base-theme-colors: (
+  "primary": $primary,
+  "danger": $danger
+);
+
+//modifico y registro las clases que voy autlizar para dar estilos
+$theme-colors: map.merge(map.merge($base-theme-colors, $custom-colors),$custom-colors-login);
+
+
+@use "@coreui/coreui/scss/coreui";
+

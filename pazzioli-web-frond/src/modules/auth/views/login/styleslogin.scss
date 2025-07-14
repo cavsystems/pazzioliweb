@@ -1,0 +1,83 @@
+.bg-login-image {
+  background-image: url('/imgs/pazzioli.png');
+  background-size:900px;
+  background-position:calc(100% + 270px) calc(100% + 600px);
+  background-repeat: no-repeat;
+ 
+ 
+  
+  
+}
+.overflow-hiddenlogin{
+    overflow:  hidden !important;
+    position: relative;
+}
+.dimensionesfondo {
+  position: absolute;
+  bottom:-70%;
+right:  -29%;
+  transform: scale(100%) rotateX(-20deg)  ;
+  transform-origin: right bottom;
+}
+
+@media (max-width:1102px){
+  .dimensionesfondo {
+  bottom:-80%;
+right:  -35%;
+  }
+ 
+}
+
+@media (max-width:430px){
+  .dimensionesfondo {
+  bottom:-55%;
+right:  -80%;
+  }
+ 
+}
+
+@media (max-width:375px){
+  .dimensionesfondo {
+  bottom:-75%;
+right:  -99%;
+  }
+ 
+}
+
+@media (max-width:350px){
+  .dimensionesfondo {
+  bottom:-59%;
+right:  -99%;
+  }
+ 
+}
+.dimensiones{
+ height: 250px; // o lo que necesites
+  width: 250px;
+}
+
+.Success{
+    background-color: var(--bs-btn-bg);
+}
+
+.bnt:hover{
+    background-color:#145a32  !important;
+   
+}
+
+.botonsubmit-login{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.login-parent{
+    justify-content: center;
+}
+
+.imagenlogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

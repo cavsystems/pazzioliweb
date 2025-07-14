@@ -1,7 +1,16 @@
-@import "tailwindcss";
+
 /*estilos modulo auth*/
-.imagen-login-pazzioli{
-  transform: scale(0.5);
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
+:root {
+
+/* Colors: */
+--blanco: #FFFFFF;
+--gris-claro: #F3F4F7;
+--gris-textos: #555555;
+--gris-bordes: #D3D4D4;
+--gris-pazzioli: #908E92;
+--azul-pazzioli: #5AADDC;
+--naranja-pazzioli: #F09700;
+--verde-pazzioli: #97BD13;
 }
+
+
