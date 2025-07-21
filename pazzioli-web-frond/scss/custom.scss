@@ -3,8 +3,11 @@
 //ui
 //aqui tanbien podemos cambiar algunas variables de corui como por ejemplo danger 
 //que da un color rojo le puedo especificar uno diferente aqui
+@use "../src/App.css";
 @use "sass:map";
 @use "@coreui/coreui/scss/variables" as *;
+//@use "@coreui/coreui/scss/utilities";
+
 $primary: #0074d9;
 $danger: rgba(231, 76, 60, 0.2);
 
@@ -15,6 +18,7 @@ $custom-colors-login:(
 "back-ground-login":#F3F4F7
 );
 
+
 $base-theme-colors: (
   "primary": $primary,
   "danger": $danger
@@ -24,5 +28,20 @@ $base-theme-colors: (
 $theme-colors: map.merge(map.merge($base-theme-colors, $custom-colors),$custom-colors-login);
 
 
-@use "@coreui/coreui/scss/coreui";
 
+@use "@coreui/coreui/scss/coreui";
+/*$utilities: map.merge(
+  $utilities,
+  (
+    "font-letra": (
+      property: font-family,
+      class: font-letra,
+      responsive: false,
+      values: (
+        "open-sans": ('Open Sans' sans-serif),
+        "roboto": (Roboto sans-serif)
+      )
+    )
+  )
+);
+@use "@coreui/coreui/scss/utilities/api";*/

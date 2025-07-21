@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.pazzioliweb</groupId>
+    <artifactId>mi-proyecto</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>web</artifactId>
+   <dependencies>
+  <dependency>
+  <!--siempre que requiero de un modulo debo establecerlo como dependencia en el modulo de pom que lo requiere
+  como como este modulo representa el modulo puntual del prollecto deber establecer todos los modulos que creo para trabajar con
+  la aplicacion aqui -->
+  <groupId>com.pazzioliweb</groupId>
+  <artifactId>auth</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</dependency>
+ </dependencies>
+
+</project>
