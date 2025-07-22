@@ -3458,3 +3458,32 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact mysql:mysql-c
 2025-07-21 10:33:25,705 [Worker-25: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
 2025-07-21 10:33:25,706 [Worker-25: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
 2025-07-21 10:33:27,021 [Worker-25: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 5 poms: local refresh takes 0,00 sec, refresh facades takes 4,00 sec, update config takes 1,00 sec 
+2025-07-21 11:04:07,594 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-07-21 11:04:08,221 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-07-21 11:04:09,342 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-07-21 11:04:09,498 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-07-21 11:04:09,498 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-07-21 11:04:09,637 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-07-21 11:04:09,779 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-07-21 11:04:09,813 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-07-21 11:04:09,907 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-07-21 11:04:09,923 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-07-21 11:04:09,928 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-07-21 11:04:09,929 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-07-21 11:04:12,552 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/main/java
+2025-07-21 11:04:12,554 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/main/resources
+2025-07-21 11:04:12,554 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/test/java
+2025-07-21 11:04:12,555 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/test/resources
+2025-07-21 11:04:12,891 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/main/java
+2025-07-21 11:04:12,892 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/main/resources
+2025-07-21 11:04:12,893 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/test/java
+2025-07-21 11:04:12,895 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/test/resources
+2025-07-21 11:04:13,221 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/main/java
+2025-07-21 11:04:13,222 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/main/resources
+2025-07-21 11:04:13,223 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/test/java
+2025-07-21 11:04:13,224 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/test/resources
+2025-07-21 11:04:13,576 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/main/java
+2025-07-21 11:04:13,577 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/main/resources
+2025-07-21 11:04:13,577 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
+2025-07-21 11:04:13,578 [Worker-37: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
+2025-07-21 11:04:14,138 [Worker-37: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 5 poms: local refresh takes 0,00 sec, refresh facades takes 4,00 sec, update config takes 1,00 sec 

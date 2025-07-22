@@ -80,6 +80,11 @@ public class AuthController {
             		}
             	 
             	 crearSesion(usuario.getCodigo());
+            	 
+            	 
+            	 
+            	 
+            	 
             	
             	
             	  
@@ -122,7 +127,10 @@ public class AuthController {
        
     }
     
-   
+   public void essuperadministrador(int id) {
+	   
+	   
+   }
     public void crearSesion(int codigo) {
     	String fechaStr = "1990-01-01 00:00:00";
     	ZoneId zonaBogota = ZoneId.of("America/Bogota");

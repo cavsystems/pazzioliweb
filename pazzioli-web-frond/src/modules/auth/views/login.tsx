@@ -76,35 +76,57 @@ const {login}=Authcontex()
     return (
         <>
         
-         <div className="container-fluid bg-back-ground-login    min-vh-100  overflow-hiddenlogin">
+         <div className=" bg-back-ground-login overflow-hiddenlogin">
            <img src="/imgs/pazziolilogo.svg" className="rounded dimensionesfondo" />
-  <div className="row login-parent justify-content-center">
+  <div className="row login-parent justify-content-center vh-100 align-items-end align-items-md-center overflow-y-auto  ">
     
-    <div className="col-12 col-sm-8 col-md-5 col-lg-5 col-xl-5 login-child">
+    <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5 login-child p-4  p-md-5 p-sm-3 logincontainer">
       <div className="imagenlogin text-center">
         {imagenpazzioliweb()}
       </div>
 
-      <CCard >
-        <CCardHeader className="p-0"  >
+      <CCard  className="bordercard">
+        <CCardHeader className="p-0 visually-hidden"   >
           
-         <CAlert color="danger" className="d-flex align-items-center h-10 m-0">
+         <CAlert color="danger" className="d-flex align-items-center h-10 m-0 ">
       
         <div className="letrapazzioli">An example danger alert with an icon</div>
       </CAlert>
             
         </CCardHeader>
         <CCardBody>
-          <CCardTitle className="font-stretch-normal letrapazzioli">Iniciar sesión</CCardTitle>
+          <CCardTitle className="fonttitle pt-4 pb-2">Iniciar sesión</CCardTitle>
 
           <CForm className="row"  onSubmit={handleSubmit(onSubmit)}>
             <CInputGroup className={`mb-3 has-validation ${errors.documento ? 'is-invalid' : ''}`}>
               <CInputGroupText>
                   <img src="/imgs/documento.svg"/>
               </CInputGroupText>
-              <CFormInput placeholder="Nombre de usuario"   {...register('documento', { required: 'Este campo es obligatorio' })}
+              <CFormInput placeholder="Identificacion"   {...register('documento', { required: 'Este campo es obligatorio' })}
     invalid={isSubmitted && !!errors.documento}
     feedbackInvalid={isSubmitted &&  errors.documento?.message} />
+            </CInputGroup>
+                <CInputGroup className="mb-3">
+               <Controller  
+            name="db"
+  control={control}
+  rules={{ required: 'Debes seleccionar una opción' }}
+  render={({ field }) => (
+    <>
+      <CFormSelect
+        {...field}
+         defaultValue=""
+        invalid={isSubmitted && !!errors.db}
+        options={[  { label: 'Empresa' },{ label: 'pruebas' }]} 
+        className="fontletre"
+      />
+      {errors.db && (
+        <CFormFeedback invalid>
+          {errors.db.message}
+        </CFormFeedback>
+      )}
+    </>
+  )}/>
             </CInputGroup>
 
             <CInputGroup className="mb-3">
@@ -125,35 +147,19 @@ const {login}=Authcontex()
     feedbackInvalid={isSubmitted &&  errors.password?.message} />
             </CInputGroup>
        
-            <CInputGroup className="mb-3">
-               <Controller  
-            name="db"
-  control={control}
-  rules={{ required: 'Debes seleccionar una opción' }}
-  render={({ field }) => (
-    <>
-      <CFormSelect
-        {...field}
-         defaultValue=""
-        invalid={isSubmitted && !!errors.db}
-        options={[  { label: 'pruebas' }, ]}
-      />
-      {errors.db && (
-        <CFormFeedback invalid>
-          {errors.db.message}
-        </CFormFeedback>
-      )}
-    </>
-  )}/>
-            </CInputGroup>
+        
 
             <CInputGroup className="d-flex justify-content-center">
-              <CButton color="success" type="submit" style={{backgroundColor:"#97BD13", color:"#ffff" ,padding:'8px 30px'}} className="mt-3">Continuar</CButton>
+              <CButton  type="submit"  className="mt-3 botonloginsucess"> <span className="spanlogin">Continuar</span></CButton>
             </CInputGroup>
           </CForm>
         </CCardBody>
       </CCard>
+      <div className="col-12 justify-content-center d-flex imagencavdiv align-items-center">
+      <img src="/imgs/cavsystems.svg " className="imagencav"/>
     </div>
+    </div>
+    
   </div>
 
 </div>
