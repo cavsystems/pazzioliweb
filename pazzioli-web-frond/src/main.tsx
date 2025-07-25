@@ -5,7 +5,7 @@ import App from './App.tsx'
 import { BrowserRouter } from 'react-router'
 import { StyledEngineProvider } from '@mui/material/styles'
 import { Provider } from 'react-redux';
-import store from './store/store.tsx'
+import {store} from './store/store.tsx'
 import Authprovider from './modules/auth/authcontext/autcontext.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

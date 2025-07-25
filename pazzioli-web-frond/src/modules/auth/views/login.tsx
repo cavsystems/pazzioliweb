@@ -6,6 +6,7 @@ import { cilUser,cilCc ,cilLockLocked, cilBurn} from '@coreui/icons'
  import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Authcontex } from "../authcontext/autcontext";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "../../../store/store";
  type Inputs = {
   documento: string;
    usuario: string;
@@ -14,6 +15,7 @@ import { useEffect, useState } from "react";
 };
 
  export  function Login() {
+  const socket = useAppSelector(state => state.authglobal.socketclient);
   //react-hook-form para manejar el formulario
    //con useForm se crea un hook que maneja el estado del formulario
    //destructuramos el hook para obtener las funciones y variables que necesitamos
@@ -77,15 +79,15 @@ const {login}=Authcontex()
         <>
         
          <div className=" bg-back-ground-login overflow-hiddenlogin">
-           <img src="/imgs/pazziolilogo.svg" className="rounded dimensionesfondo" />
+           <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
   <div className="row login-parent justify-content-center vh-100 align-items-end align-items-md-center overflow-y-auto  ">
     
-    <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5 login-child p-4  p-md-5 p-sm-3 logincontainer">
+    <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5 login-child p-4  px-md-5 px-lg-6  p-sm-3 logincontainer">
       <div className="imagenlogin text-center">
         {imagenpazzioliweb()}
       </div>
 
-      <CCard  className="bordercard">
+      <CCard  className="bordercard px-3">
         <CCardHeader className="p-0 visually-hidden"   >
           
          <CAlert color="danger" className="d-flex align-items-center h-10 m-0 ">
@@ -95,7 +97,7 @@ const {login}=Authcontex()
             
         </CCardHeader>
         <CCardBody>
-          <CCardTitle className="fonttitle pt-4 pb-2">Iniciar sesión</CCardTitle>
+          <CCardTitle className="fonttitle pt-3 pb-3">Iniciar sesión</CCardTitle>
 
           <CForm className="row"  onSubmit={handleSubmit(onSubmit)}>
             <CInputGroup className={`mb-3 has-validation ${errors.documento ? 'is-invalid' : ''}`}>
@@ -104,9 +106,34 @@ const {login}=Authcontex()
               </CInputGroupText>
               <CFormInput placeholder="Identificacion"   {...register('documento', { required: 'Este campo es obligatorio' })}
     invalid={isSubmitted && !!errors.documento}
-    feedbackInvalid={isSubmitted &&  errors.documento?.message} />
+    feedbackInvalid={isSubmitted &&  errors.documento?.message}  onChange={(e)=>{
+      socket.publish(  {
+      destination: '/app/empresa',
+      body: JSON.stringify({ identificacion:e.target.value  })});
+    }} className="p-2"/>
             </CInputGroup>
-                <CInputGroup className="mb-3">
+              
+
+            <CInputGroup className="mb-3">
+              <CInputGroupText>
+              <img src="/imgs/usuario.svg"/>
+              </CInputGroupText>
+              <CFormInput placeholder="Nombre de usuario"  {...register('usuario', { required: 'Este campo es obligatorio' })}
+    invalid={ isSubmitted &&  !!errors.usuario}
+    feedbackInvalid={isSubmitted && errors.usuario?.message} className="p-2" />
+            </CInputGroup>
+
+            <CInputGroup className="mb-3 " >
+              <CInputGroupText>
+                  <img src="/imgs/password.svg"/>
+              </CInputGroupText>
+              <CFormInput placeholder="Contraseña"  {...register('password', { required: 'Este campo es obligatorio' })}
+    invalid={isSubmitted &&  !!errors.password}
+    feedbackInvalid={isSubmitted &&  errors.password?.message} className="p-2" />
+            </CInputGroup>
+       
+        
+              <CInputGroup className="mb-3">
                <Controller  
             name="db"
   control={control}
@@ -118,7 +145,8 @@ const {login}=Authcontex()
          defaultValue=""
         invalid={isSubmitted && !!errors.db}
         options={[  { label: 'Empresa' },{ label: 'pruebas' }]} 
-        className="fontletre"
+        className="fontletre p-2"
+
       />
       {errors.db && (
         <CFormFeedback invalid>
@@ -128,30 +156,11 @@ const {login}=Authcontex()
     </>
   )}/>
             </CInputGroup>
-
-            <CInputGroup className="mb-3">
-              <CInputGroupText>
-              <img src="/imgs/usuario.svg"/>
-              </CInputGroupText>
-              <CFormInput placeholder="Nombre de usuario"  {...register('usuario', { required: 'Este campo es obligatorio' })}
-    invalid={ isSubmitted &&  !!errors.usuario}
-    feedbackInvalid={isSubmitted && errors.usuario?.message} />
-            </CInputGroup>
-
-            <CInputGroup className="mb-3">
-              <CInputGroupText>
-                  <img src="/imgs/password.svg"/>
-              </CInputGroupText>
-              <CFormInput placeholder="Contraseña"  {...register('password', { required: 'Este campo es obligatorio' })}
-    invalid={isSubmitted &&  !!errors.password}
-    feedbackInvalid={isSubmitted &&  errors.password?.message} />
-            </CInputGroup>
-       
-        
-
             <CInputGroup className="d-flex justify-content-center">
-              <CButton  type="submit"  className="mt-3 botonloginsucess"> <span className="spanlogin">Continuar</span></CButton>
+              <CButton  type="submit"  className="mt-2 botonloginsucess"> <span className="spanlogin">Continuar</span></CButton>
             </CInputGroup>
+
+            
           </CForm>
         </CCardBody>
       </CCard>

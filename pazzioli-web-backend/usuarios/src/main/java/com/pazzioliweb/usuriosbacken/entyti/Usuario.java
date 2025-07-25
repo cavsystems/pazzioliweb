@@ -57,11 +57,11 @@ public class Usuario {
 		this.login = login;
 	}
 
-	public long getNivel() {
+	public int getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(long nivel) {
+	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
 
