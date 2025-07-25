@@ -76,6 +76,14 @@ opacity: 1 !important;
 padding:10px 41px 12px 35px !important;
 }
 
+.botonlogindisabled{
+  
+background: #D3D4D4 0% 0% no-repeat padding-box !important;
+border-radius: 6px !important;
+opacity: 1 !important;
+padding:10px 41px 12px 35px !important;
+}
+
 .spanlogin{
     color: var(--blanco) !important;
 text-align: left !important;

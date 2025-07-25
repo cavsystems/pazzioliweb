@@ -42,15 +42,7 @@ useEffect(()=>{
   
   
 },[dispatch])
-useEffect(()=>{
- 
 
- 
-console.log('mensaje error',error)
- console.log('mensajedeexito',mensajeexito)
-  
-  
-},[mensajeexito])
   return (
     <BrowserRouter>
     <Routes>

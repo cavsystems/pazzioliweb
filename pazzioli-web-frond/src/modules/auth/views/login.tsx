@@ -5,8 +5,9 @@ import CIcon from '@coreui/icons-react'
 import { cilUser,cilCc ,cilLockLocked, cilBurn} from '@coreui/icons'
  import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Authcontex } from "../authcontext/autcontext";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/store";
+import { useEffect, useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { receiveMessage } from "../authslice/uathslice";
  type Inputs = {
   documento: string;
    usuario: string;
@@ -15,7 +16,13 @@ import { useAppSelector } from "../../../store/store";
 };
 
  export  function Login() {
+  const [opciones,setopciones]=useState([{
+label:'',value:''
+  }])
+  const haEjecutado = useRef(false);
   const socket = useAppSelector(state => state.authglobal.socketclient);
+  const mensajesocket = useAppSelector(state => state.authglobal.mensajesocketout);
+  const dispatch=useAppDispatch();
   //react-hook-form para manejar el formulario
    //con useForm se crea un hook que maneja el estado del formulario
    //destructuramos el hook para obtener las funciones y variables que necesitamos
@@ -34,23 +41,25 @@ import { useAppSelector } from "../../../store/store";
   documento:''
  })
  useEffect(() => {
-  const loadIcon = async () => {
-    try {
-      const svg = await iconossvg("/imgs/documento.svg");
-      const b64 = btoa(svg);
-     
-      console.log(svg)
-      seticonos(prev => ({
-        ...prev,
-          documento: `data:image/svg+xml;base64,${b64}`
-        
-      }));
-    } catch (err) {
-      console.error("Error cargando svg:", err);
-    }
-  };
-  loadIcon();
-}, []);
+  console.log('mensajesocket', mensajesocket);
+     if (mensajesocket.length > 0) {
+    const opciones = mensajesocket[0].map((item: any) => (
+    
+      {
+      label: item.nombreconexion,
+      value: item.nombreconexion // esto es clave para que <CFormSelect> lo interprete
+    }));
+    setopciones(opciones);
+  }
+       
+
+}, [mensajesocket]);
+
+useEffect(() => {
+    
+       console.log('opciones', opciones);
+
+}, [opciones]);
  const imagenpazzioliweb=()=>{
    return <>
    <img src="/imgs/pazzioliweb.svg"   className="rounded dimensiones" />
@@ -106,10 +115,12 @@ const {login}=Authcontex()
               </CInputGroupText>
               <CFormInput placeholder="Identificacion"   {...register('documento', { required: 'Este campo es obligatorio' })}
     invalid={isSubmitted && !!errors.documento}
-    feedbackInvalid={isSubmitted &&  errors.documento?.message}  onChange={(e)=>{
+    feedbackInvalid={isSubmitted &&  errors.documento?.message}  onBlur={(e)=>{
       socket.publish(  {
       destination: '/app/empresa',
       body: JSON.stringify({ identificacion:e.target.value  })});
+
+  
     }} className="p-2"/>
             </CInputGroup>
               
@@ -140,14 +151,19 @@ const {login}=Authcontex()
   rules={{ required: 'Debes seleccionar una opción' }}
   render={({ field }) => (
     <>
-      <CFormSelect
-        {...field}
-         defaultValue=""
-        invalid={isSubmitted && !!errors.db}
-        options={[  { label: 'Empresa' },{ label: 'pruebas' }]} 
-        className="fontletre p-2"
-
-      />
+     <CFormSelect
+  {...field}
+  defaultValue=""
+  invalid={isSubmitted && !!errors.db}
+  className="fontletre p-2"
+>
+ { opciones.length>1 && <option value="">Seleccione una empresa</option>}
+  {opciones.map((opcion, index) => (
+    <option key={index} value={opcion.value}>
+      {opcion.label}
+    </option>
+  ))}
+</CFormSelect>
       {errors.db && (
         <CFormFeedback invalid>
           {errors.db.message}
@@ -157,7 +173,7 @@ const {login}=Authcontex()
   )}/>
             </CInputGroup>
             <CInputGroup className="d-flex justify-content-center">
-              <CButton  type="submit"  className="mt-2 botonloginsucess"> <span className="spanlogin">Continuar</span></CButton>
+              <CButton  type={opciones.length>0 ? "submit":"button"}  className={`mt-2  ${opciones.length>0  ? "botonloginsucess":"botonlogindisabled"}`} disabled={opciones.length>0}  > <span className="spanlogin">Continuar</span></CButton>
             </CInputGroup>
 
             

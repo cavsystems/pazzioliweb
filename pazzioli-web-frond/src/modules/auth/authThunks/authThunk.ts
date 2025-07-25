@@ -50,9 +50,15 @@ export const initWebSocket = createAsyncThunk(
         onConnect: () => {
           stompClient.subscribe('/topic/greetings', (msg) => {
             const { content } = JSON.parse(msg.body);
-            dispatch(receiveMessage(JSON.parse(msg.body)));
+            //dispatch(receiveMessage(JSON.parse(msg.body)));
                  
           });
+
+      stompClient.subscribe('/topic/auth', (message: any) => {
+      const data = JSON.parse(message.body);
+      dispatch(receiveMessage(data));
+     // console.log('Datos recibidos:', data); // <-- Aquí deberías ver los datos
+    });
           stompClient.publish(  {
       destination: '/app/hello',
       body: JSON.stringify({ name: 'david' })});

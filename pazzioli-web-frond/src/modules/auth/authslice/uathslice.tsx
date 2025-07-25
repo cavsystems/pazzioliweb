@@ -73,7 +73,12 @@ switch (action.payload.proces) {
     
     },
      receiveMessage(state,action: PayloadAction<string>){
+      if(state.mensajesocketout.length>0){
+        state.mensajesocketout=[]
+      }
          state.mensajesocketout.push(action.payload);
+       
+       
      }
    
  /* async inicilizarzocketout(state):Promise<any>{
