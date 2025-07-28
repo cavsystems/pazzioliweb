@@ -8,6 +8,7 @@ import { Authcontex } from "../authcontext/autcontext";
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../store/store";
 import { receiveMessage } from "../authslice/uathslice";
+import { useNavigate } from "react-router";
  type Inputs = {
   documento: string;
    usuario: string;
@@ -20,7 +21,9 @@ import { receiveMessage } from "../authslice/uathslice";
   const haEjecutado = useRef(false);
   const socket = useAppSelector(state => state.authglobal.socketclient);
   const mensajesocket = useAppSelector(state => state.authglobal.mensajesocketout);
+  const mensajelogin= useAppSelector(state => state.authglobal.proces);
   const dispatch=useAppDispatch();
+  const navi=useNavigate();
   //react-hook-form para manejar el formulario
    //con useForm se crea un hook que maneja el estado del formulario
    //destructuramos el hook para obtener las funciones y variables que necesitamos
@@ -50,8 +53,10 @@ import { receiveMessage } from "../authslice/uathslice";
     setopciones(opciones);
   }
        
-
-}, [mensajesocket]);
+if (mensajelogin === 'exitoso') {
+navi('/inicio');
+}
+}, [mensajesocket,mensajelogin]);
 
 useEffect(() => {
     
@@ -89,7 +94,7 @@ const {login}=Authcontex()
            <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
   <div className="row login-parent justify-content-center vh-100 align-items-end align-items-md-center overflow-y-auto  ">
     
-    <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5 login-child p-4  px-md-5 px-lg-6  p-sm-3 logincontainer">
+    <div className="col-12 col-sm-8 col-md-6 col-lg-6 login-child p-4  px-md-5 px-lg-6   p-sm-3 logincontainer">
       <div className="imagenlogin text-center">
         {imagenpazzioliweb()}
       </div>
