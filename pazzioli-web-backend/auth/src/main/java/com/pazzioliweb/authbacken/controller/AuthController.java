@@ -86,25 +86,15 @@ public class AuthController {
                                 .body(response);
             		}
             	 
-            	 crearSesion(usuario.getCodigo());
+            	 crearSesion(usuario.getCodigo(),token);
             	 
-            	 
-            	 
-            	 
-            	 
-            	
-            	
-            	  
-            	  
-            	  
-
                   // ✅ Crear cookie con el token esta cookie contendra el token con el que trabajalemos duerante todo el logueo
                   Cookie jwtCookie = new Cookie("token", token);
                   jwtCookie.setHttpOnly(true); // no accesible desde JavaScript
                   jwtCookie.setSecure(false);   // solo por HTTPS en producción
                   jwtCookie.setPath("/");
                   jwtCookie.setMaxAge(24 * 60 * 60); // 1 día
-                  jwtCookie.setDomain("localhost"); // ⚠️ importante según tu entorno
+                 jwtCookie.setDomain("localhost"); // ⚠️ importante según tu entorno
                   servletResponse.addCookie(jwtCookie);
                 response.put("success", true);
                 response.put("user", usuario);
@@ -112,7 +102,6 @@ public class AuthController {
 
                 return ResponseEntity
                         .ok()
-                        .header("Authorization", "Bearer " + token)
                         .body(response);
             } else {
                 response.put("success", false);
@@ -143,17 +132,18 @@ public class AuthController {
 	   
 	   
    }
-    public void crearSesion(int codigo) {
+    public void crearSesion(int codigo,String token) {
     	String fechaStr = "1990-01-01 00:00:00";
     	ZoneId zonaBogota = ZoneId.of("America/Bogota");
     	DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Sesiones sesion = new Sesiones();
-        sesion.setCodigoUsuario(codigo);        // reemplaza con ID real
+        sesion.setCodigoUsuario(codigo);// reemplaza con ID real
+        sesion.setToken(token);
         sesion.setEstado("ACTIVO");
         System.out.println(LocalDateTime.now(zonaBogota));
-        sesion.setFechaInicio(LocalDateTime.now(zonaBogota));
+        sesion.setFechainicio(LocalDateTime.now(zonaBogota));
     
-        sesion.setFechaFin(LocalDateTime.parse(fechaStr, fmt));
+        sesion.setFechafin(LocalDateTime.parse(fechaStr, fmt));
     // o lo que necesites
 
         sessionRepository.save(sesion);      // ✅ esto hace el INSERT

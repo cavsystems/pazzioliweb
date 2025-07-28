@@ -16,9 +16,7 @@ import { receiveMessage } from "../authslice/uathslice";
 };
 
  export  function Login() {
-  const [opciones,setopciones]=useState([{
-label:'',value:''
-  }])
+  const [opciones,setopciones]=useState([])
   const haEjecutado = useRef(false);
   const socket = useAppSelector(state => state.authglobal.socketclient);
   const mensajesocket = useAppSelector(state => state.authglobal.mensajesocketout);
@@ -79,7 +77,7 @@ const {login}=Authcontex()
   //handleSubmit es una funcion de react-hook-form que se encarga de manejar el envio del formulario
   const onSubmit: SubmitHandler<Inputs> =async (data) => {
   await login({
-    login:data.usuario,
+    usuario:data.usuario,
     password:data.password,
     db:data.db
   })
@@ -173,7 +171,7 @@ const {login}=Authcontex()
   )}/>
             </CInputGroup>
             <CInputGroup className="d-flex justify-content-center">
-              <CButton  type={opciones.length>0 ? "submit":"button"}  className={`mt-2  ${opciones.length>0  ? "botonloginsucess":"botonlogindisabled"}`} disabled={opciones.length>0}  > <span className="spanlogin">Continuar</span></CButton>
+              <CButton  type={opciones.length<=0 ? "button":"submit"}  className={`mt-2  ${opciones.length<=0  ?  "botonlogindisabled":"botonloginsucess"}`} disabled={opciones.length<=0}  > <span className="spanlogin">Continuar</span></CButton>
             </CInputGroup>
 
             
