@@ -19,27 +19,43 @@ import lombok.Data;
 public class Sesiones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long codigo;
+    private int codigo;
     
-    @Column(name = "codigoUsuario", nullable = false, length = 50)    
-    private long codigoUsuario;
+    @Column(name = "codigousuario", nullable = false, length = 50)    
+    private int codigoUsuario;
 
     
 	public long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
-	}
 
-	public long getCodigoUsuario() {
+
+	
+	
+	public int getCodigoUsuario() {
 		return codigoUsuario;
 	}
 
-	public void setCodigoUsuario(long codigoUsuario) {
+
+
+
+
+	public void setCodigoUsuario(int codigoUsuario) {
 		this.codigoUsuario = codigoUsuario;
 	}
+
+
+
+
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+
+
+
 
 	public String getEstado() {
 		return estado;
@@ -50,31 +66,56 @@ public class Sesiones {
 	}
 
 	
-	public LocalDateTime getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(LocalDateTime fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public LocalDateTime getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(LocalDateTime fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
+	
 
 	@Column(length = 20)
     private String estado;
 	
     @Column(length = 20)
    
-    private LocalDateTime fechaInicio;
+    private LocalDateTime fechainicio;
 
     @Column(length = 20)
    
-    private LocalDateTime fechaFin;
+    private LocalDateTime fechafin;
+    
+    @Column(length = 20)
+    private String ipclient;
+    
+    @Column
+    private String token;
+
+
+	public LocalDateTime getFechainicio() {
+		return fechainicio;
+	}
+
+	public void setFechainicio(LocalDateTime fechainicio) {
+		this.fechainicio = fechainicio;
+	}
+
+	public LocalDateTime getFechafin() {
+		return fechafin;
+	}
+
+	public void setFechafin(LocalDateTime fechafin) {
+		this.fechafin = fechafin;
+	}
+
+	public String getIpclient() {
+		return ipclient;
+	}
+
+	public void setIpclient(String ipclient) {
+		this.ipclient = ipclient;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+    
 }

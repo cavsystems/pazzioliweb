@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.pazzioliweb.authbacken.jwt.JwUtilJava;
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
 import com.pazzioliweb.usuriosbacken.entyti.Usuario;
 
@@ -25,7 +28,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class Filter extends OncePerRequestFilter {
-	 
+	@Autowired
+	  private RedisTemplate<String, DatosSesiones> redisTemplate;
 	 @Autowired
 	    private JwUtilJava jwtUtil;
 
@@ -52,32 +56,27 @@ public class Filter extends OncePerRequestFilter {
         
         if (token != null && jwtUtil.validarToken(token)) {
             Claims claims = jwtUtil.extraerClaims(token);
-             long nivel = claims.get("nivel", Long.class);
+             String nivel = claims.get("nivel", String.class);
             // etc. lógica de autenticación...
             //registro el usuario en el serividor para reconocer un usuario como logueado en springsecurity y en el resto de la plicacion
           Optional<Usuario> optional;
-          optional=usuarioRepository.findByLogin(claims.getSubject());
+          optional=usuarioRepository.findByUsuario(claims.getSubject());
           Usuario usuario;
           if(optional.isPresent()) {
         	  usuario=optional.get();
           }else {
         	  usuario=null;
           }
-            	String role="";
-    	    	switch ((int) nivel) {
-    			case 1: {
-    				
-    				role="admin";
-    				break;
-    			}
-    			default:
-    				role="noautenticado";
-    				break;
-    				
-    			}
+            	String role=nivel;
+    	    	
                 List<SimpleGrantedAuthority> authorities = List.of(
                 	    new SimpleGrantedAuthority("ROLE_" + role)
                 	);
+                String db = claims.get("dbname", String.class);
+                DatosSesiones datos = redisTemplate.opsForValue().get( claims.get("idsecion",String.class));
+                if (datos.getDbName() != null && !datos.getDbName().isEmpty()) {
+                    TenantContext.setCurrentTenant(datos.getDbName()); // igual que en tu interceptor
+                }
                 UsernamePasswordAuthenticationToken authToken =
                     new UsernamePasswordAuthenticationToken(usuario, claims.get("idsecion",String.class), authorities);
                 SecurityContextHolder.getContext().setAuthentication(authToken);

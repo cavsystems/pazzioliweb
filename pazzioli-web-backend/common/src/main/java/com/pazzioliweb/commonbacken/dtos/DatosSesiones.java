@@ -18,12 +18,7 @@ public class DatosSesiones {
 	public void setDbName(String dbName) {
 		this.dbName = dbName;
 	}
-	public int getNivel() {
-		return nivel;
-	}
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
-	}
+	
 	public Instant getCreada() {
 		return creada;
 	}
@@ -45,8 +40,14 @@ public class DatosSesiones {
 	 private String idUsuario;
 	    private String login;
 	    private String dbName;
-	    private int nivel;
-	    private Instant creada;
+	    private String nivel;
+	    public String getNivel() {
+			return nivel;
+		}
+		public void setNivel(String nivel) {
+			this.nivel = nivel;
+		}
+		private Instant creada;
 	    private Instant expira;
 
 }

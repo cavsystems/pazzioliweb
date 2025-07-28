@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pazzioliweb.authbacken.dtos.LoginRequest;
 import com.pazzioliweb.authbacken.jwt.JwUtilJava;
+import com.pazzioliweb.commonbacken.conexiondb.ConexionDinamica;
+import com.pazzioliweb.commonbacken.conexiondb.ConexionFactory;
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.entyti.Sesiones;
 import com.pazzioliweb.commonbacken.repositorio.SessionRepository;
@@ -40,6 +43,8 @@ public class AuthController {
     private final SessionRepository sessionRepository;
     private final JwUtilJava jwtUtil;
     @Autowired
+    private ConexionFactory conexion;
+    @Autowired
     private RedisTemplate<String, DatosSesiones> redisTemplate;
   private final   HttpServletResponse servletResponse;
     @Autowired
@@ -53,14 +58,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public  ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request) {
-        Optional<Usuario> optional = usuarioRepository.findByLogin(request.login);
+    	 // Aquí request.db es el tenantId
+    	    	
+        Optional<Usuario> optional = usuarioRepository.findByUsuario(request.usuario);
 
         Map<String, Object> response = new HashMap<>();
-
+        
         if (optional.isPresent()) {
             Usuario usuario = optional.get();
-            
-            if (usuario.getPassword().equals(request.password)) {
+            System.out.println(usuario.getUsuario());
+           if (usuario.getContrasena().equals(request.password)) {
             	  String token = jwtUtil.generateToken(usuario,request.db);
             	  
             	 Optional<Sesiones> optionalsession = sessionRepository.findFirstBycodigoUsuarioAndEstadoOrderByCodigoDesc(usuario.getCodigo(),"ACTIVO");
@@ -68,7 +75,7 @@ public class AuthController {
             	 if (optionalsession.isPresent()) {
                System.out.println("sesion activa");
             		    Sesiones sesion = optionalsession.get();
-            		    LocalDateTime fechaFin = sesion.getFechaInicio();
+            		    LocalDateTime fechaFin = sesion.getFechainicio();
             		    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             		    System.out.println("Fecha y hora de fin: " + fechaFin.format(fmt));
             		    
@@ -113,7 +120,9 @@ public class AuthController {
                 return ResponseEntity
                		 .status(HttpStatus.BAD_REQUEST).
                		 body(response);
-            }
+           }
+        
+            
         } else {
             response.put("success", false);
             response.put("message", "Credenciales inválidas");
@@ -123,6 +132,9 @@ public class AuthController {
         
             
         }
+        
+        
+        
 
        
     }
