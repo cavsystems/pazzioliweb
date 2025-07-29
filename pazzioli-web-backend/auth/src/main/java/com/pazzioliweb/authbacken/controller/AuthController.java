@@ -59,11 +59,11 @@ public class AuthController {
     @PostMapping("/login")
     public  ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequest request) {
     	 // Aquí request.db es el tenantId
-    	    	
-        Optional<Usuario> optional = usuarioRepository.findByUsuario(request.usuario);
+    	
+        Optional<Usuario> optional = usuarioRepository.findByUsuario(request.usuario.trim());
 
         Map<String, Object> response = new HashMap<>();
-        
+        System.out.println(optional.isPresent());	
         if (optional.isPresent()) {
             Usuario usuario = optional.get();
             System.out.println(usuario.getUsuario());

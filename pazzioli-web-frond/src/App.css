@@ -182,3 +182,13 @@ color: #FFFFFF !important;
 opacity: 1;
 
 }
+
+.inputselect{
+    padding:20px 17px  11px 17px;
+    line-height:-1;
+}
+
+.inputdatosempresa{
+    padding:19px 17px  20px 17px !important;
+    border-radius: 10px !important;
+}

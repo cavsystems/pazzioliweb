@@ -1,5 +1,6 @@
 import { CButton, CCard, CCardBody, CCardImage, CCardText, CForm, CFormInput, CFormLabel, CFormSelect, CInputGroup, CInputGroupText, CTab, CTabContent, CTabList, CTabPanel, CTabs } from "@coreui/react";
 import './estylosempresa.scss'
+import { Datosgenrales } from "../components/Datosgenerales";
 export function Crearempresa() {
     return (  
         <>
@@ -19,10 +20,14 @@ export function Crearempresa() {
 
         <CTabContent>
              <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1}>
-          Home tab content
+           <Datosgenrales/>
         </CTabPanel>
         </CTabContent>
          </CTabs>
+          
+          
+         
+
          </div>
 
          </div>
