@@ -20,7 +20,7 @@ public class AuthControllerSocket {
 	@SendTo("/topic/auth")
 	public Object[] enpresa(@Payload UsuarioRequestDTOauth request) {
 		List<Object[]>  usuarios =empresa.buscarNombreconexion(request.getIdentificacion());
-		Object[] fila = usuarios.get(1);
+		Object[] fila = usuarios.get(0);
 		System.out.println("Empresa: " + fila[0]);
 	    return usuarios.get(0);
 	}}
