@@ -13,7 +13,7 @@ import '@coreui/coreui/dist/css/coreui.min.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../scss/custom.scss';
 import { Signup } from './modules/auth/views/sIgnup';
-import Crearempresa from './modules/empresas/views/crearempresa';
+import {Crearempresa} from './modules/empresas/views/crearempresa';
 import { useAppDispatch, useAppSelector } from './store/store'
 import { initWebSocket } from './modules/auth/authThunks/authThunk';
 
@@ -44,15 +44,18 @@ useEffect(()=>{
 },[dispatch])
 
   return (
+     <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
+           //<img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>} />
       <Route path="/inicio" element={<Inicio/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/crearempresa" element={<Crearempresa/>} />
+       
     </Routes>
      </BrowserRouter>
-   
+   </div>
   )
 }
 

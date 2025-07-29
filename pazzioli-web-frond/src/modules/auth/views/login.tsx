@@ -90,8 +90,7 @@ const {login}=Authcontex()
     return (
         <>
         
-         <div className=" bg-back-ground-login overflow-hiddenlogin">
-           <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
+       
   <div className="row login-parent justify-content-center vh-100 align-items-end align-items-md-center overflow-y-auto  ">
     
     <div className="col-12 col-sm-8 col-md-6 col-lg-6 login-child p-4  px-md-5 px-lg-6   p-sm-3 logincontainer">
@@ -190,7 +189,7 @@ const {login}=Authcontex()
     
   </div>
 
-</div>
+
 
         </>
       );
