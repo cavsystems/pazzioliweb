@@ -45,7 +45,7 @@ useEffect(()=>{
 
   return (
      <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
-           //<img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
+           <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>} />
