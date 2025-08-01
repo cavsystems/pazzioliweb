@@ -9,4 +9,13 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="io.micrometer.observation.transport.Propagator.Getter"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.PermisoRepository"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuriosbacken.entyti.PermisosRol"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.PermisosRolRepository"/>
 </qualifiedTypeNameHistroy>
