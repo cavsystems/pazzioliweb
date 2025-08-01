@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,8 +16,13 @@ import org.springframework.stereotype.Component;
 
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.redis.RedisConfig;
+import com.pazzioliweb.usuariosbacken.repositorio.PermisoRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.PermisosRolRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Permisos;
+import com.pazzioliweb.usuriosbacken.entyti.PermisosRol;
 import com.pazzioliweb.usuriosbacken.entyti.Usuario;
+
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -27,6 +33,8 @@ import io.jsonwebtoken.Jwts;
 public class JwUtilJava {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private PermisosRolRepository permisosRolRepository;
 	 private final String SECRET_KEY = "clave_secreta_clave_secreta_clave_secreta"; // 🔐 mínimo 32 bytes para HS256
 	 private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 	 @Autowired
@@ -37,6 +45,13 @@ public class JwUtilJava {
 	    	  if(!optional.isEmpty()) {
 	    		  Usuario u=optional.get();
 	    		  System.out.println(u.getCodigorol().getNombre());
+	    		  List<Permisos> permisosUsuario = permisosRolRepository.findPermisosActivosByRol(u.getCodigorol().getCodigo());
+	    		  if(!permisosUsuario.isEmpty()) {
+	    			  for (Permisos p : permisosUsuario) {
+	    				  System.out.println(p.getNombre());						
+					}
+	    		  }
+	    		  System.out.println();
 	    		  DatosSesiones sesion = new DatosSesiones();
 	  	    	sesion.setLogin(usuario.getUsuario());
 	  	    	sesion.setDbName(db);
