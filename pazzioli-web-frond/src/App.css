@@ -113,6 +113,15 @@ line-height: var(--unnamed-line-spacing-17);
 letter-spacing: var(--unnamed-character-spacing-0);
 color: var(--gris-pazzioli);
 }
+.fontgrisopaco{
+    letter-spacing: var(--unnamed-character-spacing-0) !important;
+color: var(--gris-textos) !important;
+text-align: left !important;
+font: normal normal 600 16px/22px Open Sans !important;
+letter-spacing: 0px !important;
+color: #555555 !important;
+opacity: 1 !important;
+}
 
 .letrapazzioli{
     font-family: "Open Sans", sans-serif !important;
@@ -237,3 +246,6 @@ opacity: 1 !important;
  
 
 
+.col-12{
+    padding: 0px !important;
+}

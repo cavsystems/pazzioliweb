@@ -13,7 +13,7 @@ function Nombres({ register, CInputGroup,
                 <h6  className="titlecamposempresa h6"  style={{padding:'12px 10px 5px 0 '}}>Nombres</h6>
                <div>
                 <div className="row">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 paddingempresa"  >
 
                      
                           <CInputGroup >

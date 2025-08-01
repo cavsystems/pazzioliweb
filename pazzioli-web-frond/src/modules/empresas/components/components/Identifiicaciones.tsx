@@ -8,10 +8,10 @@ export function Identificacion({ register, CInputGroup,
         <>
            <div className="col-12">
 
-                <h6  className="titlecamposempresa h6" style={{padding:'38px 10px 10px 0 '}}>Identificación</h6>
+                <h6  className="titlecamposempresa h6" style={{padding:'45px 10px 10px 0 '}}>Identificación</h6>
                <div>
                 <div className="row">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" >
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 paddingempresa" >
 
                       <CInputGroup >
                         {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 

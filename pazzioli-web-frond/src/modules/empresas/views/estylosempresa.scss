@@ -1,6 +1,11 @@
 .containerempresa{
+   
+    width: 780px;
     max-width: 780px;
-    width: 780px;;
+}
+.containerempresasucur{
+    width: 100%;
+    
 }
 
 .tapitemsempresa[aria-selected="true"]{
@@ -82,6 +87,10 @@ opacity: 1;
     margin-bottom: 50px;
 }
 
+.containerimgempresasucu{
+      margin-top: 10%;
+    margin-bottom: 50px;
+}
 .titlecamposempresa{
     margin-left: 1rem !important;
 }
@@ -132,3 +141,71 @@ padding:0 !important
  .margeniputempresa{
     margin-bottom: 12px !important;
  }
+ .paddingempresa{
+    padding-right:12px !important; ;
+ }
+
+ .tabla-wrapper {
+  
+  /* opcional: control vertical si la tabla ocupa mucho alto */
+ padding: 0 !important;
+ overflow-x: auto;
+  max-width: 100% !important;
+  height: fit-content;
+  background: #FFFFFF 0% 0% no-repeat padding-box !important;
+box-shadow: 0px 3px 6px #0000000D !important;
+border-radius: 8px !important;
+opacity: 1 !important;
+
+ border-collapse: separate !important;
+  /* si necesitas limitar altura */
+  /* max-height: 400px; */
+}
+.tablasucursal{
+    
+     min-width: 1400px;
+     margin: 0 !important;
+      
+}
+.tablasucursal th:last-child,
+.tablasucursal td:last-child {
+width: 90px;
+text-align: center !important;
+  position: sticky;
+  right: 0;
+  border-left: 1px solid #cccccc;
+  background: white; /* Asegura que el contenido no se superponga */
+   z-index: 2; /* Eleva la columna por encima de las demás */
+   box-sizing: border-box !important;
+}
+.tablasucursal th:last-child{
+    padding: 10px 8px  10px 15px !important;
+}
+
+.tablasucursal th:last-child::before,
+.tablasucursal td:last-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;  /* ajusta según ancho del borde */
+  width: 1px;
+  background-color: #cccccc;
+  z-index: 3;   /* encima del contenido de la celda */
+}
+
+.botonagregarsucursal{
+    color: var(--gris-textos) !important;
+text-align: left !important;
+font: normal normal normal 14px/19px Open Sans !important;
+letter-spacing: 0px !important;
+color: #555555 !important;
+opacity: 1 !important;
+padding: 19px 51px;
+border: 1px solid #000 !important;
+}
+
+.containersucursalboton{
+    display: inline-block;
+    padding: 4px;
+} 
