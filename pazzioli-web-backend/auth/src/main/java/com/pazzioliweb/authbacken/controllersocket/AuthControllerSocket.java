@@ -9,18 +9,23 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import com.pazzioliweb.authbacken.dtos.UsuarioRequestDTOauth;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
 import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
 import com.pazzioliweb.empresasback.entyti.Empresas;
 import com.pazzioliweb.empresasback.repositori.EmpresaRepository;
 @Controller
 public class AuthControllerSocket {
-	 @Autowired
-	 private  EmpresaRepository empresa;
+	
+	    @Autowired
+	    private EmpresaService empresaService;
+
 	@MessageMapping("/empresa")
 	@SendTo("/topic/auth")
-	public Object[] enpresa(@Payload UsuarioRequestDTOauth request) {
-		List<Object[]>  usuarios =empresa.buscarNombreconexion(request.getIdentificacion());
-		Object[] fila = usuarios.get(0);
-		System.out.println("Empresa: " + fila[0]);
-	    return usuarios.get(0);
-	}}
+	public List<EmpresaResponseauth>  enpresa(@Payload UsuarioRequestDTOauth request) {
+		List<EmpresaResponseauth> resultados = empresaService.buscarNombreconexion(request.getIdentificacion());
+
+		
+		   
+				return empresaService.buscarNombreconexion(request.getIdentificacion());
+		
+	  	}}

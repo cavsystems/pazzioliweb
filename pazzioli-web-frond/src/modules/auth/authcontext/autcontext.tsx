@@ -25,7 +25,7 @@ dispatchauth( Login({ token: '', user: null, proces: 'en proceso' }) )
            console.log('datos de autenticacion',datos)
 
         
-
+dispatchauth( Login({ token:datos.sesion.token , user:datos.sesion, proces: 'exitoso' }) )
 
 
         }catch (error) {

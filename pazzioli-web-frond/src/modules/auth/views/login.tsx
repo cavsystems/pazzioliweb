@@ -5,8 +5,10 @@ import CIcon from '@coreui/icons-react'
 import { cilUser,cilCc ,cilLockLocked, cilBurn} from '@coreui/icons'
  import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { Authcontex } from "../authcontext/autcontext";
-import { useEffect, useState } from "react";
-import { useAppSelector } from "../../../store/store";
+import { useEffect, useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../store/store";
+import { receiveMessage } from "../authslice/uathslice";
+import { useNavigate } from "react-router";
  type Inputs = {
   documento: string;
    usuario: string;
@@ -15,7 +17,13 @@ import { useAppSelector } from "../../../store/store";
 };
 
  export  function Login() {
+  const [opciones,setopciones]=useState([])
+  const haEjecutado = useRef(false);
   const socket = useAppSelector(state => state.authglobal.socketclient);
+  const mensajesocket = useAppSelector(state => state.authglobal.mensajesocketout);
+  const mensajelogin= useAppSelector(state => state.authglobal.proces);
+  const dispatch=useAppDispatch();
+  const navi=useNavigate();
   //react-hook-form para manejar el formulario
    //con useForm se crea un hook que maneja el estado del formulario
    //destructuramos el hook para obtener las funciones y variables que necesitamos
@@ -34,23 +42,27 @@ import { useAppSelector } from "../../../store/store";
   documento:''
  })
  useEffect(() => {
-  const loadIcon = async () => {
-    try {
-      const svg = await iconossvg("/imgs/documento.svg");
-      const b64 = btoa(svg);
-     
-      console.log(svg)
-      seticonos(prev => ({
-        ...prev,
-          documento: `data:image/svg+xml;base64,${b64}`
-        
-      }));
-    } catch (err) {
-      console.error("Error cargando svg:", err);
-    }
-  };
-  loadIcon();
-}, []);
+  console.log('mensajesocket', mensajesocket);
+     if (mensajesocket.length > 0) {
+    const opciones = mensajesocket[0].map((item: any) => (
+    
+      {
+      label: item.nombreconexion,
+      value: item.nombreconexion // esto es clave para que <CFormSelect> lo interprete
+    }));
+    setopciones(opciones);
+  }
+       
+if (mensajelogin === 'exitoso') {
+navi('/inicio');
+}
+}, [mensajesocket,mensajelogin]);
+
+useEffect(() => {
+    
+       console.log('opciones', opciones);
+
+}, [opciones]);
  const imagenpazzioliweb=()=>{
    return <>
    <img src="/imgs/pazzioliweb.svg"   className="rounded dimensiones" />
@@ -70,7 +82,7 @@ const {login}=Authcontex()
   //handleSubmit es una funcion de react-hook-form que se encarga de manejar el envio del formulario
   const onSubmit: SubmitHandler<Inputs> =async (data) => {
   await login({
-    login:data.usuario,
+    usuario:data.usuario,
     password:data.password,
     db:data.db
   })
@@ -78,11 +90,10 @@ const {login}=Authcontex()
     return (
         <>
         
-         <div className=" bg-back-ground-login overflow-hiddenlogin">
-           <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
+       
   <div className="row login-parent justify-content-center vh-100 align-items-end align-items-md-center overflow-y-auto  ">
     
-    <div className="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-5 login-child p-4  px-md-5 px-lg-6  p-sm-3 logincontainer">
+    <div className="col-12 col-sm-8 col-md-6 col-lg-6 login-child p-4  px-md-5 px-lg-6   p-sm-3 logincontainer">
       <div className="imagenlogin text-center">
         {imagenpazzioliweb()}
       </div>
@@ -106,10 +117,12 @@ const {login}=Authcontex()
               </CInputGroupText>
               <CFormInput placeholder="Identificacion"   {...register('documento', { required: 'Este campo es obligatorio' })}
     invalid={isSubmitted && !!errors.documento}
-    feedbackInvalid={isSubmitted &&  errors.documento?.message}  onChange={(e)=>{
+    feedbackInvalid={isSubmitted &&  errors.documento?.message}  onBlur={(e)=>{
       socket.publish(  {
       destination: '/app/empresa',
       body: JSON.stringify({ identificacion:e.target.value  })});
+
+  
     }} className="p-2"/>
             </CInputGroup>
               
@@ -140,14 +153,19 @@ const {login}=Authcontex()
   rules={{ required: 'Debes seleccionar una opción' }}
   render={({ field }) => (
     <>
-      <CFormSelect
-        {...field}
-         defaultValue=""
-        invalid={isSubmitted && !!errors.db}
-        options={[  { label: 'Empresa' },{ label: 'pruebas' }]} 
-        className="fontletre p-2"
-
-      />
+     <CFormSelect
+  {...field}
+  defaultValue=""
+  invalid={isSubmitted && !!errors.db}
+  className="fontletre p-2"
+>
+ { opciones.length>1 && <option value="">Seleccione una empresa</option>}
+  {opciones.map((opcion, index) => (
+    <option key={index} value={opcion.value}>
+      {opcion.label}
+    </option>
+  ))}
+</CFormSelect>
       {errors.db && (
         <CFormFeedback invalid>
           {errors.db.message}
@@ -157,7 +175,7 @@ const {login}=Authcontex()
   )}/>
             </CInputGroup>
             <CInputGroup className="d-flex justify-content-center">
-              <CButton  type="submit"  className="mt-2 botonloginsucess"> <span className="spanlogin">Continuar</span></CButton>
+              <CButton  type={opciones.length<=0 ? "button":"submit"}  className={`mt-2  ${opciones.length<=0  ?  "botonlogindisabled":"botonloginsucess"}`} disabled={opciones.length<=0}  > <span className="spanlogin">Continuar</span></CButton>
             </CInputGroup>
 
             
@@ -171,7 +189,7 @@ const {login}=Authcontex()
     
   </div>
 
-</div>
+
 
         </>
       );

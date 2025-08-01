@@ -11,7 +11,8 @@ import jakarta.annotation.PostConstruct;
 @ComponentScan(basePackages = {
 	    "com.pazzioliweb",
 	    "com.pazzioliweb.commonbacken",
-	    "com.pazzioliweb.authbacken"
+	    "com.pazzioliweb.authbacken",
+	    "com.pazzioliweb.usuariosbackend"
 	})
 
 public class PazzioliWebBackendApplication {
