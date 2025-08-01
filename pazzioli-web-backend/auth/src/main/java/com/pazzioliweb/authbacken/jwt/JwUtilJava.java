@@ -25,10 +25,12 @@ import io.jsonwebtoken.Jwts;
 
 @Component
 public class JwUtilJava {
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	 private final String SECRET_KEY = "clave_secreta_clave_secreta_clave_secreta"; // 🔐 mínimo 32 bytes para HS256
 	 private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+	 
 	 @Autowired
 	    private RedisTemplate<String, DatosSesiones> redisTemplate;
 	    public String generateToken(Usuario usuario, String db) {

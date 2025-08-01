@@ -1,15 +1,46 @@
 .containerempresa{
-    max-width: 768px;
-    width: 768px;;
+    max-width: 780px;
+    width: 780px;;
 }
 
 .tapitemsempresa[aria-selected="true"]{
    background: var(--naranja-pazzioli) 0% 0% no-repeat padding-box !important;
    
-   ;
+   color:#fff !important;
+}
+.conittemtapsempresa{
+    width: fit-content;
 }
 
-.tapitemsempresa:nth-child(1){
+thead >tr>th{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans) !important;
+letter-spacing: var(--unnamed-character-spacing-0) !important;
+color: var(--gris-textos) !important;
+text-align: left !important;
+}
+
+tbody >tr >td{
+
+text-align: left !important;
+font: normal normal normal 12px/17px Open Sans  !important;
+letter-spacing: 0px !important;
+color: #555555 !important;
+opacity: 1 !important;
+}
+
+thead > tr >th{
+
+    padding:20px 8px 10px 8px !important;
+}
+tbody>tr>th{
+    padding: 10px 8px 10px 8px !important;
+}
+
+.titleimpuestos{
+    padding-top: 25px !important;
+    padding-bottom: 20px !important;
+}
+/*.tapitemsempresa:nth-child(1){
   margin-right: 12px;
     padding:11px 14px 11px 13px !important;
 }
@@ -28,35 +59,13 @@
 }
 
 @media(max-width:431px){
-    .tapparentitem{
-        justify-content: start !important;
-      
-    }
- .tapitemsempresa:nth-child(1){
- flex-shrink: 1;
-}
-    .tapitemsempresa:nth-child(2){
-        margin-right: 0;
- flex-shrink: 2;
-}
+    
+ 
+
+}*/
 
 
-.tapitemsempresa:nth-child(3){
 
-   flex-shrink: 0;
-}
-
-
-}
-
-
-@media(max-width:418px){
-    .tapitemsempresa:nth-child(1){
- flex-shrink: 2;
-  margin-right: 0;
-  padding:11px 0 11px 0 !important;
-}
-}
 .tapitemsempresa{
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
 letter-spacing: var(--unnamed-character-spacing-0) !important;
@@ -69,6 +78,57 @@ opacity: 1;
 }
 
 .containerimgempresa{
-    margin-top: 138px;
+    margin-top: 20%;
     margin-bottom: 50px;
 }
+
+.titlecamposempresa{
+    margin-left: 1rem !important;
+}
+
+.botoncontinuar{
+    background: var(--azul-pazzioli) 0% 0% no-repeat padding-box;
+   border: none;
+   border-radius: 6px;
+   padding: 10px 32px 12px 33px;
+   opacity: 1;
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--blanco);
+text-align: left;
+}
+
+.padingbotoncontinuar{
+    display: inline-block;
+    padding: 4px;
+}
+
+.containercontinuar{
+    z-index:10;
+    padding-right:50px;
+}
+
+.inputarchivo{
+    margin-bottom: 50px;
+}
+
+ .coninputarchivo > label{
+    padding-left: 11px;
+ }
+
+ .checkbox{
+      appearance: none;
+  -webkit-appearance: none;
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+border: 1px solid #D3D4D4 !important;
+border-radius: 5px !important;
+opacity:1  !important;
+width: 17px !important;
+height: 17px !important;
+margin: 0 !important;
+padding:0 !important
+ }
+
+ .margeniputempresa{
+    margin-bottom: 12px !important;
+ }
