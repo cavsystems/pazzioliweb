@@ -31,12 +31,14 @@ import io.jsonwebtoken.Jwts;
 
 @Component
 public class JwUtilJava {
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private PermisosRolRepository permisosRolRepository;
 	 private final String SECRET_KEY = "clave_secreta_clave_secreta_clave_secreta"; // 🔐 mínimo 32 bytes para HS256
 	 private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+	 
 	 @Autowired
 	    private RedisTemplate<String, DatosSesiones> redisTemplate;
 	    public String generateToken(Usuario usuario, String db) {
@@ -45,10 +47,10 @@ public class JwUtilJava {
 	    	  if(!optional.isEmpty()) {
 	    		  Usuario u=optional.get();
 	    		  System.out.println(u.getCodigorol().getNombre());
-	    		  List<Permisos> permisosUsuario = permisosRolRepository.findPermisosActivosByRol(u.getCodigorol().getCodigo());
+	    		  List<PermisosRol> permisosUsuario = permisosRolRepository.findPermisosActivosByRol(u.getCodigorol().getCodigo());
 	    		  if(!permisosUsuario.isEmpty()) {
-	    			  for (Permisos p : permisosUsuario) {
-	    				  System.out.println(p.getNombre());						
+	    			  for (PermisosRol p : permisosUsuario) {
+	    				  System.out.println(p.getPermisos());						
 					}
 	    		  }
 	    		  System.out.println();

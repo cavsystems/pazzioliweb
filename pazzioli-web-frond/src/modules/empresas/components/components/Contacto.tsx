@@ -10,10 +10,10 @@ function Contacto(
           <>
            <div className="col-12">
 
-                <h6  className="titlecamposempresa h6" style={{padding:'10px 10px 3px 0 '}}>Contacto</h6>
+                <h6  className="titlecamposempresa h6" style={{padding:'12px 10px 5px 0 '}}>Contacto</h6>
                <div>
                 <div className="row">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 paddingempresa">
 
                       <CInputGroup >
                         {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
@@ -50,7 +50,7 @@ function Contacto(
             </div>
 
 
- <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+ <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{paddingLeft:'0px'}}>
 
                    
     

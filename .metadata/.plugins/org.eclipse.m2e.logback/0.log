@@ -9646,6 +9646,24 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.mysql:mys
 2025-07-29 15:26:58,915 [Worker-24: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
 2025-07-29 15:26:58,916 [Worker-24: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-07-29 15:26:58,916 [Worker-24: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+<<<<<<< HEAD
+2025-07-29 15:28:31,747 [Worker-22: Launching PazzioliWebBackendApplication] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-07-29 15:28:31,749 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\AUXPAZZIOLI\Desktop\javaproyect\pazzioliweb\pazzioli-web-backend\auth\src\main\resources
+2025-07-29 15:28:31,752 [Worker-22: Launching PazzioliWebBackendApplication] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-07-29 15:28:31,753 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\AUXPAZZIOLI\Desktop\javaproyect\pazzioliweb\pazzioli-web-backend\auth\src\test\resources
+2025-07-29 15:28:32,034 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-07-29 15:28:32,035 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-07-29 15:28:32,035 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-07-29 15:28:32,036 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-07-29 15:28:32,252 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-07-29 15:28:32,252 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-07-29 15:28:32,254 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-07-29 15:28:32,254 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-07-29 15:28:32,483 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-07-29 15:28:32,484 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-07-29 15:28:32,484 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-07-29 15:28:32,486 [Worker-22: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+=======
 2025-07-30 08:39:30,196 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-07-30 08:40:18,173 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
 2025-07-30 08:40:20,956 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioli\pazzioliweb\pazzioli-web-backend\pom.xml.
@@ -10024,6 +10042,7 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.mysql:mys
 2025-07-31 14:54:50,441 [Worker-72: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-07-31 14:54:50,441 [Worker-72: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
 >>>>>>> 039275d333d8ee569a4e25417e39f374999a88f5
+<<<<<<< HEAD
 2025-08-01 09:35:27,001 [Worker-7: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2025-08-01 09:35:52,372 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
 2025-08-01 09:35:55,630 [Worker-11: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\pom.xml.
@@ -10652,3 +10671,80 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.mysql:mys
 2025-08-01 17:55:41,195 [Worker-86: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
 2025-08-01 17:57:48,834 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@44dbd841{STOPPING}[12.0.21,sto=0]
 2025-08-01 17:57:48,844 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@46c2abe3{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+=======
+2025-08-01 09:49:27,319 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-08-01 09:49:46,897 [Worker-8: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\AUXPAZZIOLI\Desktop\javaproyect\pazzioliweb\pazzioli-web-backend\pom.xml.
+>>>>>>> 1feff7e01f8318613f2a21b39c215e5d3cdc2752
+2025-08-01 20:54:13,465 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-01 20:59:05,011 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-08-01 20:59:06,374 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-08-01 20:59:08,303 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-08-01 20:59:08,578 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 20:59:08,583 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-08-01 20:59:08,583 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-08-01 20:59:08,750 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-08-01 20:59:09,016 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-08-01 20:59:09,252 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-08-01 20:59:09,310 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 20:59:09,450 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-08-01 20:59:09,475 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-08-01 20:59:09,484 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 20:59:09,490 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-08-01 20:59:09,491 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-08-01 20:59:12,628 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/main/java
+2025-08-01 20:59:12,636 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/main/resources
+2025-08-01 20:59:12,638 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/test/java
+2025-08-01 20:59:12,641 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/test/resources
+2025-08-01 20:59:13,019 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/main/java
+2025-08-01 20:59:13,021 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/main/resources
+2025-08-01 20:59:13,023 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/test/java
+2025-08-01 20:59:13,025 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/test/resources
+2025-08-01 20:59:13,399 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/main/java
+2025-08-01 20:59:13,401 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/main/resources
+2025-08-01 20:59:13,402 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/test/java
+2025-08-01 20:59:13,403 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/test/resources
+2025-08-01 20:59:13,827 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/main/java
+2025-08-01 20:59:13,829 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/main/resources
+2025-08-01 20:59:13,831 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/test/java
+2025-08-01 20:59:13,832 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/test/resources
+2025-08-01 20:59:14,212 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/main/java
+2025-08-01 20:59:14,214 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/main/resources
+2025-08-01 20:59:14,215 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
+2025-08-01 20:59:14,217 [Worker-18: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
+2025-08-01 20:59:15,804 [Worker-18: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 6 poms: local refresh takes 0,00 sec, refresh facades takes 6,00 sec, update config takes 2,00 sec 
+2025-08-01 21:02:25,230 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-08-01 21:02:25,724 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-08-01 21:02:26,628 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-08-01 21:02:26,813 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 21:02:26,817 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-08-01 21:02:26,818 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-08-01 21:02:26,970 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-08-01 21:02:27,155 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-08-01 21:02:27,295 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-08-01 21:02:27,346 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 21:02:27,472 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-08-01 21:02:27,485 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-08-01 21:02:27,493 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-01 21:02:27,497 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-08-01 21:02:27,497 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-08-01 21:02:29,672 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/main/java
+2025-08-01 21:02:29,674 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/main/resources
+2025-08-01 21:02:29,676 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/test/java
+2025-08-01 21:02:29,678 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/test/resources
+2025-08-01 21:02:29,966 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/main/java
+2025-08-01 21:02:29,967 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/main/resources
+2025-08-01 21:02:29,968 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/test/java
+2025-08-01 21:02:29,969 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/test/resources
+2025-08-01 21:02:30,252 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/main/java
+2025-08-01 21:02:30,254 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/main/resources
+2025-08-01 21:02:30,255 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/test/java
+2025-08-01 21:02:30,256 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/test/resources
+2025-08-01 21:02:30,557 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/main/java
+2025-08-01 21:02:30,558 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/main/resources
+2025-08-01 21:02:30,559 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/test/java
+2025-08-01 21:02:30,561 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/test/resources
+2025-08-01 21:02:30,849 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/main/java
+2025-08-01 21:02:30,850 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/main/resources
+2025-08-01 21:02:30,851 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
+2025-08-01 21:02:30,852 [Worker-17: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
+2025-08-01 21:02:31,458 [Worker-17: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 6 poms: local refresh takes 0,00 sec, refresh facades takes 4,00 sec, update config takes 1,00 sec 

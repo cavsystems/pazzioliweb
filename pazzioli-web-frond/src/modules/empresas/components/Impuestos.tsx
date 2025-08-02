@@ -4,7 +4,7 @@ export function Impuestos() {
     return (  
         <>
         <div className="row justify-content-center">
-           <div className="col-12 col-md-7 col-lg-7" style={{marginBottom:"50px"}}>
+           <div className="col-12 col-md-8 col-lg-8" style={{marginBottom:"50px"}}>
                <h6 className="titlecamposempresa h6 titleimpuestos" style={{padding:'10px 10px 0px 10px ' ,marginBottom:0}}>Impuestos aplicables</h6>
                <CTable className="tabla">
   <CTableHead>
@@ -13,10 +13,10 @@ export function Impuestos() {
      <input type="checkbox" id="checkTérminos" className="checkbox h6" />
 
       </CTableHeaderCell>
-      <CTableHeaderCell scope="col" >nombre</CTableHeaderCell>
-      <CTableHeaderCell scope="col" >%tarifa</CTableHeaderCell>
+      <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
+      <CTableHeaderCell scope="col" >Tarifa</CTableHeaderCell>
       <CTableHeaderCell scope="col" >Tipo</CTableHeaderCell>
-      <CTableHeaderCell scope="col " >Aplicacion</CTableHeaderCell>
+      <CTableHeaderCell scope="col " >Aplicación</CTableHeaderCell>
     </CTableRow>
   </CTableHead>
   <CTableBody>

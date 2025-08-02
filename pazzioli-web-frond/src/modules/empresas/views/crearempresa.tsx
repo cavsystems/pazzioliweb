@@ -4,6 +4,7 @@ import { Datosgenrales } from "../components/Datosgenerales";
 import { useForm, FormProvider } from 'react-hook-form';
 import { useState } from "react";
 import { Impuestos } from "../components/Impuestos";
+import { Sucursales } from "../components/Sucursales";
 
 export function Crearempresa() {
   const [itemsformempresa, setitemsformempresa] = useState(1)
@@ -43,10 +44,10 @@ export function Crearempresa() {
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
 
         <div className="d-flex justify-content-center">
-        <div className="containerempresa">
-          <div className="d-flex justify-content-center w-100 containerimgempresa  flex-column align-items-center">
+        <div className={itemsformempresa==3 ? "containerempresasucur":"containerempresa"}>
+          <div className={`d-flex justify-content-center w-100 ${ itemsformempresa===3 ? "containerimgempresasucu":"containerimgempresa"}  flex-column align-items-center`}>
 
-            <img src="/imgs/logocreaempresa.svg" style={{maxWidth:'45px', maxHeight:'45px'}}/>
+            <img src="/imgs/logocreaempresa.svg" style={{maxWidth:'48px', maxHeight:'48px'}}/>
             <div className="d-flex">
                 <h5 className="tituloopaco">NUEVA EMPRESA</h5>
             </div>
@@ -83,7 +84,7 @@ export function Crearempresa() {
         </CTabPanel>)}
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
-         <div>Contenido de impuestos</div>
+        <Sucursales/>
         </CTabPanel>)}
         </CTabContent>
          </CTabs>
