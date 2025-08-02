@@ -105,7 +105,7 @@ public class JwUtilJava {
 	    	List<String> permisosUsuarioActivo=new ArrayList<String>();
 	    	if(!permisosUsuario.isEmpty()) {
   			  for (PermisoRol p : permisosUsuario) {
-  				  permisosUsuarioActivo.add(p.getPermiso().getNombre());						
+  				  permisosUsuarioActivo.add(p.getCodigopermiso().getNombre());						
 				}
   		  	}
 	    	return permisosUsuarioActivo;
