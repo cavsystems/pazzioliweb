@@ -23,43 +23,52 @@ public class PermisosRol{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	
-	@OneToMany(mappedBy = "codigopermiso")
-	private List<Permisos> permisos;
+
+	private String estado;
 	
 	
-	 @OneToMany(mappedBy= "codigorol")
-	private List<Roles> Roles;
+	 
+	    public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+		@ManyToOne
+	    @JoinColumn(name = "codigorol")
+	    private Roles codigorol;
+	    
+	    @ManyToOne
+	    @JoinColumn(name = "codigopermiso")
+	    private Permisos codigopermiso ;
+
+		public int getCodigo() {
+			return codigo;
+		}
+
+		public void setCodigo(int codigo) {
+			this.codigo = codigo;
+		}
+
+		public Roles getCodigorol() {
+			return codigorol;
+		}
+
+		public void setCodigorol(Roles codigorol) {
+			this.codigorol = codigorol;
+		}
+
+		public Permisos getCodigopermiso() {
+			return codigopermiso;
+		}
+
+		public void setCodigopermiso(Permisos codigopermiso) {
+			this.codigopermiso = codigopermiso;
+		}
 
 
-	 public int getCodigo() {
-		 return codigo;
-	 }
-
-
-	 public void setCodigo(int codigo) {
-		 this.codigo = codigo;
-	 }
-
-
-	 public List<Permisos> getPermisos() {
-		 return permisos;
-	 }
-
-
-	 public void setPermisos(List<Permisos> permisos) {
-		 this.permisos = permisos;
-	 }
-
-
-	 public List<Roles> getRoles() {
-		 return Roles;
-	 }
-
-
-	 public void setRoles(List<Roles> roles) {
-		 Roles = roles;
-	 }
-	
 	
 	
 	

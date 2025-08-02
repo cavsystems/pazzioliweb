@@ -25,15 +25,13 @@ public class Roles {
     private int codigo;
 
     private String nombre;
+    @OneToMany(mappedBy= "codigorol")
+   	private List<PermisosRol> permisos_roles;
 
     // Opcional: relación inversa si la necesitas
     @OneToMany(mappedBy = "codigorol")
     private List<Usuario> usuarios;
-    
-    @ManyToOne
-    @JoinColumn(name = "codigorol")
-    private PermisosRol codigorol;
-	
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -50,6 +48,14 @@ public class Roles {
 		this.nombre = nombre;
 	}
 
+	public List<PermisosRol> getPermisos_roles() {
+		return permisos_roles;
+	}
+
+	public void setPermisos_roles(List<PermisosRol> permisos_roles) {
+		this.permisos_roles = permisos_roles;
+	}
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -57,4 +63,8 @@ public class Roles {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+    
+   
+	
+	
 }

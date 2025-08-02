@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -19,28 +20,37 @@ public class Permisos{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
 	
-	@ManyToOne
-    @JoinColumn(name = "codigopermiso")
-    private PermisosRol codigopermiso;
 	
+	   @OneToMany(mappedBy= "codigopermiso")
+	   	private List<PermisosRol> permisos_roles;
+	   
 	private String nombre;
-	
-	
-	
+
 	public int getCodigo() {
 		return codigo;
 	}
-	
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	
+
+	public List<PermisosRol> getPermisos_roles() {
+		return permisos_roles;
+	}
+
+	public void setPermisos_roles(List<PermisosRol> permisos_roles) {
+		this.permisos_roles = permisos_roles;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
-	
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	
+	
 	
 }

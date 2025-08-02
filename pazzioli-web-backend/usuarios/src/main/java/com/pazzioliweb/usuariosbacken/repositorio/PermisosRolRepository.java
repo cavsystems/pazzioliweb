@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PermisosRolRepository extends JpaRepository<PermisosRol, Integer> {
-	@Query("SELECT p FROM Permisos_Roles p JOIN p.codigopermiso cp join p.codigorol cr WHERE cr.codigo = :codigo AND p.estado='ACTIVO'")
+	@Query("SELECT p FROM PermisosRol p JOIN p.codigopermiso cp join p.codigorol cr WHERE cr.codigo = :codigo AND p.estado='ACTIVO'")
     List<PermisosRol> findPermisosActivosByRol(@Param("codigo") int codigo);
     
-    Optional<Permisos> findBycodigoRolAndEstado(int codigoRol, String estado);
+   // Optional<Permisos> findBycodigoRolAndEstado(int codigoRol, String estado);
 
 }

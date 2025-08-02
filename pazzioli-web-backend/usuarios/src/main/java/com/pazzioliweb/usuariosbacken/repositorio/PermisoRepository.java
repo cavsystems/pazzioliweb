@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PermisoRepository extends JpaRepository<Permisos, Long> {
-    List<Permisos> findByPermiso(String permiso);
+    List<Permisos> findByNombre(String permiso);
 
 }

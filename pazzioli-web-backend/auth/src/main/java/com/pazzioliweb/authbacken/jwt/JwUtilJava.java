@@ -50,7 +50,7 @@ public class JwUtilJava {
 	    		  List<PermisosRol> permisosUsuario = permisosRolRepository.findPermisosActivosByRol(u.getCodigorol().getCodigo());
 	    		  if(!permisosUsuario.isEmpty()) {
 	    			  for (PermisosRol p : permisosUsuario) {
-	    				  System.out.println(p.getPermisos());						
+	    				  System.out.println(p.getCodigopermiso().getNombre());						
 					}
 	    		  }
 	    		  System.out.println();
