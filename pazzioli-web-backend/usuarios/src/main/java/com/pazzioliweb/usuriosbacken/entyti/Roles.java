@@ -32,7 +32,7 @@ public class Roles {
     
     @ManyToOne
     @JoinColumn(name = "codigorol")
-    private PermisosRol codigorol;
+    private PermisoRol codigorol;
 	
 	public int getCodigo() {
 		return codigo;

@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "permisos")
-public class Permisos{
+public class Permiso{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Permisos{
 	
 	@ManyToOne
     @JoinColumn(name = "codigopermiso")
-    private PermisosRol codigopermiso;
+    private PermisoRol codigopermiso;
 	
 	private String nombre;
 	

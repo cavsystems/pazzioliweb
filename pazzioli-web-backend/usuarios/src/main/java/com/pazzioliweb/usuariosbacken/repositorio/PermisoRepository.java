@@ -2,12 +2,11 @@ package com.pazzioliweb.usuariosbacken.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.usuriosbacken.entyti.Permisos;
+import com.pazzioliweb.usuriosbacken.entyti.Permiso;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface PermisoRepository extends JpaRepository<Permisos, Long> {
-    List<Permisos> findByPermiso(String permiso);
+public interface PermisoRepository extends JpaRepository<Permiso, Long> {
+    List<Permiso> findByNombre(String nombre);
 
 }

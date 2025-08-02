@@ -17,19 +17,28 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "permisos_roles")
-public class PermisosRol{
+public class PermisoRol{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigo;
-	
+	/*
 	@OneToMany(mappedBy = "codigopermiso")
 	private List<Permisos> permisos;
 	
 	
 	 @OneToMany(mappedBy= "codigorol")
-	private List<Roles> Roles;
+	private List<Roles> Roles;*/
+	 
+	 @ManyToOne
+	 @JoinColumn(name = "codigo_permiso")
+	 private Permiso permiso;
 
+	 @ManyToOne
+	 @JoinColumn(name = "codigo_rol")
+	 private Roles rol;
+	 
+	 private String estado;
 
 	 public int getCodigo() {
 		 return codigo;
@@ -40,27 +49,27 @@ public class PermisosRol{
 		 this.codigo = codigo;
 	 }
 
-
-	 public List<Permisos> getPermisos() {
-		 return permisos;
+	 public Permiso getPermiso() {
+		 return permiso;
 	 }
-
-
-	 public void setPermisos(List<Permisos> permisos) {
-		 this.permisos = permisos;
+	 
+	 public void setPermiso(Permiso permiso) {
+		 this.permiso=permiso;
 	 }
-
-
-	 public List<Roles> getRoles() {
-		 return Roles;
+	 
+	 public Roles getRol() {
+		 return rol;
 	 }
-
-
-	 public void setRoles(List<Roles> roles) {
-		 Roles = roles;
+	 
+	 public void setRol(Roles rol) {
+		 this.rol=rol;
 	 }
-	
-	
-	
-	
+	 
+	 public String getEstado() {
+		 return estado;
+	 }
+	 
+	 public void setEstado(String estado) {
+		 this.estado=estado;
+	 }
 }
