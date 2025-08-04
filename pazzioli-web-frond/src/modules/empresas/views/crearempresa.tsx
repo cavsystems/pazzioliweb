@@ -7,7 +7,7 @@ import { Impuestos } from "../components/Impuestos";
 import { Sucursales } from "../components/Sucursales";
 
 export function Crearempresa() {
-  const [itemsformempresa, setitemsformempresa] = useState(1)
+  const [itemsformempresa, setitemsformempresa] = useState(3)
    const methods = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -94,7 +94,11 @@ export function Crearempresa() {
             
          </div>
 <div className="d-flex position-fixed bottom-0 w-100 bg-white justify-content-end containercontinuar">
-  <div className="padingbotoncontinuar"><button type="button"  className="botoncontinuar" onClick={()=>
+  <div className="padingbotoncontinuar">
+    <button type="button"  className="botonretroceder" onClick={()=>
+    setitemsformempresa((prev) => (prev - 1))
+  } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
+    <button type="button"  className="botoncontinuar" onClick={()=>
     setitemsformempresa((prev) => (prev + 1))
   }>Continuar</button>
 </div>

@@ -10,7 +10,7 @@ export function Impuestos() {
   <CTableHead>
     <CTableRow>
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox h6" />
+     <input type="checkbox" id="checkTérminos1" className="checkbox h6" />
 
       </CTableHeaderCell>
       <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
@@ -23,7 +23,7 @@ export function Impuestos() {
     <CTableRow>
    
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox" />
+     <input type="checkbox" id="checkTérminos2" className="checkbox" />
 
       </CTableHeaderCell>
       <CTableDataCell>Impuesto 1</CTableDataCell>
@@ -35,7 +35,7 @@ export function Impuestos() {
       <CTableRow>
    
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox" />
+     <input type="checkbox" id="checkTérminos3" className="checkbox" />
 
       </CTableHeaderCell>
       <CTableDataCell>Impuesto 2</CTableDataCell>
@@ -47,7 +47,7 @@ export function Impuestos() {
      <CTableRow>
    
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox" />
+     <input type="checkbox" id="checkTérminos4" className="checkbox" />
 
       </CTableHeaderCell>
       <CTableDataCell>Impuesto 3</CTableDataCell>
@@ -59,7 +59,7 @@ export function Impuestos() {
     <CTableRow>
    
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox" />
+     <input type="checkbox" id="checkTérminos5" className="checkbox" />
 
       </CTableHeaderCell>
       <CTableDataCell>Impuesto 4</CTableDataCell>
@@ -73,7 +73,7 @@ export function Impuestos() {
     <CTableRow>
    
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos" className="checkbox" />
+     <input type="checkbox" id="checkTérminos6" className="checkbox" />
 
       </CTableHeaderCell>
       <CTableDataCell>Impuesto 5</CTableDataCell>

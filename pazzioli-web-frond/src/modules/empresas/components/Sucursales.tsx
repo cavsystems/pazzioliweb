@@ -1,6 +1,9 @@
 import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
+import { Modalsocursal } from "./components/Modalsucursal";
+import { useState } from "react";
 
 export function Sucursales() {
+    const [visible, setVisible] = useState(false)
     return ( 
         <>
         <div className="col-12">
@@ -97,11 +100,15 @@ export function Sucursales() {
                         </div>
                     </div>
                   </div>
-                   <div className="col-12 d-flex justify-content-center ">
+                   <div className="col-12 d-flex justify-content-center " style={{marginTop:'10px'}}>
                     <div className="containersucursalboton">
-                          <CButton className="botonagregarsucursal" >Agregar</CButton>
+                          <CButton className="botonagregarsucursal"  onClick={
+                            ()=> setVisible(true)
+                          }>Agregar</CButton>
                     </div>
                    </div>
+
+                   <Modalsocursal visible={visible} setVisible={setVisible}/>
 
             </div>
         </div>

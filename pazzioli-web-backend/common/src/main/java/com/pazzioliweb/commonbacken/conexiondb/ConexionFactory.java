@@ -11,7 +11,7 @@ public class ConexionFactory {
 	        HikariConfig config = new HikariConfig();
 	         /*config.setJdbcUrl("jdbc:mysql://127.0.0.1:3307/" + nombreConexion +
 	        		  "?administrador&serverTimezone=America/Bogota");*/
-	        config.setJdbcUrl("jdbc:mysql://localhost:3306/" + nombreConexion);
+	        config.setJdbcUrl("jdbc:mysql://localhost:3307/" + nombreConexion);
 	        config.setUsername("root");
 	        config.setPassword("root125");
 	        config.setDriverClassName("com.mysql.cj.jdbc.Driver");

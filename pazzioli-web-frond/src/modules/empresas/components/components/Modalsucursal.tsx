@@ -1,0 +1,200 @@
+import { CButton, CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
+import { useState } from "react";
+
+export function Modalsocursal({visible, setVisible}: any) {
+   
+    return ( 
+        <>
+     
+        <CModal
+        alignment="center"
+        scrollable
+        visible={visible}
+        onClose={() => setVisible(false)}
+        aria-labelledby="VerticallyCenteredScrollableExample2"
+       className="col-12"
+      >
+        <CModalHeader>
+          <CModalTitle id="VerticallyCenteredScrollableExample2">Agregar sucursal o bodega</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <div className="row">
+            <div className="col-12">
+               <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Identificacion</h6>
+
+            </div>
+            <div className="col-12 col-md-6 col-lg-6 paddingempresa" style={{paddingLeft:'12px'}}>
+                     <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Nombre Bodega/Sucursal</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-6  paddingempresa"  style={{paddingLeft:'0px'}} >
+                     <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Codigo sucursal</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+           
+          </div>
+
+           <div className="row">
+            <div className="col-12">
+                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Ubicación(opcional)</h6>
+
+            </div>
+              <div className=" col-12 col-md-6 col-lg-6 paddingempresa" style={{paddingLeft:'12px'}} >
+                 <CInputGroup >
+                        {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
+                        CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
+                        Debe incluir placeholder en el select para que funcione correctamente.
+                        La etiqueta (label), se queda flotando arriba incluso después de elegir una opción*/}
+                        <CFormFloating className="margeniputempresa">
+  <CFormSelect
+    size="lg"
+    placeholder="Tipo de identificacion"
+    className="inputselect fontletre"
+   
+  >
+    <option value="" >Seleccione una opción</option>
+      <option value="estrageria" >estrangeria</option>    
+  </CFormSelect>
+  <CFormLabel>Pais</CFormLabel>
+</CFormFloating>
+                                 
+      </CInputGroup>
+
+      <CInputGroup >
+                        {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
+                        CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
+                        Debe incluir placeholder en el select para que funcione correctamente.
+                        La etiqueta (label), se queda flotando arriba incluso después de elegir una opción*/}
+                        <CFormFloating className="margeniputempresa">
+  <CFormSelect
+    size="lg"
+    placeholder="Tipo de identificacion"
+    className="inputselect fontletre"
+   
+  >
+    <option value="" >Municipio</option>
+      <option value="estrageria" >estrangeria</option>    
+  </CFormSelect>
+  <CFormLabel>Municipio</CFormLabel>
+</CFormFloating>
+                                 
+      </CInputGroup>
+
+
+        <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Dirección</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+       
+
+
+
+       <div className="col-12 col-md-6 col-lg-6  paddingempresa" style={{padding:'15px 10px 5px 15px '}} >
+                 <CInputGroup >
+                        {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
+                        CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
+                        Debe incluir placeholder en el select para que funcione correctamente.
+                        La etiqueta (label), se queda flotando arriba incluso después de elegir una opción*/}
+                        <CFormFloating className="margeniputempresa">
+  <CFormSelect
+    size="lg"
+    placeholder="Tipo de identificacion"
+    className="inputselect fontletre"
+   
+  >
+    <option value="" >Seleccione una opción</option>
+      <option value="estrageria" >estrangeria</option>    
+  </CFormSelect>
+  <CFormLabel>Departamento</CFormLabel>
+</CFormFloating>
+                                 
+      </CInputGroup>
+
+      
+        <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Codigo postal</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+
+
+
+           </div>
+
+
+             <div className="row">
+            <div className="col-12">
+                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Contacto(opcional)</h6>
+
+            </div>
+              <div className="col-12 col-md-6 col-lg-6  paddingempresa">
+               
+
+
+        <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Codigo sucursal</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+
+            
+        <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Correo electronico</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+       
+
+
+
+       <div className="col-12 col-md-6 col-lg-6  paddingempresa">
+
+      
+        <CInputGroup >
+                <CFormFloating className="margeniputempresa">
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+  />
+   <CFormLabel htmlFor="identificacion">Celular</CFormLabel>
+  </CFormFloating>
+            </CInputGroup>
+            </div>
+
+
+
+           </div>
+        </CModalBody>
+        <CModalFooter style={{justifyContent: 'center',display:'flex'}}>
+          <button  onClick={() => setVisible(false)} className="botonsucursal">
+            Close
+          </button>
+          <button className="botonguardarsucursal">Guardar</button>
+        </CModalFooter>
+      </CModal>
+      
+        </>
+     );
+}
+

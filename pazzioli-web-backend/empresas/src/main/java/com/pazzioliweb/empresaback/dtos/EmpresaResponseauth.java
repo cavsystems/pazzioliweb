@@ -1,13 +1,10 @@
 package com.pazzioliweb.empresaback.dtos;
 
 public class EmpresaResponseauth{
-	private String nombreconexion;
+	public String nombreconexion;
     
 
-    public EmpresaResponseauth( String  nombreconexion) {
-        this.nombreconexion = nombreconexion;
-           }
-
+   
 
 	public String getNombreconexion() {
 		return nombreconexion;

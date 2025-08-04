@@ -35,7 +35,7 @@ public class SecurityConfig {
     	//CORS ESPECIFICO LA CONFIGURACION QUE TENDRA
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll()
+            .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**").permitAll()
                     .anyRequest().authenticated()).exceptionHandling(ex -> ex
                     	    .accessDeniedHandler((request, response, accessDeniedException) -> {
                     	        response.setStatus(HttpServletResponse.SC_FORBIDDEN);

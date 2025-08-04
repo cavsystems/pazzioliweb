@@ -61,7 +61,10 @@ el cual es org.springframework.boot  esto lo hacemos esto para gestionar  las ve
 			<artifactId>mysql-connector-j</artifactId>
 			 <version>8.0.33</version> 
 		</dependency>
-
+<dependency>
+  <groupId>org.flywaydb</groupId>
+  <artifactId>flyway-core</artifactId>
+</dependency>
    		<dependency>
     <groupId>jakarta.servlet</groupId>
     <artifactId>jakarta.servlet-api</artifactId>
