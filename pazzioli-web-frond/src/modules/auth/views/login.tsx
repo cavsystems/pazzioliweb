@@ -45,11 +45,13 @@ import { useNavigate } from "react-router";
   console.log('mensajesocket', mensajesocket);
      if (mensajesocket.length > 0) {
     const opciones = mensajesocket[0].map((item: any) => (
-    
+      
       {
+        
       label: item.nombreconexion,
       value: item.nombreconexion // esto es clave para que <CFormSelect> lo interprete
     }));
+    console.log(opciones)
     setopciones(opciones);
   }
        

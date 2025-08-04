@@ -5,18 +5,26 @@ import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.redis.RedisConfig;
+import com.pazzioliweb.usuariosbacken.repositorio.PermisoRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.PermisoRolRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Permiso;
+import com.pazzioliweb.usuriosbacken.entyti.PermisoRol;
 import com.pazzioliweb.usuriosbacken.entyti.Usuario;
+
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -28,6 +36,10 @@ public class JwUtilJava {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	PermisoRolRepository permisoRolRepository;
+	
 	 private final String SECRET_KEY = "clave_secreta_clave_secreta_clave_secreta"; // 🔐 mínimo 32 bytes para HS256
 	 private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 	 
@@ -39,6 +51,10 @@ public class JwUtilJava {
 	    	  if(!optional.isEmpty()) {
 	    		  Usuario u=optional.get();
 	    		  System.out.println(u.getCodigorol().getNombre());
+	    		  List<String> permisosUsuarioActivo=cargarPermisosUsuario(u.getCodigorol().getCodigo());
+	    		  if(permisosUsuarioActivo != null && !permisosUsuarioActivo.isEmpty()) {
+	    			  System.out.println(permisosUsuarioActivo);  
+	    		  }	    		  
 	    		  DatosSesiones sesion = new DatosSesiones();
 	  	    	sesion.setLogin(usuario.getUsuario());
 	  	    	sesion.setDbName(db);
@@ -81,6 +97,18 @@ public class JwUtilJava {
 	            // Token inválido o expirado
 	            return false;
 	        }
+	    }
+	    
+	    public List<String> cargarPermisosUsuario(int codigoRolUsuario){
+	    	
+	    	List<PermisoRol> permisosUsuario = permisoRolRepository.findPermisosActivosByRol(codigoRolUsuario);
+	    	List<String> permisosUsuarioActivo=new ArrayList<String>();
+	    	if(!permisosUsuario.isEmpty()) {
+  			  for (PermisoRol p : permisosUsuario) {
+  				  permisosUsuarioActivo.add(p.getCodigopermiso().getNombre());						
+				}
+  		  	}
+	    	return permisosUsuarioActivo;
 	    }
 
 }

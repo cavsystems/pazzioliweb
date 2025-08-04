@@ -65,10 +65,11 @@ public class AuthController {
         Map<String, Object> response = new HashMap<>();
         System.out.println(optional.isPresent());	
         if (optional.isPresent()) {
+        	
             Usuario usuario = optional.get();
             System.out.println(usuario.getUsuario());
            if (usuario.getContrasena().equals(request.password)) {
-            	  String token = jwtUtil.generateToken(usuario,request.db);
+            	  String token = jwtUtil.generateToken(usuario,request.db.trim());
             	  
             	 Optional<Sesiones> optionalsession = sessionRepository.findFirstBycodigoUsuarioAndEstadoOrderByCodigoDesc(usuario.getCodigo(),"ACTIVO");
             	

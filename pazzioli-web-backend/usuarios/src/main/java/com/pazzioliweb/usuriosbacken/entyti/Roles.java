@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -23,11 +25,14 @@ public class Roles {
     private int codigo;
 
     private String nombre;
+    @OneToMany(mappedBy= "codigorol")
+   	private List<PermisoRol> permisos_roles;
 
     // Opcional: relación inversa si la necesitas
     @OneToMany(mappedBy = "codigorol")
     private List<Usuario> usuarios;
-
+    
+   
 	
 	public int getCodigo() {
 		return codigo;
@@ -45,6 +50,14 @@ public class Roles {
 		this.nombre = nombre;
 	}
 
+	public List<PermisoRol> getPermisos_roles() {
+		return permisos_roles;
+	}
+
+	public void setPermisos_roles(List<PermisoRol> permisos_roles) {
+		this.permisos_roles = permisos_roles;
+	}
+
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -52,4 +65,8 @@ public class Roles {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+    
+   
+	
+	
 }

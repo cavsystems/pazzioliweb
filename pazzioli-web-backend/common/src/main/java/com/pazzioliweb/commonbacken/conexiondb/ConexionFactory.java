@@ -11,9 +11,13 @@ public class ConexionFactory {
 	        HikariConfig config = new HikariConfig();
 	         /*config.setJdbcUrl("jdbc:mysql://127.0.0.1:3307/" + nombreConexion +
 	        		  "?administrador&serverTimezone=America/Bogota");*/
+<<<<<<< HEAD
 	        config.setJdbcUrl("jdbc:mysql://localhost:3307/" + nombreConexion);
+=======
+	        config.setJdbcUrl("jdbc:mysql://localhost:3323/" + nombreConexion);
+>>>>>>> 6949860acdf8af06fb10f8aeb821e878bb95b627
 	        config.setUsername("root");
-	        config.setPassword("root125");
+	        config.setPassword("135790Juan*");
 	        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
 	        HikariDataSource dataSource = new HikariDataSource(config);
