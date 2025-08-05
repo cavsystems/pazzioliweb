@@ -46,7 +46,7 @@ function Nombres({ register, CInputGroup,
             </div>
 
 
- <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{paddingLeft:'0px'}}>
+ <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 margingleftcol" style={{paddingLeft:'0px'}}>
 
 
                          <CInputGroup >
@@ -82,23 +82,7 @@ function Nombres({ register, CInputGroup,
 
                 </div>
                 </div> 
-     <div className="col-12">
-        <div style={{padding:'10px 10px 10px 0 '}}>
-            <CPopover
-      title="Popover title"
-      content="And here’s some amazing content. It’s very engaging. Right?"
-      placement="right"
-       fallbackPlacements={[]}
-        trigger="hover"
-
-    >
-      <CButton  style={{paddingLeft:'14px'}} >
-        <h6 className="h5"> Datos fiscales</h6>
-       
-      </CButton>
-    </CPopover>  
-        </div>
-        </div>         
+  
    
             </div>
         </>

@@ -5,6 +5,7 @@ import Nombres from "./components/nombres";
 import Contacto from "./components/Contacto";
 import Ubicacion from "./components/Ubicacion";
 import Imagenpazzioli from "./components/Imagenpazioli";
+import { Datosfiscales } from "./components/Datosfiscales";
 
  export function Datosgenrales() {
   const { register } = useFormContext();
@@ -22,7 +23,13 @@ import Imagenpazzioli from "./components/Imagenpazioli";
   CFormSelect={CFormSelect}
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}/>
-
+<Datosfiscales
+register={register}  CInputGroup={CInputGroup}
+  CFormInput={CFormInput}
+  CFormSelect={CFormSelect}
+  CFormFloating={CFormFloating}
+  CFormLabel={CFormLabel}
+/>
 
   <Contacto  register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
@@ -37,6 +44,9 @@ import Imagenpazzioli from "./components/Imagenpazioli";
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
   />
+
+
+
 
   <Imagenpazzioli CFormInput={CFormInput}/>
         </div>

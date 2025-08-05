@@ -26,7 +26,7 @@ export function Identificacion({ register, CInputGroup,
     {...register('tipodepersona', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="juridica" >guridica</option>    
+     <option value="juridica" >Juridica</option>    
   </CFormSelect>
   <CFormLabel>Tipo de persona</CFormLabel>
 </CFormFloating>
@@ -43,7 +43,7 @@ export function Identificacion({ register, CInputGroup,
             </div>
 
 
- <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{paddingLeft:'0px'}}>
+ <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 margingleftcol" style={{paddingLeft:'0px'}}>
 
                       <CInputGroup >
                         {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 

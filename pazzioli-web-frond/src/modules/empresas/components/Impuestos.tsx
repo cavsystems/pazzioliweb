@@ -10,7 +10,27 @@ export function Impuestos() {
   <CTableHead>
     <CTableRow>
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos1" className="checkbox h6" />
+     <input type="checkbox" id="checkTérminos1" className="checkbox h6"  onClick={()=>{
+        const checkboxes = document.querySelectorAll('.checkbox');
+        if((checkboxes[0] as HTMLInputElement).checked){ 
+              checkboxes.forEach((checkbox,index) => {
+      
+
+          (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= true;
+        }
+        
+        );
+        }else{
+             checkboxes.forEach((checkbox,index) => {
+      
+
+          (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= false;
+        }
+        
+        );
+        }
+     
+     }}/>
 
       </CTableHeaderCell>
       <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
@@ -26,7 +46,7 @@ export function Impuestos() {
      <input type="checkbox" id="checkTérminos2" className="checkbox" />
 
       </CTableHeaderCell>
-      <CTableDataCell>Impuesto 1</CTableDataCell>
+      <CTableDataCell>Iva</CTableDataCell>
       <CTableDataCell>19</CTableDataCell>
        <CTableDataCell>Sobre el total</CTableDataCell>
             <CTableDataCell>Venta</CTableDataCell>
@@ -38,10 +58,10 @@ export function Impuestos() {
      <input type="checkbox" id="checkTérminos3" className="checkbox" />
 
       </CTableHeaderCell>
-      <CTableDataCell>Impuesto 2</CTableDataCell>
-      <CTableDataCell>2.5</CTableDataCell>
-       <CTableDataCell>Sobre la base</CTableDataCell>
-            <CTableDataCell>Compra</CTableDataCell>
+      <CTableDataCell>Iva</CTableDataCell>
+      <CTableDataCell>5</CTableDataCell>
+       <CTableDataCell>Sobre el total</CTableDataCell>
+            <CTableDataCell>Venta</CTableDataCell>
     </CTableRow>
    
      <CTableRow>
@@ -50,10 +70,10 @@ export function Impuestos() {
      <input type="checkbox" id="checkTérminos4" className="checkbox" />
 
       </CTableHeaderCell>
-      <CTableDataCell>Impuesto 3</CTableDataCell>
-      <CTableDataCell>10</CTableDataCell>
-       <CTableDataCell>Sobre la base</CTableDataCell>
-            <CTableDataCell>Compra</CTableDataCell>
+      <CTableDataCell>Inc</CTableDataCell>
+      <CTableDataCell>8</CTableDataCell>
+       <CTableDataCell>Sobre el total</CTableDataCell>
+            <CTableDataCell>Venta</CTableDataCell>
     </CTableRow>
 
     <CTableRow>
@@ -62,8 +82,8 @@ export function Impuestos() {
      <input type="checkbox" id="checkTérminos5" className="checkbox" />
 
       </CTableHeaderCell>
-      <CTableDataCell>Impuesto 4</CTableDataCell>
-      <CTableDataCell>10</CTableDataCell>
+      <CTableDataCell>Retefuente</CTableDataCell>
+      <CTableDataCell>2.5</CTableDataCell>
        <CTableDataCell>Sobre la base</CTableDataCell>
             <CTableDataCell>Compra</CTableDataCell>
     </CTableRow>

@@ -98,9 +98,11 @@ export function Crearempresa() {
     <button type="button"  className="botonretroceder" onClick={()=>
     setitemsformempresa((prev) => (prev - 1))
   } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
-    <button type="button"  className="botoncontinuar" onClick={()=>
+
+  {itemsformempresa>=3 ?  <button type="submit"className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={()=>
     setitemsformempresa((prev) => (prev + 1))
-  }>Continuar</button>
+  }>Continuar</button>}
+   
 </div>
          </div>
          </div>

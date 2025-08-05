@@ -23,11 +23,11 @@ export function Sucursales() {
                           <CTableHead>
                             <CTableRow>
                               <CTableHeaderCell scope="col">Bodega</CTableHeaderCell>
-                            <CTableHeaderCell scope="col" >Pais</CTableHeaderCell>
+                            <CTableHeaderCell scope="col" >País</CTableHeaderCell>
                               <CTableHeaderCell scope="col" >Departamento</CTableHeaderCell>
                               <CTableHeaderCell scope="col" >Municipio</CTableHeaderCell>
                               <CTableHeaderCell scope="col " >Cód.postal</CTableHeaderCell>
-                                <CTableHeaderCell scope="col">Direccion</CTableHeaderCell>
+                                <CTableHeaderCell scope="col">Dirección</CTableHeaderCell>
                             <CTableHeaderCell scope="col" >Teléfono</CTableHeaderCell>
                               <CTableHeaderCell scope="col" >Celular</CTableHeaderCell>
                               <CTableHeaderCell scope="col" >Cód.sucursal</CTableHeaderCell>

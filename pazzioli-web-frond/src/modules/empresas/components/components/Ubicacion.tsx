@@ -58,7 +58,7 @@ function Ubicacion({ register, CInputGroup,
             </div>
 
 
- <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{paddingLeft:'0px'}}>
+ <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 margingleftcol" style={{paddingLeft:'0px'}}>
 
 
                            <CInputGroup >
