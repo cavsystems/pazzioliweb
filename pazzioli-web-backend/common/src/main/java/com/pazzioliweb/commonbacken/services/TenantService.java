@@ -16,7 +16,8 @@ public class TenantService {
 	    Flyway.configure()
 	      .dataSource(ds)
 	      .schemas(schema)
-	      .locations("classpath:schema.sql")
+	      .locations("classpath:db/migration"
+	      		+ "")
 	      .baselineOnMigrate(true)
 	      .load()
 	      .migrate();

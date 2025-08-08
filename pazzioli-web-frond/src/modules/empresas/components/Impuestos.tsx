@@ -4,7 +4,7 @@ export function Impuestos() {
     return (  
         <>
         <div className="row justify-content-center">
-           <div className="col-12 col-md-8 col-lg-8" style={{marginBottom:"50px"}}>
+           <div className="col-12 col-md-8 col-lg-8 paddingtableimpuesto" style={{marginBottom:"50px"}}>
                <h6 className="titlecamposempresa h6 titleimpuestos" style={{padding:'10px 10px 0px 10px ' ,marginBottom:0}}>Impuestos aplicables</h6>
                <CTable className="tabla">
   <CTableHead>

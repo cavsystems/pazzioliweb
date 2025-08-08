@@ -346,10 +346,33 @@ text-align: center !important;
 @media (max-width: 768px) {
   .margingleftcol{
    
-    padding-left: 12px !important;
-    padding-right: 12px !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
 }
+.paddingempresa{
+    padding-left: 40px !important;
+    padding-right: 40px !important;
 }
+
+.paddingtitleempresa{
+    padding-left: 30px !important;
+}
+
+.paddingtitleempresabutton{
+    padding-left: 30px !important;
+}
+.paddingtitleempresalogo{
+    padding-left: 35px !important;
+}
+.paddingtableimpuesto{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.paddingempresamodal{
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}}
 
 .fottersucursal{
     background: var(--blanco) 0% 0% no-repeat padding-box !important;

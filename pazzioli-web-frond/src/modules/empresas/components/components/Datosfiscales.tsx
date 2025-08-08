@@ -9,7 +9,7 @@ export function Datosfiscales({ register, CInputGroup,
     return ( 
         <>
          <div className="col-12">
-                <div style={{padding:'10px 10px 0 0 '}}>
+                <div style={{padding:'10px 6px 0 0 ',marginLeft:'0px'}}>
                     <CPopover
               title="Popover title"
               content="And here’s some amazing content. It’s very engaging. Right?"
@@ -19,7 +19,7 @@ export function Datosfiscales({ register, CInputGroup,
         
             >
               <CButton  style={{paddingLeft:'14px'}} >
-                <h6 className="h6"> Datos fiscales</h6>
+                <h6 className="h6 paddingtitleempresabutton " style={{padding:'10px 6px 0 0 ',marginLeft:'0px'}}> Datos fiscales</h6>
                
               </CButton>
             </CPopover>  

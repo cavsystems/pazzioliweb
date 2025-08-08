@@ -20,10 +20,10 @@ export function Modalsocursal({visible, setVisible}: any) {
         <CModalBody>
           <div className="row">
             <div className="col-12">
-               <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Identificación</h6>
+               <h6 className="titlecamposempresa h6 " style={{padding:'15px 10px 5px 15px '}}>Identificación</h6>
 
             </div>
-            <div className="col-12 col-md-6 col-lg-6 paddingempresa  " style={{paddingLeft:'12px'}}>
+            <div className="col-12 col-md-6 col-lg-6 paddingempresa  paddingempresamodal" style={{paddingLeft:'12px'}}>
                      <CInputGroup >
                 <CFormFloating className="margeniputempresa">
               <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
@@ -33,7 +33,7 @@ export function Modalsocursal({visible, setVisible}: any) {
             </CInputGroup>
             </div>
 
-            <div className="col-12 col-md-6 col-lg-6  paddingempresa margingleftcol"  style={{paddingLeft:'0px'}} >
+            <div className="col-12 col-md-6 col-lg-6  paddingempresa margingleftcol paddingempresamodal"  style={{paddingLeft:'0px'}} >
                      <CInputGroup >
                 <CFormFloating className="margeniputempresa">
               <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
@@ -50,7 +50,7 @@ export function Modalsocursal({visible, setVisible}: any) {
                 <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Ubicación(opcional)</h6>
 
             </div>
-              <div className=" col-12 col-md-6 col-lg-6 paddingempresa" style={{paddingLeft:'12px'}} >
+              <div className=" col-12 col-md-6 col-lg-6 paddingempresa paddingempresamodal" style={{paddingLeft:'12px'}} >
                  <CInputGroup >
                         {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
                         CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
@@ -104,7 +104,7 @@ export function Modalsocursal({visible, setVisible}: any) {
 
 
 
-       <div className="col-12 col-md-6 col-lg-6  paddingempresa  margingleftcol" style={{padding:'15px 10px 5px 15px '}} >
+       <div className="col-12 col-md-6 col-lg-6  paddingempresa  margingleftcol paddingempresamodal" style={{padding:'15px 10px 5px 15px '}} >
                  <CInputGroup >
                         {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
                         CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
@@ -145,7 +145,7 @@ export function Modalsocursal({visible, setVisible}: any) {
                 <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Contacto(opcional)</h6>
 
             </div>
-              <div className="col-12 col-md-6 col-lg-6  paddingempresa">
+              <div className="col-12 col-md-6 col-lg-6  paddingempresa paddingempresamodal">
                
 
 
@@ -170,7 +170,7 @@ export function Modalsocursal({visible, setVisible}: any) {
 
 
 
-       <div className="col-12 col-md-6 col-lg-6  paddingempresa  margingleftcol">
+       <div className="col-12 col-md-6 col-lg-6  paddingempresa  margingleftcol paddingempresamodal">
 
       
         <CInputGroup >
