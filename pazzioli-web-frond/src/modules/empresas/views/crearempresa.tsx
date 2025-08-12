@@ -10,10 +10,28 @@ export function Crearempresa() {
   const [itemsformempresa, setitemsformempresa] = useState(3)
   
    const methods = useForm({
-    mode: 'onChange',
+     mode: 'onSubmit',
+      shouldUnregister: false,
     defaultValues: {
-      tipodepersona: '',
-      identificacion: '',
+     Actividadeconomica: "",
+Correoempresa:"",
+celularempresa:"",
+codigopostal:"",
+digitodeverificacion:"",
+digitoverificacion:"",
+nombrecomercial:"",
+numeroidentificacion:"",
+pais:"",
+primerapellido:"",
+primernombre: "",
+razonsocial:"",
+regimen:"",
+segundoapellido:"",
+segundonombre:"",
+telefonofijo:"",
+tipodeidentificacion: "",
+tipodepersona:"",
+tipoidentificacion: "",
       // Agrega todos los campos que usas en todos los pasos
     },
   });
@@ -39,10 +57,15 @@ export function Crearempresa() {
    const onSubmit = (data: any) => {
     console.log('Formulario completo:', data);
   };
+  const onError = (errors:any) => {
+  console.error("Errores del formulario:", errors);
+  
+
+};
     return (  
         <>
          <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <form onSubmit={methods.handleSubmit(onSubmit,onError)}>
 
         <div className="d-flex justify-content-center">
         <div className={itemsformempresa==3 ? "containerempresasucur":"containerempresa"}>
@@ -75,9 +98,9 @@ export function Crearempresa() {
       </div>
 
         <CTabContent>
-         {itemsformempresa===1 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1}>
+          <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
            <Datosgenrales/>
-        </CTabPanel>)}
+        </CTabPanel>
         {itemsformempresa===2 && (<CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2}>
         
             <Impuestos/>
@@ -100,8 +123,9 @@ export function Crearempresa() {
     setitemsformempresa((prev) => (prev - 1))
   } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
 
-  {itemsformempresa>=3 ?  <button type="submit"className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={()=>
+  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={(e)=>{
     setitemsformempresa((prev) => (prev + 1))
+  e.stopPropagation();}
   }>Continuar</button>}
    
 </div>
