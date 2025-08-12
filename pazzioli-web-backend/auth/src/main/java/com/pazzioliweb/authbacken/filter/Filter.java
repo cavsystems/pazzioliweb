@@ -81,7 +81,7 @@ public class Filter extends OncePerRequestFilter {
                     new UsernamePasswordAuthenticationToken(usuario, claims.get("idsecion",String.class), authorities);
                 SecurityContextHolder.getContext().setAuthentication(authToken);
 
-            	 filterChain.doFilter(request, response);
+            
             }else {
 
            	 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -89,7 +89,7 @@ public class Filter extends OncePerRequestFilter {
            	    response.getWriter().write("{\"error\": \"Token invalido o ausente\"}");
             	
             }
-           
+   	 filterChain.doFilter(request, response);
      
 		
 	}

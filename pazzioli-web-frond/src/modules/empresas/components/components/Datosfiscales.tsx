@@ -1,4 +1,6 @@
 import { CButton, CPopover } from "@coreui/react";
+import { useEffect, useState } from "react";
+import api from "../../../../apicofig";
 
 export function Datosfiscales({ register, CInputGroup,
   CFormInput,
@@ -6,6 +8,22 @@ export function Datosfiscales({ register, CInputGroup,
   CFormFloating,
   CFormLabel,
 ...rest}: any) {
+  const [actividadeconomica,setactividadeconomica]=useState([])
+  const [filtro, setFiltro] = useState('');
+
+  
+const resultados = actividadeconomica.filter((item:any) =>
+  item.descripcionActividad.toLowerCase().includes(filtro.toLowerCase())
+);
+   useEffect(()=>{
+    traerdataauto(1)
+
+   },[])
+   const traerdataauto= async (numero:number)=>{
+    const data=await api.get(`/empresa/traeractividadeseconomicas?pagina=${numero}`)
+    console.log(data.data.datosactividad)
+    setactividadeconomica(data.data.datosactividad)
+   }
     return ( 
         <>
          <div className="col-12">
@@ -28,13 +46,25 @@ export function Datosfiscales({ register, CInputGroup,
 
                   <div>
                 <div className="row">
-                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 paddingempresa"  >
+                <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 paddingempresa  imputcompletgeneral"  >
 
                      
-                          <CInputGroup >
+                          <CInputGroup className="" >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"           {...register('Actividad economica', { required: 'Este campo es obligatorio' })} />
-  <CFormLabel>Actividad económica (CIU)</CFormLabel>
+              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre"           {...register('Actividad economica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
+    setFiltro(e.target.value);
+    console.log(e.target.value);
+    // Llamar al onChange original de react-hook-form
+    register('Actividad economica').onChange(e);
+  }}/>
+    <CFormLabel>Actividad económica (CIU)</CFormLabel>
+     {filtro && (
+      <ul className="lista-opcionesaut">
+        {resultados.map((item:any) => (
+          <li key={item.codigo}>{item.descripcionActividad}</li>
+        ))}
+      </ul>
+    )}
 
               </CFormFloating>
             </CInputGroup>

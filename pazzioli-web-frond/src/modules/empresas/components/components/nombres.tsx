@@ -1,4 +1,5 @@
 import { CButton, CPopover } from "@coreui/react";
+import { useEffect } from "react";
 
 function Nombres({ register, CInputGroup,
   CFormInput,
@@ -6,6 +7,9 @@ function Nombres({ register, CInputGroup,
   CFormFloating,
   CFormLabel,
 ...rest}: any) {
+  useEffect(()=>{
+   console.log("jurico",rest.juridico)
+  },[rest.juridico,rest.natural])
     return ( 
         <>
            <div className="col-12">
@@ -18,7 +22,7 @@ function Nombres({ register, CInputGroup,
                      
                           <CInputGroup >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"           {...register('primernombre', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className={`inputdatosempresa fontletre`}    disabled={rest.natural.natural}       {...register('primernombre', { required: 'Este campo es obligatorio' })} />
   <CFormLabel>Primer nombre</CFormLabel>
 
               </CFormFloating>
@@ -28,7 +32,7 @@ function Nombres({ register, CInputGroup,
 
                 <CInputGroup >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"    {...register('primerapellido', { required: 'Este campo es obligatorio' })}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural}    {...register('primerapellido', { required: 'Este campo es obligatorio' })}          
   />
   <CFormLabel>Primer apellido</CFormLabel>
   </CFormFloating>
@@ -38,7 +42,7 @@ function Nombres({ register, CInputGroup,
             
                 <CInputGroup >
               <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"    {...register('razonsocial', { required: 'Este campo es obligatorio' })}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  disabled={rest.juridico.juridico}  {...register('razonsocial', { required: 'Este campo es obligatorio' })}          
   />
         <CFormLabel>Razón social</CFormLabel>
   </CFormFloating>
@@ -52,7 +56,7 @@ function Nombres({ register, CInputGroup,
                          <CInputGroup >
               <CFormFloating className="margeniputempresa">
               
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"           {...register('segundonombre', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"       disabled={rest.natural.natural}     {...register('segundonombre', { required: 'Este campo es obligatorio' })} />
                <CFormLabel>Segundo nombre</CFormLabel>
               </CFormFloating>
             </CInputGroup>
@@ -61,7 +65,7 @@ function Nombres({ register, CInputGroup,
 
                 <CInputGroup>
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  {...register('segundoapellido', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural} {...register('segundoapellido', { required: 'Este campo es obligatorio' })} />
                <CFormLabel>Segundo apellido</CFormLabel>
               </CFormFloating>
             </CInputGroup>

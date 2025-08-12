@@ -80,6 +80,17 @@ public class AuthController {
             		    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             		    System.out.println("Fecha y hora de fin: " + fechaFin.format(fmt));
             		    
+            		    
+            		    crearSesion(usuario.getCodigo(),token);
+                   	 
+                        // ✅ Crear cookie con el token esta cookie contendra el token con el que trabajalemos duerante todo el logueo
+                        Cookie jwtCookie = new Cookie("token", token);
+                        jwtCookie.setHttpOnly(true); // no accesible desde JavaScript
+                        jwtCookie.setSecure(false);   // solo por HTTPS en producción
+                        jwtCookie.setPath("/");
+                        jwtCookie.setMaxAge(24 * 60 * 60); // 1 día
+                       jwtCookie.setDomain("localhost"); // ⚠️ importante según tu entorno
+                        servletResponse.addCookie(jwtCookie);
             		    response.put("success", false);
                         response.put("sesion",  sesion );
                         return ResponseEntity

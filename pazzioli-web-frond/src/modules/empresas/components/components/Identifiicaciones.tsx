@@ -24,9 +24,30 @@ export function Identificacion({ register, CInputGroup,
     placeholder="Tipo de persona"
     className="inputselect fontletre "
     {...register('tipodepersona', { required: 'Este campo es obligatorio' })}
+
+     onChange={(e:any) => {
+    const value = e.target.value;
+    const ite=rest.datosempresa.tipopersona?.findIndex((item:any)=> item.codigo === Number(value)
+    )
+    console.log(rest.datosempresa.tipopersona[ite], value)
+    if (rest.datosempresa.tipopersona[ite].nombre === "Juridica") {
+      rest.juridico.setjuridico(false);
+      rest.natural.setnatural(true);
+    } else if (rest.datosempresa.tipopersona[ite].nombre=== "Natural") {
+      rest.juridico.setjuridico(true);
+      rest.natural.setnatural(false);
+    } else {
+      
+    }
+  }}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="juridica" >Juridica</option>    
+    
+     {
+      rest.datosempresa.tipopersona?.map((item:any)=>{
+      return <option value={item.codigo} >{item.nombre}</option>    
+      })
+     }
   </CFormSelect>
   <CFormLabel>Tipo de persona</CFormLabel>
 </CFormFloating>
@@ -58,7 +79,12 @@ export function Identificacion({ register, CInputGroup,
     {...register('tipoidentificacion', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-      <option value="estrageria" >estrangeria</option>    
+    {
+      rest.datosempresa.tipoidentificacion?.map((item:any)=>{
+      return <option value={item.codigo} >{item.tipoIdentificacion}</option>    
+      })
+     }
+         
   </CFormSelect>
   <CFormLabel>Tipo de identificación</CFormLabel>
 </CFormFloating>

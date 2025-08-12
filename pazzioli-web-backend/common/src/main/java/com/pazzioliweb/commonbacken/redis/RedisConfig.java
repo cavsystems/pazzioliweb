@@ -50,7 +50,7 @@ public class RedisConfig {
         
         
         BasicPolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
-                .allowIfSubType("com.pazzioliweb.pazzioli_web_backend.dto")
+                .allowIfSubType("com.pazzioliweb.commonbacken.dtos")
                 .build();
         
         
