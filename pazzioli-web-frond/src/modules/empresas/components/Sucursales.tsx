@@ -1,9 +1,24 @@
 import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { Modalsocursal } from "./components/Modalsucursal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export function Sucursales() {
+export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempresa}:any) {
     const [visible, setVisible] = useState(false)
+    const [bodega, setBodega] = useState({
+        nombre: '',
+        pais: {codigo:0,pais:''},
+        departamento: '',
+        municipio: '',
+        codigopostal: '',
+        direccion: '',
+        telefonofijo: '',
+        celular: '',
+        codigosucursal: '',
+        correo: ''
+    });
+
+    useEffect(()=>{
+        console.log("sucursales",bodega)},[bodega])
     return ( 
         <>
         <div className="col-12">
@@ -108,7 +123,7 @@ export function Sucursales() {
                     </div>
                    </div>
 
-                   <Modalsocursal visible={visible} setVisible={setVisible}/>
+                   <Modalsocursal visible={visible} setVisible={setVisible} setBodega={setBodega} bodega={bodega}  datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
 
             </div>
         </div>

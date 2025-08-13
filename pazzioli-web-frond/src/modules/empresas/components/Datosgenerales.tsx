@@ -9,11 +9,9 @@ import { Datosfiscales } from "./components/Datosfiscales";
 import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
- export function Datosgenrales() {
+ export function Datosgenrales({datosempresa,setdatosempresa}:any) {
   const { register,control } = useFormContext();
-  const [datosempresa,setdatosempresa]=useState({
   
-  })
 
    
   const [juridico,setjuridico]  =useState(true)

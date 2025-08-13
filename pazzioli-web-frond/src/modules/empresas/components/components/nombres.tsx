@@ -22,7 +22,7 @@ function Nombres({ register, CInputGroup,
                      
                           <CInputGroup >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className={`inputdatosempresa fontletre`}    disabled={rest.natural.natural}       {...register('primernombre', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className={`inputdatosempresa fontletre`}    disabled={rest.natural.natural}       {...register('primernombre')} />
   <CFormLabel>Primer nombre</CFormLabel>
 
               </CFormFloating>
@@ -32,7 +32,7 @@ function Nombres({ register, CInputGroup,
 
                 <CInputGroup >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural}    {...register('primerapellido', { required: 'Este campo es obligatorio' })}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural}    {...register('primerapellido')}          
   />
   <CFormLabel>Primer apellido</CFormLabel>
   </CFormFloating>
@@ -42,7 +42,7 @@ function Nombres({ register, CInputGroup,
             
                 <CInputGroup >
               <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  disabled={rest.juridico.juridico}  {...register('razonsocial', { required: 'Este campo es obligatorio' })}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  disabled={rest.juridico.juridico}  {...register('razonsocial')}          
   />
         <CFormLabel>Razón social</CFormLabel>
   </CFormFloating>
@@ -56,7 +56,7 @@ function Nombres({ register, CInputGroup,
                          <CInputGroup >
               <CFormFloating className="margeniputempresa">
               
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"       disabled={rest.natural.natural}     {...register('segundonombre', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"       disabled={rest.natural.natural}     {...register('segundonombre')} />
                <CFormLabel>Segundo nombre</CFormLabel>
               </CFormFloating>
             </CInputGroup>
@@ -65,7 +65,7 @@ function Nombres({ register, CInputGroup,
 
                 <CInputGroup>
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural} {...register('segundoapellido', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   disabled={rest.natural.natural} {...register('segundoapellido')} />
                <CFormLabel>Segundo apellido</CFormLabel>
               </CFormFloating>
             </CInputGroup>

@@ -2,8 +2,12 @@ import { CFormCheck, CFormInput, CTable, CTableBody, CTableDataCell, CTableHead,
 import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
-export function Impuestos() {
+export function Impuestos({
+  setimpuestosseleccionados,
+  impuestsosseleccionados
+}:any) {
   const [impuestos,setimpuestos]= useState([])
+
   useEffect(()=>{
  traerimpuestos()
   },[])
@@ -29,6 +33,7 @@ export function Impuestos() {
       
 
           (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= true;
+          setimpuestosseleccionados([...impuestos]);
         }
         
         );
@@ -37,6 +42,7 @@ export function Impuestos() {
       
 
           (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= false;
+           setimpuestosseleccionados([]);
         }
         
         );
@@ -57,7 +63,19 @@ export function Impuestos() {
 
    
       <CTableDataCell scope="col">
-     <input type="checkbox" id={`checkTérminos${index+1}`}className="checkbox" />
+     <input type="checkbox" id={`checkTérminos${index+1}`}className="checkbox"  onClick={(e)=>{
+        
+        if((e.target as HTMLInputElement).checked){ 
+         const impuestotrue= impuestsosseleccionados.some((impuesto:any)=> impuesto.codigo === item.codigo) 
+         if(!impuestotrue){
+            setimpuestosseleccionados((prev:any)=>[...prev,item])
+         }
+        
+        }else{
+          setimpuestosseleccionados((prev:any)=>prev.filter((impuesto:any)=> impuesto.codigo !== item.codigo))
+          }
+     
+     }}/>
 
       </CTableDataCell>
       <CTableDataCell>{item.nombre}</CTableDataCell>

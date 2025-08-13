@@ -77,14 +77,13 @@ export function Identificacion({ register,control, CInputGroup,
 
      
   </CFormSelect>
-  {fieldState.error && (
-  <span style={{ color: "red" }}>{fieldState.error.message}</span>
-)}
+  {fieldState.error ? (
+    <CFormLabel style={{ color: "red" }}>Tipo de persona</CFormLabel>):(<CFormLabel>Tipo de persona</CFormLabel>)}
   </>
   
   )}
 />
-  <CFormLabel>Tipo de persona</CFormLabel>
+
 </CFormFloating>
                                  
       </CInputGroup>

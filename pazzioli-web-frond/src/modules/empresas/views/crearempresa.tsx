@@ -2,13 +2,33 @@ import { CButton, CCard, CCardBody, CCardImage, CCardText, CForm, CFormInput, CF
 import './estylosempresa.scss'
 import { Datosgenrales } from "../components/Datosgenerales";
 import { useForm, FormProvider } from 'react-hook-form';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Impuestos } from "../components/Impuestos";
 import { Sucursales } from "../components/Sucursales";
+import api from "../../../apicofig";
 
 export function Crearempresa() {
   const [itemsformempresa, setitemsformempresa] = useState(3)
+  const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
+    const [datosempresa,setdatosempresa]=useState({
   
+  })
+  const [sucursales,setsucursales]=useState([])
+  useEffect( () => {
+    traerinformacion();
+   
+  },[])
+  
+  const traerinformacion= async ()=>{
+    let datos=await api.get('/empresa/traerempresa')
+   
+   setdatosempresa(datos.data.datos)
+   console.log(datos.data.datos)
+
+  }
+  useEffect(()=>{
+  console.log("impuestos seleccionados",impuestsosseleccionados)
+  },[impuestsosseleccionados])
    const methods = useForm({
      mode: 'onSubmit',
       shouldUnregister: false,
@@ -99,16 +119,16 @@ tipoidentificacion: "",
 
         <CTabContent>
           <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
-           <Datosgenrales/>
+           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
         </CTabPanel>
         {itemsformempresa===2 && (<CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2}>
         
-            <Impuestos/>
+            <Impuestos setimpuestosseleccionados={setimpuestosseleccionados} impuestsosseleccionados={impuestsosseleccionados}/>
           
         </CTabPanel>)}
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
-        <Sucursales/>
+        <Sucursales setsucursales={setsucursales} sucursales={sucursales} datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
         </CTabPanel>)}
         </CTabContent>
          </CTabs>
