@@ -1,14 +1,17 @@
 import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { Modalsocursal } from "./components/Modalsucursal";
 import { useEffect, useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
 export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempresa}:any) {
     const [visible, setVisible] = useState(false)
+    const [updateSucursal, setUpdateSucursal] = useState(false)
+    const [sucursalesData,setsucursalesData]=useState([])
     const [bodega, setBodega] = useState({
+        id:'',
         nombre: '',
         pais: {codigo:0,pais:''},
-        departamento: '',
-        municipio: '',
+        departamento: {codigo:0,departemento:''},
+        municipio:{codigo:0, municipio: ''},
         codigopostal: '',
         direccion: '',
         telefonofijo: '',
@@ -17,8 +20,59 @@ export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempr
         correo: ''
     });
 
-    useEffect(()=>{
-        console.log("sucursales",bodega)},[bodega])
+   const eliminarSucursal=(id:string)=>{
+    setsucursales((prev:any)=> prev.filter((sucursal:any)=> sucursal.id !== id))
+   }
+   const actulizarSucursal=()=>{
+    const sucursalToUpdate = sucursales.findIndex((sucursal:any) => sucursal.id === bodega.id);
+    if (sucursalToUpdate !== -1) {
+    sucursales[sucursalToUpdate]=bodega
+        setVisible(false);
+        setUpdateSucursal(false);
+    }
+    setBodega({
+           id:'',
+        nombre: '',
+        pais: {codigo:0,pais:''},
+        departamento: {codigo:0,departemento:''},
+        municipio:{codigo:0, municipio: ''},
+        codigopostal: '',
+        direccion: '',
+        telefonofijo: '',
+        celular: '',
+        codigosucursal: '',
+        correo: ''
+    })
+   }
+
+const actulizar=(id:string)=>{
+  setBodega(sucursales.find((sucursal:any)=> sucursal.id === id))
+   setVisible(true);
+ setUpdateSucursal(true);
+
+}
+    const nuevaSucursal = () => {
+        if(!bodega.id){
+            bodega.id= uuidv4()
+        }
+        setsucursales((prev:any) => [...prev, bodega]);
+        setVisible(false)
+        setBodega({
+           id:'',
+        nombre: '',
+        pais: {codigo:0,pais:''},
+        departamento: {codigo:0,departemento:''},
+        municipio:{codigo:0, municipio: ''},
+        codigopostal: '',
+        direccion: '',
+        telefonofijo: '',
+        celular: '',
+        codigosucursal: '',
+        correo: ''
+    })
+    }
+
+   
     return ( 
         <>
         <div className="col-12">
@@ -51,60 +105,39 @@ export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempr
                             </CTableRow>
                           </CTableHead>
                           <CTableBody>
-                            <CTableRow>
-                           
-                            
-                              <CTableDataCell>Empresa sur</CTableDataCell>
-                              <CTableDataCell>Colombia</CTableDataCell>
-                               <CTableDataCell>Valle del cauca</CTableDataCell>
-                                    <CTableDataCell>Cali</CTableDataCell>
-                                     <CTableDataCell>7600003</CTableDataCell>
-                                      <CTableDataCell>Cra 112#44-21 apto 630</CTableDataCell>
-                              <CTableDataCell>3934672</CTableDataCell>
-                               <CTableDataCell>3162226224</CTableDataCell>
-                                    <CTableDataCell>123</CTableDataCell>
-                                     <CTableDataCell>correoempresa@empresa.com.co</CTableDataCell>
+                          
+                              {sucursales?.map((item:any,index:any)=>(
+                                <>
+                                  <CTableRow>
+                                <CTableDataCell key={index}>{item.nombre}</CTableDataCell>
+                                   <CTableDataCell>{item.pais.pais}</CTableDataCell>
+                               <CTableDataCell>{item.departamento.departamento}</CTableDataCell>
+                                    <CTableDataCell>{item.municipio.municipio}</CTableDataCell>
+                                     <CTableDataCell>{item.codigopostal}</CTableDataCell>
+                                      <CTableDataCell>{item.direccion}</CTableDataCell>
+                              <CTableDataCell>{item.telefonofijo}</CTableDataCell>
+                               <CTableDataCell>{item.celular}</CTableDataCell>
+                                    <CTableDataCell>{item.codigosucursal}</CTableDataCell>
+                                     <CTableDataCell>{item.correo}</CTableDataCell>
                                       <CTableHeaderCell >
                                         <div className="row justify-content-center g-2" >
                                             <div className="col-6" style={{ maxWidth: 'fit-content' }}>
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}>
+                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}  onClick={()=>actulizar(item.id)}>
                                                     <img src="/imgs/imgeditar.svg"/>
                                                 </CButton>
                                             </div>
                                             <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content' ,padding:'0' }}>  <img src="/imgs/eliminar.svg"/></CButton>
+                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content' ,padding:'0' }} onClick={()=>{
+                                                    eliminarSucursal(item.id)
+                                                }}>  <img src="/imgs/eliminar.svg"/></CButton>
                                             </div>
                                         </div>
                                       </CTableHeaderCell>
-                            </CTableRow>
+                                      </CTableRow>
+                                </>))}
+                         
 
-
-                              <CTableRow>
-                           
                             
-                              <CTableDataCell>Empresa sur</CTableDataCell>
-                              <CTableDataCell>Colombia</CTableDataCell>
-                               <CTableDataCell>Valle del cauca</CTableDataCell>
-                                    <CTableDataCell>Cali</CTableDataCell>
-                                     <CTableDataCell>7600003</CTableDataCell>
-                                      <CTableDataCell>Cra 112#44-21 apto 630</CTableDataCell>
-                              <CTableDataCell>3934672</CTableDataCell>
-                               <CTableDataCell>3162226224</CTableDataCell>
-                                    <CTableDataCell>123</CTableDataCell>
-                                     <CTableDataCell>correoempresa@empresa.com.co</CTableDataCell>
-                                      <CTableHeaderCell >
-                                        <div className="row justify-content-center g-2" >
-                                            <div className="col-6" style={{ maxWidth: 'fit-content' }}>
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}>
-                                                    <img src="/imgs/imgeditar.svg"/>
-                                                </CButton>
-                                            </div>
-                                            <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content' ,padding:'0' }}>  <img src="/imgs/eliminar.svg"/></CButton>
-                                            </div>
-                                        </div>
-                                      </CTableHeaderCell>
-                            </CTableRow>
 
                               
                         
@@ -123,7 +156,7 @@ export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempr
                     </div>
                    </div>
 
-                   <Modalsocursal visible={visible} setVisible={setVisible} setBodega={setBodega} bodega={bodega}  datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
+                   <Modalsocursal visible={visible} setVisible={setVisible} setBodega={setBodega} bodega={bodega}  datosempresa={datosempresa} setdatosempresa={setdatosempresa} nuevaSucursal={nuevaSucursal} updateSucursal={{updateSucursal,setUpdateSucursal}} actulizar={actulizarSucursal}/>
 
             </div>
         </div>

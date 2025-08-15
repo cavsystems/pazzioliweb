@@ -8,7 +8,7 @@ import { Sucursales } from "../components/Sucursales";
 import api from "../../../apicofig";
 
 export function Crearempresa() {
-  const [itemsformempresa, setitemsformempresa] = useState(3)
+  const [itemsformempresa, setitemsformempresa] = useState(1)
   const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
     const [datosempresa,setdatosempresa]=useState({
   
@@ -18,6 +18,9 @@ export function Crearempresa() {
     traerinformacion();
    
   },[])
+
+   useEffect(()=>{
+        console.log("sucursales",sucursales)},[sucursales])
   
   const traerinformacion= async ()=>{
     let datos=await api.get('/empresa/traerempresa')
@@ -51,7 +54,9 @@ segundonombre:"",
 telefonofijo:"",
 tipodeidentificacion: "",
 tipodepersona:"",
-tipoidentificacion: "",
+impuestos:[],
+sucursales:[],
+
       // Agrega todos los campos que usas en todos los pasos
     },
   });
@@ -142,8 +147,10 @@ tipoidentificacion: "",
     <button type="button"  className="botonretroceder" onClick={()=>
     setitemsformempresa((prev) => (prev - 1))
   } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
-
-  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={(e)=>{
+   {/*un key es un nombre identificativo que le doy a mis nodos o componentes en este caso fue 
+   necesario ya que cuando pasaba la tracision de un componente a otro  react utiliza mi boton gaurdar y  pensando que es el boton 
+   de submit me ejecuta el submit por eso utilizo el key para difernciar el boton continuar con el submit y evitar este error*/}
+  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar"  key="guardar">Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={(e)=>{
     setitemsformempresa((prev) => (prev + 1))
   e.stopPropagation();}
   }>Continuar</button>}

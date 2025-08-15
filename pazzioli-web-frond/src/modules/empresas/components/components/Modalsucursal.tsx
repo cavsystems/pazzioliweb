@@ -1,17 +1,29 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
 import { useState } from "react";
 
-export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa, setdatosempresa}: any) {
+
+export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa, setdatosempresa,nuevaSucursal,actulizar,updateSucursal}: any) {
+   const onchangeBodegaselect=(e:any)=>{
+    console.log( JSON.stringify(e.target.value))
+   
+   setBodega((prev:any)=>({...prev,[e.target.name]:JSON.parse(e.target.value)}))
+    
+   
+   
+   }
+
    const onchangeBodega=(e:any)=>{
-    console.log( e.target.value)
+    
    
    setBodega((prev:any)=>({...prev,[e.target.name]:e.target.value}))
     
    
-    console.log("bodega",setBodega)
+   
    }
    const eventoonchageselect=(nombre:any,item:any)=>{
-    setBodega((prev:any)=>({...prev, nombre: item}))
+     console.log("item",JSON.parse(item))
+    setBodega((prev:any)=>({...prev, nombre: JSON.parse(item)}))
+   
    }
     return ( 
         <>
@@ -71,16 +83,17 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
     size="lg"
     placeholder="Tipo de identificacion"
     className="inputselect fontletre"
-        value={bodega.pais}
+
+        value={JSON.stringify(bodega.pais)}
         name='pais'
-        onChange={onchangeBodega}
+        onChange={onchangeBodegaselect}
    
   >
-    <option value="" >Seleccione una opción</option>
+    <option value="{codigo:0,pais:''}">Seleccione una opción</option>
    
       {
       datosempresa.pais?.map((item:any)=>{
-      return <option value={item} onClick={eventoonchageselect("pais",item)} >{item.pais}</option>    
+      return <option value={JSON.stringify(item)} onClick={()=>{eventoonchageselect("pais",item)}} >{item.pais}</option>    
       })
      }   
   </CFormSelect>
@@ -99,10 +112,17 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
     size="lg"
     placeholder="Tipo de identificacion"
     className="inputselect fontletre"
-   
+   value={JSON.stringify(bodega.municipio)}
+        name='municipio'
+        onChange={onchangeBodegaselect}
   >
-    <option value="" >Municipio</option>
-      <option value="estrageria" >estrangeria</option>    
+    <option value="
+{codigo:0, municipio: ''}" >Seleccione una opción</option>
+      {
+      datosempresa.municipio?.map((item:any)=>{
+      return <option value={JSON.stringify(item)} onClick={()=>{eventoonchageselect("pais",item)}} >{item.municipio}</option>    
+      })
+     }   
   </CFormSelect>
   <CFormLabel>Municipio</CFormLabel>
 </CFormFloating>
@@ -133,10 +153,16 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
     size="lg"
     placeholder="Tipo de identificacion"
     className="inputselect fontletre"
-   
+     value={JSON.stringify(bodega.departamento)}
+        name='departamento'
+        onChange={onchangeBodegaselect}
   >
-    <option value="" >Seleccione una opción</option>
-      <option value="estrageria" >estrangeria</option>    
+    <option value="{codigo:0,departemento:''}" >Seleccione una opción</option>
+      {
+      datosempresa.departamento?.map((item:any)=>{
+      return <option value={JSON.stringify(item)} onClick={()=>{eventoonchageselect("pais",item)}} >{item.departamento}</option>    
+      })
+     }     
   </CFormSelect>
   <CFormLabel>Departamento</CFormLabel>
 </CFormFloating>
@@ -178,7 +204,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
             
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   name='correo' onChange={onchangeBodega} value={bodega.correo}        
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   name='correo' onChange={onchangeBodega} value={bodega.correo}       
   />
    <CFormLabel htmlFor="identificacion" >Correo electrónico</CFormLabel>
   </CFormFloating>
@@ -208,7 +234,9 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
           <button  onClick={() => setVisible(false)} className="botonsucursal">
             Cancelar
           </button>
-          <button className="botonguardarsucursal">Guardar</button>
+          <button className="botonguardarsucursal" onClick={()=>{ updateSucursal.updateSucursal ? actulizar() :
+            nuevaSucursal();
+          }}>Guardar</button>
         </CModalFooter>
       </CModal>
       
