@@ -51,7 +51,7 @@ const resultados = actividadeconomica.filter((item:any) =>
                      
                           <CInputGroup className="" >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre"           {...register('Actividad economica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
+              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre"           {...register('Actividadeconomica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
     setFiltro(e.target.value);
     console.log(e.target.value);
     // Llamar al onChange original de react-hook-form
@@ -94,7 +94,11 @@ const resultados = actividadeconomica.filter((item:any) =>
     {...register('regimen', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="juridica" >Juridica</option>    
+       {
+      rest.datosempresa.regimen?.map((item:any)=>{
+      return <option value={item.codigo} >{item.descripcion}</option>    
+      })
+     }  
   </CFormSelect>
   <CFormLabel>Regimen</CFormLabel>
 </CFormFloating>

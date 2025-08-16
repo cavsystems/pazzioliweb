@@ -2,18 +2,56 @@ import { CButton, CCard, CCardBody, CCardImage, CCardText, CForm, CFormInput, CF
 import './estylosempresa.scss'
 import { Datosgenrales } from "../components/Datosgenerales";
 import { useForm, FormProvider } from 'react-hook-form';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Impuestos } from "../components/Impuestos";
 import { Sucursales } from "../components/Sucursales";
+import api from "../../../apicofig";
 
 export function Crearempresa() {
   const [itemsformempresa, setitemsformempresa] = useState(3)
+  const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
+    const [datosempresa,setdatosempresa]=useState({
   
+  })
+  const [sucursales,setsucursales]=useState([])
+  useEffect( () => {
+    traerinformacion();
+   
+  },[])
+  
+  const traerinformacion= async ()=>{
+    let datos=await api.get('/empresa/traerempresa')
+   
+   setdatosempresa(datos.data.datos)
+   console.log(datos.data.datos)
+
+  }
+  useEffect(()=>{
+  console.log("impuestos seleccionados",impuestsosseleccionados)
+  },[impuestsosseleccionados])
    const methods = useForm({
-    mode: 'onChange',
+     mode: 'onSubmit',
+      shouldUnregister: false,
     defaultValues: {
-      tipodepersona: '',
-      identificacion: '',
+     Actividadeconomica: "",
+Correoempresa:"",
+celularempresa:"",
+codigopostal:"",
+digitodeverificacion:"",
+digitoverificacion:"",
+nombrecomercial:"",
+numeroidentificacion:"",
+pais:"",
+primerapellido:"",
+primernombre: "",
+razonsocial:"",
+regimen:"",
+segundoapellido:"",
+segundonombre:"",
+telefonofijo:"",
+tipodeidentificacion: "",
+tipodepersona:"",
+tipoidentificacion: "",
       // Agrega todos los campos que usas en todos los pasos
     },
   });
@@ -39,10 +77,15 @@ export function Crearempresa() {
    const onSubmit = (data: any) => {
     console.log('Formulario completo:', data);
   };
+  const onError = (errors:any) => {
+  console.error("Errores del formulario:", errors);
+  
+
+};
     return (  
         <>
          <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                <form onSubmit={methods.handleSubmit(onSubmit,onError)}>
 
         <div className="d-flex justify-content-center">
         <div className={itemsformempresa==3 ? "containerempresasucur":"containerempresa"}>
@@ -75,17 +118,17 @@ export function Crearempresa() {
       </div>
 
         <CTabContent>
-         {itemsformempresa===1 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1}>
-           <Datosgenrales/>
-        </CTabPanel>)}
+          <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
+           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
+        </CTabPanel>
         {itemsformempresa===2 && (<CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2}>
         
-            <Impuestos/>
+            <Impuestos setimpuestosseleccionados={setimpuestosseleccionados} impuestsosseleccionados={impuestsosseleccionados}/>
           
         </CTabPanel>)}
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
-        <Sucursales/>
+        <Sucursales setsucursales={setsucursales} sucursales={sucursales} datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
         </CTabPanel>)}
         </CTabContent>
          </CTabs>
@@ -100,8 +143,9 @@ export function Crearempresa() {
     setitemsformempresa((prev) => (prev - 1))
   } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
 
-  {itemsformempresa>=3 ?  <button type="submit"className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={()=>
+  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={(e)=>{
     setitemsformempresa((prev) => (prev + 1))
+  e.stopPropagation();}
   }>Continuar</button>}
    
 </div>

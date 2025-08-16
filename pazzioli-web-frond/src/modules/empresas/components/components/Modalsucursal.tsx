@@ -1,8 +1,18 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
 import { useState } from "react";
 
-export function Modalsocursal({visible, setVisible}: any) {
+export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa, setdatosempresa}: any) {
+   const onchangeBodega=(e:any)=>{
+    console.log( e.target.value)
    
+   setBodega((prev:any)=>({...prev,[e.target.name]:e.target.value}))
+    
+   
+    console.log("bodega",setBodega)
+   }
+   const eventoonchageselect=(nombre:any,item:any)=>{
+    setBodega((prev:any)=>({...prev, nombre: item}))
+   }
     return ( 
         <>
      
@@ -26,17 +36,17 @@ export function Modalsocursal({visible, setVisible}: any) {
             <div className="col-12 col-md-6 col-lg-6 paddingempresa  paddingempresamodal" style={{paddingLeft:'12px'}}>
                      <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  name="nombre" onChange={onchangeBodega} value={bodega.nombre}          
   />
    <CFormLabel htmlFor="identificacion">Nombre Bodega/Sucursal</CFormLabel>
   </CFormFloating>
             </CInputGroup>
             </div>
 
-            <div className="col-12 col-md-6 col-lg-6  paddingempresa margingleftcol paddingempresamodal"  style={{paddingLeft:'0px'}} >
+            <div className="col-12 col-md-6 col-lg-6  paddingempresa margingleftcol paddingempresamodal"  style={{paddingLeft:'0px'}}  >
                      <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"     name='codigosucursal' onChange={onchangeBodega} value={bodega.codigosucursal}         
   />
    <CFormLabel htmlFor="identificacion">Código sucursal</CFormLabel>
   </CFormFloating>
@@ -61,10 +71,18 @@ export function Modalsocursal({visible, setVisible}: any) {
     size="lg"
     placeholder="Tipo de identificacion"
     className="inputselect fontletre"
+        value={bodega.pais}
+        name='pais'
+        onChange={onchangeBodega}
    
   >
     <option value="" >Seleccione una opción</option>
-      <option value="estrageria" >Colombia</option>    
+   
+      {
+      datosempresa.pais?.map((item:any)=>{
+      return <option value={item} onClick={eventoonchageselect("pais",item)} >{item.pais}</option>    
+      })
+     }   
   </CFormSelect>
   <CFormLabel>País</CFormLabel>
 </CFormFloating>
@@ -94,9 +112,9 @@ export function Modalsocursal({visible, setVisible}: any) {
 
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre" name="direccion" onChange={onchangeBodega} value={bodega.direccion}           
   />
-   <CFormLabel htmlFor="identificacion">Dirección</CFormLabel>
+   <CFormLabel htmlFor="identificacion" >Dirección</CFormLabel>
   </CFormFloating>
             </CInputGroup>
             </div>
@@ -128,7 +146,7 @@ export function Modalsocursal({visible, setVisible}: any) {
       
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre" name='codigopostal' onChange={onchangeBodega} value={bodega.codigopostal}          
   />
    <CFormLabel htmlFor="identificacion">Código postal</CFormLabel>
   </CFormFloating>
@@ -151,18 +169,18 @@ export function Modalsocursal({visible, setVisible}: any) {
 
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"     name='telefonofijo' onChange={onchangeBodega} value={bodega.telefonofijo}      
   />
-   <CFormLabel htmlFor="identificacion">Télefono</CFormLabel>
+   <CFormLabel htmlFor="identificacion" >Télefono</CFormLabel>
   </CFormFloating>
             </CInputGroup>
 
             
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   name='correo' onChange={onchangeBodega} value={bodega.correo}        
   />
-   <CFormLabel htmlFor="identificacion">Correo electrónico</CFormLabel>
+   <CFormLabel htmlFor="identificacion" >Correo electrónico</CFormLabel>
   </CFormFloating>
             </CInputGroup>
             </div>
@@ -175,7 +193,7 @@ export function Modalsocursal({visible, setVisible}: any) {
       
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"             
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  name='celular' onChange={onchangeBodega} value={bodega.celular}         
   />
    <CFormLabel htmlFor="identificacion">Celular</CFormLabel>
   </CFormFloating>

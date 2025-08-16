@@ -1,5 +1,5 @@
 import { CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CInputGroupText } from "@coreui/react";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { Identificacion } from "./components/Identifiicaciones";
 import Nombres from "./components/nombres";
 import Contacto from "./components/Contacto";
@@ -9,11 +9,9 @@ import { Datosfiscales } from "./components/Datosfiscales";
 import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
- export function Datosgenrales() {
-  const { register } = useFormContext();
-  const [datosempresa,setdatosempresa]=useState({
+ export function Datosgenrales({datosempresa,setdatosempresa}:any) {
+  const { register,control } = useFormContext();
   
-  })
 
    
   const [juridico,setjuridico]  =useState(true)
@@ -35,7 +33,7 @@ import api from "../../../apicofig";
     return (  
         <>
         <div className="row">
-            <Identificacion register={register}  CInputGroup={CInputGroup}
+            <Identificacion register={register}  control={control} CInputGroup={CInputGroup}
   CFormInput={CFormInput}
   CFormSelect={CFormSelect}
   CFormFloating={CFormFloating}
@@ -57,6 +55,7 @@ register={register}  CInputGroup={CInputGroup}
   CFormSelect={CFormSelect}
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
+    datosempresa={datosempresa}
 />
 
   <Contacto  register={register}  CInputGroup={CInputGroup}
@@ -71,6 +70,7 @@ register={register}  CInputGroup={CInputGroup}
   CFormSelect={CFormSelect}
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
+  datosempresa={datosempresa}
   />
 
 

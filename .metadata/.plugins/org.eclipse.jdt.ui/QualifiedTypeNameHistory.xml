@@ -22,7 +22,13 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+<<<<<<< HEAD
     <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.entyti.Actividadeconomica"/>
+=======
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entyti.Municipio"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entyti.Impuestos"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori"/>
+>>>>>>> bf9da3012c98b9af2d97e25db6c6810b583a1394
 </qualifiedTypeNameHistroy>

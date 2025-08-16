@@ -28,7 +28,11 @@ function Ubicacion({ register, CInputGroup,
     {...register('pais', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="Colombia" >Colombia</option>    
+      {
+      rest.datosempresa.pais?.map((item:any)=>{
+      return <option value={item.codigo} >{item.pais}</option>    
+      })
+     }   
   </CFormSelect>
   <CFormLabel>Pais</CFormLabel>
 </CFormFloating>
@@ -49,7 +53,11 @@ function Ubicacion({ register, CInputGroup,
     {...register('codigopostal', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="Valle del Cauca" >Valle del Cauca</option>    
+     {
+      rest.datosempresa.municipio?.map((item:any)=>{
+      return <option value={item.codigo} >{item.municipio}</option>    
+      })
+     }   
   </CFormSelect>
   <CFormLabel>Municipio</CFormLabel>
 </CFormFloating>
@@ -74,7 +82,11 @@ function Ubicacion({ register, CInputGroup,
     {...register('tipodepersona', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
-     <option value="juridica" >Juridica</option>    
+      {
+      rest.datosempresa.departamento?.map((item:any)=>{
+      return <option value={item.codigo} >{item.departamento}</option>    
+      })
+     }   
   </CFormSelect>
   <CFormLabel>Departamento</CFormLabel>
 </CFormFloating>

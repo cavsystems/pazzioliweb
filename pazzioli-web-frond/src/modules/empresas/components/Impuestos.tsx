@@ -1,6 +1,22 @@
 import { CFormCheck, CFormInput, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
+import { useEffect, useState } from "react";
+import api from "../../../apicofig";
 
-export function Impuestos() {
+export function Impuestos({
+  setimpuestosseleccionados,
+  impuestsosseleccionados
+}:any) {
+  const [impuestos,setimpuestos]= useState([])
+
+  useEffect(()=>{
+ traerimpuestos()
+  },[])
+
+  const traerimpuestos= async ()=>{
+    const data=await api.get("/empresa/traerimpuestos")
+    console.log(data.data.datosimpuestos)
+    setimpuestos(data.data.datosimpuestos)
+  }
     return (  
         <>
         <div className="row justify-content-center">
@@ -10,13 +26,14 @@ export function Impuestos() {
   <CTableHead>
     <CTableRow>
       <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos1" className="checkbox h6"  onClick={()=>{
+     <input type="checkbox" id="checkTérminos0" className="checkbox h6"  onClick={()=>{
         const checkboxes = document.querySelectorAll('.checkbox');
         if((checkboxes[0] as HTMLInputElement).checked){ 
               checkboxes.forEach((checkbox,index) => {
       
 
           (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= true;
+          setimpuestosseleccionados([...impuestos]);
         }
         
         );
@@ -25,6 +42,7 @@ export function Impuestos() {
       
 
           (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= false;
+           setimpuestosseleccionados([]);
         }
         
         );
@@ -35,72 +53,38 @@ export function Impuestos() {
       </CTableHeaderCell>
       <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
       <CTableHeaderCell scope="col" >Tarifa</CTableHeaderCell>
-      <CTableHeaderCell scope="col" >Tipo</CTableHeaderCell>
-      <CTableHeaderCell scope="col " >Aplicación</CTableHeaderCell>
+      <CTableHeaderCell scope="col" >Base</CTableHeaderCell>
+      <CTableHeaderCell scope="col " >Sigla</CTableHeaderCell>
     </CTableRow>
   </CTableHead>
   <CTableBody>
-    <CTableRow>
-   
-      <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos2" className="checkbox" />
+    {impuestos?.map((item:any,index:number)=>{
+     return <CTableRow>
 
-      </CTableHeaderCell>
-      <CTableDataCell>Iva</CTableDataCell>
-      <CTableDataCell>19</CTableDataCell>
-       <CTableDataCell>Sobre el total</CTableDataCell>
-            <CTableDataCell>Venta</CTableDataCell>
+   
+      <CTableDataCell scope="col">
+     <input type="checkbox" id={`checkTérminos${index+1}`}className="checkbox"  onClick={(e)=>{
+        
+        if((e.target as HTMLInputElement).checked){ 
+         const impuestotrue= impuestsosseleccionados.some((impuesto:any)=> impuesto.codigo === item.codigo) 
+         if(!impuestotrue){
+            setimpuestosseleccionados((prev:any)=>[...prev,item])
+         }
+        
+        }else{
+          setimpuestosseleccionados((prev:any)=>prev.filter((impuesto:any)=> impuesto.codigo !== item.codigo))
+          }
+     
+     }}/>
+
+      </CTableDataCell>
+      <CTableDataCell>{item.nombre}</CTableDataCell>
+      <CTableDataCell>{item.tarifa}</CTableDataCell>
+       <CTableDataCell>{item.base}</CTableDataCell>
+            <CTableDataCell>{item.sigla}</CTableDataCell>
     </CTableRow>
-
-      <CTableRow>
-   
-      <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos3" className="checkbox" />
-
-      </CTableHeaderCell>
-      <CTableDataCell>Iva</CTableDataCell>
-      <CTableDataCell>5</CTableDataCell>
-       <CTableDataCell>Sobre el total</CTableDataCell>
-            <CTableDataCell>Venta</CTableDataCell>
-    </CTableRow>
-   
-     <CTableRow>
-   
-      <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos4" className="checkbox" />
-
-      </CTableHeaderCell>
-      <CTableDataCell>Inc</CTableDataCell>
-      <CTableDataCell>8</CTableDataCell>
-       <CTableDataCell>Sobre el total</CTableDataCell>
-            <CTableDataCell>Venta</CTableDataCell>
-    </CTableRow>
-
-    <CTableRow>
-   
-      <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos5" className="checkbox" />
-
-      </CTableHeaderCell>
-      <CTableDataCell>Retefuente</CTableDataCell>
-      <CTableDataCell>2.5</CTableDataCell>
-       <CTableDataCell>Sobre la base</CTableDataCell>
-            <CTableDataCell>Compra</CTableDataCell>
-    </CTableRow>
-
-
-
-    <CTableRow>
-   
-      <CTableHeaderCell scope="col">
-     <input type="checkbox" id="checkTérminos6" className="checkbox" />
-
-      </CTableHeaderCell>
-      <CTableDataCell>Impuesto 5</CTableDataCell>
-      <CTableDataCell>10</CTableDataCell>
-       <CTableDataCell>Sobre la base</CTableDataCell>
-            <CTableDataCell>Compra</CTableDataCell>
-    </CTableRow>
+      })}
+    
    
   </CTableBody>
 </CTable>
