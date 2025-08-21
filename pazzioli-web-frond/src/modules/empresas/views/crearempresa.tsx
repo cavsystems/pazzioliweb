@@ -8,7 +8,7 @@ import { Sucursales } from "../components/Sucursales";
 import api from "../../../apicofig";
 
 export function Crearempresa() {
-  const [itemsformempresa, setitemsformempresa] = useState(3)
+  const [itemsformempresa, setitemsformempresa] = useState(1)
   const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
     const [datosempresa,setdatosempresa]=useState({
   
@@ -18,6 +18,9 @@ export function Crearempresa() {
     traerinformacion();
    
   },[])
+
+   useEffect(()=>{
+        console.log("sucursales",sucursales)},[sucursales])
   
   const traerinformacion= async ()=>{
     let datos=await api.get('/empresa/traerempresa')
@@ -34,11 +37,12 @@ export function Crearempresa() {
       shouldUnregister: false,
     defaultValues: {
      Actividadeconomica: "",
-Correoempresa:"",
+correoempresa:"",
 celularempresa:"",
 codigopostal:"",
 digitodeverificacion:"",
-digitoverificacion:"",
+departamento:"",
+municipio:"",
 nombrecomercial:"",
 numeroidentificacion:"",
 pais:"",
@@ -51,7 +55,9 @@ segundonombre:"",
 telefonofijo:"",
 tipodeidentificacion: "",
 tipodepersona:"",
-tipoidentificacion: "",
+impuestos:[],
+sucursales:[],
+
       // Agrega todos los campos que usas en todos los pasos
     },
   });
@@ -74,8 +80,24 @@ tipoidentificacion: "",
         
     )
   }]
-   const onSubmit = (data: any) => {
+   const onSubmit = async (data: any) => {
+    data.impuestos=impuestsosseleccionados;
+    data.sucursales=sucursales;
+    console.log(data)
+    data.pais=data.pais==="" ? 0:Number(data.pais);
+    data.municipio=data.pais==="" ? 0:Number(data.pais);
+    data.departamento=data.departamento==="" ? 0:Number(data.departamento);
+    data.tipodeidentificacion=data.tipodeidentificacion==="" ? 0:Number(data.tipodeidentificacion);
+    data.tipodepersona=data.tipodepersona==="" ? 0:Number(data.tipodepersona)
+   data.regimen=data.regimen==="" ? 0:Number(data.regimen)
+    if(!data.razonsocial){
+      data.razonsocial=data.primernombre+data.segundonombre
+
+    }
+
+    const datosem= await api.post('/empresa/crear',data)
     console.log('Formulario completo:', data);
+
   };
   const onError = (errors:any) => {
   console.error("Errores del formulario:", errors);
@@ -121,11 +143,11 @@ tipoidentificacion: "",
           <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
            <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
         </CTabPanel>
-        {itemsformempresa===2 && (<CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2}>
+        <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
         
             <Impuestos setimpuestosseleccionados={setimpuestosseleccionados} impuestsosseleccionados={impuestsosseleccionados}/>
           
-        </CTabPanel>)}
+        </CTabPanel>
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
         <Sucursales setsucursales={setsucursales} sucursales={sucursales} datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
@@ -142,8 +164,10 @@ tipoidentificacion: "",
     <button type="button"  className="botonretroceder" onClick={()=>
     setitemsformempresa((prev) => (prev - 1))
   } style={itemsformempresa<2 ? {display:'none'}:{display:''}}>Atras</button>
-
-  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar">Guardar</button> :     <button type="button" className="botoncontinuar" onClick={(e)=>{
+   {/*un key es un nombre identificativo que le doy a mis nodos o componentes en este caso fue 
+   necesario ya que cuando pasaba la tracision de un componente a otro  react utiliza mi boton gaurdar y  pensando que es el boton 
+   de submit me ejecuta el submit por eso utilizo el key para difernciar el boton continuar con el submit y evitar este error*/}
+  {itemsformempresa>=3 ?  <button type="submit" className="botoncontinuarguardar"  key="guardar">Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={(e)=>{
     setitemsformempresa((prev) => (prev + 1))
   e.stopPropagation();}
   }>Continuar</button>}

@@ -23,7 +23,7 @@ function Contacto(
                         <CFormFloating className="margeniputempresa">
     <CFormInput     id="Correoempresa"
     placeholder=""
-  className="inputdatosempresa fontletre"    {...register('Correoempresa', { required: 'Este campo es obligatorio' })}          
+  className="inputdatosempresa fontletre"    {...register('correoempresa', { required: 'Este campo es obligatorio' })}          
   />
   <CFormLabel htmlFor="Correoempresa">Correo empresa</CFormLabel>
 </CFormFloating>

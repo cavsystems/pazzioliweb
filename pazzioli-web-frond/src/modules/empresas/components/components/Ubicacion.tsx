@@ -50,7 +50,7 @@ function Ubicacion({ register, CInputGroup,
     size="lg"
     placeholder=""
     className="inputselect fontletre "
-    {...register('codigopostal', { required: 'Este campo es obligatorio' })}
+    {...register('municipio', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
      {
@@ -79,7 +79,7 @@ function Ubicacion({ register, CInputGroup,
     size="lg"
     placeholder="Tipo de persona"
     className="inputselect fontletre "
-    {...register('tipodepersona', { required: 'Este campo es obligatorio' })}
+    {...register('departamento', { required: 'Este campo es obligatorio' })}
   >
     <option value="" >Seleccione una opción</option>
       {
@@ -97,7 +97,7 @@ function Ubicacion({ register, CInputGroup,
 
                 <CInputGroup>
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  {...register('segundoapellido', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"  {...register('codigopostal', { required: 'Este campo es obligatorio' })} />
                <CFormLabel>Código postal</CFormLabel>
               </CFormFloating>
             </CInputGroup>

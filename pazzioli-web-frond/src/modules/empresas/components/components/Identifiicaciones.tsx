@@ -50,7 +50,7 @@ export function Identificacion({ register,control, CInputGroup,
           // lógica adicional...
     const value = e.target.value;
    
-      field.onChange(value === "" ? "" : Number(value)); 
+      field.onChange(value); 
     const ite=rest.datosempresa.tipopersona?.findIndex((item:any)=> item.codigo === Number(value)
     )
     console.log(rest.datosempresa.tipopersona[ite], value)
@@ -123,13 +123,13 @@ export function Identificacion({ register,control, CInputGroup,
      
      // field.onChange(e); // importante para que RHF sepa del cambio
      const value = e.target.value;
-        field.onChange(value === "" ? "" : Number(value)); 
+        field.onChange(value); 
    
     }}
    
      
   >
-    <option value="" >Seleccione una opción</option>
+    <option value={0} >Seleccione una opción</option>
     {
       rest.datosempresa.tipoidentificacion?.map((item:any)=>{
       return <option value={item.codigo} >{item.tipoIdentificacion}</option>    

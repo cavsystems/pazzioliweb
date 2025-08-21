@@ -79,12 +79,11 @@ CREATE TABLE `impuestos` (
 
 --
 -- Dumping data for table `impuestos`
-INSERT INTO `impuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','INACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','INACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','INACTIVO'),(4,'EXENTO DE IVA',0,0,'EXN','INACTIVO'),(5,'REGIMEN SIMPLE DE TRIBUTACION',-1,0,'RST','INACTIVO');
 --
 
 LOCK TABLES `impuestos` WRITE;
 /*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
-
+INSERT INTO `impuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','ACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','ACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','ACTIVO');
 /*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +237,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'usuariocaja'),(2,'superusuario');
+INSERT INTO `roles` VALUES (1,'usuariocaja'),(2,'administradornivel1');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,7 +348,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Cavsystems','cav','cav2025','ACTIVO',2,0,current_time(),'1990-06-06');
+INSERT INTO `usuarios` VALUES (1,'Luis David','Luis David','12345','ACTIVO',2,0,'2025-07-24','1990-06-06'),(2,'caja1','caja1','12349','ACTIVO',1,1,'2025-07-24','1990-06-06');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -418,69 +417,17 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-08-19 12:28:38
-DROP TABLE IF EXISTS `nuevosimpuestos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nuevosimpuestos` (
-  `codigo` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) DEFAULT NULL,
-  `tarifa` double DEFAULT NULL,
-  `base` double DEFAULT NULL,
-  `sigla` varchar(10) DEFAULT NULL,
-  `estado` varchar(8) DEFAULT 'ACTIVO',
-  PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `impuestos`
---
-
-
-/*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
-INSERT INTO `nuevosimpuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','ACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','ACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','ACTIVO');
-/*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
-
-
 DROP TABLE IF EXISTS `bodegas`;
 create table bodegas(
  codigo  int auto_increment,
  nombre varchar(50) not null,
- codigosucursal varchar(50),
  codigopais int,
  codigodepartamento int,
  codigomunicipio int,
  codigopostal varchar(50),
+ codigosucursal varchar(50),
  direccion varchar(50),
  telefono varchar(50),
  celular varchar(50),
  correo varchar(50),
  primary key(codigo));
- 
- 
- DROP TABLE IF EXISTS empresa;
- 
- create table empresa(
- codigo int auto_increment,
- codigotipopersona int,
- codigotipoidentificacion int,
- numeroidentificacion varchar(10),
- digitoverificacion varchar(10),
- primernombre varchar(50),
- segundonombre varchar(50),
- primerapellido varchar(50),
- segundoapellido varchar(50),
- razonsocial varchar(100),
- codigopostal varchar(100),
- nombrecomercial varchar(50),
- codigoactividadeconomica int,
- codigoregimen int,
- correoempresa varchar(50),
- celularempresa varchar(12),
- telfonofijo varchar(20),
- codigopais int,
- codigodepartamento int,
- codigomunicipio int,
- imagenenpresa varchar(100) default "",
- primary key(codigo)); 
- 

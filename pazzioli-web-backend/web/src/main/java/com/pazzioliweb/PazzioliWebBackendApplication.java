@@ -12,17 +12,21 @@ import jakarta.annotation.PostConstruct;
 	    "com.pazzioliweb",
 	    "com.pazzioliweb.commonbacken",
 	    "com.pazzioliweb.authbacken",
-	    "com.pazzioliweb.usuariosbackend"
+	    "com.pazzioliweb.usuariosbacken",
+	   
+	    
 	})
 
 public class PazzioliWebBackendApplication {
 
 	
-public static void main(String[] args) {
-		
-			SpringApplication.run(PazzioliWebBackendApplication.class, args);
-		
 
-	}
+public static void main(String[] args) {
+	
+		SpringApplication.run(PazzioliWebBackendApplication.class, args);
+	
 
 }
+
+}
+

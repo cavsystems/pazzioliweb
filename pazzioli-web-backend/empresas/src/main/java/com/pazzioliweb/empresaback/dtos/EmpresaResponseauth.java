@@ -1,19 +1,18 @@
 package com.pazzioliweb.empresaback.dtos;
 
-public class EmpresaResponseauth{
-	public String nombreconexion;
-    
+import java.util.List;
 
-   
+public class EmpresaResponseauth{
+	String nombreconexion;
 
 	public String getNombreconexion() {
 		return nombreconexion;
 	}
 
-
-	public void setNombreconexion(String nombreconnexion) {
-		this.nombreconexion = nombreconnexion;
+	public void setNombreconexion(String nombreconexion) {
+		this.nombreconexion = nombreconexion;
 	}
+   
 
   
 } 

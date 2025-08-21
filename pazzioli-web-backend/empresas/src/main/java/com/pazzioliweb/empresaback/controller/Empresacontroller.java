@@ -1,5 +1,6 @@
 package com.pazzioliweb.empresaback.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,17 +23,32 @@ import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
 import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
 import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
 import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
 import com.pazzioliweb.empresaback.dtos.Datosempresa;
 import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
 import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
 import com.pazzioliweb.empresasback.entyti.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
 import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
 import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
 import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
 import com.pazzioliweb.commonbacken.entyti.Departamento;
 import com.pazzioliweb.commonbacken.entyti.Impuestos;
 import com.pazzioliweb.commonbacken.entyti.Municipio;
@@ -41,6 +57,11 @@ import com.pazzioliweb.commonbacken.entyti.Municipio;
 @RestController
 @RequestMapping("/api/empresa")
 public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
 	@Autowired
 	  private JdbcTemplate jdbc;
 	  @Autowired
@@ -61,15 +82,55 @@ public class Empresacontroller {
 	  private MunicipioRepositori  municipiorepositori;
 	  @Autowired
 	  private ImpuestosRepositori impuestorepositorio;
-	  
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
 	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
 	  private Map<String, Object> response = new HashMap<>();
+	  
+	 	 @Transactional
 	 @PostMapping("/crear")
-	 public ResponseEntity<Void> crearEmpresa(@RequestBody EmpresaResponseauth dto) {
+	 public ResponseEntity<Void> crearEmpresa(@RequestBody Empresaresponse dto) {
 	    	 // Aquí request.db es el tenantId}
-		   String schema = dto.getNombreconexion().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
 		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
 		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   
+		   serv.crearempresa(dto,schema);
+		   
 		   return ResponseEntity.status(HttpStatus.CREATED).build();
 		 	 }
 	 
