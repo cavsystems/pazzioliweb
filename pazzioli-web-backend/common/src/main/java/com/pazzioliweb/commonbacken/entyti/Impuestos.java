@@ -17,6 +17,10 @@ public class Impuestos {
 	  private String nombre;
 	  private int tarifa;
 	  private int base;
+	  private String estado;
+	  public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	  public int getCodigo() {
 		return codigo;
 	}

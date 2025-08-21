@@ -94,10 +94,10 @@ public class Empresacontroller {
 	  @Autowired
 	  private EmpresaService serv;
 	  private Map<String, Object> response = new HashMap<>();
-	  
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
 	 	 @Transactional
 	 @PostMapping("/crear")
-	 public ResponseEntity<Void> crearEmpresa(@RequestBody Empresaresponse dto) {
+	 public ResponseEntity<Map<String, Object>> crearEmpresa(@RequestBody Empresaresponse dto) {
 	    	 // Aquí request.db es el tenantId}
 		 
 		nombredb.setNombre(dto.getRazonsocial());
@@ -128,10 +128,35 @@ public class Empresacontroller {
 		    /*Se cierra el EntityManager y la conexión se libera.*/
 		    em.close();
 		   
-		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   public String getMensaje() {
+				return mensaje;
+			}
+			   public void setMensaje(String mensaje) {
+				   this.mensaje = mensaje;
+			   }
+			   public boolean isEstado() {
+				   return estado;
+			   }
+			   public void setEstado(boolean estado) {
+				   this.estado = estado;
+			   }
+			   boolean estado;
+			   public  mensajesuccesempres(String mensaje,boolean estado) {
+				   
+				   this.mensaje=mensaje;
+				   this.estado=estado;
+			   }
+			   
+   public  mensajesuccesempres() {
+				   
+				  
+			   }
+		   }
 		   serv.crearempresa(dto,schema);
-		   
-		   return ResponseEntity.status(HttpStatus.CREATED).build();
+		   response.put("respuesta", new mensajesuccesempres("Empresa creada",true) );
+		   return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		 	 }
 	 
 	 

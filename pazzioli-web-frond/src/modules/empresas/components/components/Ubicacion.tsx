@@ -5,7 +5,9 @@ function Ubicacion({ register, CInputGroup,
   CFormSelect,
   CFormFloating,
   CFormLabel,
+   paisdef,
 ...rest}: any) {
+
     return ( 
         <>
            <div className="col-12">
@@ -27,7 +29,7 @@ function Ubicacion({ register, CInputGroup,
     className="inputselect fontletre "
     {...register('pais', { required: 'Este campo es obligatorio' })}
   >
-    <option value="" >Seleccione una opción</option>
+    <option value={paisdef.codigo} >{paisdef.pais}</option>
       {
       rest.datosempresa.pais?.map((item:any)=>{
       return <option value={item.codigo} >{item.pais}</option>    

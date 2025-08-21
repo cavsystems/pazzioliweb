@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,15 +123,13 @@ public class EmpresaService {
 			//Impuestos impuesto=new Impuestos();
 			 List<Impuestos> impuestos = new ArrayList<>();
 			for(com.pazzioliweb.empresaback.dtos.Empresaresponse.Impuestos in:empre.getImpuestos()) {
-				
-				Impuestos impuesto=new Impuestos();
-				impuesto.setNombre(in.getNombre());
-				impuesto.setSigla(in.getSigla());
-				impuesto.setBase(in.getBase());
-				impuestos.add(impuesto);
+				Optional<Impuestos> impuestosop=impuestorepositorio.findByCodigo(in.getCodigo());
+				Impuestos impuesto=impuestosop.get();
+				impuesto.setEstado("ACTIVO");
+				impuestorepositorio.save(impuesto);
 				
 			}
-			impuestorepositorio.saveAll(impuestos);
+			
 			
 		}
 		

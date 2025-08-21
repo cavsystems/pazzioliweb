@@ -6,9 +6,15 @@ import { useEffect, useState } from "react";
 import { Impuestos } from "../components/Impuestos";
 import { Sucursales } from "../components/Sucursales";
 import api from "../../../apicofig";
-
+import Modalalertasuccess from "../../../components/modalsuccess";
+import { FcOk } from "react-icons/fc";
 export function Crearempresa() {
+  const [visible,setVisible]=useState(false);
   const [itemsformempresa, setitemsformempresa] = useState(1)
+  const [paisdefault,setpaisdefault]=useState({
+    codigo:0,
+    pais:""
+  })
   const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
     const [datosempresa,setdatosempresa]=useState({
   
@@ -26,6 +32,9 @@ export function Crearempresa() {
     let datos=await api.get('/empresa/traerempresa')
    
    setdatosempresa(datos.data.datos)
+   const pais=datos.data.datos.pais.findIndex((dato:any)=> dato.pais==="COLOMBIA")
+   const paisdefa=datos.data.datos.pais[pais]
+   setpaisdefault(paisdefa)
    console.log(datos.data.datos)
 
   }
@@ -96,7 +105,8 @@ sucursales:[],
     }
 
     const datosem= await api.post('/empresa/crear',data)
-    console.log('Formulario completo:', data);
+    setVisible(datosem.data.respuesta.estado)
+    console.log('Formulario completo:', datosem);
 
   };
   const onError = (errors:any) => {
@@ -141,7 +151,7 @@ sucursales:[],
 
         <CTabContent>
           <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
-           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa}/>
+           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa} paisdef={paisdefault}/>
         </CTabPanel>
         <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
         
@@ -177,6 +187,8 @@ sucursales:[],
          </div>
          </form>
          </FormProvider>
+
+         <Modalalertasuccess icon={<FcOk/>} visible={visible}  setVisible={setVisible} mensaje="Empresa creada exisamente" type="succcess"/>
         </>
     );
 }

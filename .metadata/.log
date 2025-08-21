@@ -9081,3 +9081,1762 @@ java.lang.Exception: Resource '/empresas/src/main/java/com/pazzioliweb/empresaau
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 10:11:23.671
 !MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+!SESSION 2025-08-21 11:26:27.128 -----------------------------------------------
+eclipse.buildId=4.36.0.20250605-1300
+java.version=21.0.7
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_CO
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-21 11:26:33.969
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-08-21 11:26:50.248
+!MESSAGE Logback config file: C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-08-21 11:27:09.029
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\cavsistem'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 11:37:07.883
+!MESSAGE Could not retrieve interfaces
+!STACK 0
+org.eclipse.jdt.internal.compiler.problem.AbortCompilation: Pb(347) The type jakarta.servlet.jsp.tagext.BodyTag cannot be resolved. It is indirectly referenced from required type org.springframework.web.servlet.tags.form.OptionTag
+	at org.eclipse.jdt.internal.compiler.problem.ProblemHandler.handle(ProblemHandler.java:159)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemHandler.handle(ProblemHandler.java:226)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemReporter.handle(ProblemReporter.java:2649)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemReporter.isClassPathCorrect(ProblemReporter.java:5009)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:125)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:242)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.superInterfaces(BinaryTypeBinding.java:2487)
+	at org.eclipse.jdt.core.dom.TypeBinding.getInterfaces(TypeBinding.java:498)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.isInherited(UnresolvedElementsBaseSubProcessor.java:1058)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.addSimilarTypeProposals(UnresolvedElementsBaseSubProcessor.java:1031)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.collectTypeProposals(UnresolvedElementsBaseSubProcessor.java:791)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsSubProcessor.getTypeProposals(UnresolvedElementsSubProcessor.java:143)
+	at org.eclipse.jdt.internal.ui.text.correction.QuickFixProcessor.process(QuickFixProcessor.java:436)
+	at org.eclipse.jdt.internal.ui.text.correction.QuickFixProcessor.getCorrections(QuickFixProcessor.java:356)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionCollector.safeRun(JavaCorrectionProcessor.java:381)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionProcessorAccess.run(JavaCorrectionProcessor.java:341)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionProcessorAccess.process(JavaCorrectionProcessor.java:336)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.collectCorrections(JavaCorrectionProcessor.java:465)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.collectProposals(JavaCorrectionProcessor.java:284)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.computeQuickAssistProposals(JavaCorrectionProcessor.java:247)
+	at org.eclipse.jface.text.quickassist.QuickAssistAssistant$ContentAssistProcessor.computeCompletionProposals(QuickAssistAssistant.java:71)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.lambda$0(ContentAssistant.java:2064)
+	at java.base/java.util.Collections$SingletonSet.forEach(Collections.java:5125)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.run(ContentAssistant.java:2063)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.computeCompletionProposals(ContentAssistant.java:2060)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.computeProposals(CompletionProposalPopup.java:577)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.lambda$0(CompletionProposalPopup.java:507)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.showProposals(CompletionProposalPopup.java:502)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.showPossibleCompletions(ContentAssistant.java:1874)
+	at org.eclipse.jface.text.quickassist.QuickAssistAssistant.showPossibleQuickAssists(QuickAssistAssistant.java:113)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionAssistant.showPossibleQuickAssists(JavaCorrectionAssistant.java:194)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor$AdaptedSourceViewer.doOperation(CompilationUnitEditor.java:201)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaSelectAnnotationRulerAction.runWithEvent(JavaSelectAnnotationRulerAction.java:101)
+	at org.eclipse.ui.texteditor.AbstractRulerActionDelegate.runWithEvent(AbstractRulerActionDelegate.java:112)
+	at org.eclipse.ui.internal.handlers.ActionDelegateHandlerProxy.execute(ActionDelegateHandlerProxy.java:278)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:485)
+	at org.eclipse.ui.actions.ContributedAction.runWithEvent(ContributedAction.java:176)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$1.triggerAction(AbstractTextEditor.java:3030)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$1.lambda$0(AbstractTextEditor.java:3044)
+	at org.eclipse.swt.widgets.Display.runTimer(Display.java:4234)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3347)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3722)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:678)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:583)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:185)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 11:37:10.985
+!MESSAGE Could not retrieve interfaces
+!STACK 0
+org.eclipse.jdt.internal.compiler.problem.AbortCompilation: Pb(347) The type jakarta.servlet.jsp.tagext.BodyTag cannot be resolved. It is indirectly referenced from required type org.springframework.web.servlet.tags.form.OptionTag
+	at org.eclipse.jdt.internal.compiler.problem.ProblemHandler.handle(ProblemHandler.java:159)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemHandler.handle(ProblemHandler.java:226)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemReporter.handle(ProblemReporter.java:2649)
+	at org.eclipse.jdt.internal.compiler.problem.ProblemReporter.isClassPathCorrect(ProblemReporter.java:5009)
+	at org.eclipse.jdt.internal.compiler.lookup.UnresolvedReferenceBinding.resolve(UnresolvedReferenceBinding.java:125)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.resolveType(BinaryTypeBinding.java:242)
+	at org.eclipse.jdt.internal.compiler.lookup.BinaryTypeBinding.superInterfaces(BinaryTypeBinding.java:2487)
+	at org.eclipse.jdt.core.dom.TypeBinding.getInterfaces(TypeBinding.java:498)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.isInherited(UnresolvedElementsBaseSubProcessor.java:1058)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.addSimilarTypeProposals(UnresolvedElementsBaseSubProcessor.java:1031)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsBaseSubProcessor.collectTypeProposals(UnresolvedElementsBaseSubProcessor.java:791)
+	at org.eclipse.jdt.internal.ui.text.correction.UnresolvedElementsSubProcessor.getTypeProposals(UnresolvedElementsSubProcessor.java:143)
+	at org.eclipse.jdt.internal.ui.text.correction.QuickFixProcessor.process(QuickFixProcessor.java:436)
+	at org.eclipse.jdt.internal.ui.text.correction.QuickFixProcessor.getCorrections(QuickFixProcessor.java:356)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionCollector.safeRun(JavaCorrectionProcessor.java:381)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionProcessorAccess.run(JavaCorrectionProcessor.java:341)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor$SafeCorrectionProcessorAccess.process(JavaCorrectionProcessor.java:336)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.collectCorrections(JavaCorrectionProcessor.java:465)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.collectProposals(JavaCorrectionProcessor.java:284)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionProcessor.computeQuickAssistProposals(JavaCorrectionProcessor.java:247)
+	at org.eclipse.jface.text.quickassist.QuickAssistAssistant$ContentAssistProcessor.computeCompletionProposals(QuickAssistAssistant.java:71)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.lambda$0(ContentAssistant.java:2064)
+	at java.base/java.util.Collections$SingletonSet.forEach(Collections.java:5125)
+	at org.eclipse.jface.text.contentassist.ContentAssistant$2.run(ContentAssistant.java:2063)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.computeCompletionProposals(ContentAssistant.java:2060)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.computeProposals(CompletionProposalPopup.java:577)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.lambda$0(CompletionProposalPopup.java:507)
+	at org.eclipse.swt.custom.BusyIndicator.showWhile(BusyIndicator.java:67)
+	at org.eclipse.jface.text.contentassist.CompletionProposalPopup.showProposals(CompletionProposalPopup.java:502)
+	at org.eclipse.jface.text.contentassist.ContentAssistant.showPossibleCompletions(ContentAssistant.java:1874)
+	at org.eclipse.jface.text.quickassist.QuickAssistAssistant.showPossibleQuickAssists(QuickAssistAssistant.java:113)
+	at org.eclipse.jdt.internal.ui.text.correction.JavaCorrectionAssistant.showPossibleQuickAssists(JavaCorrectionAssistant.java:194)
+	at org.eclipse.jdt.internal.ui.javaeditor.CompilationUnitEditor$AdaptedSourceViewer.doOperation(CompilationUnitEditor.java:201)
+	at org.eclipse.jdt.internal.ui.javaeditor.JavaSelectAnnotationRulerAction.runWithEvent(JavaSelectAnnotationRulerAction.java:101)
+	at org.eclipse.ui.texteditor.AbstractRulerActionDelegate.runWithEvent(AbstractRulerActionDelegate.java:112)
+	at org.eclipse.ui.internal.handlers.ActionDelegateHandlerProxy.execute(ActionDelegateHandlerProxy.java:278)
+	at org.eclipse.core.commands.Command.executeWithChecks(Command.java:488)
+	at org.eclipse.core.commands.ParameterizedCommand.executeWithChecks(ParameterizedCommand.java:485)
+	at org.eclipse.ui.actions.ContributedAction.runWithEvent(ContributedAction.java:176)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$1.triggerAction(AbstractTextEditor.java:3030)
+	at org.eclipse.ui.texteditor.AbstractTextEditor$1.lambda$0(AbstractTextEditor.java:3044)
+	at org.eclipse.swt.widgets.Display.runTimer(Display.java:4234)
+	at org.eclipse.swt.widgets.Display.messageProc(Display.java:3347)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3722)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:678)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:583)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:185)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:219)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:149)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:115)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:467)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:298)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:627)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:575)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1431)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:20.309
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:20.336
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:24.334
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:24.372
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:26.350
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:26.421
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:55.071
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 11:43:55.242
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:04:06.918
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:04:06.944
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 15:09:35.971
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.pazzioliweb.empresaback.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
+import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
+import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
+import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
+import com.pazzioliweb.empresaback.dtos.Datosempresa;
+import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
+import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
+import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
+import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
+import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
+import com.pazzioliweb.commonbacken.entyti.Departamento;
+import com.pazzioliweb.commonbacken.entyti.Impuestos;
+import com.pazzioliweb.commonbacken.entyti.Municipio;
+
+@Component
+@RestController
+@RequestMapping("/api/empresa")
+public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
+	@Autowired
+	  private JdbcTemplate jdbc;
+	  @Autowired
+	  private TenantService tenantService;
+	  @Autowired 
+	  private TipopersonaRepository tipopersonarepositori;
+	  @Autowired 
+	  private TipoidentificacionRepository  tipoidentificacionrepositori;
+	  @Autowired
+	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
+	  @Autowired
+	  private RegimenRepositori regimenrepositori;
+	  @Autowired
+	  private DepartamentoRepositori departamentorepositori;
+	  @Autowired
+	  private PaisRepositori paisrepository;
+	  @Autowired
+	  private MunicipioRepositori  municipiorepositori;
+	  @Autowired
+	  private ImpuestosRepositori impuestorepositorio;
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
+	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
+	  private Map<String, Object> response = new HashMap<>();
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
+	 	 @Transactional
+	 @PostMapping("/crear")
+	 public ResponseEntity<Map<String, Boolean>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	    	 // Aquí request.db es el tenantId}
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
+		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   boolean es
+			   public  mensajesuccesempres(String mensaje) {
+				   this.mensaje=mensaje;
+				   
+			   }
+		   }
+		   serv.crearempresa(dto,schema);
+		   responseempresa.put("respuesta", true);
+		   return ResponseEntity.status(HttpStatus.CREATED).body( responseempresa);
+		 	 }
+	 
+	 
+	 @RequestMapping("/traerempresa")
+	 public ResponseEntity<Map<String, Object>> traerempresa() {
+		 
+		
+		 List<Tipopersona>  tipersona=tipopersonarepositori.findAll();
+		 List<Tipoidentificacion> tipoidentificacion=tipoidentificacionrepositori.findAll();
+		 List<Regimen> regimen=regimenrepositori.findAll();
+		 List<Pais> pais=paisrepository.findAll();
+		 List<Departamento> departamento=departamentorepositori.findAll();
+		 List<Municipio> municipio=municipiorepositori.findAll();
+		 datosempresa.setTipopersona(tipersona);
+		 datosempresa.setTipoidentificacion(tipoidentificacion);
+		 datosempresa.setRegimen(regimen);
+		 datosempresa.setDepartamento(departamento);
+		 datosempresa.setPais(pais);
+		 datosempresa.setMunicipio(municipio);
+		 
+            response.put("datos",  datosempresa );
+            return ResponseEntity
+                    .ok()
+                    .body(response);
+		 
+		 
+		 
+	 }
+	    
+	 @RequestMapping("/traeractividadeseconomicas")
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+		 Object req;
+		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
+		    
+		
+		 
+		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 
+         response.put("datosactividad",  actividades );
+         return ResponseEntity
+                 .ok()
+                 .body(response);
+		 
+		 
+		 
+	 }
+	 @RequestMapping("/traerimpuestos")
+	 public ResponseEntity<Map<String, Object>> traerimpuestos() {
+		 List<Impuestos> impuestos=impuestorepositorio.findAll();
+		   response.put("datosimpuestos",  impuestos );
+		   return ResponseEntity
+	                 .ok()
+	                 .body(response);
+		}
+	    
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2025-08-21 15:09:35.987
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-08-21 15:09:35.992
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 15:09:36.435
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.pazzioliweb.empresaback.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
+import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
+import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
+import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
+import com.pazzioliweb.empresaback.dtos.Datosempresa;
+import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
+import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
+import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
+import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
+import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
+import com.pazzioliweb.commonbacken.entyti.Departamento;
+import com.pazzioliweb.commonbacken.entyti.Impuestos;
+import com.pazzioliweb.commonbacken.entyti.Municipio;
+
+@Component
+@RestController
+@RequestMapping("/api/empresa")
+public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
+	@Autowired
+	  private JdbcTemplate jdbc;
+	  @Autowired
+	  private TenantService tenantService;
+	  @Autowired 
+	  private TipopersonaRepository tipopersonarepositori;
+	  @Autowired 
+	  private TipoidentificacionRepository  tipoidentificacionrepositori;
+	  @Autowired
+	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
+	  @Autowired
+	  private RegimenRepositori regimenrepositori;
+	  @Autowired
+	  private DepartamentoRepositori departamentorepositori;
+	  @Autowired
+	  private PaisRepositori paisrepository;
+	  @Autowired
+	  private MunicipioRepositori  municipiorepositori;
+	  @Autowired
+	  private ImpuestosRepositori impuestorepositorio;
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
+	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
+	  private Map<String, Object> response = new HashMap<>();
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
+	 	 @Transactional
+	 @PostMapping("/crear")
+	 public ResponseEntity<Map<String, Boolean>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	    	 // Aquí request.db es el tenantId}
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
+		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   boolean esa
+			   public  mensajesuccesempres(String mensaje) {
+				   this.mensaje=mensaje;
+				   
+			   }
+		   }
+		   serv.crearempresa(dto,schema);
+		   responseempresa.put("respuesta", true);
+		   return ResponseEntity.status(HttpStatus.CREATED).body( responseempresa);
+		 	 }
+	 
+	 
+	 @RequestMapping("/traerempresa")
+	 public ResponseEntity<Map<String, Object>> traerempresa() {
+		 
+		
+		 List<Tipopersona>  tipersona=tipopersonarepositori.findAll();
+		 List<Tipoidentificacion> tipoidentificacion=tipoidentificacionrepositori.findAll();
+		 List<Regimen> regimen=regimenrepositori.findAll();
+		 List<Pais> pais=paisrepository.findAll();
+		 List<Departamento> departamento=departamentorepositori.findAll();
+		 List<Municipio> municipio=municipiorepositori.findAll();
+		 datosempresa.setTipopersona(tipersona);
+		 datosempresa.setTipoidentificacion(tipoidentificacion);
+		 datosempresa.setRegimen(regimen);
+		 datosempresa.setDepartamento(departamento);
+		 datosempresa.setPais(pais);
+		 datosempresa.setMunicipio(municipio);
+		 
+            response.put("datos",  datosempresa );
+            return ResponseEntity
+                    .ok()
+                    .body(response);
+		 
+		 
+		 
+	 }
+	    
+	 @RequestMapping("/traeractividadeseconomicas")
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+		 Object req;
+		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
+		    
+		
+		 
+		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 
+         response.put("datosactividad",  actividades );
+         return ResponseEntity
+                 .ok()
+                 .body(response);
+		 
+		 
+		 
+	 }
+	 @RequestMapping("/traerimpuestos")
+	 public ResponseEntity<Map<String, Object>> traerimpuestos() {
+		 List<Impuestos> impuestos=impuestorepositorio.findAll();
+		   response.put("datosimpuestos",  impuestos );
+		   return ResponseEntity
+	                 .ok()
+	                 .body(response);
+		}
+	    
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2025-08-21 15:09:36.440
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-08-21 15:09:36.443
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 15:09:36.997
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.pazzioliweb.empresaback.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
+import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
+import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
+import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
+import com.pazzioliweb.empresaback.dtos.Datosempresa;
+import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
+import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
+import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
+import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
+import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
+import com.pazzioliweb.commonbacken.entyti.Departamento;
+import com.pazzioliweb.commonbacken.entyti.Impuestos;
+import com.pazzioliweb.commonbacken.entyti.Municipio;
+
+@Component
+@RestController
+@RequestMapping("/api/empresa")
+public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
+	@Autowired
+	  private JdbcTemplate jdbc;
+	  @Autowired
+	  private TenantService tenantService;
+	  @Autowired 
+	  private TipopersonaRepository tipopersonarepositori;
+	  @Autowired 
+	  private TipoidentificacionRepository  tipoidentificacionrepositori;
+	  @Autowired
+	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
+	  @Autowired
+	  private RegimenRepositori regimenrepositori;
+	  @Autowired
+	  private DepartamentoRepositori departamentorepositori;
+	  @Autowired
+	  private PaisRepositori paisrepository;
+	  @Autowired
+	  private MunicipioRepositori  municipiorepositori;
+	  @Autowired
+	  private ImpuestosRepositori impuestorepositorio;
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
+	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
+	  private Map<String, Object> response = new HashMap<>();
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
+	 	 @Transactional
+	 @PostMapping("/crear")
+	 public ResponseEntity<Map<String, Boolean>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	    	 // Aquí request.db es el tenantId}
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
+		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   boolean es
+			   public  mensajesuccesempres(String mensaje) {
+				   this.mensaje=mensaje;
+				   
+			   }
+		   }
+		   serv.crearempresa(dto,schema);
+		   responseempresa.put("respuesta", true);
+		   return ResponseEntity.status(HttpStatus.CREATED).body( responseempresa);
+		 	 }
+	 
+	 
+	 @RequestMapping("/traerempresa")
+	 public ResponseEntity<Map<String, Object>> traerempresa() {
+		 
+		
+		 List<Tipopersona>  tipersona=tipopersonarepositori.findAll();
+		 List<Tipoidentificacion> tipoidentificacion=tipoidentificacionrepositori.findAll();
+		 List<Regimen> regimen=regimenrepositori.findAll();
+		 List<Pais> pais=paisrepository.findAll();
+		 List<Departamento> departamento=departamentorepositori.findAll();
+		 List<Municipio> municipio=municipiorepositori.findAll();
+		 datosempresa.setTipopersona(tipersona);
+		 datosempresa.setTipoidentificacion(tipoidentificacion);
+		 datosempresa.setRegimen(regimen);
+		 datosempresa.setDepartamento(departamento);
+		 datosempresa.setPais(pais);
+		 datosempresa.setMunicipio(municipio);
+		 
+            response.put("datos",  datosempresa );
+            return ResponseEntity
+                    .ok()
+                    .body(response);
+		 
+		 
+		 
+	 }
+	    
+	 @RequestMapping("/traeractividadeseconomicas")
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+		 Object req;
+		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
+		    
+		
+		 
+		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 
+         response.put("datosactividad",  actividades );
+         return ResponseEntity
+                 .ok()
+                 .body(response);
+		 
+		 
+		 
+	 }
+	 @RequestMapping("/traerimpuestos")
+	 public ResponseEntity<Map<String, Object>> traerimpuestos() {
+		 List<Impuestos> impuestos=impuestorepositorio.findAll();
+		   response.put("datosimpuestos",  impuestos );
+		   return ResponseEntity
+	                 .ok()
+	                 .body(response);
+		}
+	    
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2025-08-21 15:09:37.007
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-08-21 15:09:37.012
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 15:09:37.462
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.pazzioliweb.empresaback.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
+import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
+import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
+import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
+import com.pazzioliweb.empresaback.dtos.Datosempresa;
+import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
+import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
+import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
+import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
+import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
+import com.pazzioliweb.commonbacken.entyti.Departamento;
+import com.pazzioliweb.commonbacken.entyti.Impuestos;
+import com.pazzioliweb.commonbacken.entyti.Municipio;
+
+@Component
+@RestController
+@RequestMapping("/api/empresa")
+public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
+	@Autowired
+	  private JdbcTemplate jdbc;
+	  @Autowired
+	  private TenantService tenantService;
+	  @Autowired 
+	  private TipopersonaRepository tipopersonarepositori;
+	  @Autowired 
+	  private TipoidentificacionRepository  tipoidentificacionrepositori;
+	  @Autowired
+	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
+	  @Autowired
+	  private RegimenRepositori regimenrepositori;
+	  @Autowired
+	  private DepartamentoRepositori departamentorepositori;
+	  @Autowired
+	  private PaisRepositori paisrepository;
+	  @Autowired
+	  private MunicipioRepositori  municipiorepositori;
+	  @Autowired
+	  private ImpuestosRepositori impuestorepositorio;
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
+	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
+	  private Map<String, Object> response = new HashMap<>();
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
+	 	 @Transactional
+	 @PostMapping("/crear")
+	 public ResponseEntity<Map<String, Boolean>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	    	 // Aquí request.db es el tenantId}
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
+		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   boolean est
+			   public  mensajesuccesempres(String mensaje) {
+				   this.mensaje=mensaje;
+				   
+			   }
+		   }
+		   serv.crearempresa(dto,schema);
+		   responseempresa.put("respuesta", true);
+		   return ResponseEntity.status(HttpStatus.CREATED).body( responseempresa);
+		 	 }
+	 
+	 
+	 @RequestMapping("/traerempresa")
+	 public ResponseEntity<Map<String, Object>> traerempresa() {
+		 
+		
+		 List<Tipopersona>  tipersona=tipopersonarepositori.findAll();
+		 List<Tipoidentificacion> tipoidentificacion=tipoidentificacionrepositori.findAll();
+		 List<Regimen> regimen=regimenrepositori.findAll();
+		 List<Pais> pais=paisrepository.findAll();
+		 List<Departamento> departamento=departamentorepositori.findAll();
+		 List<Municipio> municipio=municipiorepositori.findAll();
+		 datosempresa.setTipopersona(tipersona);
+		 datosempresa.setTipoidentificacion(tipoidentificacion);
+		 datosempresa.setRegimen(regimen);
+		 datosempresa.setDepartamento(departamento);
+		 datosempresa.setPais(pais);
+		 datosempresa.setMunicipio(municipio);
+		 
+            response.put("datos",  datosempresa );
+            return ResponseEntity
+                    .ok()
+                    .body(response);
+		 
+		 
+		 
+	 }
+	    
+	 @RequestMapping("/traeractividadeseconomicas")
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+		 Object req;
+		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
+		    
+		
+		 
+		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 
+         response.put("datosactividad",  actividades );
+         return ResponseEntity
+                 .ok()
+                 .body(response);
+		 
+		 
+		 
+	 }
+	 @RequestMapping("/traerimpuestos")
+	 public ResponseEntity<Map<String, Object>> traerimpuestos() {
+		 List<Impuestos> impuestos=impuestorepositorio.findAll();
+		   response.put("datosimpuestos",  impuestos );
+		   return ResponseEntity
+	                 .ok()
+	                 .body(response);
+		}
+	    
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2025-08-21 15:09:37.465
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-08-21 15:09:37.466
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.core 4 4 2025-08-21 15:09:38.567
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package com.pazzioliweb.empresaback.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
+import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
+import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
+import com.pazzioliweb.commonbacken.services.TenantService;
+import com.pazzioliweb.commonbacken.util.Nombredb;
+import com.pazzioliweb.empresaauth.service.EmpresaService;
+import com.pazzioliweb.empresaauth.service.Insertarregistrosjoin;
+import com.pazzioliweb.empresaback.dtos.Datosempresa;
+import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse;
+import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
+import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
+import com.pazzioliweb.empresasback.entyti.Bodegas;
+import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.BodegasRepository;
+import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
+import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
+import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
+import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+
+
+import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
+import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
+import com.pazzioliweb.commonbacken.entyti.Departamento;
+import com.pazzioliweb.commonbacken.entyti.Impuestos;
+import com.pazzioliweb.commonbacken.entyti.Municipio;
+
+@Component
+@RestController
+@RequestMapping("/api/empresa")
+public class Empresacontroller {
+	/* Aquí se inyecta la fábrica de EntityManager de Spring/Hibernate*/
+	/* El EntityManagerFactory está configurado con tu soporte multi-tenant, por lo que al crear un EntityManager 
+	 * se usará el tenant definido en TenantContext.*/
+	@Autowired
+	private EntityManagerFactory emf;
+	@Autowired
+	  private JdbcTemplate jdbc;
+	  @Autowired
+	  private TenantService tenantService;
+	  @Autowired 
+	  private TipopersonaRepository tipopersonarepositori;
+	  @Autowired 
+	  private TipoidentificacionRepository  tipoidentificacionrepositori;
+	  @Autowired
+	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
+	  @Autowired
+	  private RegimenRepositori regimenrepositori;
+	  @Autowired
+	  private DepartamentoRepositori departamentorepositori;
+	  @Autowired
+	  private PaisRepositori paisrepository;
+	  @Autowired
+	  private MunicipioRepositori  municipiorepositori;
+	  @Autowired
+	  private ImpuestosRepositori impuestorepositorio;
+	  @Autowired
+	  private Nombredb nombredb;
+	  @Autowired
+	  private BodegasRepository repotoribodega;
+	  @Autowired
+	  private Insertarregistrosjoin insertjoi;
+	  private Datosempresa datosempresa=new Datosempresa();
+	  @Autowired
+	  private  TenantRegister register;
+	  @Autowired
+	  private EmpresaService serv;
+	  private Map<String, Object> response = new HashMap<>();
+	  private Map<String, Boolean> responseempresa = new HashMap<>();
+	 	 @Transactional
+	 @PostMapping("/crear")
+	 public ResponseEntity<Map<String, Boolean>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	    	 // Aquí request.db es el tenantId}
+		 
+		nombredb.setNombre(dto.getRazonsocial());
+		
+		  String schema = nombredb.getNombre().toLowerCase().replaceAll("[^a-z0-9_]", "");
+		   jdbc.execute("CREATE SCHEMA IF NOT EXISTS `" + schema + "`");
+		   tenantService.initTenantSchema(schema);
+		  	/*Esto establece el tenant actual.  */	  
+		   /* Gracias a tu CurrentTenantIdentifierResolver, 
+		    * Hibernate sabrá a qué esquema o base de datos debe conectarse cuando abras el EntityManager. */
+		   TenantContext.setCurrentTenant(schema);
+		   register.registerNewTenant(schema);
+		   /*Se crea un EntityManager nuevo, que abrirá una conexión basada en el tenant que se haya establecido.  */
+		   /*A diferencia de usar un repositorio inyectado, aquí controlas manualmente la sesión de Hibernate.  */
+		   EntityManager em = emf.createEntityManager(); // se abre con el tenant actual
+		   /*Inicia una transacción manual.*/
+		   /*Necesaria si vas a persistir entidades con em.persist() o ejecutar queries 
+		    * nativas que modifiquen la base de datos.*/
+		    em.getTransaction().begin();
+
+		    // persistir normalmente
+		    /* Ese fragmento de código está mostrando cómo crear y usar un EntityManager 
+		     * manualmente para persistir datos en la base de datos usando Hibernate/JPA,
+		     *  y cómo se conecta dinámicamente al tenant actual. Vamos  */
+           /* Se hace commit de la transacción para que los cambios se guarden en la base de datos.*/
+		    
+		    em.getTransaction().commit();
+		    /*Se cierra el EntityManager y la conexión se libera.*/
+		    em.close();
+		   
+		   class mensajesuccesempres{
+			   String mensaje;
+			   boolean estado
+			   public  mensajesuccesempres(String mensaje) {
+				   this.mensaje=mensaje;
+				   
+			   }
+		   }
+		   serv.crearempresa(dto,schema);
+		   responseempresa.put("respuesta", true);
+		   return ResponseEntity.status(HttpStatus.CREATED).body( responseempresa);
+		 	 }
+	 
+	 
+	 @RequestMapping("/traerempresa")
+	 public ResponseEntity<Map<String, Object>> traerempresa() {
+		 
+		
+		 List<Tipopersona>  tipersona=tipopersonarepositori.findAll();
+		 List<Tipoidentificacion> tipoidentificacion=tipoidentificacionrepositori.findAll();
+		 List<Regimen> regimen=regimenrepositori.findAll();
+		 List<Pais> pais=paisrepository.findAll();
+		 List<Departamento> departamento=departamentorepositori.findAll();
+		 List<Municipio> municipio=municipiorepositori.findAll();
+		 datosempresa.setTipopersona(tipersona);
+		 datosempresa.setTipoidentificacion(tipoidentificacion);
+		 datosempresa.setRegimen(regimen);
+		 datosempresa.setDepartamento(departamento);
+		 datosempresa.setPais(pais);
+		 datosempresa.setMunicipio(municipio);
+		 
+            response.put("datos",  datosempresa );
+            return ResponseEntity
+                    .ok()
+                    .body(response);
+		 
+		 
+		 
+	 }
+	    
+	 @RequestMapping("/traeractividadeseconomicas")
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+		 Object req;
+		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
+		    
+		
+		 
+		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 
+         response.put("datosactividad",  actividades );
+         return ResponseEntity
+                 .ok()
+                 .body(response);
+		 
+		 
+		 
+	 }
+	 @RequestMapping("/traerimpuestos")
+	 public ResponseEntity<Map<String, Object>> traerimpuestos() {
+		 List<Impuestos> impuestos=impuestorepositorio.findAll();
+		   response.put("datosimpuestos",  impuestos );
+		   return ResponseEntity
+	                 .ok()
+	                 .body(response);
+		}
+	    
+
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2025-08-21 15:09:38.571
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2025-08-21 15:09:38.573
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException: negative length=-820 startPosition= 6089
+	at org.eclipse.jdt.core.dom.ASTNode.setSourceRange(ASTNode.java:3446)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToFieldDeclaration(ASTConverter.java:3845)
+	at org.eclipse.jdt.core.dom.ASTConverter.checkAndAddMultipleFieldDeclaration(ASTConverter.java:566)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:175)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3143)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:774)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:182)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3477)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1554)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:690)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:284)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:250)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:569)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1257)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:182)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:108)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:751)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:816)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1431)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:132)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:94)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:47)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:91)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:158)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:12:40.682
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:12:40.700
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:15:50.460
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:15:50.475
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:18:49.433
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:18:49.448
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.debug.core 4 125 2025-08-21 15:18:51.654
+!MESSAGE Exception occurred executing command line.
+!STACK 0
+java.io.IOException: Cannot run program "C:\Users\cavsistem\Downloads\eclipse-jee-2025-06-R-win32-x86_64\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916\jre\bin\javaw.exe" (in directory "C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web"): CreateProcess error=5, Acceso denegado
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
+	at java.base/java.lang.Runtime.exec(Runtime.java:681)
+	at org.eclipse.debug.core.DebugPlugin.exec(DebugPlugin.java:1044)
+	at org.eclipse.jdt.launching.AbstractVMRunner.exec(AbstractVMRunner.java:116)
+	at org.eclipse.jdt.internal.launching.StandardVMRunner.run(StandardVMRunner.java:538)
+	at org.eclipse.jdt.launching.JavaLaunchDelegate.launch(JavaLaunchDelegate.java:176)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:777)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:688)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1052)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1255)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Caused by: java.io.IOException: CreateProcess error=5, Acceso denegado
+	at java.base/java.lang.ProcessImpl.create(Native Method)
+	at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:506)
+	at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
+	at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
+	... 11 more
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:22:33.651
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2025-08-21 15:22:33.658
+!MESSAGE Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!

@@ -33,6 +33,7 @@ export function Impuestos({
       
 
           (document.getElementById(`checkTérminos${index+1}`) as HTMLInputElement).checked= true;
+          
           setimpuestosseleccionados([...impuestos]);
         }
         

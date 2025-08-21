@@ -28,4 +28,5 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.entyti.Regimen"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.entyti.Actividadeconomica"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.repositori.EmpresaRepositori"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
 </qualifiedTypeNameHistroy>

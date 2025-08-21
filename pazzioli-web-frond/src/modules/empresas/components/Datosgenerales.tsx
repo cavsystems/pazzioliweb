@@ -9,7 +9,7 @@ import { Datosfiscales } from "./components/Datosfiscales";
 import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
- export function Datosgenrales({datosempresa,setdatosempresa}:any) {
+ export function Datosgenrales({datosempresa,setdatosempresa, paisdef}:any) {
   const { register,control } = useFormContext();
   
 
@@ -71,6 +71,7 @@ register={register}  CInputGroup={CInputGroup}
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
   datosempresa={datosempresa}
+  paisdef={paisdef}
   />
 
 
