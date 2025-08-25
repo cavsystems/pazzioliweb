@@ -1,10 +1,24 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
 import { useState } from "react";
-
+interface municipio{
+  codigo:number,
+codigoDepartamento:number,
+codigoMunicipio?:number,
+municipio:string,
+}
+interface municipios{
+  municipio:municipio[]
+}
 
 export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa, setdatosempresa,nuevaSucursal,actulizar,updateSucursal}: any) {
    const onchangeBodegaselect=(e:any)=>{
     console.log( JSON.stringify(e.target.value))
+      const [codigodepar,setcodigodepart]=useState('0')
+   const [codigomunicipio,setcodigomunicipio]=useState('0')
+
+  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigodepartamento:0, departamento: ''})
+   const [municipio,setmunicipio]=useState<municipio[]>([])
+
    
    setBodega((prev:any)=>({...prev,[e.target.name]:JSON.parse(e.target.value)}))
     
@@ -69,7 +83,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
 
            <div className="row">
             <div className="col-12">
-                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Ubicación(opcional)</h6>
+                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Ubicación (opcional)</h6>
 
             </div>
               <div className=" col-12 col-md-6 col-lg-6 paddingempresa paddingempresamodal" style={{paddingLeft:'12px'}} >
@@ -186,7 +200,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
 
              <div className="row">
             <div className="col-12">
-                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Contacto(opcional)</h6>
+                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Contacto (opcional)</h6>
 
             </div>
               <div className="col-12 col-md-6 col-lg-6  paddingempresa paddingempresamodal">

@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller } from "react-hook-form";
+import api from "../../../../apicofig";
 
 export function Identificacion({ register,control, CInputGroup,
   CFormInput,
   CFormSelect,
   CFormFloating,
   CFormLabel,
+    setValue,
 ...rest}: any) {
   const [selectedtipo, setSelected] = useState(0);
     const [selectedtipoidentificacion, setSelectedtipo] = useState(0);
+    const [digito,setdigito]=useState("");
+    useEffect(()=>{
+     setValue("digitodeverificacion",digito)
+    },[digito])
     return ( 
         <>
            <div className="col-12">
@@ -90,7 +96,17 @@ export function Identificacion({ register,control, CInputGroup,
           
                 <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"    {...register('numeroidentificacion', { required: 'Este campo es obligatorio' })}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"      {...register('numeroidentificacion', { required: 'Este campo es obligatorio' ,  onChange: (e) => {
+      console.log("dijito");
+      api.get("/digitoverificacion/CalcularDv?numeroIdentificacion=" + e.target.value)
+        .then((res) => {
+          console.log(res.data.digito)   
+           setdigito(res.data.digito)}
+      
+      );
+    }
+                
+              })}          
   />
    <CFormLabel htmlFor="identificacion">Numero de identificación</CFormLabel>
   </CFormFloating>
@@ -148,11 +164,11 @@ export function Identificacion({ register,control, CInputGroup,
                 <CInputGroup >
                  <CFormFloating className="margeniputempresa">
 
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"           {...register('digitodeverificacion', { required: 'Este campo es obligatorio' })} />
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"      disabled={true}        {...register('digitodeverificacion', { required: 'Este campo es obligatorio' })} />
               
 
 
-    <CFormLabel htmlFor="digitodeverificacion">Digito de verificación</CFormLabel>
+    <CFormLabel htmlFor="digitodeverificacion" >Digito de verificación</CFormLabel>
               </CFormFloating>
             </CInputGroup>
             </div>

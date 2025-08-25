@@ -14,7 +14,24 @@ public class Municipio {
 	  @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private int codigo;
-	  
+	  private int codigoDepartamento;
+	  private int codigoMunicipio;
+	  public int getCodigoDepartamento() {
+		return codigoDepartamento;
+	}
+
+	  public void setCodigoDepartamento(int codigoDepartamento) {
+		  this.codigoDepartamento = codigoDepartamento;
+	  }
+
+	  public int getCodigoMunicipio() {
+		  return codigoMunicipio;
+	  }
+
+	  public void setCodigoMunicipio(int codigoMunicipio) {
+		  this.codigoMunicipio = codigoMunicipio;
+	  }
+
 	  private String municipio;
 
 	  public int getCodigo() {

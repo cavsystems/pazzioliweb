@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
  export function Datosgenrales({datosempresa,setdatosempresa, paisdef}:any) {
-  const { register,control } = useFormContext();
+  const { register,control,setValue } = useFormContext();
   
 
    
@@ -40,7 +40,8 @@ import api from "../../../apicofig";
   CFormLabel={CFormLabel}
   datosempresa={datosempresa}
   juridico={{juridico,setjuridico}}
-  natural={{natural,setnatural}}/>
+  natural={{natural,setnatural}}
+    setValue={setValue}/>
 
             <Nombres register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
@@ -72,6 +73,7 @@ register={register}  CInputGroup={CInputGroup}
   CFormLabel={CFormLabel}
   datosempresa={datosempresa}
   paisdef={paisdef}
+  setValue={setValue}
   />
 
 

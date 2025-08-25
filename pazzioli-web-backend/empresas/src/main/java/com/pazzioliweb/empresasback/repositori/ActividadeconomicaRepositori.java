@@ -13,6 +13,13 @@ import com.pazzioliweb.empresasback.entyti.Empresas;
 public interface ActividadeconomicaRepositori  extends JpaRepository<Actividadeconomica, Long>  {
 	 @Query("SELECT a FROM Actividadeconomica a")
 	    List<Actividadeconomica> findWithLimit(Pageable pageable);
+	 List<Actividadeconomica> findByDescripcionActividadContainingOrCodigo(
+			    String descripcion,
+			    int codigo,
+			    Pageable pageable
+			);
 	 
 	Optional<Actividadeconomica> findByDescripcionActividad(String nombre);
+	
+	
 }

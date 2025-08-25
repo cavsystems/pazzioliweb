@@ -23,7 +23,14 @@ public class Departamento {
 private int codigopais;
 
 private int codigodepartamento;
+private int codigoDepartamento;
 
+public int getCodigoDepartamento() {
+	return codigoDepartamento;
+}
+public void setCodigoDepartamento(int codigoDepartamento) {
+	this.codigoDepartamento = codigoDepartamento;
+}
 public int getCodigopais() {
 	return codigopais;
 }

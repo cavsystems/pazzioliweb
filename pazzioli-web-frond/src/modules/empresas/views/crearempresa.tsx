@@ -8,6 +8,26 @@ import { Sucursales } from "../components/Sucursales";
 import api from "../../../apicofig";
 import Modalalertasuccess from "../../../components/modalsuccess";
 import { FcOk } from "react-icons/fc";
+interface Pais {
+  codigo: number;
+  pais: number;
+}
+
+
+interface municipio{
+  codigo:number,
+codigoDepartamento:number,
+codigoMunicipio:number,
+municipio:string,
+}
+interface DatosEmpresa {
+  departamento: any[];
+  municipio: municipio[];
+  pais: Pais[];
+  regimen: any[];
+  tipoidentificacion: any[];
+  tipopersona: any[];
+}
 export function Crearempresa() {
   const [visible,setVisible]=useState(false);
   const [itemsformempresa, setitemsformempresa] = useState(1)
@@ -16,12 +36,26 @@ export function Crearempresa() {
     pais:""
   })
   const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
-    const [datosempresa,setdatosempresa]=useState({
-  
+    const [datosempresa,setdatosempresa]=useState<DatosEmpresa>({
+  departamento:[], 
+municipio:[],
+
+pais:[], 
+
+regimen:[],
+
+tipoidentificacion:[],
+
+tipopersona:[] 
+
   })
   const [sucursales,setsucursales]=useState([])
   useEffect( () => {
     traerinformacion();
+     if (datosempresa.pais && datosempresa.pais.length > 0) {
+    // asigna el primer país al campo pais
+    
+  }
    
   },[])
 
@@ -34,6 +68,8 @@ export function Crearempresa() {
    setdatosempresa(datos.data.datos)
    const pais=datos.data.datos.pais.findIndex((dato:any)=> dato.pais==="COLOMBIA")
    const paisdefa=datos.data.datos.pais[pais]
+ methods.setValue("pais", paisdefa.codigo.toString());
+
    setpaisdefault(paisdefa)
    console.log(datos.data.datos)
 
