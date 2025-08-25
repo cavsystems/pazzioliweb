@@ -35,12 +35,15 @@ public class SecurityConfig {
     	//CORS ESPECIFICO LA CONFIGURACION QUE TENDRA
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**").permitAll()
+            .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**").permitAll().requestMatchers("/api/digitoverificacion/**").permitAll().requestMatchers("/api/codigoPostal/**").permitAll()
                     .anyRequest().authenticated()).exceptionHandling(ex -> ex
                     	    .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    	        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                    	        response.setContentType("application/json");
-                    	        response.getWriter().write("{\"error\": \"Acceso denegado. No tienes permisos suficientes.\"}");
+                    	    	if (!response.isCommitted()) {
+                    	    		response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        	        response.setContentType("application/json");
+                        	        response.getWriter().write("{\"error\": \"Acceso denegado. No tienes permisos suficientes.\"}");
+                    	    	}
+                    	        
                     	    })
                     	
                             ).addFilterBefore(filtro,  UsernamePasswordAuthenticationFilter.class);

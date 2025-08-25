@@ -9,8 +9,8 @@ import { Datosfiscales } from "./components/Datosfiscales";
 import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
- export function Datosgenrales({datosempresa,setdatosempresa, paisdef}:any) {
-  const { register,control } = useFormContext();
+ export function Datosgenrales({datosempresa,setdatosempresa, paisdef,archivologo}:any) {
+  const { register,control,setValue } = useFormContext();
   
 
    
@@ -40,7 +40,8 @@ import api from "../../../apicofig";
   CFormLabel={CFormLabel}
   datosempresa={datosempresa}
   juridico={{juridico,setjuridico}}
-  natural={{natural,setnatural}}/>
+  natural={{natural,setnatural}}
+    setValue={setValue}/>
 
             <Nombres register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
@@ -72,12 +73,13 @@ register={register}  CInputGroup={CInputGroup}
   CFormLabel={CFormLabel}
   datosempresa={datosempresa}
   paisdef={paisdef}
+  setValue={setValue}
   />
 
 
 
 
-  <Imagenpazzioli CFormInput={CFormInput}/>
+  <Imagenpazzioli CFormInput={CFormInput} setValue={setValue} register={register} archivologo/>
         </div>
         </>
     );

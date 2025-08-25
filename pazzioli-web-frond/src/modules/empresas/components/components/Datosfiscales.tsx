@@ -9,18 +9,49 @@ export function Datosfiscales({ register, CInputGroup,
   CFormLabel,
 ...rest}: any) {
   const [actividadeconomica,setactividadeconomica]=useState([])
-  const [filtro, setFiltro] = useState('');
+  const [filtrodes, setFiltro] = useState('');
+  const [filtroco, setFiltroco] = useState(0);
+  const [mostrardes,setmostrardes]=useState(true)
+ const [tipohove,settipohover]=useState("hoverchrome");
+ const [CIIU,setciiu]=useState('')
+  useEffect(()=>{
+    /*Ese bloque detecta el navegador revisando firmas específicas dentro de la cadena userAgent.
+Usa expresiones regulares (/texto/) y el método .test(cadena) que devuelve true si encuentra coincidencia. */
+    function detectarNavegador() {
+  const userAgent = navigator.userAgent;
+/*Para saber en qué navegador está un usuario, en el lado del cliente (JavaScript en el navegador), puedes usar el objeto navigator.
+Lo más común es leer navigator.userAgent y analizarlo.*/
+/* Ese código está evaluando el contenido de navigator.userAgent (una cadena que describe el navegador y sistema operativo del usuario) 
+usando expresiones regulares. */
 
-  
-const resultados = actividadeconomica.filter((item:any) =>
-  item.descripcionActividad.toLowerCase().includes(filtro.toLowerCase())
-);
+/* Revisa si en la cadena aparece "Edg/" (firma de Microsoft Edge).
+Ejemplo: "Edg/125.0.0.0". */
+  if (/Edg\//.test(userAgent)) {
+    return "Microsoft Edge";
+  } else if (/OPR\//.test(userAgent)) {
+    return "Opera";
+  } else if (/Chrome\//.test(userAgent) && !/Edg\//.test(userAgent)) {
+    return "Google Chrome";
+  } else if (/Safari\//.test(userAgent) && !/Chrome\//.test(userAgent)) {
+    return "Safari";
+  } else if (/Firefox\//.test(userAgent)) {
+    return "Mozilla Firefox";
+  } else if (/MSIE|Trident\//.test(userAgent)) {
+    return "Internet Explorer";
+  } else {
+    return "Desconocido";
+  }
+}
+
+console.log("Estás usando:", detectarNavegador());
+  },[])
+
    useEffect(()=>{
-    traerdataauto(1)
+  traerdataauto()
 
-   },[])
-   const traerdataauto= async (numero:number)=>{
-    const data=await api.get(`/empresa/traeractividadeseconomicas?pagina=${numero}`)
+   },[filtroco,filtrodes])
+   const traerdataauto= async ()=>{
+    const data=await api.get(`/empresa/traeractividadeseconomicas?descripcion=${filtrodes}&codigo=${filtroco}`)
     console.log(data.data.datosactividad)
     setactividadeconomica(data.data.datosactividad)
    }
@@ -51,17 +82,25 @@ const resultados = actividadeconomica.filter((item:any) =>
                      
                           <CInputGroup className="" >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre"           {...register('Actividadeconomica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
-    setFiltro(e.target.value);
+              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre inputcomple"   value={filtrodes}        {...register('Actividadeconomica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
+                 const valor = e.target.value;
+                setFiltro(e.target.value);
+                setmostrardes(true)
+             setFiltroco(valor === "" ? 0: (!isNaN(valor) ? Number(valor) : 0));
+
     console.log(e.target.value);
     // Llamar al onChange original de react-hook-form
     register('Actividad economica').onChange(e);
   }}/>
-    <CFormLabel>Actividad económica (CIU)</CFormLabel>
-     {filtro && (
-      <ul className="lista-opcionesaut">
-        {resultados.map((item:any) => (
-          <li key={item.codigo}>{item.descripcionActividad}</li>
+    <CFormLabel>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>
+     {filtrodes && mostrardes && (
+      <ul className={`lista-opcionesaut ${tipohove}`}>
+        {actividadeconomica.map((item:any) => (
+          <li key={item.codigo} onClick={()=>{
+            setFiltro(item.descripcionActividad)
+            setciiu(item.codigo)
+            setmostrardes(false)
+          }}>{item.descripcionActividad}</li>
         ))}
       </ul>
     )}

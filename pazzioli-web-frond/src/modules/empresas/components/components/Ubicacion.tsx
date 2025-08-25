@@ -1,13 +1,64 @@
 import { CButton, CPopover } from "@coreui/react";
-
+import { useEffect, useState } from "react";
+import api from "../../../../apicofig";
+interface municipio{
+  codigo:number,
+codigoDepartamento:number,
+codigoMunicipio?:number,
+municipio:string,
+}
+interface municipios{
+  municipio:municipio[]
+}
 function Ubicacion({ register, CInputGroup,
   CFormInput,
   CFormSelect,
   CFormFloating,
   CFormLabel,
    paisdef,
+   setValue,
 ...rest}: any) {
+  const [codigodepar,setcodigodepart]=useState('0')
+   const [codigomunicipio,setcodigomunicipio]=useState('0')
 
+  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigodepartamento:0, departamento: ''})
+  const [municipio,setmunicipio]=useState<municipio[]>([])
+
+     useEffect(()=>{
+  const codigom=codigomunicipio.length===1 ? '00'+codigomunicipio:codigomunicipio.length===2 ? '0'+codigomunicipio:codigomunicipio
+  const codigomp=codigodepar+ codigom;
+
+traercodigopostal(Number(codigomp))
+  },[codigomunicipio])
+    useEffect(()=>{
+   traermuni()
+  },[ rest.datosempresa])
+
+const traercodigopostal=async (codigomunici:number)=>{
+ const codigoposta= await api.get(`/codigoPostal/codigopostal?codigomunicipio=${Number(codigomunici)}`)
+ console.log("codigo postal",codigoposta)
+
+ const postal=codigoposta.data.respuesta.replace("\r","");
+ setValue("codigopostal",postal)
+}
+  useEffect(()=>{
+   traermuni()
+
+  },[departactual])
+const traermuni=async()=>{
+  if(departactual.codigo!==0){
+    
+    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigodepartamento}`)
+    setmunicipio(muni.data.repuesta)
+    setValue("municipio","")
+   console.log("municipiooooo",muni.data.repuesta)
+  }else{
+     console.log("entro aqui",rest)
+   setmunicipio([])
+  }
+
+
+}
     return ( 
         <>
            <div className="col-12">
@@ -27,12 +78,14 @@ function Ubicacion({ register, CInputGroup,
     size="lg"
     placeholder=""
     className="inputselect fontletre "
+    
     {...register('pais', { required: 'Este campo es obligatorio' })}
+  
   >
-    <option value={paisdef.codigo} >{paisdef.pais}</option>
+    <option value="" >elije una obcion</option>
       {
       rest.datosempresa.pais?.map((item:any)=>{
-      return <option value={item.codigo} >{item.pais}</option>    
+      return <option key={item.codigo} value={item.codigo} >{item.pais}</option>    
       })
      }   
   </CFormSelect>
@@ -52,11 +105,22 @@ function Ubicacion({ register, CInputGroup,
     size="lg"
     placeholder=""
     className="inputselect fontletre "
+  
     {...register('municipio', { required: 'Este campo es obligatorio' })}
+    
+    onChange={(e:any)=>{
+       const codigmuni:municipio | undefined=municipio.find((item)=> item.codigo ===Number(e.target.value)) 
+       if(typeof codigmuni !== "undefined"){
+       
+        if(codigmuni.codigoMunicipio) setcodigomunicipio(codigmuni.codigoMunicipio.toString())
+       }
+         
+    }
+    }
   >
     <option value="" >Seleccione una opción</option>
      {
-      rest.datosempresa.municipio?.map((item:any)=>{
+     municipio?.map((item:any)=>{
       return <option value={item.codigo} >{item.municipio}</option>    
       })
      }   
@@ -82,11 +146,33 @@ function Ubicacion({ register, CInputGroup,
     placeholder="Tipo de persona"
     className="inputselect fontletre "
     {...register('departamento', { required: 'Este campo es obligatorio' })}
+    onChange={(e:any) => {
+      const value=e.target.value
+      if(value!==""){
+      
+const seleccionado = rest.datosempresa.departamento.find(
+      (item: any) => item.codigo === Number(e.target.value)
+    );
+
+   
+       if(typeof seleccionado !== "undefined"){
+      
+        if(seleccionado.codigoDepartamento) setcodigodepart(seleccionado.codigoDepartamento.toString())
+       }
+    setdeparactual(seleccionado);
+
+      }else{
+        setcodigodepart('0')
+      
+      }
+    
+  }}
+  
   >
     <option value="" >Seleccione una opción</option>
       {
       rest.datosempresa.departamento?.map((item:any)=>{
-      return <option value={item.codigo} >{item.departamento}</option>    
+      return <option value={item.codigo}  >{item.departamento}</option>    
       })
      }   
   </CFormSelect>

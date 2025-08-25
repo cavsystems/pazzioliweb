@@ -393,17 +393,21 @@ opacity: 1;
 
 .imputcompletgeneral{
     position: relative;
+    
 }
 
 .lista-opcionesaut{
     position: absolute;
-    top: -1;
+    top: -2;
     z-index: 6;
     background: #fff;
     border-radius: 1px solid;
     padding: 0;
     max-height:300px ;
     overflow-y: auto;
+    min-width:calc(100% + 10px) !important;
+    border-radius: 2px;
+   border: 1px solid #888;
 
 }
 
@@ -413,4 +417,18 @@ opacity: 1;
   padding: 0; 
   padding: 0px 0px 10px 0px;
  padding-left: 8px;
+ text-align: left !important;
+    font: normal normal normal 14px / 19px Open Sans !important;
+    letter-spacing: 0px !important;
+}
+
+.hoverchrome li:hover{
+background:rgba(78, 78, 85, 0.7) !important;
+color:#fff;
+cursor: default;
+}
+
+.inputcomple{
+    z-index: 1;
+position: relative;
 }

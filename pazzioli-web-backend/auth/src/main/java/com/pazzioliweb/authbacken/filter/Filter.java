@@ -87,6 +87,7 @@ public class Filter extends OncePerRequestFilter {
            	 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
            	    response.setContentType("application/json");
            	    response.getWriter().write("{\"error\": \"Token invalido o ausente\"}");
+           	    return;
             	
             }
    	 filterChain.doFilter(request, response);

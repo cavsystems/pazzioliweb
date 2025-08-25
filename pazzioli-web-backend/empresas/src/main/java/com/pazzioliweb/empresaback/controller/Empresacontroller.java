@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.pazzioliweb.commonbacken.entyti.Pais;
 import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
@@ -96,8 +99,9 @@ public class Empresacontroller {
 	  private Map<String, Object> response = new HashMap<>();
 	  private Map<String, Boolean> responseempresa = new HashMap<>();
 	 	 @Transactional
-	 @PostMapping("/crear")
-	 public ResponseEntity<Map<String, Object>> crearEmpresa(@RequestBody Empresaresponse dto) {
+	 //@PostMapping("/crear"")
+	 	@PostMapping(value = "/crear", consumes = "multipart/form-data")
+	 public ResponseEntity<Map<String, Object>> crearEmpresa(@RequestPart("dto") Empresaresponse dto,@RequestPart(value = "archivo", required = false) MultipartFile archivo) throws Exception{
 	    	 // Aquí request.db es el tenantId}
 		 
 		nombredb.setNombre(dto.getRazonsocial());
@@ -154,7 +158,7 @@ public class Empresacontroller {
 				  
 			   }
 		   }
-		   serv.crearempresa(dto,schema);
+		   serv.crearempresa(dto,schema,archivo);
 		   response.put("respuesta", new mensajesuccesempres("Empresa creada",true) );
 		   return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		 	 }
@@ -187,14 +191,17 @@ public class Empresacontroller {
 	 }
 	    
 	 @RequestMapping("/traeractividadeseconomicas")
-	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="1") int pagina) {
+	 public ResponseEntity<Map<String, Object>> traeractividades(@RequestParam(defaultValue ="") String descripcion, @RequestParam(defaultValue ="0") int codigo) {
 		 Object req;
-		 int inicio = pagina > 0 ? pagina * 15 - 15 : 0;
-		    
+	
+		   System.out.println(descripcion);
 		
 		 
-		 PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
-		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);
+		 /*PageRequest pageRequest = PageRequest.of(1, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findWithLimit(pageRequest);*/
+		 
+		 PageRequest pageRequest = PageRequest.of(0, 15); // página 1 (empieza en 0), 15 registros
+		 List<Actividadeconomica> actividades = actividadeconomicarepositorio.findByDescripcionActividadContainingOrCodigo(descripcion, codigo, pageRequest);
 		 
          response.put("datosactividad",  actividades );
          return ResponseEntity
@@ -212,6 +219,23 @@ public class Empresacontroller {
 	                 .ok()
 	                 .body(response);
 		}
+	 
+	 
+	 
+	 
+	 @RequestMapping("/codigodeparta")
+	 public ResponseEntity<Map<String, Object>> traermunicipio(@RequestParam(defaultValue ="0") int codigo){
+	
+		 List<Municipio> municipios=municipiorepositori.findByCodigoDepartamento(codigo);
+		 
+		 
+		 
+		 response.put("repuesta", municipios);
+		 
+		 return ResponseEntity.ok().body(response);
+		 
+		 
+	 }
 	    
 
 }
