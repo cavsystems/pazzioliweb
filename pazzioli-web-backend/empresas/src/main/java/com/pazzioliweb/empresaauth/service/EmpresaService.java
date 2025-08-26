@@ -5,6 +5,7 @@ import jakarta.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class EmpresaService {
 	
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
-	public void crearempresa(Empresaresponse empre,String db) {
+	public void crearempresa(Empresaresponse empre,String db, MultipartFile archivo) throws Exception{
 		if(!empre.getSucursales().isEmpty()) {
 			 List<Bodegas> bodegas = new ArrayList<>();
 			   for(Sucursales sucu: empre.getSucursales()) {
@@ -157,7 +158,10 @@ public class EmpresaService {
 		empresa.setSegundoapellido(empre.getSegundoapellido());
 		empresa.setRazonsocial(empre.getRazonsocial());
 		empresa.setTelfonofijo(empre.getTelefonofijo());
-	
+		if (archivo != null && !archivo.isEmpty()) {
+			empresa.setImagenEmpresa(archivo.getBytes());
+		    empresa.setTipoImagen(archivo.getContentType()); // Guardamos el tipo MIME
+		}
 
 		emprerepo.save(empresa);
 		
@@ -170,5 +174,5 @@ public class EmpresaService {
 		
 		
 	}
-
+	
 }

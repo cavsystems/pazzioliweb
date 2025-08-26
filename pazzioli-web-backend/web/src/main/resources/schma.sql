@@ -83,7 +83,7 @@ CREATE TABLE `impuestos` (
 
 LOCK TABLES `impuestos` WRITE;
 /*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
-INSERT INTO `impuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','ACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','ACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','ACTIVO');
+INSERT INTO `impuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','ACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','ACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','ACTIVO'),(4,'EXENTO DE IVA',0,0,'EXN','ACTIVO'),(5,'EXCLUIDO DE IVA',-1,0,'EXC','ACTIVO'),(6,'IMPUESTO NACIONAL AL CONSUMO DE BOLSAS PLASTICAS',70,0,'INCBP','ACTIVO');
 /*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -480,6 +480,7 @@ create table bodegas(
  codigopais int,
  codigodepartamento int,
  codigomunicipio int,
- imagenenpresa varchar(100) default "",
+ imagenempresa longblob default null,
+ tipoImagen varchar(100) default "",
  primary key(codigo)); 
  

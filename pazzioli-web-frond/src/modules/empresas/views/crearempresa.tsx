@@ -5,6 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { useEffect, useState } from "react";
 import { Impuestos } from "../components/Impuestos";
 import { Sucursales } from "../components/Sucursales";
+
 import api from "../../../apicofig";
 import Modalalertasuccess from "../../../components/modalsuccess";
 import { FcOk } from "react-icons/fc";
@@ -35,6 +36,7 @@ export function Crearempresa() {
     codigo:0,
     pais:""
   })
+  const[archivologo,setarchivologo]=useState(null)
   const [impuestsosseleccionados, setimpuestosseleccionados] = useState([])
     const [datosempresa,setdatosempresa]=useState<DatosEmpresa>({
   departamento:[], 
@@ -100,6 +102,7 @@ segundonombre:"",
 telefonofijo:"",
 tipodeidentificacion: "",
 tipodepersona:"",
+archivoLogo:null,
 impuestos:[],
 sucursales:[],
 
@@ -139,8 +142,29 @@ sucursales:[],
       data.razonsocial=data.primernombre+data.segundonombre
 
     }
+    // ****** inicio cambios para Imagen empresa ******
+    // Crear el FormData para enviar multipart
+    const formData = new FormData();
 
-    const datosem= await api.post('/empresa/crear',data)
+    // Parte JSON del DTO
+    formData.append(
+      "dto",
+      new Blob([JSON.stringify(data)], { type: "application/json" })
+    );
+    
+    // Parte del archivo opcional (logo)
+    if (data.archivoLogo) {
+      formData.append("archivo", data.archivoLogo);
+    }
+
+    // Enviar al backend
+    const datosem = await api.post("/empresa/crear", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    // ****** fin cambios para ImagenEmpresa ******
+    //const datosem= await api.post('/empresa/crear',data)
     setVisible(datosem.data.respuesta.estado)
     console.log('Formulario completo:', datosem);
 
@@ -187,7 +211,7 @@ sucursales:[],
 
         <CTabContent>
           <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
-           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa} paisdef={paisdefault}/>
+           <Datosgenrales datosempresa={datosempresa} setdatosempresa={setdatosempresa} paisdef={paisdefault} archivologo={{archivologo,setarchivologo}}/>
         </CTabPanel>
         <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
         

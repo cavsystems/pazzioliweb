@@ -6,11 +6,13 @@ import com.pazzioliweb.commonbacken.entyti.Pais;
 import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
 import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -190,5 +192,25 @@ public void setTelfonofijo(String telfonofijo) {
 	this.telfonofijo = telfonofijo;
 }
   
-  
+@Lob
+@Column(columnDefinition = "LONGBLOB")
+private byte[] imagenEmpresa;
+
+private String tipoImagen;
+
+public byte[] getImagenEmpresa() {
+	return imagenEmpresa;
+}
+public void setImagenEmpresa(byte[] imagenEmpresa) {
+	this.imagenEmpresa = imagenEmpresa;
+}
+public String getTipoImagen() {
+	return tipoImagen;
+}
+public void setTipoImagen(String tipoImagen) {
+	this.tipoImagen = tipoImagen;
+}
+
+
+
 }
