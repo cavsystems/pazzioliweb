@@ -16,6 +16,7 @@ import { Signup } from './modules/auth/views/sIgnup';
 import {Crearempresa} from './modules/empresas/views/crearempresa';
 import { useAppDispatch, useAppSelector } from './store/store'
 import { initWebSocket } from './modules/auth/authThunks/authThunk';
+import Navbar from './components/navbar';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -46,6 +47,7 @@ useEffect(()=>{
   return (
      <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
            <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
+           <Navbar/>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>} />

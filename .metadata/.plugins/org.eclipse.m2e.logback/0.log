@@ -17783,6 +17783,25 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliw
 2025-08-25 09:19:35,453 [Worker-1: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
 2025-08-25 09:19:35,455 [Worker-1: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-08-25 09:19:35,456 [Worker-1: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+<<<<<<< HEAD
+2025-08-25 10:15:11,299 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-08-25 15:53:40,989 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-08-25 15:53:41,190 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-08-25 15:53:41,195 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-08-25 15:53:41,197 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-08-25 15:53:42,020 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-08-25 15:53:42,022 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-08-25 15:53:42,022 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-08-25 15:53:42,023 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-08-25 15:53:42,316 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-08-25 15:53:42,317 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-08-25 15:53:42,318 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-08-25 15:53:42,319 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-08-25 15:53:42,578 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-08-25 15:53:42,578 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-08-25 15:53:42,579 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-08-25 15:53:42,580 [Worker-69: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+=======
 >>>>>>> f1adf902bccf264d6bd7896a4bfd2429967b1a82
 2025-08-25 10:07:30,432 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-08-25 10:11:53,480 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
@@ -18067,6 +18086,7 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliw
 2025-08-25 15:43:39,194 [Worker-32: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
 2025-08-25 15:43:39,195 [Worker-32: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-08-25 15:43:39,196 [Worker-32: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+<<<<<<< HEAD
 2025-08-25 16:45:58,359 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-08-25 20:20:24,682 [Worker-52: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
 2025-08-25 20:20:24,697 [Worker-52: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
@@ -18101,3 +18121,6 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliw
 2025-08-26 12:31:04,290 [Worker-38: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
 2025-08-26 12:31:04,291 [Worker-38: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-08-26 12:31:04,291 [Worker-38: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+=======
+>>>>>>> 6906fc13d37af844c1a074e5b66c367f5acc0a42
+>>>>>>> 420a878bdbd24c1f0fd35754df2ca94d458627c3

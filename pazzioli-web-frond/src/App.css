@@ -250,4 +250,133 @@ opacity: 1 !important;
     padding: 0px !important;
 }
 
+.navpazzioli{
+    background: var(--blanco) 0% 0% no-repeat padding-box !important;
+
+}
+
+.navpazzioli   .navizquierdo {
+    list-style: none !important;
+    display: inline-block !important;
+padding-top: 5px !important;;
+    font: normal normal normal 14px/19px Open Sans !important;
+    letter-spacing: 0px !important;
+    color: #555555 !important;
+    opacity: 1 !important;
+    width: 22px;
+    height: 22px;
+        position: absolute;
+    left: 80px;
+}
+
+/*0 = no hay desplazamiento horizontal.
+
+6px y 12px = desplaza hacia abajo.
+
+0 en el blur-radius = sin difuminado → es un rectángulo sólido.
+
+black = color.
+
+Así que el navegador dibuja dos rectángulos negros del mismo tamaño del elemento, pero “copiados” en las posiciones Y=+6px y Y=+12px.
+El efecto: parecen líneas apiladas debajo del elemento, como si fueran varias capas o un marco en escalera.*/
+
+.navpazzioli  .navizquierdo::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: #555555;
+  box-shadow: 0 6px 0 #555555, 0 12px 0 #555555; /* crea 3 líneas */
+  margin-bottom: 5px;
+}
+
+.navpazzioli ul{
+      margin: 0;
+    padding-left:0;
+    display: flex;
+    height: 100%;
+    justify-content: start;
+    align-items: center;
+    height: 64px;
+    bottom: -50px;
+    
+}
+
+.navizquierodsidebar{
+  list-style: none !important;
+  display: inline-block !important;
+  padding-top: 5px !important;
+  font: normal normal normal 14px/19px Open Sans !important;
+  letter-spacing: 0px !important;
+  color: #555555 !important;
+  opacity: 1 !important;
+overflow: auto;
+  width: 63px;         /* ancho fijo de la barra */
+  height: 100vh;       /* 👈 alto = 100% del viewport */
+  position: fixed;     /* se queda fijo aunque hagas scroll */
+  top: 0;              /* empieza desde arriba */
+  left: 0;             /* pegado a la izquierda */
+  background: #fff; /* ponle un color de fondo para ver la barra */
+box-shadow: 3px 0px 20px #0000001A;
+z-index: 3;
+}
+
+
+.listamanenusidebar{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+        
+}
+
+.listamanenusidebar li{
+    list-style: none !important;
+}
+
+.lilogomenu{
+    position: relative;
+
+
+}
+
+.logonavbar{
+    position: absolute;
+    
+    left: -25px;
+    
+}
+
+
+
+.lineaseparadora {
+  position: relative;
+  height: 1px;           /* fuerza un alto mínimo */
+  width: 100%;
+}
+
+.lineaseparadora::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #D3D4D4;
+   /* separación arriba/abajo */
+}
+
+
+
+.imgnavicon{
+    width: 22px !important;
+    height: 22px !important;
+   
+}
+.lineaseparadora{
+    bottom: -50px;
+}
+.navsiguiente{
+    bottom: -60px;
+}
+
+
 
