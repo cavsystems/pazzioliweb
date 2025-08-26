@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.pazzioliweb.commonbacken.entyti.CodigoPostal;
 
 public interface CodigoPostalRepositori extends JpaRepository<CodigoPostal, Long>{
-	public List<CodigoPostal> findBycodigoMunicipioOrderByCodigoPostal(int codigo);
+	public List<CodigoPostal> findByCodigoMunicipioOrderByCodigoPostal(int codigo);
 
 }

@@ -23,11 +23,13 @@ public class CodigoPostalController {
 	private CodigoPostalRepositori codigorepositorio;
 	
 	@RequestMapping("/codigopostal")
-	public  ResponseEntity<Map<String,String>> obtenercodigopostal(@RequestParam (defaultValue ="") int codigomunicipio){
+	public  ResponseEntity<Map<String,String>> obtenercodigopostal( @RequestParam Integer codigomunicipio){
 		Map<String,String> response= new HashMap<>();
-		List<CodigoPostal>  postalop= codigorepositorio.findBycodigoMunicipioOrderByCodigoPostal(codigomunicipio);
+		System.out.println("codigos postales"+codigomunicipio);
+		List<CodigoPostal>  postalop= codigorepositorio.findByCodigoMunicipioOrderByCodigoPostal(codigomunicipio);
 		if(!postalop.isEmpty()) {
 			CodigoPostal codigoPostal=postalop.get(0);
+			System.out.println("codigos postales"+codigoPostal.getCodigoPostal());
 			response.put("respuesta", codigoPostal.getCodigoPostal());
 	}else {
 		response.put("respuesta","");

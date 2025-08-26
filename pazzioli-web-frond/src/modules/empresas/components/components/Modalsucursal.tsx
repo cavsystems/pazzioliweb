@@ -1,5 +1,6 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../../../apicofig";
 interface municipio{
   codigo:number,
 codigoDepartamento:number,
@@ -11,20 +12,80 @@ interface municipios{
 }
 
 export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa, setdatosempresa,nuevaSucursal,actulizar,updateSucursal}: any) {
-   const onchangeBodegaselect=(e:any)=>{
-    console.log( JSON.stringify(e.target.value))
-      const [codigodepar,setcodigodepart]=useState('0')
+    const [codigodepar,setcodigodepart]=useState('0')
    const [codigomunicipio,setcodigomunicipio]=useState('0')
 
   const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigodepartamento:0, departamento: ''})
    const [municipio,setmunicipio]=useState<municipio[]>([])
+   const [codigopostal,setcodigopostal]=useState('')
 
+
+
+ useEffect(()=>{
+  const codigom=codigomunicipio.length===1 ? '00'+codigomunicipio:codigomunicipio.length===2 ? '0'+codigomunicipio:codigomunicipio
+  const codigomp=codigodepar+ codigom;
+console.log("codigocodigo",codigomp)
+traercodigopostal(Number(codigomp))
+  },[codigomunicipio])
+    useEffect(()=>{
+   traermuni()
+  },[datosempresa])
+
+const traercodigopostal=async (codigomunici:number)=>{
+ const codigoposta= await api.get(`/codigoPostal/codigopostal?codigomunicipio=${Number(codigomunici)}`)
+ console.log("codigo postal",codigoposta)
+
+ let postal=codigoposta.data.respuesta.replace("\r","");
+   postal=postal.replace("\n","");
+
+   setcodigopostal(postal)
+
+}
+  useEffect(()=>{
+   traermuni()
+
+  },[departactual])
+const traermuni=async()=>{
+  if(departactual.codigo!==0){
+    
+    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigodepartamento}`)
+    setmunicipio(muni.data.repuesta)
+   
+   console.log("municipiooooo",muni.data.repuesta)
+  }else{
+    
+   setmunicipio([])
+  }
+
+
+}
+   const onchangeBodegaselect=(e:any)=>{
+    console.log( JSON.stringify(e.target.value))
+    
    
    setBodega((prev:any)=>({...prev,[e.target.name]:JSON.parse(e.target.value)}))
     
-   
-   
+   if(e.target.name==="departamento"){
+    setdeparactual(JSON.parse(e.target.value))
+const departemento=JSON.parse(e.target.value)
+const deparactual=datosempresa.departamento.find((depar:any)=> depar.codigo===departemento.codigo)
+    setcodigodepart(deparactual ? deparactual.codigoDepartamento : 0)
+    setcodigomunicipio('0')
    }
+
+
+   if(e.target.name==="municipio"){
+   
+   const municipios:municipio | undefined=JSON.parse(e.target.value)
+       const codigmuni:municipio | undefined=municipio.find((item)=> item.codigo ===municipios?.codigo) 
+       if(typeof codigmuni !== "undefined"){
+       
+        if(codigmuni.codigoMunicipio) setcodigomunicipio(codigmuni.codigoMunicipio.toString())
+       }
+         
+    
+   }
+  }
 
    const onchangeBodega=(e:any)=>{
     
@@ -133,7 +194,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
     <option value="
 {codigo:0, municipio: ''}" >Seleccione una opción</option>
       {
-      datosempresa.municipio?.map((item:any)=>{
+      municipio?.map((item:any)=>{
       return <option value={JSON.stringify(item)} onClick={()=>{eventoonchageselect("pais",item)}} >{item.municipio}</option>    
       })
      }   
@@ -186,7 +247,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
       
         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre" name='codigopostal' onChange={onchangeBodega} value={bodega.codigopostal}          
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre" name='codigopostal' onChange={onchangeBodega} value={codigopostal ? codigopostal:bodega.codigopostal}   
   />
    <CFormLabel htmlFor="identificacion">Código postal</CFormLabel>
   </CFormFloating>
@@ -257,4 +318,3 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
         </>
      );
 }
-

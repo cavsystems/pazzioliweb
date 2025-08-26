@@ -17,6 +17,7 @@ import {Crearempresa} from './modules/empresas/views/crearempresa';
 import { useAppDispatch, useAppSelector } from './store/store'
 import { initWebSocket } from './modules/auth/authThunks/authThunk';
 import Navbar from './components/navbar';
+import '@coreui/coreui/dist/css/coreui.min.css';
 
 function App() {
   const dispatch = useAppDispatch();

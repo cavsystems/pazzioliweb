@@ -1,7 +1,8 @@
 import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
-import { Modalsocursal } from "./components/Modalsucursal";
+
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { Modalsocursal } from "./components/Modalsucursal";
 export function Sucursales({setsucursales, sucursales,datosempresa, setdatosempresa}:any) {
     const [visible, setVisible] = useState(false)
     const [updateSucursal, setUpdateSucursal] = useState(false)
@@ -151,7 +152,9 @@ const actulizar=(id:string)=>{
                    <div className="col-12 d-flex justify-content-center " style={{marginTop:'10px'}}>
                     <div className="containersucursalboton">
                           <CButton className="botonagregarsucursal"  onClick={
-                            ()=> setVisible(true)
+                            ()=> {setVisible(true)  
+                              console.log("datossucursal",visible)
+                            }
                           }>Agregar</CButton>
                     </div>
                    </div>

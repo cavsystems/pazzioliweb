@@ -366,17 +366,25 @@ z-index: 3;
 
 
 
-.imgnavicon{
-    width: 22px !important;
-    height: 22px !important;
-   
-}
+
+
+
 .lineaseparadora{
     bottom: -50px;
 }
 .navsiguiente{
     bottom: -60px;
+    position: relative;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: end;
+    gap: 28px;
+        margin: 20px 0 0 0;
+    
 }
+
+
 
 
 
