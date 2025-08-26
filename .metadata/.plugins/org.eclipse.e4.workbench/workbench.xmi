@@ -82,9 +82,25 @@
           <tags>persp.newWizSC:org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard</tags>
           <tags>persp.newWizSC:org.eclipse.jpt.jpa.ui.wizard.newJpaProject</tags>
           <tags>persp.perspSC:org.eclipse.jpt.ui.jpaPerspective</tags>
+<<<<<<< HEAD
           <children xsi:type="basic:PartSashContainer" xmi:id="_f9JUsYKEEfC_MbNcxIKBCg" selectedElement="_f9JUvoKEEfC_MbNcxIKBCg" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_f9JUsoKEEfC_MbNcxIKBCg" elementId="topLeft" containerData="2000" selectedElement="_f9JUs4KEEfC_MbNcxIKBCg">
               <children xsi:type="advanced:Placeholder" xmi:id="_f9JUs4KEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_f8i3wIKEEfC_MbNcxIKBCg" closeable="true">
+=======
+          <tags>persp.editorOnboardingText:Open a file or drop files here to open them.</tags>
+          <tags>persp.editorOnboardingCommand:Find Actions$$$Ctrl+3</tags>
+          <tags>persp.editorOnboardingCommand:Show Key Assist$$$Ctrl+Shift+L</tags>
+          <tags>persp.editorOnboardingCommand:New$$$Ctrl+N</tags>
+<<<<<<< HEAD
+          <children xsi:type="basic:PartSashContainer" xmi:id="_ykHpRX6GEfCSaoi6bSJ3mQ" selectedElement="_ykHpUn6GEfCSaoi6bSJ3mQ" horizontal="true">
+            <children xsi:type="basic:PartStack" xmi:id="_ykHpRn6GEfCSaoi6bSJ3mQ" elementId="topLeft" containerData="3181" selectedElement="_ykHpR36GEfCSaoi6bSJ3mQ">
+              <children xsi:type="advanced:Placeholder" xmi:id="_ykHpR36GEfCSaoi6bSJ3mQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_ykHsKn6GEfCSaoi6bSJ3mQ" closeable="true">
+=======
+          <children xsi:type="basic:PartSashContainer" xmi:id="_NTVHsYHFEfCIAKAkg4z_Ag" selectedElement="_NTVHv4HFEfCIAKAkg4z_Ag" horizontal="true">
+            <children xsi:type="basic:PartStack" xmi:id="_NTVHsoHFEfCIAKAkg4z_Ag" elementId="topLeft" containerData="2341" selectedElement="_NTVHs4HFEfCIAKAkg4z_Ag">
+              <children xsi:type="advanced:Placeholder" xmi:id="_NTVHs4HFEfCIAKAkg4z_Ag" elementId="org.eclipse.ui.navigator.ProjectExplorer" ref="_NSs1kIHFEfCIAKAkg4z_Ag" closeable="true">
+>>>>>>> 6906fc13d37af844c1a074e5b66c367f5acc0a42
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
                 <tags>View</tags>
                 <tags>categoryTag:General</tags>
               </children>
@@ -129,11 +145,33 @@
                 <tags>categoryTag:Debug</tags>
               </children>
             </children>
+<<<<<<< HEAD
             <children xsi:type="basic:PartSashContainer" xmi:id="_f9JUvoKEEfC_MbNcxIKBCg" containerData="8000" selectedElement="_f9JUxYKEEfC_MbNcxIKBCg">
               <children xsi:type="basic:PartSashContainer" xmi:id="_f9JUv4KEEfC_MbNcxIKBCg" containerData="7070" selectedElement="_f9JUwIKEEfC_MbNcxIKBCg" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_f9JUwIKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.editorss" containerData="8000" ref="_f8XRkIKEEfC_MbNcxIKBCg"/>
                 <children xsi:type="basic:PartStack" xmi:id="_f9JUwYKEEfC_MbNcxIKBCg" elementId="topRight" containerData="2000" selectedElement="_f9JUwoKEEfC_MbNcxIKBCg">
                   <children xsi:type="advanced:Placeholder" xmi:id="_f9JUwoKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.views.ContentOutline" ref="_f8soxYKEEfC_MbNcxIKBCg" closeable="true">
+=======
+<<<<<<< HEAD
+            <children xsi:type="basic:PartSashContainer" xmi:id="_NTVHv4HFEfCIAKAkg4z_Ag" containerData="7659" selectedElement="_NTVHx4HFEfCIAKAkg4z_Ag">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_NTVHwIHFEfCIAKAkg4z_Ag" containerData="6163" selectedElement="_NTVHwYHFEfCIAKAkg4z_Ag" horizontal="true">
+=======
+<<<<<<< HEAD
+            <children xsi:type="basic:PartSashContainer" xmi:id="_ykHpUn6GEfCSaoi6bSJ3mQ" containerData="6819" selectedElement="_ykHpWX6GEfCSaoi6bSJ3mQ">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_ykHpU36GEfCSaoi6bSJ3mQ" containerData="5169" selectedElement="_ykHpVH6GEfCSaoi6bSJ3mQ" horizontal="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_ykHpVH6GEfCSaoi6bSJ3mQ" elementId="org.eclipse.ui.editorss" containerData="9000" ref="_ykHr0n6GEfCSaoi6bSJ3mQ"/>
+                <children xsi:type="basic:PartStack" xmi:id="_ykHpVX6GEfCSaoi6bSJ3mQ" elementId="topRight" containerData="1000" selectedElement="_ykHpVn6GEfCSaoi6bSJ3mQ">
+                  <children xsi:type="advanced:Placeholder" xmi:id="_ykHpVn6GEfCSaoi6bSJ3mQ" elementId="org.eclipse.ui.views.ContentOutline" ref="_ykHseX6GEfCSaoi6bSJ3mQ" closeable="true">
+=======
+            <children xsi:type="basic:PartSashContainer" xmi:id="_NTVHv4HFEfCIAKAkg4z_Ag" containerData="7235" selectedElement="_NTVHx4HFEfCIAKAkg4z_Ag">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_NTVHwIHFEfCIAKAkg4z_Ag" containerData="5291" selectedElement="_NTVHwYHFEfCIAKAkg4z_Ag" horizontal="true">
+>>>>>>> 420a878bdbd24c1f0fd35754df2ca94d458627c3
+                <children xsi:type="advanced:Placeholder" xmi:id="_NTVHwYHFEfCIAKAkg4z_Ag" elementId="org.eclipse.ui.editorss" containerData="8000" ref="_NSVCIIHFEfCIAKAkg4z_Ag"/>
+                <children xsi:type="basic:PartStack" xmi:id="_NTVHwoHFEfCIAKAkg4z_Ag" elementId="topRight" visible="false" containerData="2000" selectedElement="_NTVHw4HFEfCIAKAkg4z_Ag">
+                  <tags>Minimized</tags>
+                  <children xsi:type="advanced:Placeholder" xmi:id="_NTVHw4HFEfCIAKAkg4z_Ag" elementId="org.eclipse.ui.views.ContentOutline" ref="_NS30sIHFEfCIAKAkg4z_Ag" closeable="true">
+>>>>>>> 6906fc13d37af844c1a074e5b66c367f5acc0a42
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
                     <tags>View</tags>
                     <tags>categoryTag:General</tags>
                   </children>
@@ -147,7 +185,11 @@
                   </children>
                 </children>
               </children>
+<<<<<<< HEAD
               <children xsi:type="basic:PartStack" xmi:id="_f9JUxYKEEfC_MbNcxIKBCg" elementId="bottomRight" containerData="2930" selectedElement="_f9JUz4KEEfC_MbNcxIKBCg">
+=======
+              <children xsi:type="basic:PartStack" xmi:id="_NTVHx4HFEfCIAKAkg4z_Ag" elementId="bottomRight" containerData="3837" selectedElement="_NTVH0YHFEfCIAKAkg4z_Ag">
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
                 <tags>Oomph</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_f9JUxoKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.views.ProblemView" ref="_f8lUBYKEEfC_MbNcxIKBCg" closeable="true">
                   <tags>View</tags>
@@ -529,7 +571,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftFfcIKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_ftcr0IKEEfC_MbNcxIKBCg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.svg" tooltip="Print" command="_fIiBloKEEfC_MbNcxIKBCg"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ts6uAIKdEfCAG6WnBIaARw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.svg" tooltip="Print" command="_L54or4HFEfCIAKAkg4z_Ag"/>
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftFfcYKEEfC_MbNcxIKBCg" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -537,8 +583,23 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftFfc4KEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.workbench.edit">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_ftd58IKEEfC_MbNcxIKBCg" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.svg" tooltip="Undo" enabled="false" command="_fIfkoIKEEfC_MbNcxIKBCg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_ftehAIKEEfC_MbNcxIKBCg" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.svg" tooltip="Redo" enabled="false" command="_fIhaBIKEEfC_MbNcxIKBCg"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ts78IIKdEfCAG6WnBIaARw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.svg" tooltip="Undo" enabled="false" command="_L5yiBYHFEfCIAKAkg4z_Ag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ts78IYKdEfCAG6WnBIaARw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.svg" tooltip="Redo" enabled="false" command="_L50-IIHFEfCIAKAkg4z_Ag"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Qbk1kIHGEfCUCvamIVeV6w" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.svg" tooltip="Undo" enabled="false" command="_ykRgDX6GEfCSaoi6bSJ3mQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_QbmDsIHGEfCUCvamIVeV6w" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.svg" tooltip="Redo" enabled="false" command="_ykRgt36GEfCSaoi6bSJ3mQ"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Ay6h0IHKEfCZybIifWfrcw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.svg" tooltip="Undo" enabled="false" command="_L5yiBYHFEfCIAKAkg4z_Ag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Ay7I4IHKEfCZybIifWfrcw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.svg" tooltip="Redo" enabled="false" command="_L50-IIHFEfCIAKAkg4z_Ag"/>
+>>>>>>> 6906fc13d37af844c1a074e5b66c367f5acc0a42
+>>>>>>> 420a878bdbd24c1f0fd35754df2ca94d458627c3
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftFfdIKEEfC_MbNcxIKBCg" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -568,7 +629,19 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftGtkIKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_fthkUIKEEfC_MbNcxIKBCg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.svg" tooltip="Pin Editor" type="Check" command="_fIiBOIKEEfC_MbNcxIKBCg"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ts9KQIKdEfCAG6WnBIaARw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.svg" tooltip="Pin Editor" enabled="false" type="Check" command="_L54BhIHFEfCIAKAkg4z_Ag"/>
+=======
+<<<<<<< HEAD
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Qbn44IHGEfCUCvamIVeV6w" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.svg" tooltip="Pin Editor" enabled="false" type="Check" command="_ykRhzX6GEfCSaoi6bSJ3mQ"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Ay8-EIHKEfCZybIifWfrcw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.svg" tooltip="Pin Editor" enabled="false" type="Check" command="_L54BhIHFEfCIAKAkg4z_Ag"/>
+>>>>>>> 6906fc13d37af844c1a074e5b66c367f5acc0a42
+>>>>>>> 420a878bdbd24c1f0fd35754df2ca94d458627c3
+>>>>>>> 8821bd59fe9585b8622acd2e8a924d4036fad82f
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_ftGtkYKEEfC_MbNcxIKBCg" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
