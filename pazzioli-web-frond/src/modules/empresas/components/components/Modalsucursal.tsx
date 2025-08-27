@@ -117,7 +117,7 @@ const deparactual=datosempresa.departamento.find((depar:any)=> depar.codigo===de
         <CModalBody>
           <div className="row">
             <div className="col-12">
-               <h6 className="titlecamposempresa h6 " style={{padding:'15px 10px 5px 15px '}}>Identificación</h6>
+               <h6 className="h6 " style={{padding:'15px 10px 5px 12px ',marginLeft:'1rem'}}>Identificación</h6>
 
             </div>
             <div className="col-12 col-md-6 col-lg-6 paddingempresa  paddingempresamodal" style={{paddingLeft:'12px'}}>
@@ -144,7 +144,7 @@ const deparactual=datosempresa.departamento.find((depar:any)=> depar.codigo===de
 
            <div className="row">
             <div className="col-12">
-                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Ubicación (opcional)</h6>
+                <h6 className="h6" style={{padding:'15px 10px 5px 10px ',marginLeft:'1rem'}}>Ubicación (opcional)</h6>
 
             </div>
               <div className=" col-12 col-md-6 col-lg-6 paddingempresa paddingempresamodal" style={{paddingLeft:'12px'}} >
@@ -261,7 +261,7 @@ const deparactual=datosempresa.departamento.find((depar:any)=> depar.codigo===de
 
              <div className="row">
             <div className="col-12">
-                <h6 className="titlecamposempresa h6" style={{padding:'15px 10px 5px 15px '}}>Contacto (opcional)</h6>
+                <h6 className=" h6" style={{padding:'15px 10px 5px 8px ',marginLeft:'1rem'}}>Contacto (opcional)</h6>
 
             </div>
               <div className="col-12 col-md-6 col-lg-6  paddingempresa paddingempresamodal">

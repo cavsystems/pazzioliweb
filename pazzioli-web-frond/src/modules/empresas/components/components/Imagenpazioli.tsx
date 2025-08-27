@@ -57,7 +57,7 @@ function Imagenpazzioli(
             <div>
                 <div className="row inputarchivo">
 
-                <h6  className="titlecamposempresa h6 paddingtitleempresalogo" style={{padding:'12px 10px 0px 10px ',marginBottom:0}}>Logo empresa</h6>
+                <h6  className="titlecamposempresa h6 paddingtitleempresalogo" style={{padding:'12px 10px 5px 0  ',marginBottom:0}}>Logo empresa</h6>
                     <div className="mb-3 coninputarchivo paddingempresa">
         <CFormInput  className=" fontletre placeholderarchivo"  type="file" id="formFile" label="JPG, PNG, BMP, 600x380 px Max."  {...register("archivologo")} onChange={handleFileChange}/>
       </div>

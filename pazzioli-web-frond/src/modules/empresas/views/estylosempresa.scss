@@ -365,7 +365,7 @@ text-align: center !important;
     padding-left: 30px !important;
 }
 .paddingtitleempresalogo{
-    padding-left: 35px !important;
+    padding-left: 40px !important;
 }
 .paddingtableimpuesto{
     padding-left: 20px !important;
@@ -377,6 +377,9 @@ text-align: center !important;
     padding-right: 20px !important;
 }}
 
+.inputarchivo label:nth-child(2) {
+   padding-left: 40px !important;
+}
 .fottersucursal{
     background: var(--blanco) 0% 0% no-repeat padding-box !important;
 background: #FFFFFF 0% 0% no-repeat padding-box !important;

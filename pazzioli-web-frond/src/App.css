@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 /*estilos modulo auth*/
-
+*{
+    z-index: 0 !important;
+}
 :root {
 
 /* Colors: */
@@ -210,7 +212,7 @@ opacity: 1;
 }
 
 .inputdatosempresa{
-    padding:22px 16px  5px 16px !important;
+    padding:22px 16px  5px 13px !important;
    border-radius: 6px !important;
    
 }
@@ -258,7 +260,7 @@ opacity: 1 !important;
 .navpazzioli   .navizquierdo {
     list-style: none !important;
     display: inline-block !important;
-padding-top: 5px !important;;
+padding-top: 5px !important;
     font: normal normal normal 14px/19px Open Sans !important;
     letter-spacing: 0px !important;
     color: #555555 !important;
@@ -318,7 +320,8 @@ overflow: auto;
   left: 0;             /* pegado a la izquierda */
   background: #fff; /* ponle un color de fondo para ver la barra */
 box-shadow: 3px 0px 20px #0000001A;
-z-index: 3;
+z-index: 10 !important;
+overflow-x: hidden;
 }
 
 
@@ -385,6 +388,158 @@ z-index: 3;
 }
 
 
+.navsiguienteresponsive{
+    display: none;
+  list-style: none !important;
+  display: inline-block !important;
+  padding-top: 5px !important;
+  font: normal normal normal 14px/19px Open Sans !important;
+  letter-spacing: 0px !important;
+  color: #555555 !important;
+  opacity: 1 !important;
+overflow: auto;
+  width: 255px;         /* ancho fijo de la barra */
+  height: 100vh;       /* 👈 alto = 100% del viewport */
+  position: fixed;     /* se queda fijo aunque hagas scroll */
+  top: 0;              /* empieza desde arriba */
+  left: 0;             /* pegado a la izquierda */
+  background: #fff; /* ponle un color de fondo para ver la barra */
+box-shadow: 3px 0px 20px #0000001A;
+z-index: 10 !important;
+
+}
+
+
+.navsiguienteresponsive > ul  .lilogomenu .logonavbar{
+position: relative;
+left: 8px;
+}
+
+.navsiguienteresponsive   .lilogomenu{
+    width: 100%;
+}
+
+.navsiguienteresponsive > ul .lineaseparadora{
+    position: relative;
+  bottom: -10px;
+}
+
+.navsiguienteresponsive >  ul .navsiguiente{
+    position: relative;
+    bottom: -20px;
+    display: flex;
+    width: 100%;
+    padding-left: 23px;
+    
+}
+
+.navizquierodsidebarlarge{
+    list-style: none !important;
+  display: inline-block !important;
+  padding-top: 5px !important;
+  font: normal normal normal 14px/19px Open Sans !important;
+  letter-spacing: 0px !important;
+  color: #555555 !important;
+  opacity: 1 !important;
+overflow: auto;
+  width: 245px;         /* ancho fijo de la barra */
+  height: 100vh;       /* 👈 alto = 100% del viewport */
+  position: fixed;     /* se queda fijo aunque hagas scroll */
+  top: 0;              /* empieza desde arriba */
+  left: 0;             /* pegado a la izquierda */
+  background: #fff; /* ponle un color de fondo para ver la barra */
+box-shadow: 3px 0px 20px #0000001A;
+z-index: 10 !important;
+
+}
+
+.cerrarmenuicon{
+    padding: 10px;
+   
+}
+.navizquierodsidebarlarge > ul  .lilogomenu .logonavbar{
+position: relative;
+left: 8px;
+}
+
+.navizquierodsidebarlarge > ul .lineaseparadora{
+    position: relative;
+  bottom: -10px;
+}
+
+.navizquierodsidebarlarge >  ul .navsiguiente{
+    position: relative;
+    bottom: -20px;
+    display: flex;
+    width: 100%;
+    padding-left: 23px;
+    
+}
+
+.iconospedidossidebar{
+    display: flex;
+   align-items: center;
+   gap:12px;
+}
 
 
 
+
+
+.sidebardisplay{
+ display: none;
+}
+
+.navizquierdolarge{
+     
+        list-style: none !important;
+    display: inline-block !important;
+padding-top: 5px !important;
+    font: normal normal normal 14px/19px Open Sans !important;
+    letter-spacing: 0px !important;
+    color: #555555 !important;
+    opacity: 1 !important;
+    width: 22px;
+    height: 22px;
+        position: absolute;
+     left: 255px !important;
+}
+
+.navizquierdolarge::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: #555555;
+  box-shadow: 0 6px 0 #555555, 0 12px 0 #555555; /* crea 3 líneas */
+  margin-bottom: 5px;
+}
+
+.navizquierdores{
+
+}
+
+
+.navpazzioli   .navizquierdores {
+    list-style: none !important;
+    display: inline-block !important;
+padding-top: 5px !important;
+    font: normal normal normal 14px/19px Open Sans !important;
+    letter-spacing: 0px !important;
+    color: #555555 !important;
+    opacity: 1 !important;
+    width: 22px;
+    height: 22px;
+        position: absolute;
+    left:20px;
+}
+
+.navpazzioli  .navizquierdores::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: #555555;
+  box-shadow: 0 6px 0 #555555, 0 12px 0 #555555; /* crea 3 líneas */
+  margin-bottom: 5px;
+}
