@@ -86,7 +86,7 @@ const actulizar=(id:string)=>{
                     </div>
                  </div>
                   <div className="col-12">
-                    <div style={{paddingRight:'37px',paddingLeft:'45.5px',position:'relative'}} >
+                    <div  className="tablesucursalescon" >
                         <div className="tabla-wrapper">
                            <CTable className="tablasucursal">
                           

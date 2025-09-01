@@ -12,7 +12,8 @@ function Navbar() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [issideresponsiside, setIssideresponsiside] = useState(false);
     return ( <>
-    <nav className="navpazzioli">
+    <nav className="navpazzioli" style={{    position: 'fixed',
+    width: '100%',zIndex:'12 !important'}}>
         <ul>
 
          {isLargeScreen ?  isSidebarOpen ?  <li className="navizquierodsidebarlarge"  onMouseEnter={() => setIsSidebarOpen(true)} onMouseLeave={() => setIsSidebarOpen(false)}>
@@ -27,7 +28,7 @@ function Navbar() {
 
                        <li className="navsiguiente">
                         <div> <div className="iconospedidossidebar"> <img src="/imgs/imagenniconcasa.svg" className="imgnavicon" />  <span>Inicio</span></div></div>
-                      
+                          <div><div className="iconospedidossidebar"> <span>Menu</span></div></div>
                         <div><div className="iconospedidossidebar"><img src="/imgs/imgdatafono.svg" className="imgnavicon"/> <span>Caja</span></div></div>
 
                         <div><div className="iconospedidossidebar"><img src="/imgs/usuarios.svg"  className="imgnavicon"/> <span>Usuarios</span></div></div>
@@ -99,6 +100,7 @@ function Navbar() {
 
                        <li className="navsiguiente">
                         <div> <div className="iconospedidossidebar"> <img src="/imgs/imagenniconcasa.svg" className="imgnavicon" />  <span>Inicio</span></div></div>
+                          <div><div className="iconospedidossidebar"> <span>Menu</span></div></div>
                       
                         <div><div className="iconospedidossidebar"><img src="/imgs/imgdatafono.svg" className="imgnavicon"/> <span>Caja</span></div></div>
 

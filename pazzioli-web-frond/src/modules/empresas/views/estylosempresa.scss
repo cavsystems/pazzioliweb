@@ -437,3 +437,31 @@ position: relative;
 }
 
 
+.tablesucursalescon{
+        padding-right: 45px;
+    padding-left: 100px;
+    position: relative;
+    
+}
+
+@media (max-width:903px) {
+    .tablesucursalescon{
+ padding-right:37px; 
+    padding-left:45.5px;
+    position:relative
+    }
+   
+    
+}
+
+@media (max-width:601px) {
+    .containerimgempresa{
+        margin-top: 35%;
+    }
+
+    .containerimgempresasucu {
+        margin-top: 35%;
+    }
+   
+    
+}

@@ -3,6 +3,7 @@
 /*estilos modulo auth*/
 *{
     z-index: 0 !important;
+    
 }
 :root {
 
@@ -38,8 +39,28 @@
 --unnamed-line-spacing-41: 41px;
 --unnamed-text-transform-uppercase: uppercase;
 }
+p{
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
+.fonttitulos{
+    color: var(--gris-textos);
+text-align: left;
+font: normal normal bold 16px/22px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
 
+.fondletraspanlarge{
+    color: var(--gris-textos);
+text-align: left;
+font: normal normal 300 30px/41px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
 .parrafo {
 font-family: var(--unnamed-font-family-open-sans);
 font-style: var(--unnamed-font-style-normal);
@@ -517,6 +538,13 @@ padding-top: 5px !important;
 
 .navizquierdores{
 
+}
+
+.navpazzioli{
+       position: fixed;
+    width: 100%; 
+    z-index:12 !important;
+    box-shadow: 0px 3px 10px #0000001A;
 }
 
 

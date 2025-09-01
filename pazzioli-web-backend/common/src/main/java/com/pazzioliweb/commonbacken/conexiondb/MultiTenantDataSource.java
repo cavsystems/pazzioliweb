@@ -18,7 +18,7 @@ public class MultiTenantDataSource extends AbstractRoutingDataSource  {
 
 	        // Opcional: un datasource por defecto (puede ser "cavsystems" u otro)
 	        DataSource defaultDs = DataSourceBuilder.create()
-	                .url("jdbc:mysql://localhost:3307/cavsystems?serverTimezone=UTC")
+	                .url("jdbc:mysql://localhost:3306/cavsystems?serverTimezone=UTC")
 	                .username("root")
 	                .password("root125")
 	                .driverClassName("com.mysql.cj.jdbc.Driver")
