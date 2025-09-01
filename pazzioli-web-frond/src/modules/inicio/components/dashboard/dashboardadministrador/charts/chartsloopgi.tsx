@@ -75,9 +75,22 @@ function Chatsloopgiadmin() {
   };
 //Opciones (options)
 const options:any = {
+  
     //el gráfico se ajusta al tamaño del contenedor.
   responsive: true,
   maintainAspectRatio: false,
+   scales: {
+    x: {
+      grid: {
+        display: false, // Desactiva las líneas de la cuadrícula en el eje X
+      },
+    },
+    y: {
+      grid: {
+        display: true, // Mantiene las líneas de la cuadrícula en el eje Y
+      },
+    },
+  },
     
   animations: {
     //Estás animando el radius (radio) de los puntos en el gráfico.
@@ -98,14 +111,14 @@ de radio 5 px → a radio 15 px (efecto de pulso).  cada ves que paso el hover p
     },
   },
   plugins: {
-    legend: {
-        //coloca la leyenda arriba.
-      position: "top" as const,
+    legend:{
+      display: false, // Desactiva la leyenda predeterminada
     },
     tooltip: {
         //activa los tooltips al pasar el mouse.
       enabled: true,
     },
+    
   },
   //define cómo reacciona al pasar el mouse:
   interaction: {
@@ -116,10 +129,25 @@ de radio 5 px → a radio 15 px (efecto de pulso).  cada ves que paso el hover p
     //solo se activa en el eje x (horizontalmente).
     axis: "x" as const,
   },
+
+  
 };
+
+
 return ( 
         <>
          <div className="chart-container" >
+          <div className="custom-legend">
+  <button className="botonesgraficos"  style={{background: "#F3F4F7 0% 0% no-repeat padding-box"}}><span>Ingresos totales</span>
+  <div>
+    <span>${'144.381.444 COP'}</span>
+  </div>
+  </button>
+  <button className="botonesgraficos" ><span>Gastos totales</span>
+  <div>
+    <span>${'144.381.444 COP'}</span>
+  </div></button>
+</div>
            <Line data={data} options={options}  />
          </div>
         </>

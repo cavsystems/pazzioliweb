@@ -1,7 +1,25 @@
 import { useEffect, useState, type JSX } from "react";
 
 function Sectionacceso() {
-    const [imgenes, setImgenes] = useState(['/imgs/compras.svg','/imgs/pedidos.svg','/imgs/facturas.svg','/imgs/pagos.svg'])
+    const [imgenes, setImgenes] = useState([{
+        imgen:'/imgs/compras.svg',
+        label:'Nueva Compra'
+    },
+    {
+        imgen: '/imgs/pedidos.svg',
+         label:'Nuevo pedido'
+
+    },
+  
+    {
+        imgen:'/imgs/facturas.svg',
+         label:'Nueva Factura'
+    },{
+        imgen:'/imgs/pagos.svg',
+         label:'Nuevo pago'
+    },
+    
+   ])
 
     const [bontesacceso, setBontesacceso] = useState<JSX.Element[]>([]);
 useEffect(()=>{
@@ -12,8 +30,8 @@ useEffect(()=>{
         return imgenes.map((item, index) => {
             return (
                 <button key={index} className="botonesacceso">
-                    <img src={imgenes[index]} className="imgbotonesacceso" />
-                    {/*<span className="textobotonesacceso">{item}</span>*/}
+                    <img src={item.imgen} className="imgbotonesacceso" />
+                    <span className="textobotonesacceso">{item.label}</span>
                 </button>
             );
         });

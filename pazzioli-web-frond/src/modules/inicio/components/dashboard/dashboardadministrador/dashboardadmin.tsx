@@ -15,7 +15,7 @@ function Dashboardadmin() {
             </div>
            
                 <div className="col-12"  >
-                    <div className="container-lg">
+                    <div className="container-fluid">
                         <div className="row">
                     <div className="col-12 col-md-8 col-lg-8 col-sm-12 col-xl-8"  >
                         <div className="chartinventario" >
@@ -30,7 +30,7 @@ function Dashboardadmin() {
 
                     <div className="col-12 col-md-4 col-lg-4 col-sm-12 col-xl-4" >
                         <div className="chartcartera">
-                        <div className="card" >
+                        <div className="card"  style={{maxHeight:"400px"}}>
                             <div className="card-body">
                                 <span className="card-title fonttitulos" style={{padding:'30px 16px 50px 16px'}}>Inventario </span>
                             <Chartcartera/>
