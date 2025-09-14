@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import com.pazzioliweb.authbacken.dtos.UsuarioRequestDTOauth;
 import com.pazzioliweb.empresaauth.service.EmpresaService;
 import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
-import com.pazzioliweb.empresasback.entyti.Empresas;
+import com.pazzioliweb.empresasback.entity.Empresas;
 import com.pazzioliweb.empresasback.repositori.EmpresaRepository;
 @Controller
 public class AuthControllerSocket {

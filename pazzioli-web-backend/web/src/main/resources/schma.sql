@@ -484,3 +484,34 @@ create table bodegas(
  tipoImagen varchar(100) default "",
  primary key(codigo)); 
  
+ 
+ DROP TABLE IF EXISTS productos;
+ 
+ create table productos(
+  id_producto int auto_increment,
+  nombre varchar(50),
+ primary key(id_producto)
+ );
+ 
+ insert into productos(nombre)values("leche");
+ 
+  DROP TABLE IF EXISTS grupo;
+  create table grupo(
+  codigo int auto_increment,
+  nombre varchar(50),
+  primary key(codigo)
+  
+  );
+  
+  
+   DROP TABLE IF EXISTS Linea;
+     create table Linea(
+  codigo int auto_increment,
+  nombre varchar(50),
+  primary key(codigo)
+  
+  );
+  
+   
+  
+ 

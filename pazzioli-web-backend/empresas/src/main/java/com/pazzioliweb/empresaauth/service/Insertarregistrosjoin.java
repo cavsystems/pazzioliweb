@@ -5,21 +5,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pazzioliweb.commonbacken.entyti.Departamento;
-import com.pazzioliweb.commonbacken.entyti.Municipio;
-import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.entity.Departamento;
+import com.pazzioliweb.commonbacken.entity.Municipio;
+import com.pazzioliweb.commonbacken.entity.Pais;
 import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
 import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
 import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
-import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
-import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.entity.Actividadeconomica;
+import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
 import com.pazzioliweb.empresasback.repositori.BodegasRepository;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
-import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
-import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
 
 
 

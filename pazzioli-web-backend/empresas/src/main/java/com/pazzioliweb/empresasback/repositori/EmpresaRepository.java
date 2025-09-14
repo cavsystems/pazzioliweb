@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
-import com.pazzioliweb.empresasback.entyti.Empresas;
+import com.pazzioliweb.empresasback.entity.Empresas;
 
 import jakarta.persistence.EntityManager;
 

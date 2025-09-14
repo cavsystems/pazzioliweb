@@ -2,7 +2,7 @@ package com.pazzioliweb.usuariosbacken.repositorio;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.usuriosbacken.entyti.Permiso;
+import com.pazzioliweb.usuariosbacken.entity.Permiso;
 
 import java.util.List;
 

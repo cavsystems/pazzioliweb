@@ -4,6 +4,7 @@ function Contacto(
   CFormSelect,
   CFormFloating,
   CFormLabel,
+   errors,
 ...rest}: any
 ) {
     return ( 
@@ -23,9 +24,13 @@ function Contacto(
                         <CFormFloating className="margeniputempresa">
     <CFormInput     id="Correoempresa"
     placeholder=""
-  className="inputdatosempresa fontletre"    {...register('correoempresa', { required: 'Este campo es obligatorio' })}          
+  className="inputdatosempresa fontletre"    {...register('correoempresa', { required: 'Este campo es obligatorio' })} 
+
   />
-  <CFormLabel htmlFor="Correoempresa">Correo empresa</CFormLabel>
+  { errors.correoempresa ? (
+    <CFormLabel style={{ color: "red" }}>Correo empresa</CFormLabel>):(
+  <CFormLabel>Correo empresa</CFormLabel>)}
+  
 </CFormFloating>
                                  
       </CInputGroup>
@@ -42,7 +47,9 @@ function Contacto(
     placeholder=""
   className="inputdatosempresa fontletre"    {...register('celularempresa', { required: 'Este campo es obligatorio' })}          
   />
-  <CFormLabel htmlFor="celularempresa">Celular empresa</CFormLabel>
+  { errors.celularempresa ? (
+    <CFormLabel style={{ color: "red" }}>Celular empresa</CFormLabel>):(
+  <CFormLabel htmlFor="celularempresa">Celular empresa</CFormLabel>)}
 </CFormFloating>
                                  
       </CInputGroup>       
@@ -65,7 +72,9 @@ function Contacto(
     placeholder=""
   className="inputdatosempresa fontletre"    {...register('telefonofijo', { required: 'Este campo es obligatorio' })}          
   />
-  <CFormLabel htmlFor="telefonofijoempresa">Teléfono fijo empresa</CFormLabel>
+  { errors.telefonofijo ? (
+    <CFormLabel style={{ color: "red" }}>Teléfono fijo empresa</CFormLabel>):(
+  <CFormLabel htmlFor="telefonofijoempresa">Teléfono fijo empresa</CFormLabel>)}
 </CFormFloating>
                                  
       </CInputGroup>

@@ -18,13 +18,12 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.redis.RedisConfig;
+import com.pazzioliweb.usuariosbacken.entity.Permiso;
+import com.pazzioliweb.usuariosbacken.entity.PermisoRol;
+import com.pazzioliweb.usuariosbacken.entity.Usuario;
 import com.pazzioliweb.usuariosbacken.repositorio.PermisoRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.PermisoRolRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
-import com.pazzioliweb.usuriosbacken.entyti.Permiso;
-import com.pazzioliweb.usuriosbacken.entyti.PermisoRol;
-import com.pazzioliweb.usuriosbacken.entyti.Usuario;
-
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

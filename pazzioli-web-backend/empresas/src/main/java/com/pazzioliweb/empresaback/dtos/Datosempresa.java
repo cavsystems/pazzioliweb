@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.pazzioliweb.commonbacken.entyti.Departamento;
-import com.pazzioliweb.commonbacken.entyti.Impuestos;
-import com.pazzioliweb.commonbacken.entyti.Municipio;
-import com.pazzioliweb.commonbacken.entyti.Pais;
-import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
-import com.pazzioliweb.empresasback.entyti.Regimen;
-import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
-import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+import com.pazzioliweb.commonbacken.entity.Departamento;
+import com.pazzioliweb.commonbacken.entity.Impuestos;
+import com.pazzioliweb.commonbacken.entity.Municipio;
+import com.pazzioliweb.commonbacken.entity.Pais;
+import com.pazzioliweb.empresasback.entity.Actividadeconomica;
+import com.pazzioliweb.empresasback.entity.Regimen;
+import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 @Component
 public class Datosempresa {
 	private List<Tipopersona> tipopersona;

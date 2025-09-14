@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { chartcontex } from "../../../contextchart";
+import { CPagination, CPaginationItem } from "@coreui/react";
 
 function Chartinventariolinea() {
+
+  const {settotallinea}=chartcontex()
    /* const total = 100; // valor máximo (ej: ventas meta)
   const actual = 65; // valor actual (ej: ventas logradas)
 
@@ -60,12 +64,23 @@ function Chartinventariolinea() {
    porcentaje:0
   },
 
+    {
+    nombre:"electrodomesticos",
+ total:2200000000,
+   porcentaje:0
+  },
+
+
+    
+   
+
     
 ])
 
 useEffect(()=>{
 settotaltodo(lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0))
 const total=lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0)
+settotallinea(total)
 setLineastotales(lineastotales.map((linea:any)=> {
    return {
           ...linea,
@@ -77,16 +92,16 @@ setLineastotales(lineastotales.map((linea:any)=> {
 
 
   return (
-    <div  style={{ padding: "16px", borderRadius: "12px", width: "100%" }}>
+    <div  style={{ padding: "16px 16px 0 16px", borderRadius: "12px", width: "100%",height:'368px',position:"relative" }}>
       {
         lineastotales.map((lineas:any)=>{
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.nombre}</span>  <span>{lineas.total.toLocaleString('de-DE')}$</span>
+                      <span>{lineas.nombre}</span>  <span>${lineas.total.toLocaleString('de-DE')}</span>
                  </div>
              
-                  <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "10px" ,  marginBottom:'12px'}}>
+                  <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>
         <div
           style={{
             width: `${lineas.porcentaje}%`,
@@ -105,7 +120,19 @@ setLineastotales(lineastotales.map((linea:any)=> {
         })
       }
      
-    
+      <CPagination aria-label="Page navigation example" style={{    position: 'absolute',
+    width: '100%',
+    bottom: '0'}}>
+      <CPaginationItem aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </CPaginationItem>
+      <CPaginationItem className="act">1</CPaginationItem>
+      <CPaginationItem>2</CPaginationItem>
+      <CPaginationItem>3</CPaginationItem>
+      <CPaginationItem aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </CPaginationItem>
+    </CPagination>
       
     </div>
   );

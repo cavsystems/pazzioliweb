@@ -4,18 +4,22 @@ import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.metamodel.EntityType;
 @SpringBootApplication
-@ComponentScan(basePackages = {
-	    "com.pazzioliweb",
-	    "com.pazzioliweb.commonbacken",
-	    "com.pazzioliweb.authbacken",
-	    "com.pazzioliweb.usuariosbacken",
+@EntityScan(basePackages = {
+	    "com.*",
+	  	})
+	@EnableJpaRepositories(basePackages = {
+	    "com.*",
 	   
-	    
 	})
+	@ComponentScan(basePackages = {"com.pazzioliweb.domain"})
 
 public class PazzioliWebBackendApplication {
 
@@ -28,5 +32,17 @@ public static void main(String[] args) {
 
 }
 
+
+@Autowired
+private EntityManager entityManager;
+
+@PostConstruct
+public void showEntities() {
+    System.out.println("=== Entidades registradas en Hibernate ===");
+    for (EntityType<?> entity : entityManager.getMetamodel().getEntities()) {
+        System.out.println(entity.getName() + " -> " + entity.getJavaType().getName());
+    }
+    System.out.println("=========================================");
+}
 }
 

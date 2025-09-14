@@ -8,6 +8,7 @@ export function Identificacion({ register,control, CInputGroup,
   CFormFloating,
   CFormLabel,
     setValue,
+    errors,
 ...rest}: any) {
   const [selectedtipo, setSelected] = useState(0);
     const [selectedtipoidentificacion, setSelectedtipo] = useState(0);
@@ -108,7 +109,9 @@ export function Identificacion({ register,control, CInputGroup,
                 
               })}          
   />
-   <CFormLabel htmlFor="identificacion">Numero de identificación</CFormLabel>
+    { errors.numeroidentificacion ? (
+    <CFormLabel style={{ color: "red" }}>Numero de identificación</CFormLabel>):(<CFormLabel>Numero de identificación</CFormLabel>)}
+  
   </CFormFloating>
             </CInputGroup>
             </div>
@@ -128,7 +131,8 @@ export function Identificacion({ register,control, CInputGroup,
   name="tipodeidentificacion"
   rules={{ required: "Este campo es obligatorio" }}
   defaultValue={""}
-  render={({ field }) => (
+  render={({ field,fieldState }) => (
+    <>
  <CFormSelect
   {...field} 
   
@@ -153,10 +157,13 @@ export function Identificacion({ register,control, CInputGroup,
      }
          
   </CFormSelect>
+    {fieldState.error ? (
+    <CFormLabel style={{ color: "red" }}>Tipo de identificación</CFormLabel>):(<CFormLabel>Tipo de identificación</CFormLabel>)}
+</>
   )}
 />
 
-  <CFormLabel>Tipo de identificación</CFormLabel>
+  
 </CFormFloating>
                                  
       </CInputGroup>
@@ -167,8 +174,9 @@ export function Identificacion({ register,control, CInputGroup,
               <CFormInput placeholder=""  className="inputdatosempresa fontletre"      disabled={true}        {...register('digitodeverificacion', { required: 'Este campo es obligatorio' })} />
               
 
-
-    <CFormLabel htmlFor="digitodeverificacion" >Digito de verificación</CFormLabel>
+   { errors.digitodeverificacion ? (
+    <CFormLabel style={{ color: "red" }}>Digito de verificación</CFormLabel>):(<CFormLabel>Numero de identificación</CFormLabel>)}
+   
               </CFormFloating>
             </CInputGroup>
             </div>

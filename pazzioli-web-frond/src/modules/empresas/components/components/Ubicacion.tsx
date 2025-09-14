@@ -17,6 +17,7 @@ function Ubicacion({ register, CInputGroup,
   CFormLabel,
    paisdef,
    setValue,
+   errors,
 ...rest}: any) {
   const [codigodepar,setcodigodepart]=useState('0')
    const [codigomunicipio,setcodigomunicipio]=useState('0')
@@ -89,7 +90,10 @@ const traermuni=async()=>{
       })
      }   
   </CFormSelect>
-  <CFormLabel>Pais</CFormLabel>
+{ errors.pais ? (
+    <CFormLabel style={{ color: "red" }}>Pais</CFormLabel>):(
+  <CFormLabel>Pais</CFormLabel>)}
+  
 </CFormFloating>
                                  
       </CInputGroup>
@@ -125,7 +129,10 @@ const traermuni=async()=>{
       })
      }   
   </CFormSelect>
-  <CFormLabel>Municipio</CFormLabel>
+  { errors.municipio ? (
+    <CFormLabel style={{ color: "red" }}>Municipio</CFormLabel>):(
+  <CFormLabel>Municipio</CFormLabel>)}
+
 </CFormFloating>
                                  
       </CInputGroup>
@@ -176,7 +183,9 @@ const seleccionado = rest.datosempresa.departamento.find(
       })
      }   
   </CFormSelect>
-  <CFormLabel>Departamento</CFormLabel>
+  { errors.departamento ? (
+    <CFormLabel style={{ color: "red" }}>Departamento</CFormLabel>):(
+  <CFormLabel>Departamento</CFormLabel>)}
 </CFormFloating>
                                  
       </CInputGroup>
@@ -186,7 +195,9 @@ const seleccionado = rest.datosempresa.departamento.find(
                 <CInputGroup>
                <CFormFloating className="margeniputempresa">
               <CFormInput placeholder=""  className="inputdatosempresa fontletre"  {...register('codigopostal', { required: 'Este campo es obligatorio' })} />
-               <CFormLabel>Código postal</CFormLabel>
+                { errors.codigopostal ? ( 
+    <CFormLabel style={{ color: "red" }}>Código postal</CFormLabel>):(<CFormLabel>Código postal</CFormLabel>)}
+             
               </CFormFloating>
             </CInputGroup>
 

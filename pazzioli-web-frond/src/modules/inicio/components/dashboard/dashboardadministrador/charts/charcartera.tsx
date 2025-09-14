@@ -8,14 +8,14 @@ import React, { useEffect } from 'react';
 /* accumulated se usa más adelante para calcular la posición de los labels a partir del ángulo acumulado. */
 let accumulated = 0;
 const data:any = [
-  { id:0,label: '0-30 dias', value: 420000, color: '#0088FE' ,porcentaje:0 },
-  { id:1,label: '30-60 dias', value: 300000, color: '#00C49F' ,porcentaje:0},
-  { id:2,label: '30-90 dias', value: 300000, color: '#FFBB28' ,porcentaje:0},
-  { id:3,label: '+90 dias', value: 20000, color: '#FF8042' ,porcentaje:0},
+  { id:0,label: '0-30 dias', value: 420000, color: '#53EAFD' ,porcentaje:0 },
+  { id:1,label: '30-60 dias', value: 300000, color: '#21BCFF' ,porcentaje:0},
+  { id:2,label: '60-90 dias', value: 300000, color: '#FFD230' ,porcentaje:0},
+  { id:3,label: '+90 dias', value: 120000, color: '#FF8042' ,porcentaje:0},
 ];
 /*  Configuras el PieChart con un tamaño fijo, margen derecho y sin leyenda integrada.*/
 const settings = {
-  margin: { right: 5 },
+
   width: 300,
   height: 300,
   hideLegend: true
@@ -26,7 +26,7 @@ function Chartcartera() {
     const [datacartera,setdatacartera]=React.useState(data)
     /*  totalcartera guarda la suma de todos los valores.*/
     const [totalcartera,settotalcartera]=React.useState(0)
-      const size = { width: 300, height: 200};
+      const size = { width: 200, height: 200};
       /* Define el tamaño del contenedor y el centro del círculo.
 
 .*/
@@ -70,7 +70,7 @@ Dibujas el PieChart con los datos de datacartera. */}
   {...settings}
   series={[
     {
-      innerRadius: 50,
+      innerRadius: 57,
       outerRadius: 100,
       data: datacartera,
                                                                  
@@ -98,6 +98,7 @@ Dibuja un div absoluto en esa posición con el label.
 {datacartera.map((item: any) => {
   if (item.porcentaje < 2) return null;
   const total = datacartera.reduce((sum, d) => sum + d.value, 0);
+
   const startAngle = (accumulated / total) * 360;
   accumulated += item.value;
   const endAngle = (accumulated / total) * 360;
@@ -169,9 +170,14 @@ Esto coloca el punto exactamente sobre el arco del círculo a la distancia rLabe
         top: pos.y,
         transform: "translate(-50%, -50%)",
         textAlign: "center",
-        fontSize: 11,
-        color: "#000",
-        pointerEvents: "none",
+         
+        color: 'var(--blanco)',
+ 
+font: 'normal normal 600 12px/11px Open San',
+letterSpacing: '0px',
+
+textShadow: '0px 1px 1px #00000078',
+opacity: '1',
         whiteSpace: "pre-line",
       }}
     >
@@ -179,12 +185,30 @@ Esto coloca el punto exactamente sobre el arco del círculo a la distancia rLabe
     </div>
   );
 })}
-
+<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center', marginTop: '10px' ,position:"absolute",position: "absolute",
+      top: "45%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      textAlign: "center",
+      fontWeight: 600,
+      fontSize: "16px",
+      color: "#333",}}> 
+  <span style={{letterSpacing: "var(--unnamed-character-spacing-0)",
+color:"var(--gris-textos)",
+textAlign:"center",
+font: "normal normal normal 12px/12px Open Sans",
+}}>Total</span>
+  <h2 style={{letterSpacing: "var(--unnamed-character-spacing-0)",
+color: "var(--gris-textos)",
+textAlign: "center",
+font: "normal normal bold 12px/12px Open Sans",
+}}>${totalcartera.toLocaleString('de-DE')}</h2>
+</div>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start',justifyContent:'start', marginTop: '30px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start',justifyContent:'start', marginTop: '10px' }}>
   {  datacartera
 .map((s:any) => (
-    <div key={s.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 8 ,justifyContent:'center'}}>
+    <div key={s.id} style={{ display: 'flex', alignItems: 'center' ,justifyContent:'center'}}>
       <span
         style={{
           width: 12,
@@ -198,6 +222,9 @@ Esto coloca el punto exactamente sobre el arco del círculo a la distancia rLabe
     </div>
   ))}
 </div>
+  <div className='botonvermas'>
+    <button>Ver mas</button>
+  </div>
 </div>
 
         </>

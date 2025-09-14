@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pazzioliweb.commonbacken.entyti.CodigoPostal;
+import com.pazzioliweb.commonbacken.entity.CodigoPostal;
 import com.pazzioliweb.commonbacken.repositorio.CodigoPostalRepositori;
 
 @Component

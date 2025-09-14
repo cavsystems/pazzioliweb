@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
-import com.pazzioliweb.commonbacken.entyti.Departamento;
-import com.pazzioliweb.commonbacken.entyti.Impuestos;
-import com.pazzioliweb.commonbacken.entyti.Municipio;
-import com.pazzioliweb.commonbacken.entyti.Pais;
+import com.pazzioliweb.commonbacken.entity.Departamento;
+import com.pazzioliweb.commonbacken.entity.Impuestos;
+import com.pazzioliweb.commonbacken.entity.Municipio;
+import com.pazzioliweb.commonbacken.entity.Pais;
 import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
 import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
 import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
@@ -32,18 +32,18 @@ import com.pazzioliweb.empresaback.dtos.Datosempresa;
 import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
-import com.pazzioliweb.empresasback.entyti.Actividadeconomica;
-import com.pazzioliweb.empresasback.entyti.Bodegas;
-import com.pazzioliweb.empresasback.entyti.Empresa;
-import com.pazzioliweb.empresasback.entyti.Regimen;
+import com.pazzioliweb.empresasback.entity.Actividadeconomica;
+import com.pazzioliweb.empresasback.entity.Bodegas;
+import com.pazzioliweb.empresasback.entity.Empresa;
+import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
 import com.pazzioliweb.empresasback.repositori.BodegasRepository;
 import com.pazzioliweb.empresasback.repositori.EmpresaRepositori;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
-import com.pazzioliweb.usuriosbacken.entyti.Tipoidentificacion;
-import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
 
 @Service
 public class EmpresaService {

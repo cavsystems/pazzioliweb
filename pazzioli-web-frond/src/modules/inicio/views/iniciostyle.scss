@@ -6,6 +6,16 @@
    align-items: center;
 
 }
+
+@media (min-width:768px) and (max-width:809px) {
+.continarbotonesacceso{
+    padding-right: 30px;
+}
+    
+
+}
+
+
 .navigationhome{
     text-decoration: none;
     letter-spacing: var(--unnamed-character-spacing-0);
@@ -24,12 +34,20 @@ transition: color 0.5s border-bottom 0.5s;
   padding-bottom: 0px;
 }
 .containerhome{
-    padding: 10px 0px 0px 170px;
-    margin-top: 55px;
-    margin-left: 80px;
-    margin-bottom: 350px !important;
+    padding: 10px 0px 0px 0;
+    margin-top: 57px;
+    margin-left: 60px;
+    margin-bottom: 500px !important;
 }
 
+
+@media (max-width:450px) {
+    .containerhomedashboard{
+    padding: 15px 20px 15px 20px !important;
+    }
+
+    
+}
 @media (max-width:913px){
     .containerhome{
       padding: 10px 0px 0px 0px;
@@ -53,19 +71,36 @@ transition: color 0.5s border-bottom 0.5s;
     justify-content: space-between;
 }
 
+
+
+.botonesacceso:hover{
+    background: #F3F4F7 0% 0% no-repeat padding-box;
+   
+}
+.botonesacceso:active{
+ background-color: #0000;
+ opacity: 1;
+   
+    
+}
+
+
 .botonesacceso{
+
     display: flex;
     flex-direction: column;
     width: 108px !important;
+     max-width: 108px;
     height: 77px !important;
         background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 10px #0000001A;
     border: 0.5px solid #D3D4D4;
     border-radius: 7px;
     opacity: 1;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
   flex:1;
+  min-width: 93px;
     
    
 
@@ -84,6 +119,13 @@ transition: color 0.5s border-bottom 0.5s;
     gap: 12px;
     justify-content: center;
     align-items: center;
+    padding-left: 148px;
+}
+
+@media (max-width:1103px){
+    .continarbotonesacceso{
+         padding-left: 0px;
+    }
 }
 
 @media (max-width:767px) {
@@ -96,9 +138,16 @@ transition: color 0.5s border-bottom 0.5s;
 
 .chart-container{
     position: relative;
-    height:300px;
+    height:100%;
     width: 100%;
 }
+
+@media (max-width:480px) {
+  
+    
+}
+
+
 
 .divdashchartcontainer{
 margin-top: 11px !important;
@@ -107,6 +156,18 @@ margin-top: 11px !important;
     margin: 0 !important;
 }
 
+
+@media (max-width:767px) {
+    .chartinventario{
+     padding: 15px 0px 0px 0px  !important;
+    }
+
+    .chartcartera {
+      padding: 15px 0px 15px 0px;
+    }
+    
+    
+}
 .chartinventario{
     box-sizing: border-box;
     padding: 15px 7.5px 15px 0px ;
@@ -128,15 +189,20 @@ border-radius: 6px;
 opacity: 1;
 display: inline-flex;
 flex-direction: column;
-justify-content: start;
+justify-content:center;
 align-items: start;
 margin-left: 15px;
 
 
 }
 
+.botonesgraficosactive{
+    background: #F3F4F7 0% 0% no-repeat padding-box;
+}
+
 .textobotonesacceso{
     width: 108px;
+   
 height: 17px;
 font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans);
 letter-spacing: var(--unnamed-character-spacing-0);
@@ -147,4 +213,129 @@ letter-spacing: 0px;
 color: #555555;
 opacity: 1;
 }
+.spancalender{
+   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align:start;
+font: normal normal normal 20px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1; 
+}
+.spancalenderitem{
+       font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align:start;
+font: normal normal normal 15px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1; 
+}
+.fottercalender{
+    background: #FFFF 0% 0% no-repeat padding-box !important;
+    box-shadow: 3px 0px 6px #0000001A;
 
+}
+.botonesfooter{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+.botonfotercancelar{
+    border:none;
+    background:  #fff 0% 0% no-repeat padding-box ;
+        text-align: left;
+    font: normal normal bold 12px / 17px Open Sans;
+    letter-spacing: 0px;
+     
+    opacity: 1;
+    border: 1px solid #555555;
+    border-radius: 100px;
+    width: 80px;
+    text-align: center;
+  /*  border:none;
+    background:  #FFFF 0% 0% no-repeat padding-box ;
+        text-align: left;
+    font: normal normal bold 12px / 17px Open Sans;
+    letter-spacing: 0px;
+   
+    opacity: 1;
+    border: 1px solid #555555;
+    border-radius: 100px;
+    width: 80px;
+    text-align: center;
+  color: #ffff;*/
+}
+.botonaplicarfotter{
+  
+    border:none;
+    background:  #000 0% 0% no-repeat padding-box ;
+        text-align: left;
+    font: normal normal bold 12px / 17px Open Sans;
+    letter-spacing: 0px;
+   
+    opacity: 1;
+    border: 1px solid #555555;
+    border-radius: 100px;
+    width: 80px;
+    text-align: center;
+  color: #ffff;
+
+
+}
+.custom-legend{
+    display: flex;
+    align-items: start;
+}
+.MuiInputLabel-root {
+  z-index: 10 !important;
+  position: absolute; /* necesario para que z-index aplique */
+}
+
+.divisoracalen::before{
+    content:"" ;
+    border:1px solid #D3D4D4 ;
+    height: 100%;
+    display: block;
+   
+}
+.cardcalender{
+    border: 0.5px solid #D3D4D4;
+border-radius: 7px;
+box-shadow: 0px 3px 10px #0000001A;
+}
+
+.textolineatotal{
+    letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal normal 12px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
+
+.pagination{
+        justify-content: center !important;
+    margin: 12px 0 0 0 !important;
+}
+
+.botonvermas{
+    display: block;
+   
+    margin-top: 23px;
+    margin-bottom: 9px;
+}
+
+.botonvermas>button{
+    width: 101px;
+height: 30px;
+/* UI Properties */
+background: var(--gris-claro) 0% 0% no-repeat padding-box;
+background: #F3F4F7 0% 0% no-repeat padding-box;
+border-radius: 6px;
+opacity: 1;
+border: none;
+}

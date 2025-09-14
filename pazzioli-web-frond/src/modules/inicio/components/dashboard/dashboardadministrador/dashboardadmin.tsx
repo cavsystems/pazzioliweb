@@ -1,15 +1,20 @@
+import { chartcontex } from "../../contextchart";
 import Chartcartera from "./charts/charcartera";
 import Chartinventariolinea from "./charts/chartinventariolinea";
 import Chatsloopgiadmin from "./charts/chartsloopgi";
 
 function Dashboardadmin() {
+     const {totallinea}=chartcontex()
+    
     return(
         <>
           <div className="row" style={{maxHeight:'1400px'}}>
             <div className="col-12 divdashchartcontainer" >
-                <div className="card" >
+                <div className="card"  style={{boxShadow:"0px 3px 10px #0000001A"}}>
                     <div className="card-body">
                    <Chatsloopgiadmin/>
+
+
                     </div>
                 </div>
             </div>
@@ -17,22 +22,25 @@ function Dashboardadmin() {
                 <div className="col-12"  >
                     <div className="container-fluid">
                         <div className="row">
-                    <div className="col-12 col-md-8 col-lg-8 col-sm-12 col-xl-8"  >
+                    <div className="col-12 col-md-6 col-lg-8 col-sm-12 col-xl-9"  >
                         <div className="chartinventario" >
-                        <div className="card" style={{height:'100%',maxHeight:'400px'}}>
-                            <div className="card-body">
-                                <span className="card-title fonttitulos" style={{padding:'30px 16px 50px 16px'}}>Inventario por linea</span>
+                        <div className="card" style={{height:'100%',boxShadow:"0px 3px 10px #0000001A"}} >
+                            <div className="card-body" style={{}}>
+                                <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px"}}>
+                                <span className="fonttitulos" >Inventario por linea</span>
+                                <span className="textolineatotal">${totallinea.toLocaleString('de-DE')}</span>
+                                </div>
                             <Chartinventariolinea/>
                             </div>
                         </div>
                         </div>
                     </div>
 
-                    <div className="col-12 col-md-4 col-lg-4 col-sm-12 col-xl-4" >
+                    <div className="col-12 col-md-6 col-lg-4 col-sm-12 col-xl-3" >
                         <div className="chartcartera">
-                        <div className="card"  style={{maxHeight:"400px"}}>
+                        <div className="card"  style={{boxShadow:'0px 3px 10px #0000001A'}}>
                             <div className="card-body">
-                                <span className="card-title fonttitulos" style={{padding:'30px 16px 50px 16px'}}>Inventario </span>
+                                <span className="fonttitulos" style={{padding:'10px 16px 30px 16px',display:"inline-block"}}>Cartera</span>
                             <Chartcartera/>
                             </div>
                         </div>

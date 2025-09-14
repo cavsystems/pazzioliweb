@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.usuriosbacken.entyti.Permiso;
-import com.pazzioliweb.usuriosbacken.entyti.Tipopersona;
+import com.pazzioliweb.usuariosbacken.entity.Permiso;
+import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 
 public interface TipopersonaRepository extends JpaRepository<Tipopersona, Long>  {
 

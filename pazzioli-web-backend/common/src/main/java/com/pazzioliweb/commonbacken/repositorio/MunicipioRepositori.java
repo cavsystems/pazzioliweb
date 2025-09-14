@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.commonbacken.entyti.Departamento;
-import com.pazzioliweb.commonbacken.entyti.Municipio;
+import com.pazzioliweb.commonbacken.entity.Departamento;
+import com.pazzioliweb.commonbacken.entity.Municipio;
 
 public interface  MunicipioRepositori extends JpaRepository<Municipio, Long> {
  public Optional<Municipio> findByCodigo(int codigo);

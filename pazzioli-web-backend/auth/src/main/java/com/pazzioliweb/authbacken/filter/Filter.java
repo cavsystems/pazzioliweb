@@ -17,8 +17,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.pazzioliweb.authbacken.jwt.JwUtilJava;
 import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
+import com.pazzioliweb.usuariosbacken.entity.Usuario;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
-import com.pazzioliweb.usuriosbacken.entyti.Usuario;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -99,7 +99,8 @@ public class Filter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 	    String path = request.getRequestURI();
-	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") ;
+	    System.out.println("productos"+path.startsWith("api/producto") );
+	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") || !path.startsWith("api/producto") ;
 	}
 	
 

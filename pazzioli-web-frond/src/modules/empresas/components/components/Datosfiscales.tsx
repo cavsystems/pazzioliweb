@@ -7,6 +7,7 @@ export function Datosfiscales({ register, CInputGroup,
   CFormSelect,
   CFormFloating,
   CFormLabel,
+  errors,
 ...rest}: any) {
   const [actividadeconomica,setactividadeconomica]=useState([])
   const [filtrodes, setFiltro] = useState('');
@@ -90,9 +91,12 @@ console.log("Estás usando:", detectarNavegador());
 
     console.log(e.target.value);
     // Llamar al onChange original de react-hook-form
-    register('Actividad economica').onChange(e);
+    register('Actividadeconomica').onChange(e);
   }}/>
-    <CFormLabel>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>
+    { errors.Actividadeconomica ? (
+    <CFormLabel style={{ color: "red" }}>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>):(
+  <CFormLabel>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>)}
+    
      {filtrodes && mostrardes && (
       <ul className={`lista-opcionesaut ${tipohove}`}>
         {actividadeconomica.map((item:any) => (
@@ -139,7 +143,9 @@ console.log("Estás usando:", detectarNavegador());
       })
      }  
   </CFormSelect>
-  <CFormLabel>Regimen</CFormLabel>
+  { errors.regimen ? (
+    <CFormLabel style={{ color: "red" }}>Regimen</CFormLabel>):(
+  <CFormLabel>Regimen</CFormLabel>)}
 </CFormFloating>
                                  
       </CInputGroup>

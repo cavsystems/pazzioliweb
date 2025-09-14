@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 interface AuthContextType {
   login: (data: any) => Promise<void>;
 }
-const AuthContext =createContext<AuthContextType | null>(null);;
+const AuthContext =createContext<AuthContextType | null>(null);
 
 
 

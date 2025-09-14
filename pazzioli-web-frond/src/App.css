@@ -43,16 +43,51 @@ p{
     margin: 0 !important;
     padding: 0 !important;
 }
-
-.fonttitulos{
+.spancalender{
     color: var(--gris-textos);
+text-align: left;
+font: normal normal normal 12px/17px Open Sans;
+letter-spacing: 0px;
+
+
+}
+.fonttitulos{
+font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-16)/var(--unnamed-line-spacing-22) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
 text-align: left;
 font: normal normal bold 16px/22px Open Sans;
 letter-spacing: 0px;
 color: #555555;
 opacity: 1;
 }
-
+.fonttitulosbotones{
+    letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal bold 12px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
+.botoncalender{
+  width: 105px;
+height: 34px;
+/* UI Properties */
+border: 1px solid #707070;
+border-radius: 7px;
+opacity: 1;
+background: var(--blanco) 0% 0% no-repeat padding-box;
+}
+.fontnumerosdashboard{
+    letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal normal 12px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
 .fondletraspanlarge{
     color: var(--gris-textos);
 text-align: left;
@@ -394,7 +429,7 @@ overflow-x: hidden;
 
 
 .lineaseparadora{
-    bottom: -50px;
+    bottom: -58px;
 }
 .navsiguiente{
     bottom: -60px;

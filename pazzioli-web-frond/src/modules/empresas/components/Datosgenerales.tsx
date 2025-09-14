@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import api from "../../../apicofig";
 
  export function Datosgenrales({datosempresa,setdatosempresa, paisdef,archivologo}:any) {
-  const { register,control,setValue } = useFormContext();
+  const { register,control,setValue, formState: { errors } } = useFormContext();
   
 
    
@@ -41,7 +41,8 @@ import api from "../../../apicofig";
   datosempresa={datosempresa}
   juridico={{juridico,setjuridico}}
   natural={{natural,setnatural}}
-    setValue={setValue}/>
+    setValue={setValue}
+     errors={ errors}/>
 
             <Nombres register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
@@ -49,7 +50,8 @@ import api from "../../../apicofig";
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
     juridico={{juridico,setjuridico}}
-  natural={{natural,setnatural}}/>
+  natural={{natural,setnatural}}
+   errors={ errors}/>
 <Datosfiscales
 register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
@@ -57,13 +59,15 @@ register={register}  CInputGroup={CInputGroup}
   CFormFloating={CFormFloating}
   CFormLabel={CFormLabel}
     datosempresa={datosempresa}
+    errors={ errors}
 />
 
   <Contacto  register={register}  CInputGroup={CInputGroup}
   CFormInput={CFormInput}
   CFormSelect={CFormSelect}
   CFormFloating={CFormFloating}
-  CFormLabel={CFormLabel}/>
+  CFormLabel={CFormLabel}
+     errors={ errors}/>
 
   <Ubicacion
   register={register}  CInputGroup={CInputGroup}
@@ -74,6 +78,7 @@ register={register}  CInputGroup={CInputGroup}
   datosempresa={datosempresa}
   paisdef={paisdef}
   setValue={setValue}
+  errors={ errors}
   />
 
 

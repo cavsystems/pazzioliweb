@@ -1,6 +1,9 @@
 import { useEffect, useState, type JSX } from "react";
+import { navcontex } from "../../../components/contextnavbar";
 
 function Sectionacceso() {
+    const [rol,setrool]=useState("cajero")
+    const {nav}=navcontex();
     const [imgenes, setImgenes] = useState([{
         imgen:'/imgs/compras.svg',
         label:'Nueva Compra'
@@ -28,10 +31,19 @@ useEffect(()=>{
      
     const componbotones = (): JSX.Element[] => {
         return imgenes.map((item, index) => {
+            
             return (
                 <button key={index} className="botonesacceso">
+                    <div style={{display: 'flex',
+
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:'5px',
+    gap:'5px'}}>
                     <img src={item.imgen} className="imgbotonesacceso" />
                     <span className="textobotonesacceso">{item.label}</span>
+                    </div>
                 </button>
             );
         });
@@ -46,7 +58,7 @@ useEffect(()=>{
             </div>
             </div>
               <div className="col-12 col-md-6 col-lg-6 col-sm-12 col-xl-6" >
-            <div  style={{width:'100%',display:'flex'}} className="continarbotonesacceso" >
+            <div  style={{width:'100%',display:'flex', paddingRight:nav ? "30px":""}} className="continarbotonesacceso" >
            {bontesacceso.map((boton,index)=> {
             return <> {boton}</>
            

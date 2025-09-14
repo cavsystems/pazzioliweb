@@ -6,6 +6,7 @@ function Nombres({ register, CInputGroup,
   CFormSelect,
   CFormFloating,
   CFormLabel,
+  errors,
 ...rest}: any) {
   useEffect(()=>{
    console.log("jurico",rest.juridico)
@@ -76,7 +77,10 @@ function Nombres({ register, CInputGroup,
              <CFormFloating className="margeniputempresa">
               <CFormInput placeholder=""  className="inputdatosempresa fontletre"    {...register('nombrecomercial', { required: 'Este campo es obligatorio' })}          
   />
-  <CFormLabel>Nombre comercial</CFormLabel>
+  { errors.nombrecomercial ? (
+    <CFormLabel style={{ color: "red" }}>Nombre comercial</CFormLabel>):(<CFormLabel>Nombre comercial</CFormLabel>)}
+   
+
   </CFormFloating>
             </CInputGroup>
 

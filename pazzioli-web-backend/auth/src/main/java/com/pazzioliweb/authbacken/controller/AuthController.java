@@ -26,10 +26,10 @@ import com.pazzioliweb.commonbacken.conexiondb.ConexionDinamica;
 import com.pazzioliweb.commonbacken.conexiondb.ConexionFactory;
 import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
-import com.pazzioliweb.commonbacken.entyti.Sesiones;
+import com.pazzioliweb.commonbacken.entity.Sesiones;
 import com.pazzioliweb.commonbacken.repositorio.SessionRepository;
+import com.pazzioliweb.usuariosbacken.entity.Usuario;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
-import com.pazzioliweb.usuriosbacken.entyti.Usuario;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;

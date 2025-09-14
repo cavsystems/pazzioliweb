@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import {store} from './store/store.tsx'
 import Authprovider from './modules/auth/authcontext/autcontext.tsx'
 import './globalstyle.css'
+import NavbarProvider from "./components/contextnavbar.tsx"
+import Providerchart from "./modules/inicio/components/contextchart.tsx"
 createRoot(document.getElementById('root')!).render(
 
    // <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
@@ -15,9 +17,14 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
    <StyledEngineProvider injectFirst>
     <Provider store={store}>
+    <Providerchart>
+   <NavbarProvider>
    <Authprovider>
+    
     <App />
     </Authprovider>
+    </NavbarProvider>
+    </Providerchart>
     </Provider>
     </StyledEngineProvider>
   </StrictMode>

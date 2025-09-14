@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.commonbacken.entyti.Impuestos;
-import com.pazzioliweb.commonbacken.entyti.Municipio;
+import com.pazzioliweb.commonbacken.entity.Impuestos;
+import com.pazzioliweb.commonbacken.entity.Municipio;
 
 public interface ImpuestosRepositori extends JpaRepository<Impuestos, Long> {
 	public Optional<Impuestos> findByCodigo(int codigo);
