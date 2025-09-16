@@ -4,7 +4,7 @@ import { CPagination, CPaginationItem } from "@coreui/react";
 
 function Chartinventariolineacajero() {
 
-  const {settotallinea}=chartcontex()
+  const {settotalnumeroprolinea}=chartcontex()
    /* const total = 100; // valor máximo (ej: ventas meta)
   const actual = 65; // valor actual (ej: ventas logradas)
 
@@ -49,24 +49,24 @@ function Chartinventariolineacajero() {
   const [totaltodo,settotaltodo]=useState(0)
   const [lineastotales,setLineastotales]=useState([{
    nombre:"electrodomesticos",
-   total:2000000000,
+   total:200,
    porcentaje:0
   },
   {
     nombre:"electrodomesticos",
- total:1000000000,
+ total:300,
    porcentaje:0
   },
 
     {
     nombre:"electrodomesticos",
- total:2200000000,
+ total:400,
    porcentaje:0
   },
 
     {
     nombre:"electrodomesticos",
- total:2200000000,
+ total:500,
    porcentaje:0
   },
 
@@ -80,7 +80,7 @@ function Chartinventariolineacajero() {
 useEffect(()=>{
 settotaltodo(lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0))
 const total=lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0)
-settotallinea(total)
+settotalnumeroprolinea(total)
 setLineastotales(lineastotales.map((linea:any)=> {
    return {
           ...linea,
@@ -92,13 +92,13 @@ setLineastotales(lineastotales.map((linea:any)=> {
 
 
   return (
-    <div  style={{ padding: "16px 16px 0 16px", borderRadius: "12px", width: "100%",height:'368px',position:"relative" }}>
+    <div  style={{ padding: "16px 16px 0 16px", borderRadius: "12px", width: "100%",height:'100%',minHeight:'369px',position:"relative" }}>
       {
         lineastotales.map((lineas:any)=>{
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.nombre}</span>  <span>${lineas.total.toLocaleString('de-DE')}</span>
+                      <span>{lineas.nombre}</span>  <span>{lineas.total.toLocaleString('de-DE')}</span>
                  </div>
              
                   <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>

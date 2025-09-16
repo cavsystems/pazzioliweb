@@ -197,6 +197,9 @@ return (
       {!tablein  &&  <ChartgostoloopCajero/>}
            
            </div>
+             <div className='botonvermas' >
+    <button>Ver mas</button>
+  </div>
          </div>
         </>
      );

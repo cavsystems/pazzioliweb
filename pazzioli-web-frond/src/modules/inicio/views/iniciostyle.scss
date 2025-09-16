@@ -35,9 +35,13 @@ transition: color 0.5s border-bottom 0.5s;
 }
 .containerhome{
     padding: 10px 0px 0px 0;
-    margin-top: 57px;
+    margin-top: 63px;
     margin-left: 60px;
-    margin-bottom: 500px !important;
+           overflow: auto;
+     max-height: 570px;
+    position: relative;
+    z-index: 9 !important;
+
 }
 
 
@@ -122,6 +126,10 @@ transition: color 0.5s border-bottom 0.5s;
     padding-left: 148px;
 }
 
+.containerhomedashboard{
+
+}
+
 @media (max-width:1103px){
     .continarbotonesacceso{
          padding-left: 0px;
@@ -163,7 +171,7 @@ margin-top: 11px !important;
     }
 
     .chartcartera {
-      padding: 15px 0px 15px 0px;
+      padding: 15px 0px 15px 0px !important;
     }
     
     
@@ -198,6 +206,8 @@ margin-left: 15px;
 
 .botonesgraficosactive{
     background: #F3F4F7 0% 0% no-repeat padding-box;
+    padding-left: 12px ;
+    
 }
 
 .textobotonesacceso{
@@ -323,10 +333,11 @@ opacity: 1;
 }
 
 .botonvermas{
-    display: block;
+    display: flex;
+     justify-content: center;
+     align-items: center;
+    margin-top: 25px;
    
-    margin-top: 23px;
-    margin-bottom: 9px;
 }
 
 .botonvermas>button{

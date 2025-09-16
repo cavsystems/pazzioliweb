@@ -4,7 +4,7 @@ import Chatsloopgicajero from "./charts/chartsloopgi";
 import Chatsloopgirecuadocajero from "./charts/chartsloopgirecaudo";
 
 function Dashboardcajero() {
-   const {totallinea}=chartcontex()
+   const {totalnumeroprolinea}=chartcontex()
     
     return(
         <>
@@ -25,10 +25,10 @@ function Dashboardcajero() {
                     <div className="col-12 col-md-6 col-lg-6 col-sm-12 col-xl-4"  >
                         <div className="chartinventario" >
                         <div className="card" style={{height:'100%',boxShadow:"0px 3px 10px #0000001A"}} >
-                            <div className="card-body" style={{}}>
+                            <div className="card-body" style={{display: 'flex',flexDirection:"column",height: '100%'}}>
                                 <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px"}}>
                                 <span className="fonttitulos" >Inventario por linea</span>
-                                <span className="textolineatotal">${totallinea.toLocaleString('de-DE')}</span>
+                                <span className="textolineatotal">{totalnumeroprolinea}</span>
                                 </div>
 
                                 <Chartinventariolineacajero/>

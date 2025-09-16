@@ -46,7 +46,7 @@ useEffect(()=>{
 },[dispatch])
 
   return (
-     <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
+     <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100 containeroot">
            <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
            <Navbar/>
     <BrowserRouter>
