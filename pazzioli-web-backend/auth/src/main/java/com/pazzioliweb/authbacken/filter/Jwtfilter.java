@@ -27,7 +27,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 @Component
-public class Filter extends OncePerRequestFilter {
+public class Jwtfilter extends OncePerRequestFilter {
 	@Autowired
 	  private RedisTemplate<String, DatosSesiones> redisTemplate;
 	 @Autowired
@@ -99,8 +99,8 @@ public class Filter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 	    String path = request.getRequestURI();
-	    System.out.println("productos"+path.startsWith("api/producto") );
-	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") || !path.startsWith("api/producto") ;
+	    System.out.println("productos"+path.startsWith("/api/productos") +path);
+	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") ||  path.startsWith("/api/productos")  ;
 	}
 	
 

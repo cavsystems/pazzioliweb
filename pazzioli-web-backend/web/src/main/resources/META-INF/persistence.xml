@@ -17,12 +17,19 @@
         
         <!-- Empresas -->
         <class>com.pazzioliweb.empresasback.entity.Actividadeconomica</class>
+<<<<<<< HEAD
          <class>com.pazzioliweb.empresasback.entity.Bodegas</class>
+=======
+>>>>>>> 8e125c3c4a45b696b98b832d771db3bbc8e5d4a2
           <class>com.pazzioliweb.empresasback.entity.Empresa</class>
            <class>com.pazzioliweb.empresasback.entity.Empresas</class>
             <class>com.pazzioliweb.empresasback.entity.Regimen</class>
         <!-- Common (si tiene entidades) -->
+<<<<<<< HEAD
         <class>com.pazzioliweb.commonbacken.entity.Administrado</class>
+=======
+        <class>com.pazzioliweb.commonbacken.entity.Administrador</class>
+>>>>>>> 8e125c3c4a45b696b98b832d771db3bbc8e5d4a2
         <class>com.pazzioliweb.commonbacken.entity.CodigoPostal</class>
         <class>com.pazzioliweb.commonbacken.entity.Departamento</class>
         <class>com.pazzioliweb.commonbacken.entity.Impuestos</class>
@@ -30,10 +37,24 @@
         <class>com.pazzioliweb.commonbacken.entity.Sesiones</class>
         <class>com.pazzioliweb.commonbacken.entity.Pais</class>
         
+<<<<<<< HEAD
         <!-- productos -->
         <class>com.pazzioliweb.productosmodule.entity.Grupo</class>
         <class>com.pazzioliweb.productosmodule.entity.Lineas</class>
         <class>com.pazzioliweb.productosmodule.entity.Producto</class>
         
+=======
+        <!--  Productos -->
+        <class>com.pazzioliweb.productosmodule.entity.Bodegas</class>
+        <class>com.pazzioliweb.productosmodule.entity.Existencias</class>
+        <class>com.pazzioliweb.productosmodule.entity.Grupos</class>
+        <class>com.pazzioliweb.productosmodule.entity.Lineas</class>
+        <class>com.pazzioliweb.productosmodule.entity.Precios</class>
+        <class>com.pazzioliweb.productosmodule.entity.PreciosProducto</class>
+        <class>com.pazzioliweb.productosmodule.entity.Productos</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedida</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProducto</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProductoId</class>
+>>>>>>> 8e125c3c4a45b696b98b832d771db3bbc8e5d4a2
     </persistence-unit>
 </persistence>

@@ -9,6 +9,266 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+SET FOREIGN_KEY_CHECKS = 0;
+
+--
+-- Table structure for table `grupos`
+--
+
+DROP TABLE IF EXISTS `grupos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `grupos` (
+  `grupo_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  PRIMARY KEY (`grupo_id`),
+  UNIQUE KEY uq_grupos_descripcion (descripcion)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `grupos`
+--
+
+--
+-- Table structure for table `lineas`
+--
+
+DROP TABLE IF EXISTS `lineas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `lineas` (
+  `linea_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  PRIMARY KEY (`linea_id`),
+  UNIQUE KEY uq_lineas_descripcion (descripcion)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `lineas`
+--
+
+--
+-- Table structure for table `bodegas`
+--
+
+DROP TABLE IF EXISTS `bodegas`;
+create table bodegas(
+ codigo  int auto_increment,
+ nombre varchar(50) not null,
+ codigosucursal varchar(50),
+ codigopais int,
+ codigodepartamento int,
+ codigomunicipio int,
+ codigopostal varchar(50),
+ direccion varchar(50),
+ telefono varchar(50),
+ celular varchar(50),
+ correo varchar(50),
+ primary key(codigo));
+ 
+--
+-- Dumping data for table `bodegas`
+--
+
+ --
+-- Table structure for table `impuestos`
+--
+
+DROP TABLE IF EXISTS `impuestos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `impuestos` (
+  `codigo` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `tarifa` double DEFAULT NULL,
+  `base` double DEFAULT NULL,
+  `sigla` varchar(10) DEFAULT NULL,
+  `estado` varchar(8) DEFAULT 'ACTIVO',
+  PRIMARY KEY (`codigo`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `impuestos`
+INSERT INTO `impuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','INACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','INACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','INACTIVO'),(4,'EXENTO DE IVA',0,0,'EXN','INACTIVO'),(5,'EXCLUIDO DE IVA',-1,0,'EXC','INACTIVO'),(6,'IMPUESTO NACIONAL AL CONSUMO DE BOLSAS PLASTICAS',70,0,'INCBP','INACTIVO');
+--
+
+LOCK TABLES `impuestos` WRITE;
+/*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
+
+/*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productos` (
+  `producto_id` int NOT NULL AUTO_INCREMENT,
+  `codigo_contable` varchar(50) DEFAULT NULL,
+  `codigo_barras` varchar(50) DEFAULT NULL,
+  `referencia` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `costo` decimal(10,2) DEFAULT 0.00,
+  `impuesto_id` int DEFAULT NULL,
+  `linea_id` int DEFAULT NULL,
+  `grupo_id` int DEFAULT NULL,
+  `usuario_creo_id` int DEFAULT NULL,
+  `fecha_creacion` dateTime DEFAULT CURRENT_TIMESTAMP,
+  `codigo_usuario_modifico` int DEFAULT NULL,
+  `fecha_modificacion` dateTime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `estado` ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  `fecha_ultima_venta` dateTime DEFAULT NULL,
+  `fecha_ultima_compra` dateTime DEFAULT NULL,
+  PRIMARY KEY (`producto_id`),
+  FOREIGN KEY (impuesto_id) REFERENCES impuestos(codigo),
+  FOREIGN KEY (linea_id) REFERENCES lineas(linea_id),
+  FOREIGN KEY (grupo_id) REFERENCES grupos(grupo_id)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+DROP TABLE IF EXISTS `precios_producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `precios_producto` (
+  `precios_producto_id` int NOT NULL AUTO_INCREMENT,
+  `producto_id` int NOT NULL,
+  `precio_id` int NOT NULL,
+  `valor` decimal(10,2) DEFAULT 0.00,
+  `fecha_creacion` dateTime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_modificacion` dateTime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fecha_inicio` dateTime DEFAULT CURRENT_TIMESTAMP,
+  `fecha_fin` dateTime DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`precios_producto_id`),
+  FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
+  FOREIGN KEY (precio_id) REFERENCES precios(precio_id)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `precios_producto`
+--
+
+DROP TABLE IF EXISTS `unidades_medida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `unidades_medida` (
+  `unidad_medida_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  `sigla` varchar(10) NOT NULL,
+  PRIMARY KEY (`unidad_medida_id`),
+  UNIQUE KEY uq_unidades_medida_sigla (sigla)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unidades_medida`
+--
+
+DROP TABLE IF EXISTS `unidades_medida_producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `unidades_medida_producto` (
+  `producto_id` int NOT NULL,
+  `unidad_medida_id` int NOT NULL,
+  PRIMARY KEY (`producto_id`,`unidad_medida_id`),
+  FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
+  FOREIGN KEY (unidad_medida_id) REFERENCES unidades_medida(unidad_medida_id)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unidades_medida_producto`
+--
+
+DROP TABLE IF EXISTS `precios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `precios` (
+  `precio_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  PRIMARY KEY (`precio_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `precios`
+--
+
+--
+-- Table structure for table `caracteristicas`
+--
+
+DROP TABLE IF EXISTS `caracteristicas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `caracteristicas` (
+  `caracteristica_id` int NOT NULL AUTO_INCREMENT,
+  `caracteristica` varchar(100) NOT NULL,
+  PRIMARY KEY (`caracteristica_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `caracteristicas`
+--
+
+--
+-- Table structure for table `caracteristicas_producto`
+--
+
+DROP TABLE IF EXISTS `caracteristicas_producto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `caracteristicas_producto` (
+  `producto_id` int NOT NULL,
+  `caracteristica_id` int NOT NULL,
+  PRIMARY KEY (`producto_id`,`caracteristica_id`),
+  FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
+  FOREIGN KEY (caracteristica_id) REFERENCES caracteristicas(caracteristica_id)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `caracteristicas_producto`
+--
+
+--
+-- Table structure for table `existencias`
+--
+
+DROP TABLE IF EXISTS `existencias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `existencias` (
+  `existencia_id` int NOT NULL AUTO_INCREMENT,
+  `producto_id` int NOT NULL,
+  `bodega_id` int NOT NULL,
+  `existencia` decimal(10,2) DEFAULT 0.00,
+  `stock_min` decimal(10,2) DEFAULT 0.00,
+  `stock_max` decimal(10,2) DEFAULT 0.00,
+  `fecha_ultimo_movimiento` dateTime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`existencia_id`),
+  UNIQUE KEY uq_existencias_producto_bodega (producto_id, bodega_id),
+  FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
+  FOREIGN KEY (bodega_id) REFERENCES bodegas(codigo)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `existencias`
+--
+
 --
 -- Table structure for table `actividadeconomica`
 --
@@ -440,22 +700,6 @@ CREATE TABLE `nuevosimpuestos` (
 /*!40000 ALTER TABLE `impuestos` DISABLE KEYS */;
 INSERT INTO `nuevosimpuestos` VALUES (1,'IMPUESTO SOBRE LAS VENTAS',5,0,'IVA','ACTIVO'),(2,'IMPUESTO SOBRE LAS VENTAS',19,0,'IVA','ACTIVO'),(3,'IMPUESTO NACIONAL AL CONSUMIDOR',8,0,'INC','ACTIVO');
 /*!40000 ALTER TABLE `impuestos` ENABLE KEYS */;
-
-
-DROP TABLE IF EXISTS `bodegas`;
-create table bodegas(
- codigo  int auto_increment,
- nombre varchar(50) not null,
- codigosucursal varchar(50),
- codigopais int,
- codigodepartamento int,
- codigomunicipio int,
- codigopostal varchar(50),
- direccion varchar(50),
- telefono varchar(50),
- celular varchar(50),
- correo varchar(50),
- primary key(codigo));
  
  
  DROP TABLE IF EXISTS empresa;
@@ -485,3 +729,4 @@ create table bodegas(
  tipoImagen varchar(100) default "",
  primary key(codigo)); 
  
+ SET FOREIGN_KEY_CHECKS = 1;
