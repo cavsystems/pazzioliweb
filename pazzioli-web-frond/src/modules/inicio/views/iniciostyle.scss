@@ -38,10 +38,58 @@ transition: color 0.5s border-bottom 0.5s;
     margin-top: 63px;
     margin-left: 60px;
            overflow: auto;
-     max-height: 570px;
+     
     position: relative;
     z-index: 9 !important;
 
+}
+
+.rowopcionalfotter{
+    padding-bottom: 126px;
+}
+
+.imagenesaccesosrapidos{
+    width: 300px;
+    height: 130px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+}
+.Botonaccesorapidofotter{
+    width: 138px;
+height: 40px;
+/* UI Properties */
+background: var(--blanco) 0% 0% no-repeat padding-box;
+border: 1px solid var(--gris-textos);
+background: #FFFFFF 0% 0% no-repeat padding-box;
+border: 1px solid #555555;
+border-radius: 7px;
+opacity: 1;
+text-align: center;
+font: normal normal normal 14px/19px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
+.textofottertitulocard{
+   letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal bold 14px/19px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1; 
+}
+
+.componentfottercard{
+    margin-bottom: 15px !important;
+}
+
+.rowopcionalfotter>div{
+margin-bottom: 15px;
+}
+/* etilizando scroll*/
+.containerhome::-webkit-scrollbar-track{
+    background: #888;          /* color del thumb */
+  border-radius: 10px;
 }
 
 
@@ -123,7 +171,7 @@ transition: color 0.5s border-bottom 0.5s;
     gap: 12px;
     justify-content: center;
     align-items: center;
-    padding-left: 148px;
+    padding-left: 155px;
 }
 
 .containerhomedashboard{
@@ -340,6 +388,27 @@ opacity: 1;
    
 }
 
+.botonvermaspastel{
+   display: flex;
+     justify-content: center;
+     align-items: center;
+    margin-top: 25px;
+    margin-bottom: 21px;
+
+}
+
+
+
+.botonvermaspastel>button{
+    width: 101px;
+height: 30px;
+/* UI Properties */
+background: var(--gris-claro) 0% 0% no-repeat padding-box;
+background: #F3F4F7 0% 0% no-repeat padding-box;
+border-radius: 6px;
+opacity: 1;
+border: none;
+}
 .botonvermas>button{
     width: 101px;
 height: 30px;
@@ -349,4 +418,8 @@ background: #F3F4F7 0% 0% no-repeat padding-box;
 border-radius: 6px;
 opacity: 1;
 border: none;
+}
+
+.paginacionpastel{
+    margin-bottom: 21px !important;
 }

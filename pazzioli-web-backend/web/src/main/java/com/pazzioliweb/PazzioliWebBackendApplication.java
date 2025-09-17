@@ -12,15 +12,8 @@ import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 @SpringBootApplication
-@EntityScan(basePackages = {
-	    "com.*",
-	  	})
-	@EnableJpaRepositories(basePackages = {
-	    "com.*",
-	   
-	})
-	@ComponentScan(basePackages = {"com.pazzioliweb.domain"})
-
+@EntityScan(basePackages = "com.pazzioliweb")
+@EnableJpaRepositories(basePackages = "com.pazzioliweb")
 public class PazzioliWebBackendApplication {
 
 	

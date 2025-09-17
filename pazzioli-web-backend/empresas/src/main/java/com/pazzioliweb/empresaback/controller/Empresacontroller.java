@@ -48,7 +48,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-
 import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;
 import com.pazzioliweb.commonbacken.entity.Departamento;

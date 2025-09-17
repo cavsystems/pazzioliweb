@@ -3,9 +3,25 @@
 /*estilos modulo auth*/
 *{
     z-index: 0 !important;
- 
- 
+    
   
+}
+
+
+/* etilizando scroll*/
+*::-webkit-scrollbar-track{
+    background:rgb(209, 213, 220,0.9) ;          /* color del thumb */
+  border-radius: 8px !important;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;               /* ancho del scroll vertical */
+                /* alto del scroll horizontal */
+}
+
+.containerhome::-webkit-scrollbar-track{
+    background:rgb(209, 213, 220,0.9) ;          /* color del thumb */
+  border-radius: 8px !important;
 }
 html{
     overflow: hidden;
@@ -309,7 +325,15 @@ opacity: 1 !important;
  }
  
 
-
+.textofottercard{
+    letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal normal 14px/19px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
+}
 .col-12{
     padding: 0px !important;
 }

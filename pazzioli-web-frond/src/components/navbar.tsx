@@ -86,7 +86,17 @@ function Navbar() {
                                 <li className="listitem"> <div className="contenlist"></div> <span>Imprimir codigos de barras</span></li>
                             </ul>
                             </div></div>
-                       <div> <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash"/></div></div></div>
+                       <div> <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
+                            abrirtogle('despachos')
+                         }}/></div></div>
+                        <div id="despachos" className="noactive">
+                              <ul className="listasidebar" style={{height:"fit-content"}}>
+                                <li className="listitem"> <div className="contenlist"></div><span>Consultar conductores</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Consultar Despachos</span></li>
+                              
+                               
+                            </ul>
+                            </div></div>
                         <div> <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/reportes.svg"/> <span>Reportes</span> </div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
                             abrirtogle('reportes')
                          }} /></div></div>  <div id="reportes" className="noactive">
@@ -216,7 +226,17 @@ function Navbar() {
                                 <li className="listitem"> <div><div className="contenlist"></div> <span>Imprimir codigos de barras</span></div></li>
                             </ul>
                             </div></div>
-                        <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash"/></div></div>
+                        <div><div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
+                            abrirtogle('despachos')
+                         }}/></div></div>
+                        <div id="despachos" className="noactive">
+                              <ul className="listasidebar" style={{height:"fit-content"}}>
+                                <li className="listitem"> <div className="contenlist"></div><span>Consultar conductores</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Consultar Despachos</span></li>
+                              
+                               
+                            </ul>
+                            </div></div>
                         <div> <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/reportes.svg"/> <span>Reportes</span> </div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
                             abrirtogle('reportes')
                          }} /></div></div>  <div id="reportes" className="noactive">

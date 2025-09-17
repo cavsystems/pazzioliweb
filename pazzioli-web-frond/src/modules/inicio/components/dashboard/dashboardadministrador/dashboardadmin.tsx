@@ -1,3 +1,4 @@
+import { CFormFloating, CFormLabel, CFormSelect } from "@coreui/react";
 import { chartcontex } from "../../contextchart";
 import Chartcartera from "./charts/charcartera";
 import Chartinventariolinea from "./charts/chartinventariolinea";
@@ -26,10 +27,36 @@ function Dashboardadmin() {
                         <div className="chartinventario" >
                         <div className="card" style={{height:'100%',boxShadow:"0px 3px 10px #0000001A"}} >
                             <div className="card-body" style={{}}>
-                                <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px"}}>
-                                <span className="fonttitulos" >Inventario por linea</span>
-                                <span className="textolineatotal">${totallinea.toLocaleString('de-DE')}</span>
-                                </div>
+                              <div style={{display:"flex", justifyContent:"space-between"}}>
+                                                              <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px" ,flex:"0 1 50%"}}>
+                                                             
+                                                              <span className="fonttitulos" >Inventario por linea</span>
+                                                              <span className="textolineatotal">{totallinea}</span>
+                                                             
+                              
+                                                              
+                              
+                                                              </div>
+                                                              <div style={{flex:"0 0 40%"}}>
+                                                                   <CFormFloating className="margeniputempresa">
+                                                                    <CFormSelect
+                                                                      size="lg"
+                                                                      placeholder="Tipo de identificacion"
+                                                                      className="inputselect fontletre"
+                                                                  
+                                                                          value=""
+                                                                          name='bodega'
+                                                                     
+                                                                     
+                                                                    >
+                                                                      <option value="0">bodega1</option>
+                                                                     
+                                                                       <option value="0">bodega2</option>
+                                                                    </CFormSelect>
+                                                                    <CFormLabel>País</CFormLabel>
+                                                                  </CFormFloating>
+                                                              </div>
+                                                              </div>
                             <Chartinventariolinea/>
                             </div>
                         </div>
