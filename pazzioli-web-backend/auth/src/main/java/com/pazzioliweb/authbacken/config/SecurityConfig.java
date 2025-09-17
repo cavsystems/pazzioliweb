@@ -18,7 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.pazzioliweb.authbacken.filter.Filter;
+import com.pazzioliweb.authbacken.filter.Jwtfilter;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -29,15 +29,18 @@ import jakarta.servlet.http.HttpServletResponse;
 @EnableMethodSecurity   
 public class SecurityConfig {
 	  @Autowired
-	 private Filter filtro ;
+	 private Jwtfilter filtro ;
+	  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    	System.out.println(">>> Usando SecurityConfig principal para configurar rutas");
+    	System.out.println("fitro token"+filtro);
     	//CORS ESPECIFICO LA CONFIGURACION QUE TENDRA
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**")
             		.permitAll().requestMatchers("/api/digitoverificacion/**").permitAll().requestMatchers("/api/codigoPostal/**")
-            		.permitAll().requestMatchers("api/producto/**").permitAll()
+            		.permitAll().requestMatchers("/api/productos/**").permitAll()
                     .anyRequest().authenticated()).exceptionHandling(ex -> ex
                     	    .accessDeniedHandler((request, response, accessDeniedException) -> {
                     	    	if (!response.isCommitted()) {
@@ -49,8 +52,12 @@ public class SecurityConfig {
                     	    })
                     	
                             ).addFilterBefore(filtro,  UsernamePasswordAuthenticationFilter.class);
+    	/*http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());*/
         return http.build();
     }
+    
     //METODO DE CONFIGURACION DE CORS PARA PODER HACER PETICIONES ENTRE DISTRINTOS ORIGENES
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

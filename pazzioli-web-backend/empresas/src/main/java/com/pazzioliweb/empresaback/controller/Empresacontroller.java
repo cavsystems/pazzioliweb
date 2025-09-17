@@ -33,11 +33,11 @@ import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
 import com.pazzioliweb.empresasback.entity.Actividadeconomica;
-import com.pazzioliweb.empresasback.entity.Bodegas;
 import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
-import com.pazzioliweb.empresasback.repositori.BodegasRepository;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
+import com.pazzioliweb.productosmodule.entity.Bodegas;
+import com.pazzioliweb.productosmodule.repositori.BodegasRepository;
 import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
@@ -47,7 +47,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
-
 
 import com.pazzioliweb.commonbacken.conexiondb.TenantContext;
 import com.pazzioliweb.commonbacken.conexiondb.TenantRegister;

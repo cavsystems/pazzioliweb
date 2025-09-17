@@ -3,7 +3,7 @@ import Dashboardadmin from "./dashboardadministrador/dashboardadmin";
 import Dashboardcajero from "./dashboardcajero/dashboardcajero";
 
 function Dashboard() {
-    const [rol,setrool]=useState("cajero")
+    const [rol,setrool]=useState("administrador")
     return (  
         <>
         

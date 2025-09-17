@@ -1,4 +1,4 @@
-package com.pazzioliweb.empresasback.entity;
+package com.pazzioliweb.productosmodule.entity;
 
 import com.pazzioliweb.commonbacken.entity.Departamento;
 import com.pazzioliweb.commonbacken.entity.Municipio;
@@ -18,7 +18,7 @@ import lombok.Data;
 @Table(name = "bodegas")
 @Data
 public class Bodegas {
-	  @Id
+	  	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private int codigo;
 	     

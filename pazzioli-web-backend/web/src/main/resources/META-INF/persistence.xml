@@ -1,0 +1,44 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="default">
+       <!-- Productos -->
+        <class>com.pazzioliweb.productosmodule.entity.Producto</class>
+        <!-- Usuarios -->
+        <class>com.pazzioliweb.usuariosbacken.entity.Usuario</class>
+        <class>com.pazzioliweb.usuariosbacken.entity.Roles</class>
+         <class>com.pazzioliweb.usuariosbacken.entity.Permiso</class>
+          <class>com.pazzioliweb.usuariosbacken.entity.PermisoRol</class>
+           <class>com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion</class>
+            <class>com.pazzioliweb.usuariosbacken.entity.Tipopersona</class>
+          
+          
+        
+        <!-- Empresas -->
+        <class>com.pazzioliweb.empresasback.entity.Actividadeconomica</class>
+          <class>com.pazzioliweb.empresasback.entity.Empresa</class>
+           <class>com.pazzioliweb.empresasback.entity.Empresas</class>
+            <class>com.pazzioliweb.empresasback.entity.Regimen</class>
+        <!-- Common (si tiene entidades) -->
+        <class>com.pazzioliweb.commonbacken.entity.Administrador</class>
+        <class>com.pazzioliweb.commonbacken.entity.CodigoPostal</class>
+        <class>com.pazzioliweb.commonbacken.entity.Departamento</class>
+        <class>com.pazzioliweb.commonbacken.entity.Impuestos</class>
+        <class>com.pazzioliweb.commonbacken.entity.Municipio</class>
+        <class>com.pazzioliweb.commonbacken.entity.Sesiones</class>
+        <class>com.pazzioliweb.commonbacken.entity.Pais</class>
+        
+        <!--  Productos -->
+        <class>com.pazzioliweb.productosmodule.entity.Bodegas</class>
+        <class>com.pazzioliweb.productosmodule.entity.Existencias</class>
+        <class>com.pazzioliweb.productosmodule.entity.Grupos</class>
+        <class>com.pazzioliweb.productosmodule.entity.Lineas</class>
+        <class>com.pazzioliweb.productosmodule.entity.Precios</class>
+        <class>com.pazzioliweb.productosmodule.entity.PreciosProducto</class>
+        <class>com.pazzioliweb.productosmodule.entity.Productos</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedida</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProducto</class>
+        <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProductoId</class>
+    </persistence-unit>
+</persistence>
