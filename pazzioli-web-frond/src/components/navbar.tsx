@@ -182,14 +182,14 @@ function Navbar() {
                          }} /></div></div>
                         <div id="caja" className="noactive active" >
                             <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div className="contenlist"></div><span>Facturacion</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Devoluciones</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Recibos de caja</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Comprobantes de egresos</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Consultar facturas</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Consultar devoluciones</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Resoluciones</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>vendedores</span></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Facturacion</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Devoluciones</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div> <span>Recibos de caja</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Comprobantes de egresos</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Consultar facturas</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div> <span>Consultar devoluciones</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Resoluciones</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div> <span>vendedores</span></div></li>
                             </ul>
                             </div>
                         </div>
@@ -204,16 +204,16 @@ function Navbar() {
                             abrirtogle('inventario')
                          }}/></div></div> <div id="inventario" className="noactive">
                               <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div className="contenlist"></div><span>Consultar producto</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Bodegas</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Entradas de inventario</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Salida de inventario</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Traslado de inventario</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Compras</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Recalcular costos</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Inventario fisico</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Programar descuentos</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Imprimir codigos de barras</span></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Consultar producto</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Bodegas</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Entradas de inventario</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Salida de inventario</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Traslado de inventario</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Compras</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Recalcular costos</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Inventario fisico</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Programar descuentos</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Imprimir codigos de barras</span></div></li>
                             </ul>
                             </div></div>
                         <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash"/></div></div>
@@ -221,12 +221,12 @@ function Navbar() {
                             abrirtogle('reportes')
                          }} /></div></div>  <div id="reportes" className="noactive">
                               <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div className="contenlist"></div><span>Cuentas por cobrar</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Cuentas por pagar</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>AUX cartera CXC</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>AUX cartera CXP</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Monitor de caja</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Inventarios</span></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Cuentas por cobrar</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Cuentas por pagar</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div> <span>AUX cartera CXC</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>AUX cartera CXP</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div><span>Monitor de caja</span></div></li>
+                                <li className="listitem"><div> <div className="contenlist"></div> <span>Inventarios</span></div></li>
                                
                             </ul>
                             </div></div>
@@ -253,6 +253,15 @@ function Navbar() {
              <li className="navizquierdores"  onClick={(e)=>{
                 setIssideresponsiside(true)
              }} ></li>}
+
+
+             <li style={{position:"absolute",right:'0',height:'100%',display:"flex" ,justifyContent:"center", alignItems:"center",  gap:'12px'}}>
+                <div>
+                <img  src="imgs/imagennoti.svg"/>
+                </div>
+                 <div className="contentnavline"></div>
+                <div style={{display: 'inline-flex',justifyContent: "center",alignItems: "center",gap: '12px'}}> <span>Luis david</span> <img src="imgs/avatar.svg"/></div>
+             </li>
          
         </ul>
     </nav>

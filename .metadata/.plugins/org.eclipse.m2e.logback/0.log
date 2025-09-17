@@ -23267,6 +23267,7 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliw
 2025-09-14 15:26:04,137 [Worker-329: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
 2025-09-14 15:26:04,138 [Worker-329: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-09-14 15:26:04,138 [Worker-329: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+<<<<<<< HEAD
 2025-09-15 08:44:10,266 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-09-15 08:45:21,738 [Worker-29: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\pom.xml.
 2025-09-15 08:47:31,516 [Worker-16: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\pazzioli-web-backend\common\pom.xml.
@@ -33935,3 +33936,6 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliw
 2025-09-17 16:05:15,562 [Worker-108: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
 2025-09-17 16:10:29,088 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@4f12312f{STOPPING}[12.0.21,sto=0]
 2025-09-17 16:10:29,094 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@31c914dd{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+=======
+2025-09-15 08:29:10,798 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+>>>>>>> d154bcc6d27f20029ca74a89298105689d82224f

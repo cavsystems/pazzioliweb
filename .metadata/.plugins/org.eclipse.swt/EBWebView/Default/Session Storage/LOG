@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2025/09/17-09:06:23.682 24e0 Reusing MANIFEST C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/MANIFEST-000001
 2025/09/17-09:06:23.685 24e0 Recovering log #3
 2025/09/17-09:06:23.689 24e0 Reusing old log C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/000003.log 
+=======
+2025/09/15-08:29:45.232 566c Reusing MANIFEST C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/MANIFEST-000001
+2025/09/15-08:29:45.235 566c Recovering log #3
+2025/09/15-08:29:45.244 566c Reusing old log C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/000003.log 
+>>>>>>> d154bcc6d27f20029ca74a89298105689d82224f

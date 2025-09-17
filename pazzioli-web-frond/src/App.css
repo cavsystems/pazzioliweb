@@ -3,8 +3,14 @@
 /*estilos modulo auth*/
 *{
     z-index: 0 !important;
-    
+ 
+ 
+  
 }
+html{
+    overflow: hidden;
+}
+
 :root {
 
 /* Colors: */
@@ -349,8 +355,11 @@ El efecto: parecen líneas apiladas debajo del elemento, como si fueran varias c
 }
 
 .navpazzioli ul{
-      margin: 0;
-    padding-left:0;
+      margin-left: 7px !important;
+      margin: 0 !important;
+          margin-top: 7px !important;
+          margin-right:7px !important ;
+    padding-left:0px !important;
     display: flex;
     height: 100%;
     justify-content: start;
