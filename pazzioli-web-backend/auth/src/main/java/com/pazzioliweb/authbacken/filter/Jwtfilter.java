@@ -100,7 +100,8 @@ public class Jwtfilter extends OncePerRequestFilter {
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 	    String path = request.getRequestURI();
 	    System.out.println("productos"+path.startsWith("/api/productos") +path);
-	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") ||  path.startsWith("/api/productos")  ;
+	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") ||  path.startsWith("/api/productos") 
+	    		|| path.startsWith("/api/bodegas");
 	}
 	
 

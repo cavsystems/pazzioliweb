@@ -739,13 +739,15 @@ create table bodegas(
  SET FOREIGN_KEY_CHECKS = 1;
   
  /* INSERT PRODUCTOS, PRECIOS, EXISTENCIA, LINEA, GRUPO (PRUEBAS)*/
-	insert into lineas values (1,'HOGAR'),(2,'PAPELERIA'),(3,'ASEO');
-	insert into grupos values (1,'UNICO');
-	insert into precios values (1,'DETAL'),(2,'MAYOREO');
+	insert into lineas values (1,'Hogar'),(2,'Papeleria'),(3,'Aseo');
+	insert into grupos values (1,'Unico');
+	insert into precios values (1,'Detal'),(2,'Mayoreo');
 	insert into productos values (1,'0001','0001','0001','CAFETERA JC',45000,2,1,1,1,null,0,null,'ACTIVO',null,null),
 	(2,'0002','0002','0002','RESMA DE PAPEL CARTA',12000,2,2,1,1,null,0,null,'ACTIVO',null,null),
 	(3,'0003','0003','0003','JABON LIQUIDO MANOS',8000,2,3,1,1,null,0,null,'ACTIVO',null,null);
-	insert into bodegas values (1,'PRINCIPAL',null,176,1,44,'10144','CR 8 12-15','333 3333','312 458 1245',null);
+	insert into bodegas values (1,'Principal',null,176,1,44,'10144','CR 8 12-15','333 3333','312 458 1245',null);
+	insert into bodegas values (2,'Almacen Centro',null,176,1,44,'10144','CR 9 11-05','333 3333','312 458 1245',null);
+	insert into bodegas values (3,'Almacen Sur',null,176,1,44,'10144','CLL 5 34-02','333 3333','312 458 1245',null);
 	insert into existencias values (0,1,1,20,8,30,null),(0,2,1,15,5,15,null),(0,3,1,9,2,10,null);
 	insert into precios_producto values (0,1,1,82000,null,null,null,null),(0,2,1,22000,null,null,null,null),(0,3,1,12000,null,null,null,null);
  /****************************************************************/

@@ -4,7 +4,8 @@ import { CPagination, CPaginationItem } from "@coreui/react";
 
 function Chartinventariolinea() {
 
-  const {settotallinea}=chartcontex()
+  const {settotallinea,totalesporlinea,settotalesporlinea,lineasupda}=chartcontex()
+
    /* const total = 100; // valor máximo (ej: ventas meta)
   const actual = 65; // valor actual (ej: ventas logradas)
 
@@ -78,27 +79,28 @@ function Chartinventariolinea() {
 ])
 
 useEffect(()=>{
-settotaltodo(lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0))
-const total=lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0)
+settotaltodo(totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0))
+const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
+console.log("totales",total)
 settotallinea(total)
-setLineastotales(lineastotales.map((linea:any)=> {
+settotalesporlinea(totalesporlinea.map((linea:any)=> {
    return {
           ...linea,
-          porcentaje: (linea.total / total) * 100, // ✅ CORREGIDO
+          porcentaje: (linea.totalLinea / total) * 100, // ✅ CORREGIDO
         };
    
 }))
-},[])
+},[lineasupda])
 
 
   return (
     <div  style={{ padding: "16px 16px 0 16px", borderRadius: "12px", width: "100%",height:'368px',position:"relative" }}>
       {
-        lineastotales.map((lineas:any)=>{
+       totalesporlinea.map((lineas:any)=>{
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.nombre}</span>  <span>${lineas.total.toLocaleString('de-DE')}</span>
+                      <span>{lineas.descripcion}</span>  <span>${lineas.totalLinea.toLocaleString('de-DE')}</span>
                  </div>
              
                   <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>

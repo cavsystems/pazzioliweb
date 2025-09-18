@@ -5,7 +5,7 @@ import Chartinventariolinea from "./charts/chartinventariolinea";
 import Chatsloopgiadmin from "./charts/chartsloopgi";
 
 function Dashboardadmin() {
-     const {totallinea}=chartcontex()
+     const {totallinea,bodegas}=chartcontex()
     
     return(
         <>
@@ -31,7 +31,7 @@ function Dashboardadmin() {
                                                               <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px" ,flex:"0 1 50%"}}>
                                                              
                                                               <span className="fonttitulos" >Inventario por linea</span>
-                                                              <span className="textolineatotal">{totallinea}</span>
+                                                              <span className="textolineatotal">${totallinea.toLocaleString('de-DE')}</span>
                                                              
                               
                                                               
@@ -49,11 +49,16 @@ function Dashboardadmin() {
                                                                      
                                                                      
                                                                     >
-                                                                      <option value="0">bodega1</option>
+                                                                      <option value="0">Seleccione</option>
                                                                      
-                                                                       <option value="0">bodega2</option>
+                                                                       {bodegas.map((item,key)=>{
+                                                                        return(
+                                                                          <option value={item.codigo} key={key}>{item.nombre}</option>
+  
+                                                                        )
+                                                                       })}
                                                                     </CFormSelect>
-                                                                    <CFormLabel>País</CFormLabel>
+                                                                    <CFormLabel>Bodegas</CFormLabel>
                                                                   </CFormFloating>
                                                               </div>
                                                               </div>
