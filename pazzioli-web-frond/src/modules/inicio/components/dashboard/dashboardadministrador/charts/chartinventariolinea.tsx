@@ -3,8 +3,74 @@ import { chartcontex } from "../../../contextchart";
 import { CPagination, CPaginationItem } from "@coreui/react";
 
 function Chartinventariolinea() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageindex, setCurrentPageindex] = useState(0);
+  const [contador,setcontador]=useState(1)
+  const [negativo,setnegativo]=useState(false)
+  const [numeroregistros,setnumeroregistros]=useState<number[]>([])
+  const [pagination,setpagination]=useState(false)
+  const {settotallinea,registropaginador}=chartcontex()
+ useEffect(()=>{
+                      
+                       
+                      if(currentPageindex<0){
+                        setCurrentPageindex(0)
+                        setCurrentPage(1)
+                        console.log("es menor")
+                      }else{
 
-  const {settotallinea}=chartcontex()
+                        if( registropaginador.length<currentPage){
+                           setCurrentPageindex(registropaginador.length-2)
+                        setCurrentPage(registropaginador[registropaginador.length-1])
+                        }
+                             setnumeroregistros((prev)=> prev=registropaginador.slice(currentPageindex,currentPageindex+3))
+                      }
+                          
+
+ },[currentPage,currentPageindex])
+  useEffect(()=>{
+
+    setnumeroregistros((prev)=> prev=registropaginador.slice(currentPageindex,currentPageindex+3))
+
+  },[registropaginador])
+
+    /*useEffect(()=>{
+     determinarcontador()
+    
+
+  },[contador])*/
+  const determinarcontador=()=>{
+   
+    if(contador===2){
+      console.log("es igual a tres",contador)
+     setcontador(1)
+      
+              setCurrentPageindex(currentPage-1)
+           
+             
+           
+    }else{
+       
+       setcontador(prev=> prev+1)
+    }
+
+    
+     
+    
+  }
+
+    const determinarcontadornegativo=()=>{
+   
+    if(contador===3){
+      setcontador(1)
+      console.log(currentPageindex)
+              setCurrentPageindex(currentPageindex-1)
+              setnumeroregistros((prev)=> prev=registropaginador.slice(currentPageindex,currentPageindex+3))
+    }
+   
+    
+    setcontador(prev=> prev+1)
+  }
    /* const total = 100; // valor máximo (ej: ventas meta)
   const actual = 65; // valor actual (ej: ventas logradas)
 
@@ -123,13 +189,36 @@ setLineastotales(lineastotales.map((linea:any)=> {
       <CPagination aria-label="Page navigation example" style={{    position: 'absolute',
     width: '100%',
     bottom: '0'}}>
-      <CPaginationItem aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
+      <CPaginationItem aria-label="Previous" onClick={(e)=>{
+      
+        setCurrentPageindex((prev)=> prev-1)
+        setCurrentPage((prev)=> prev-1)
+       
+                   
+
+       
+        
+       
+        
+      }}>
+        <span aria-hidden="true" >&laquo;</span>
       </CPaginationItem>
-      <CPaginationItem className="act">1</CPaginationItem>
-      <CPaginationItem>2</CPaginationItem>
-      <CPaginationItem>3</CPaginationItem>
-      <CPaginationItem aria-label="Next">
+      {
+        numeroregistros.map((item,key)=>{
+          return   <CPaginationItem  className={currentPage===item ?`activepagi`:""}>{item}</CPaginationItem>
+        }
+        )
+      }
+     
+      <CPaginationItem aria-label="Next" onClick={(e)=>{
+        setCurrentPageindex(prev=> prev+1)
+        setCurrentPage((prev)=>prev+1)
+         determinarcontador()
+        
+
+  
+        
+      }}>
         <span aria-hidden="true">&raquo;</span>
       </CPaginationItem>
     </CPagination>
