@@ -7,10 +7,14 @@ export function Impuestos({
   impuestsosseleccionados
 }:any) {
   const [impuestos,setimpuestos]= useState([])
+  const ochangeselect=(e:any)=>{
+    
 
+  }
   useEffect(()=>{
  traerimpuestos()
   },[])
+
 
   const traerimpuestos= async ()=>{
     const data=await api.get("/empresa/traerimpuestos")

@@ -3,9 +3,15 @@ import { chartcontex } from "../../contextchart";
 import Chartcartera from "./charts/charcartera";
 import Chartinventariolinea from "./charts/chartinventariolinea";
 import Chatsloopgiadmin from "./charts/chartsloopgi";
+import { useState } from "react";
 
 function Dashboardadmin() {
      const {totallinea,bodegas}=chartcontex()
+     const [codigobodega,setcodigobodega]=useState('0');
+      
+    const selectbodega=(e:any)=>{
+       setcodigobodega((prev)=> e.target.value)
+    }
     
     return(
         <>
@@ -44,16 +50,18 @@ function Dashboardadmin() {
                                                                       placeholder="Tipo de identificacion"
                                                                       className="inputselect fontletre"
                                                                   
-                                                                          value=""
+                                                                          value={codigobodega}
                                                                           name='bodega'
+    
+                                                                          onChange={selectbodega}
                                                                      
                                                                      
                                                                     >
-                                                                      <option value="0">Seleccione</option>
+                                                                      <option value="0" >Seleccione</option>
                                                                      
                                                                        {bodegas.map((item,key)=>{
                                                                         return(
-                                                                          <option value={item.codigo} key={key}>{item.nombre}</option>
+                                                                          <option value={item.codigo.toString()} key={key}>{item.nombre}</option>
   
                                                                         )
                                                                        })}

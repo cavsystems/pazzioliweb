@@ -14,6 +14,16 @@ public class Pais {
 	  @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private int codigo;
+	  
+	  private int codigoPais;
+	  
+	  public int getCodigoPais() {
+		return codigoPais;
+	}
+
+	  public void setCodigoPais(int codigoPais) {
+		  this.codigoPais = codigoPais;
+	  }
 
 	  private String pais;
 

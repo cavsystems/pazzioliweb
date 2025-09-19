@@ -4,6 +4,8 @@ package com.pazzioliweb.productosmodule.repositori;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -43,7 +45,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		       "join p.linea l " +
 		       "join p.existencias x " +
 		       "group by l.descripcion")
-		List<LineaProductosDTO> getTotalesPorLineaGlobal();
+		Page<LineaProductosDTO> getTotalesPorLineaGlobal(Pageable pageable);
 	
 	@Query("""
 		    SELECT 
@@ -57,7 +59,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    JOIN x.bodega b
 		    GROUP BY l.descripcion, b.nombre
 		""")
-		List<LineaProductosDTO> getTotalesPorLineaXBodegas();
+		Page<LineaProductosDTO> getTotalesPorLineaXBodegas(Pageable pageable);
 	
 	@Query("""
 			SELECT 
@@ -72,5 +74,5 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    WHERE b.codigo = :bodegaId 
 		    GROUP BY l.descripcion
 			""")
-		List<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId);
+		Page<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId,Pageable pageable);
 }

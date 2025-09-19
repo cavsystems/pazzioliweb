@@ -11,9 +11,7 @@ import api from "../../../apicofig";
 
  export function Datosgenrales({datosempresa,setdatosempresa, paisdef,archivologo}:any) {
   const { register,control,setValue, formState: { errors } } = useFormContext();
-  
-
-   
+    
   const [juridico,setjuridico]  =useState(true)
   const [natural,setnatural]=useState(true)
   useEffect( () => {

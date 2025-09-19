@@ -739,17 +739,27 @@ create table bodegas(
  SET FOREIGN_KEY_CHECKS = 1;
   
  /* INSERT PRODUCTOS, PRECIOS, EXISTENCIA, LINEA, GRUPO (PRUEBAS)*/
-	insert into lineas values (1,'Hogar'),(2,'Papeleria'),(3,'Aseo');
+	insert into lineas values (1,'Hogar'),(2,'Papeleria'),(3,'Aseo'),(4,'Dulceria'),(5,'Jugueteria'),(6,'Cacharro'),(7,'Cosmeticos'),(8,'Ropa Dama'),(9,'Ropa Hombre'),(10,'Ropa Niña'),(11,'Ropa Niño');
 	insert into grupos values (1,'Unico');
 	insert into precios values (1,'Detal'),(2,'Mayoreo');
-	insert into productos values (1,'0001','0001','0001','CAFETERA JC',45000,2,1,1,1,null,0,null,'ACTIVO',null,null),
-	(2,'0002','0002','0002','RESMA DE PAPEL CARTA',12000,2,2,1,1,null,0,null,'ACTIVO',null,null),
-	(3,'0003','0003','0003','JABON LIQUIDO MANOS',8000,2,3,1,1,null,0,null,'ACTIVO',null,null);
-	insert into bodegas values (1,'Principal',null,176,1,44,'10144','CR 8 12-15','333 3333','312 458 1245',null);
-	insert into bodegas values (2,'Almacen Centro',null,176,1,44,'10144','CR 9 11-05','333 3333','312 458 1245',null);
-	insert into bodegas values (3,'Almacen Sur',null,176,1,44,'10144','CLL 5 34-02','333 3333','312 458 1245',null);
-	insert into existencias values (0,1,1,20,8,30,null),(0,2,1,15,5,15,null),(0,3,1,9,2,10,null);
-	insert into precios_producto values (0,1,1,82000,null,null,null,null),(0,2,1,22000,null,null,null,null),(0,3,1,12000,null,null,null,null);
+	insert into productos values (1,'0001','0001','0001','Cafetera',45000,2,1,1,1,null,0,null,'ACTIVO',null,null),
+	(2,'0002','0002','0002','Resma de papel carta',12000,2,2,1,1,null,0,null,'ACTIVO',null,null),
+	(3,'0003','0003','0003','Jabon liquido de manos',8000,2,3,1,1,null,0,null,'ACTIVO',null,null),
+	(4,'0004','0004','0004','Bonbonbum fresa',250,2,4,1,1,null,0,null,'ACTIVO',null,null),
+	(5,'0005','0005','0005','Carro control AV',45000,2,5,1,1,null,0,null,'ACTIVO',null,null),
+	(6,'0006','0006','0006','Balon futbol grande',35000,2,5,1,1,null,0,null,'ACTIVO',null,null),
+	(7,'0007','0007','0007','Abanico bambu flores',2000,2,6,1,1,null,0,null,'ACTIVO',null,null),
+	(8,'0008','0008','0008','Labial brillo',2500,2,7,1,1,null,0,null,'ACTIVO',null,null),
+	(9,'0009','0009','0009','Blusa roja brillo',18000,2,8,1,1,null,0,null,'ACTIVO',null,null),
+	(10,'0010','0010','0010','Camisa blanca',20000,2,9,1,1,null,0,null,'ACTIVO',null,null),
+	(11,'0011','0011','0011','Conjunto princesas',25000,2,10,1,1,null,0,null,'ACTIVO',null,null),
+	(12,'0012','0012','0012','Sudadera futbol',15000,2,11,1,1,null,0,null,'ACTIVO',null,null);
+	insert into bodegas values (1,'Principal',null,46,24,1004,'10144','CR 8 12-15','333 3333','312 458 1245',null);
+	insert into bodegas values (2,'Almacen Centro',null,46,24,1004,'10144','CR 9 11-05','333 3333','312 458 1245',null);
+	insert into bodegas values (3,'Almacen Sur',null,46,24,1004,'10144','CLL 5 34-02','333 3333','312 458 1245',null);
+	insert into existencias values (0,1,1,20,8,30,null),(0,2,1,15,5,15,null),(0,3,1,9,2,10,null),(0,4,1,5,2,7,null),(0,5,1,10,2,10,null),(0,6,1,3,2,10,null),(0,7,1,12,5,10,null),(0,8,1,15,5,10,null),(0,9,1,25,5,10,null),(0,10,1,14,5,10,null),(0,11,1,10,5,10,null),(0,12,1,7,5,10,null);
+	insert into existencias values (0,1,2,30,8,30,null),(0,2,2,20,5,15,null),(0,3,2,5,2,7,null),(0,4,2,7,2,7,null),(0,5,2,3,2,10,null),(0,6,2,1,2,10,null),(0,7,2,7,5,10,null),(0,8,2,20,5,10,null),(0,9,2,30,5,10,null),(0,10,2,18,5,10,null),(0,11,2,10,5,10,null),(0,12,2,3,5,10,null);
+	insert into precios_producto values (0,1,1,82000,null,null,null,null),(0,2,1,22000,null,null,null,null),(0,3,1,12000,null,null,null,null),(0,4,1,500,null,null,null,null),(0,5,1,89000,null,null,null,null),(0,6,1,55000,null,null,null,null),(0,7,1,3500,null,null,null,null),(0,8,1,3500,null,null,null,null),(0,9,1,25000,null,null,null,null),(0,10,1,32000,null,null,null,null),(0,11,1,36000,null,null,null,null),(0,12,1,24000,null,null,null,null);
  /****************************************************************/
   
  

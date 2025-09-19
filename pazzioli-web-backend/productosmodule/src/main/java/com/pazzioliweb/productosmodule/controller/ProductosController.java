@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
@@ -76,11 +78,19 @@ public class ProductosController {
     }
     
     @GetMapping("/totalesPorLineasGlobal")
-    public ResponseEntity<ApiResponse<List<LineaProductosDTO>>> totalesPorLinea(){
-    	List<LineaProductosDTO> totalesLineas=productoService.totalPorLineasGlobal();
+    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLinea(
+    		@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(defaultValue = "descripcion") String sortField){
+    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasGlobal(page,size,sortField);
     	if(!totalesLineas.isEmpty()) {
+    		Map<String, Object> response = new HashMap<>();
+            response.put("content", totalesLineas.getContent());      // la lista de resultados
+            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
+            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
+            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
             return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", totalesLineas));
+            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
     	}else {
     		System.out.println("no hay datos");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
@@ -89,11 +99,19 @@ public class ProductosController {
     }
     
     @GetMapping("/totalesPorLineasXBodegas")
-    public ResponseEntity<ApiResponse<List<LineaProductosDTO>>> totalesPorLineaXBodegas(){
-    	List<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodegas();
+    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLineaXBodegas(
+    		@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(defaultValue = "descripcion") String sortField){
+    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodegas(page,size,sortField);
     	if(!totalesLineas.isEmpty()) {
+    		Map<String, Object> response = new HashMap<>();
+            response.put("content", totalesLineas.getContent());      // la lista de resultados
+            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
+            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
+            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
             return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", totalesLineas));
+            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
     	}else {
     		System.out.println("no hay datos");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)
@@ -102,11 +120,20 @@ public class ProductosController {
     }
     
     @GetMapping("/totalesPorLineasXBodega/{bodegaID}")
-    public ResponseEntity<ApiResponse<List<LineaProductosDTO>>> totalesPorLineaXBodega(@PathVariable Integer bodegaID){
-    	List<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodega(bodegaID);
+    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLineaXBodega(
+    		@PathVariable Integer bodegaID,
+    		@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "7") int size,
+            @RequestParam(defaultValue = "descripcion") String sortField){
+    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodega(bodegaID,page,size,sortField);
     	if(!totalesLineas.isEmpty()) {
+    		Map<String, Object> response = new HashMap<>();
+            response.put("content", totalesLineas.getContent());      // la lista de resultados
+            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
+            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
+            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
             return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", totalesLineas));
+            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
     	}else {
     		System.out.println("no hay datos");
             return ResponseEntity.status(HttpStatus.NO_CONTENT)

@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.productosmodule.repositori.ProductosRespitori;
@@ -35,15 +39,21 @@ public class ProductosService {
     	productoRepositori.deleteById(id);
     }
     
-    public List<LineaProductosDTO> totalPorLineasGlobal() {
-        return productoRepositori.getTotalesPorLineaGlobal();
+    public Page<LineaProductosDTO> totalPorLineasGlobal(int page, int size, String sortField) {
+    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    	Page<LineaProductosDTO> totalLineasGlobal = productoRepositori.getTotalesPorLineaGlobal(pageable); 
+        return totalLineasGlobal;
     }
     
-    public List<LineaProductosDTO> totalPorLineasXBodegas() {
-        return productoRepositori.getTotalesPorLineaXBodegas();
+    public Page<LineaProductosDTO> totalPorLineasXBodegas(int page, int size, String sortField) {
+    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    	Page<LineaProductosDTO> totalLineasXBodegas = productoRepositori.getTotalesPorLineaXBodegas(pageable);
+        return totalLineasXBodegas;
     }
-    public List<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId) {
-        return productoRepositori.getTotalesPorLineaXBodega(bodegaId);
+    public Page<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId,int page, int size, String sortField) {
+    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    	Page<LineaProductosDTO> totalLineasXBodega = productoRepositori.getTotalesPorLineaXBodega(bodegaId,pageable);
+    	return totalLineasXBodega;
     }
     public Optional<TotalInventarioDTO> totalInventarioGlobal() {
         return productoRepositori.getTotalInventarioProductosGlobal();
