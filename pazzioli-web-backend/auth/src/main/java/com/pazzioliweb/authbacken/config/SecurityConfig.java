@@ -40,7 +40,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**")
             		.permitAll().requestMatchers("/api/digitoverificacion/**").permitAll().requestMatchers("/api/codigoPostal/**")
-            		.permitAll().requestMatchers("/api/productos/**").permitAll().requestMatchers("/api/bodegas/**").permitAll()
+            		.permitAll().requestMatchers("/api/productos/**").permitAll().requestMatchers("/api/bodegas/**").permitAll().requestMatchers("/api/grupos/**")
+            		.permitAll().requestMatchers("/api/lineas/**").permitAll().requestMatchers("/api/precios/**").permitAll().requestMatchers("/api/existencias/**").permitAll()
                     .anyRequest().authenticated()).exceptionHandling(ex -> ex
                     	    .accessDeniedHandler((request, response, accessDeniedException) -> {
                     	    	if (!response.isCommitted()) {

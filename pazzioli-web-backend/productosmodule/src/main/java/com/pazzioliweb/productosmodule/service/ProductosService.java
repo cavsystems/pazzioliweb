@@ -39,19 +39,28 @@ public class ProductosService {
     	productoRepositori.deleteById(id);
     }
     
-    public Page<LineaProductosDTO> totalPorLineasGlobal(int page, int size, String sortField) {
-    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    public Page<LineaProductosDTO> totalPorLineasGlobal(int page, int size, String sortField, String sortDirection) {
+    	Sort sort = sortDirection.equalsIgnoreCase("desc")
+                ? Sort.by(sortField).descending()
+                : Sort.by(sortField).ascending();
+    	Pageable pageable = PageRequest.of(page, size, sort);
     	Page<LineaProductosDTO> totalLineasGlobal = productoRepositori.getTotalesPorLineaGlobal(pageable); 
         return totalLineasGlobal;
     }
     
-    public Page<LineaProductosDTO> totalPorLineasXBodegas(int page, int size, String sortField) {
-    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    public Page<LineaProductosDTO> totalPorLineasXBodegas(int page, int size, String sortField, String sortDirection) {
+    	Sort sort = sortDirection.equalsIgnoreCase("desc")
+                ? Sort.by(sortField).descending()
+                : Sort.by(sortField).ascending();
+    	Pageable pageable = PageRequest.of(page, size, sort);
     	Page<LineaProductosDTO> totalLineasXBodegas = productoRepositori.getTotalesPorLineaXBodegas(pageable);
         return totalLineasXBodegas;
     }
-    public Page<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId,int page, int size, String sortField) {
-    	Pageable pageable = PageRequest.of(page, size, Sort.by(sortField).ascending());
+    public Page<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId,int page, int size, String sortField, String sortDirection) {
+    	Sort sort = sortDirection.equalsIgnoreCase("desc")
+                ? Sort.by(sortField).descending()
+                : Sort.by(sortField).ascending();
+    	Pageable pageable = PageRequest.of(page, size, sort);
     	Page<LineaProductosDTO> totalLineasXBodega = productoRepositori.getTotalesPorLineaXBodega(bodegaId,pageable);
     	return totalLineasXBodega;
     }
