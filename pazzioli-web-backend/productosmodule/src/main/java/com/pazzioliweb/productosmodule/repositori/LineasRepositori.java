@@ -2,7 +2,6 @@ package com.pazzioliweb.productosmodule.repositori;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.productosmodule.entity.Grupos;
 import com.pazzioliweb.productosmodule.entity.Lineas;
 
 public interface LineasRepositori extends JpaRepository<Lineas,Integer>  { 

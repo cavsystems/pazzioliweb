@@ -114,19 +114,20 @@ const traertotalxinventariopage=async (page:number=1,codbodega:String='')=>{
   if(codbodega!==""){
     console.log("codigo bodega",codbodega)
     if(codbodega!=="0"){
-        const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/${Number(codigobodega)+1}?page=${page}`,{
+        const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/${Number(codigobodega)+1}?page=${page}&sortField=totalLinea&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
  console.log("datos total por linea",totalesporlineas.data)
  setlineasupda(!lineasupda)
  settotalesporlinea(totalesporlineas.data.data.content)
+   settotallinea(totalesporlineas.data.data.totalGloballineas);
  setitempage(totalesporlineas.data.data.
 totalPages)
 setCurrentPage(1)
 setCurrentPageindex(0)
     }else{
-           const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/page=${page}`,{
+           const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/page=${page}&sortField=totalLinea&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
@@ -135,6 +136,7 @@ setCurrentPageindex(0)
  settotalesporlinea(totalesporlineas.data.data.content)
  setitempage(totalesporlineas.data.data.
 totalPages)
+  settotallinea(totalesporlineas.data.data.totalGloballineas);
 setCurrentPage(1)
 setCurrentPageindex(0)
 
@@ -142,13 +144,14 @@ setCurrentPageindex(0)
   
 return
   }
-  const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}`,{
+  const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=totalLinea&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
  console.log("datos total por linea",totalesporlineas.data)
  setlineasupda(!lineasupda)
  settotalesporlinea(totalesporlineas.data.data.content)
+   settotallinea(totalesporlineas.data.data.totalGloballineas);
  setitempage(totalesporlineas.data.data.
 totalPages)
 

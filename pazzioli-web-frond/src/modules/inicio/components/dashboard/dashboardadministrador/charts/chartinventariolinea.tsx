@@ -162,7 +162,7 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
     if (Array.isArray(totalesporlinea)) {
       const total = totalesporlinea.reduce((sum:any,linea:any)=>sum+ (linea.totalLinea||0),0);
       console.log("totales", total);
-      settotallinea(total);
+    
       settotalesporlinea(totalesporlinea.map((linea:any)=> ({
         ...linea,
         porcentaje: total > 0 ? (linea.totalLinea / total) * 100 : 0,
