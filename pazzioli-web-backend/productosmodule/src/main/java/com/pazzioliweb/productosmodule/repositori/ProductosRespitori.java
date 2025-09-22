@@ -4,12 +4,15 @@ package com.pazzioliweb.productosmodule.repositori;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
+import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
 
 public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
@@ -43,7 +46,23 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		       "join p.linea l " +
 		       "join p.existencias x " +
 		       "group by l.descripcion")
-		List<LineaProductosDTO> getTotalesPorLineaGlobal();
+		Page<LineaProductosDTO> getTotalesPorLineaGlobal(Pageable pageable);
+	
+	
+	@Query(value = """
+		       SELECT SUM(totalLinea) as totalLinea
+		       FROM (
+		           SELECT l.descripcion,
+		                  SUM(p.costo * e.existencia) as totalLinea,
+		                  SUM(e.existencia) as totalExistencia
+		           FROM productos p
+		           JOIN lineas l ON l.linea_id = p.linea_id
+		           JOIN existencias e ON p.producto_id = e.producto_id
+		           GROUP BY l.descripcion
+		       ) AS sub
+		       """, nativeQuery = true)
+		int getTotalGloballineas();
+
 	
 	@Query("""
 		    SELECT 
@@ -57,8 +76,23 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    JOIN x.bodega b
 		    GROUP BY l.descripcion, b.nombre
 		""")
-		List<LineaProductosDTO> getTotalesPorLineaXBodegas();
+		Page<LineaProductosDTO> getTotalesPorLineaXBodegas(Pageable pageable);
 	
+	
+	
+	@Query("""
+		    SELECT 
+	        l.descripcion AS descripcion,
+	        sum(p.costo * x.existencia) AS totalLinea,
+	        sum(x.existencia) as cantidadLinea,
+	        b.nombre AS bodega
+		    FROM Productos p
+		    JOIN p.linea l
+		    JOIN p.existencias x
+		    JOIN x.bodega b
+		    GROUP BY l.descripcion, b.nombre
+		""")
+		List<LineaProductosDTO> getTotalesPorLineaXBodegastotal();
 	@Query("""
 			SELECT 
 	        l.descripcion AS descripcion,
@@ -72,5 +106,5 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    WHERE b.codigo = :bodegaId 
 		    GROUP BY l.descripcion
 			""")
-		List<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId);
+		Page<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId,Pageable pageable);
 }

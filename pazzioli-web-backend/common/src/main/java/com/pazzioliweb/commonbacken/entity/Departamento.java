@@ -22,7 +22,6 @@ public class Departamento {
 
 private int codigopais;
 
-private int codigodepartamento;
 private int codigoDepartamento;
 
 public int getCodigoDepartamento() {
@@ -37,12 +36,7 @@ public int getCodigopais() {
 public void setCodigopais(int codigopais) {
 	this.codigopais = codigopais;
 }
-public int getCodigodepartamento() {
-	return codigodepartamento;
-}
-public void setCodigodepartamento(int codigodepartamento) {
-	this.codigodepartamento = codigodepartamento;
-}
+
 private String departamento;
 
 public int getCodigo() {

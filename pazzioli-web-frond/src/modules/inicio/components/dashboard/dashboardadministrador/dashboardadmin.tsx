@@ -3,9 +3,16 @@ import { chartcontex } from "../../contextchart";
 import Chartcartera from "./charts/charcartera";
 import Chartinventariolinea from "./charts/chartinventariolinea";
 import Chatsloopgiadmin from "./charts/chartsloopgi";
+import { useState } from "react";
 
 function Dashboardadmin() {
-     const {totallinea}=chartcontex()
+     const {totallinea,bodegas,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega,setcodigobodega,traertotalxinventariopage}=chartcontex()
+    
+      
+    const selectbodega=(e:any)=>{
+       setcodigobodega((prev)=> e.target.value)
+       traertotalxinventariopage(1,e.target.value)
+    }
     
     return(
         <>
@@ -31,7 +38,7 @@ function Dashboardadmin() {
                                                               <div style={{padding:'10px 0px 12px 16px',display:"flex", flexDirection:"column",gap:"1px" ,flex:"0 1 50%"}}>
                                                              
                                                               <span className="fonttitulos" >Inventario por linea</span>
-                                                              <span className="textolineatotal">{totallinea}</span>
+                                                              <span className="textolineatotal">${totallinea.toLocaleString('de-DE')}</span>
                                                              
                               
                                                               
@@ -44,16 +51,23 @@ function Dashboardadmin() {
                                                                       placeholder="Tipo de identificacion"
                                                                       className="inputselect fontletre"
                                                                   
-                                                                          value=""
+                                                                          value={codigobodega}
                                                                           name='bodega'
+    
+                                                                          onChange={selectbodega}
                                                                      
                                                                      
                                                                     >
-                                                                      <option value="0">bodega1</option>
+                                                                      <option value="0" >Seleccione</option>
                                                                      
-                                                                       <option value="0">bodega2</option>
+                                                                       {bodegas?.map((item,key)=>{
+                                                                        return(
+                                                                          <option value={item.codigo.toString()} key={key}>{item.nombre}</option>
+  
+                                                                        )
+                                                                       })}
                                                                     </CFormSelect>
-                                                                    <CFormLabel>País</CFormLabel>
+                                                                    <CFormLabel>Bodegas</CFormLabel>
                                                                   </CFormFloating>
                                                               </div>
                                                               </div>
