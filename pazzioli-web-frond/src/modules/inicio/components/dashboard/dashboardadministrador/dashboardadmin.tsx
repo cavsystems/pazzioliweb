@@ -10,6 +10,7 @@ function Dashboardadmin() {
     
       
     const selectbodega=(e:any)=>{
+        console.log("codigobodega",e.target.value)
        setcodigobodega((prev)=> e.target.value)
        traertotalxinventariopage(1,e.target.value)
     }
@@ -79,7 +80,7 @@ function Dashboardadmin() {
 
                     <div className="col-12 col-md-6 col-lg-4 col-sm-12 col-xl-3" >
                         <div className="chartcartera">
-                        <div className="card"  style={{boxShadow:'0px 3px 10px #0000001A'}}>
+                        <div className="card"  style={{boxShadow:'0px 3px 10px #0000001A',height:"100%"}}>
                             <div className="card-body">
                                 <span className="fonttitulos" style={{padding:'10px 16px 30px 16px',display:"inline-block"}}>Cartera</span>
                             <Chartcartera/>

@@ -59,6 +59,7 @@ public class JwUtilJava {
 	  	    	sesion.setDbName(db);
 	  	    	sesion.setIdUsuario(sessionId);
 	  	    	sesion.setNivel(u.getCodigorol().getNombre());
+	  	    	
 	  	    	sesion.setCreada(Instant.now());
 	  	    	sesion.setExpira(Instant.now().plus(24, ChronoUnit.HOURS));
 	  	    	redisTemplate.opsForValue().set(sessionId, sesion, Duration.ofHours(24));
@@ -104,12 +105,14 @@ public class JwUtilJava {
 	    	List<String> permisosUsuarioActivo=new ArrayList<String>();
 	    	if(!permisosUsuario.isEmpty()) {
   			  for (PermisoRol p : permisosUsuario) {
-  				  permisosUsuarioActivo.add(p.getCodigopermiso().getNombre());						
+  				  permisosUsuarioActivo.add(p.getCodigorol().getNombre());						
 				}
   		  	}
 	    	return permisosUsuarioActivo;
 	    }
-
+	    
+	    
+   
 }
 
 

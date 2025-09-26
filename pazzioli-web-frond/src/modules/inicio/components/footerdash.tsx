@@ -4,15 +4,15 @@ function Footerdash() {
         <div className="col-12">
             <div className="card" style={{width:'100%' }}>
                 <div className="car-body d-flex" style={{padding: "13px 12px",
-    gap: "12px"}}>
+    gap: "15px"}}>
                         <img src="imgs/imagenconfig.svg" className="imagenesaccesosrapidos"/>
 
                         <div className="d-flex flex-column">
 
-                            <span style={{marginBottom:"15px"}} className="textofottertitulocard">Configura Informacion de tu empresa</span>
-                            <p style={{marginBottom:"15px"}} className="textofottercard">Completa los datos de tu empresa, regimen tributario y preferencias contables para comensar a facturar sin errores</p>
+                            <span style={{marginBottom:"15px"}} className="textofottertitulocard">Configura la información de tu empresa</span>
+                            <p style={{marginBottom:"15px"}} className="textofottercard componentfottercard">Completa los datos de tu empresa, régimen tributario y preferencias contables para comenzar a facturar</p>
 
-                            <div ><button className="Botonaccesorapidofotter">Configuracion</button></div>
+                            <div ><button className="Botonaccesorapidofotter">Configuración</button></div>
 
                         </div>
                 </div>
@@ -22,7 +22,7 @@ function Footerdash() {
             <div className="col-12">
             <div className="card" style={{width:'100%' }}>
                 <div className="car-body d-flex" style={{padding: "13px 12px",
-    gap: "12px"}}>
+    gap: "15px"}}>
                         <img src="imgs/imagenconfig.svg" className="imagenesaccesosrapidos"/>
 
                         <div className="d-flex flex-column">
@@ -39,13 +39,13 @@ function Footerdash() {
 
             <div className="col-12">
             <div className="card" style={{width:'100%' }}>
-                <div className="car-body d-flex" style={{padding:"12px" ,gap:"12px"}}>
+                <div className="car-body d-flex" style={{padding:"12px" ,gap:"15px"}}>
                         <img src="imgs/imagenconfig.svg" className="imagenesaccesosrapidos"/>
 
                         <div className="d-flex flex-column">
 
                             <span style={{marginBottom:"15px"}} className="textofottertitulocard">Crea clientes y provedores</span>
-                            <p style={{marginBottom:"15px"}} className="textofottercard componentfottercard">crear nuevo cliente o provedor</p>
+                            <p style={{marginBottom:"15px"}} className="textofottercard componentfottercard">Crear nuevo cliente o proveedor</p>
 
                             <div ><button className="Botonaccesorapidofotter">Crear cliente</button></div>
 

@@ -50,7 +50,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 	
 	
 	@Query(value = """
-		       SELECT SUM(totalLinea) as totalLinea
+		       SELECT SUM(totalLinea) as totalLinea,SUM(totalExistencia) as totalExistencia
 		       FROM (
 		           SELECT l.descripcion,
 		                  SUM(p.costo * e.existencia) as totalLinea,
@@ -61,11 +61,11 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		           GROUP BY l.descripcion
 		       ) AS sub
 		       """, nativeQuery = true)
-		Double getTotalGloballineas();
+		Optional<TotallineasDTO> getTotalGloballineas();
 	
 	
 	@Query(value = """
-		       SELECT SUM(totalLinea) as totalLinea
+		       SELECT SUM(totalLinea) as totalLinea,SUM(totalExistencia) as totalExistencia
 		       FROM (
 		           SELECT l.descripcion,
 		                  SUM(p.costo * e.existencia) as totalLinea,
@@ -77,7 +77,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		           GROUP BY l.descripcion
 		       ) AS sub
 		       """, nativeQuery = true)
-		Double getTotalGloballineasXbodega(@Param("bodegaId") int bodegaId);
+	Optional<TotallineasDTO>getTotalGloballineasXbodega(@Param("bodegaId") int bodegaId);
 	
 
 	

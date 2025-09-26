@@ -9,6 +9,7 @@ import { Sucursales } from "../components/Sucursales";
 import api from "../../../apicofig";
 import Modalalertasuccess from "../../../components/modalsuccess";
 import { FcOk } from "react-icons/fc";
+import { appcontex } from "../../../context";
 interface Pais {
   codigo: number;
   pais: number;
@@ -30,6 +31,10 @@ interface DatosEmpresa {
   tipopersona: any[];
 }
 export function Crearempresa() {
+  const{  paginaactual,
+setpaginaactual,
+link,
+setlink}=appcontex();
   const [visible,setVisible]=useState(false);
   const [itemsformempresa, setitemsformempresa] = useState(1)
   const [paisdefault,setpaisdefault]=useState({
@@ -53,6 +58,8 @@ tipopersona:[]
   })
   const [sucursales,setsucursales]=useState([])
   useEffect( () => {
+    setpaginaactual("crearempresa")
+    setlink("/crearempresa")
     traerinformacion();
      if (datosempresa.pais && datosempresa.pais.length > 0) {
     // asigna el primer país al campo pais
@@ -129,6 +136,45 @@ sucursales:[],
     )
   }]
    const onSubmit = async (data: any) => {
+    /* Esto devuelve un array con todos los valores de las propiedades de un objeto. */
+    /* Sirve para comprobar si todos los elementos del array cumplen una condición. */
+
+ const camposRequeridos = [
+     "Actividadeconomica",
+"correoempresa",
+"celularempresa",
+"codigopostal",
+"digitodeverificacion",
+"departamento",
+"municipio",
+"nombrecomercial",
+"numeroidentificacion",
+"pais",
+"primerapellido",
+"primernombre",
+"razonsocial",
+"regimen",
+"segundoapellido",
+"segundonombre",
+"telefonofijo",
+"tipodeidentificacion:",
+"tipodepersona",
+
+  ];
+
+  // Revisa si TODOS los campos requeridos están vacíos
+  const requeridosVacios = camposRequeridos.every((campo) => {
+    const valor = data[campo];
+    return valor === "" || valor === null;
+  });
+
+  if (requeridosVacios) {
+    // 👉 Aquí tu acción especial
+    setVisible(true); // ejemplo: mostrar modal
+    alert("Debes llenar al menos los campos requeridos");
+    return;
+  }
+
     data.impuestos=impuestsosseleccionados;
     data.sucursales=sucursales;
     console.log(data)
@@ -144,6 +190,7 @@ sucursales:[],
     }
     // ****** inicio cambios para Imagen empresa ******
     // Crear el FormData para enviar multipart
+       
     const formData = new FormData();
 
     // Parte JSON del DTO
@@ -171,7 +218,24 @@ sucursales:[],
   };
   const onError = (errors:any) => {
   console.error("Errores del formulario:", errors);
-  
+  // Lista de campos que están en la pestaña 1
+  const camposPestaña1 = [
+    "razonsocial",
+    "primernombre",
+    "tipodeidentificacion",
+    "tipodepersona",
+    "correoempresa"
+
+  ];
+
+  // Si hay al menos un error en esos campos, me voy a la pestaña 1
+  const tieneErroresPestaña1 = camposPestaña1.some(
+    (campo) => errors[campo]
+  );
+
+  if (tieneErroresPestaña1) {
+    setitemsformempresa(1);
+  }
 
 };
     return (  

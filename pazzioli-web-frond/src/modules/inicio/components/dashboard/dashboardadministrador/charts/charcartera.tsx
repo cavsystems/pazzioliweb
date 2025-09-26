@@ -41,7 +41,7 @@ function Chartcartera() {
     })
     settotalcartera(total)
     const dataconporcentaje=data.map((item:any)=>{
-      return {...item,porcentaje: parseFloat(((item.value / total) * 100).toFixed(3))}
+      return {...item,porcentaje: parseFloat(((item.value / total) * 100).toFixed(2))}
     })
     setdatacartera(dataconporcentaje)
      
@@ -218,7 +218,7 @@ font: "normal normal bold 12px/12px Open Sans",
           borderRadius:'10px'
         }}
       />
-      <span>{s.label}-${s.value.toLocaleString('de-DE')}{`(${s.porcentaje})`}</span>
+      <span>{s.label}-${s.value.toLocaleString('de-DE')}{`(${s.porcentaje}%)`}</span>
     </div>
   ))}
 </div>

@@ -55,6 +55,7 @@ interface chart{
       codigobodega:string
 lineasupda:boolean
  traertotalxinventariopage:(page:number)=> Promise<void>
+ traertotalxinventariopagenext:(page:number)=> Promise<void>
  currentPage:number
  currentPageindex:number
 
@@ -62,6 +63,8 @@ setCurrentPage:Dispatch<SetStateAction<number>>,
  setCurrentPageindex:Dispatch<SetStateAction<number>>,
 contador:number,
 setcontador:Dispatch<SetStateAction<number>>,
+imagenlogo:string;
+setimagenlogo:Dispatch<SetStateAction<string>>
 }
 const defaultContext: chart = {
   totallinea: 0,
@@ -86,9 +89,11 @@ const defaultContext: chart = {
 };
 const Chartcontext =createContext<chart | null>(defaultContext);
 function Providerchart({children}: {children: React.ReactNode}) {
+   const [imagenlogo,setimagenlogo]=useState<string>('');
     const [codigobodega,setcodigobodega]=useState<string>('0');
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [currentPageindex, setCurrentPageindex] = useState<number>(0);
+    const [permiso,setoermiso]= useState<String>("administrador");
     const [contador,setcontador]=useState<number>(1)
 const [totallinea,settotallinea]=useState<number>(0)
 const [totalnumeroprolinea,settotalnumeroprolinea]=useState<number>(0)
@@ -109,25 +114,83 @@ const [totalesporlinea,settotalesporlinea]=useState<lineastotales[]>([])
 const [lineasupda,setlineasupda]=useState<boolean>(false)
 const [bodegas,setlistabodegas]=useState<listabodegas[]>([])
 
-
-const traertotalxinventariopage=async (page:number=1,codbodega:String='')=>{
+const traertotalxinventariopagenext= async (page:number=1,codbodega:String='',des:String="totalLinea")=>{
+  console.log("descripcion",des)
   if(codbodega!==""){
     console.log("codigo bodega",codbodega)
     if(codbodega!=="0"){
-        const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/${Number(codigobodega)+1}?page=${page}&sortField=totalLinea&sortDirection=desc`,{
+        const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/${Number(codbodega)}?page=${page}&sortField=${des}&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
  console.log("datos total por linea",totalesporlineas.data)
  setlineasupda(!lineasupda)
  settotalesporlinea(totalesporlineas.data.data.content)
-   settotallinea(totalesporlineas.data.data.totalGloballineas);
+     settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas.
+totalExistencia
+
+)
+ setitempage(totalesporlineas.data.data.
+totalPages)
+
+    }else{
+           const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=${des}&sortDirection=desc`,{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+        }},)
+ console.log("datos total por linea",totalesporlineas.data)
+ setlineasupda(!lineasupda)
+ settotalesporlinea(totalesporlineas.data.data.content)
+ setitempage(totalesporlineas.data.data.
+totalPages)
+   settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas
+.totalExistencia
+
+)
+    }
+  
+return
+  }
+  const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=${des}&sortDirection=desc`,{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+        }},)
+ console.log("datos total por linea",totalesporlineas.data)
+ setlineasupda(!lineasupda)
+ settotalesporlinea(totalesporlineas.data.data.content)
+  settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas
+.totalExistencia
+
+)
+ setitempage(totalesporlineas.data.data.
+totalPages)
+
+}
+const traertotalxinventariopage=async (page:number=1,codbodega:String='',des:string="totalLinea")=>{
+  if(codbodega!==""){
+    console.log("codigo bodega",codbodega)
+    if(codbodega!=="0"){
+        const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/${Number(codbodega)}?page=${page}&sortField=${des}&sortDirection=desc`,{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+        }},)
+ console.log("datos total por linea",totalesporlineas.data)
+ setlineasupda(!lineasupda)
+ settotalesporlinea(totalesporlineas.data.data.content)
+   settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas
+.totalExistencia
+
+)
  setitempage(totalesporlineas.data.data.
 totalPages)
 setCurrentPage(1)
 setCurrentPageindex(0)
     }else{
-           const totalesporlineas= await  api.get(`/productos/totalesPorLineasXBodega/page=${page}&sortField=totalLinea&sortDirection=desc`,{
+           const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=${des}&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
@@ -136,7 +199,11 @@ setCurrentPageindex(0)
  settotalesporlinea(totalesporlineas.data.data.content)
  setitempage(totalesporlineas.data.data.
 totalPages)
-  settotallinea(totalesporlineas.data.data.totalGloballineas);
+ settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas
+.totalExistencia
+
+)
 setCurrentPage(1)
 setCurrentPageindex(0)
 
@@ -144,16 +211,22 @@ setCurrentPageindex(0)
   
 return
   }
-  const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=totalLinea&sortDirection=desc`,{
+  const totalesporlineas= await  api.get(`/productos/totalesPorLineasGlobal?page=${page}&sortField=${des}&sortDirection=desc`,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
         }},)
  console.log("datos total por linea",totalesporlineas.data)
  setlineasupda(!lineasupda)
  settotalesporlinea(totalesporlineas.data.data.content)
-   settotallinea(totalesporlineas.data.data.totalGloballineas);
+      settotallinea(totalesporlineas.data.data.totalGloballineas.totallinea);
+      settotalnumeroprolinea(totalesporlineas.data.data.totalGloballineas
+.totalExistencia
+
+)
  setitempage(totalesporlineas.data.data.
 totalPages)
+setCurrentPage(1)
+setCurrentPageindex(0)
 
 }
  const traernombrebodega=async()=>{
@@ -165,6 +238,11 @@ totalPages)
    setlistabodegas(bodegas.data.data)
  }
 useEffect(()=>{
+  if(permiso==="bodeguero"){
+ traertotalxinventariopage(1,"","cantidadLinea")
+  traernombrebodega()
+ return
+  }
     traertotalxinventariopage()
     traernombrebodega()
 },[])
@@ -187,7 +265,12 @@ lineasupda,
  setCurrentPage,
  setCurrentPageindex,
 contador,
-setcontador,}}> 
+setcontador,
+traertotalxinventariopagenext,
+imagenlogo,
+setimagenlogo
+
+}}> 
       {children}
     </Chartcontext.Provider>
     );

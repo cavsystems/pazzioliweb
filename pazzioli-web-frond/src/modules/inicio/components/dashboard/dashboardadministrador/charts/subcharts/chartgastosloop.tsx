@@ -75,10 +75,11 @@ function Chartgostoloop() {
             data: [ 200000, 600000, 0, 40000],
             //color de la linea
             
-            borderColor: "#FB923C",
+            borderColor: "#FFB93B",
             //color de relleno (si lo habilitas en otras configs).
             backgroundColor: "lightblue",
             tension: 0.4, // curva suave
+                borderDash: [5, 5],
           },
     
         ],

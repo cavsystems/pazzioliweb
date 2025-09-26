@@ -10,6 +10,7 @@ import Authprovider from './modules/auth/authcontext/autcontext.tsx'
 import './globalstyle.css'
 import NavbarProvider from "./components/contextnavbar.tsx"
 import Providerchart from "./modules/inicio/components/contextchart.tsx"
+import Providerapp from './context.tsx'
 createRoot(document.getElementById('root')!).render(
 
    // <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
    <StyledEngineProvider injectFirst>
     <Provider store={store}>
+      < Providerapp>
     <Providerchart>
    <NavbarProvider>
    <Authprovider>
@@ -25,6 +27,7 @@ createRoot(document.getElementById('root')!).render(
     </Authprovider>
     </NavbarProvider>
     </Providerchart>
+    </Providerapp>
     </Provider>
     </StyledEngineProvider>
   </StrictMode>

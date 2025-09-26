@@ -12,6 +12,7 @@ import {
 import * as React from 'react';
 
 import dayjs, { Dayjs } from 'dayjs';
+import 'dayjs/locale/es'; 
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
@@ -72,7 +73,9 @@ setfechafinal(dayjs(`${date.getFullYear()-1}-${addzeros(date.getMonth()+1)}-${ad
 return ( 
         <>
          <div className="chart-container" >
+          <div style={{display:"flex",justifyContent:"space-between",flexWrap:"wrap"}}>
           <div className="custom-legend">
+            <div style={{display:"flex"}}>
              <div style={{position:'relative'}}>
             <button className="botoncalender" onClick={()=>{
             setopencalender(!opencalender)
@@ -84,18 +87,16 @@ return (
 
             <div className="card cardcalender" style={{width:'700px',position:"absolute",zIndex:10,top: '48px' , display:opencalender===true ? "":"none" }} >
                
-              <div className="card-body" style={{paddingRight:0}}>
+              <div className="card-body" style={{paddingRight:0,maxHeight: "300px",
+    overflow: 'auto'}}>
                 <div style={{display:"flex"}} >
                   <div style={{display:"flex",flexDirection:"column",    padding: '0 10px 0 0',gap:'20px'}}>
                   <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Hoy</span>
                   <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Ayer</span>
                   <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Esta semana</span>
                   <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Semana pasada </span>
-                  <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Los ultimos 7 dias</span>
-                  <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Los ultimos 28 dias</span>
-                 <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Los ultimos 30 dias</span>
-                 <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Los ultimos 90 dias</span>
-                  <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Ultimo año</span>
+                  <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Este mes</span>
+                  <span style={{whiteSpace:'nowrap'}} className="spancalenderitem">Este año</span>
                   </div>
 
                 
@@ -104,36 +105,81 @@ return (
 
                     <div style={{display:'flex',flexDirection:'column',width: '100%',padding:'6px 10px 6px 10px'}}>
                     <div style={{display:'flex' ,justifyContent:"space-between",    padding: '0 40px'}}>
-                         
+             <TextField label="Fecha inicial" id="outlined-size-normal" value={fechafinal?.format("YYYY-MM-DD")} defaultValue="small" variant="outlined"    size="small"      slotProps={{
+    inputLabel: {
+      shrink: true,
+      sx: {
+        "&.MuiInputLabel-root": {
+          zIndex: 10,
+          position: "absolute",
+        },
+      },
+    },
+    input: {
+      sx: {
+        "& .MuiInputBase-input": {
+          border: "none !important",
+        },
+        "& .MuiOutlinedInput-input": {
+          border: "none !important",
+        },
+        "& .MuiInputBase-inputSizeSmall": {
+          border: "none !important",
+        },
+      },
+    },
+  }}/>               
          <TextField
-          label="Size"
+          label="Fecha final"
           id="outlined-size-small"
           defaultValue="Small"
            size="small"
            value={fechainicial?.format("YYYY-MM-DD")}
-          slotProps={{
+     slotProps={{
     inputLabel: {
-      shrink: true, // hace que el label flote
+      shrink: true,
       sx: {
-         
-               ".css-idnh3w-MuiFormLabel-root-MuiInputLabel-root":{
-                       zIndex: 10 ,
-               position: 'absolute',
-               }
+        "&.MuiInputLabel-root": {
+          zIndex: 10,
+          position: "absolute",
+        },
+      },
+    },
+    input: {
+      sx: {
+        "& .MuiInputBase-input": {
+          border: "none !important",
+        },
+        "& .MuiOutlinedInput-input": {
+          border: "none !important",
+        },
+        "& .MuiInputBase-inputSizeSmall": {
+          border: "none !important",
+        },
       },
     },
   }}
-
         />
-        <TextField label="Size" id="outlined-size-normal" value={fechafinal?.format("YYYY-MM-DD")} defaultValue="small" variant="outlined"    size="small"/>
+     
                     </div>
 
 
 
 
                     <div style={{display:"flex" }}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar sx={{width:'250px',height:'100%' ,  ".MuiDayCalendar-root, .MuiYearCalendar-root": {
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}  adapterLocale="es">
+      <DateCalendar sx={{width:'250px' ,  ".MuiDayCalendar-root, .MuiYearCalendar-root": {
+      width:'200px',
+      height:'200px'
+    },
+    ".MuiPickersCalendarHeader-root":{
+     padding:0
+    }}}  value={fechafinal}   // 👈 aquí usas value
+    onChange={(newValue) => setfechafinal(newValue) } />
+    </LocalizationProvider>
+                      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+      <DateCalendar sx={{width:'250px' , ".MuiDayCalendar-root, .MuiYearCalendar-root": {
       width:'200px',
       height:'200px'
     },
@@ -144,16 +190,7 @@ return (
     onChange={(newValue) => setfechainial(newValue)}/>
     </LocalizationProvider>
   
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DateCalendar sx={{width:'250px',height:'100%' ,  ".MuiDayCalendar-root, .MuiYearCalendar-root": {
-      width:'200px',
-      height:'200px'
-    },
-    ".MuiPickersCalendarHeader-root":{
-     padding:0
-    }}}  value={fechafinal}   // 👈 aquí usas value
-    onChange={(newValue) => setfechafinal(newValue)}/>
-    </LocalizationProvider>
+    
 
 
                     </div>
@@ -183,12 +220,22 @@ return (
     <span className="fontnumerosdashboard">${'144.381.444 COP'}</span>
   </div>
   </button>
+  </div>
   <button className={`botonesgraficos ${!tablein ? "botonesgraficosactive":""} `}  onClick={()=>{
     settablein(false)
   }}><span className="fonttitulosbotones">Gastos totales</span>
   <div>
     <span className="fontnumerosdashboard">${'144.381.444 COP'}</span>
   </div></button>
+</div>
+
+ { tablein ? <div style={{display:"flex" ,gap:'15px'}} className="indicadoreschar">
+  <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#51A2FF",width:"15px",height:"15px"}}></div><span>Ventas actuales</span></div>
+  <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#31C950",width:"15px",height:"15px"}}></div><span>Ventas anteriores</span></div>
+</div>:<div style={{display:"flex" ,gap:'15px'}} className="indicadoreschar">
+  <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#F09700",width:"15px",height:"15px"}}></div><span>Gastos actuales</span></div>
+  <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#FFB93B",width:"15px",height:"15px"}}></div><span>Gastos anteriores</span></div>
+</div> }
 </div>
 <div style={{height:'389px', width:'100%'}}>
       {tablein &&  <Ingresoloopchar/>}

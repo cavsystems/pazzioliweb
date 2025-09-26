@@ -402,7 +402,7 @@ opacity: 1;
 .lista-opcionesaut{
     position: absolute;
     top: -2;
-    z-index: 6;
+    z-index: 20 !important;
     background: #fff;
     border-radius: 1px solid;
     padding: 0;

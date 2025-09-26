@@ -94,7 +94,7 @@ public class ProductosController {
     	 System.out.println("pagina tamaño"+size);
  
     	 
-    	Double totalli=productoService.totallinea();
+    	 Optional<TotallineasDTO >  totalli=productoService.totallinea();
         
     	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasGlobal(inicio,size,sortField,sortDirection);
     	if(!totalesLineas.isEmpty()) {
@@ -122,6 +122,7 @@ public class ProductosController {
             @RequestParam(defaultValue = "7") int size,
             @RequestParam(defaultValue = "descripcion") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection){
+    	
     	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodegas(page,size,sortField,sortDirection);
     	if(!totalesLineas.isEmpty()) {
     		Map<String, Object> response = new HashMap<>();
@@ -146,11 +147,12 @@ public class ProductosController {
             @RequestParam(defaultValue = "descripcion") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection){
 				int inicio=0;
-     	if(page>0) {
+				System.out.println("bodegamid"+bodegaID);
+				if(page>0) {
      		  inicio = page-1;
      	} 
     	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodega(bodegaID,inicio,size,sortField,sortDirection);
-    	Double  totalli=productoService.totallineabodega(bodegaID);
+    	Optional<TotallineasDTO >   totalli=productoService.totallineabodega(bodegaID);
     	if(!totalesLineas.isEmpty()) {
     		Map<String, Object> response = new HashMap<>();
     		response.put("totalGloballineas", totalli);
@@ -162,7 +164,7 @@ public class ProductosController {
             		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
     	}else {
     		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body(ApiResponse.failure("No hay datos disponibles"));
     	}
     }
@@ -194,3 +196,4 @@ public class ProductosController {
     }
 
 }
+

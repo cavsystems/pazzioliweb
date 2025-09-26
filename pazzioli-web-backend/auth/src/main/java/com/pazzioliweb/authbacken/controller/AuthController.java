@@ -31,6 +31,7 @@ import com.pazzioliweb.commonbacken.repositorio.SessionRepository;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
 
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -41,6 +42,7 @@ public class AuthController {
 
     private final UsuarioRepository usuarioRepository;
     private final SessionRepository sessionRepository;
+    @Autowired
     private final JwUtilJava jwtUtil;
     @Autowired
     private ConexionFactory conexion;
@@ -81,8 +83,10 @@ public class AuthController {
             		    System.out.println("Fecha y hora de fin: " + fechaFin.format(fmt));
             		    
             		    
-            		    crearSesion(usuario.getCodigo(),token);
-                   	 
+            		    //crearSesion(usuario.getCodigo(),token);
+            		     Claims claims = jwtUtil.extraerClaims(token);
+            		    DatosSesiones datos = redisTemplate.opsForValue().get( claims.get("idsecion",String.class));
+            		    System.out.println("nivel"+datos.getNivel());
                         // ✅ Crear cookie con el token esta cookie contendra el token con el que trabajalemos duerante todo el logueo
                         Cookie jwtCookie = new Cookie("token", token);
                         jwtCookie.setHttpOnly(true); // no accesible desde JavaScript
@@ -92,14 +96,17 @@ public class AuthController {
                        jwtCookie.setDomain("localhost"); // ⚠️ importante según tu entorno
                         servletResponse.addCookie(jwtCookie);
             		    response.put("success", false);
-                        response.put("sesion",  sesion );
+                        response.put("sesion",  datos );
                         return ResponseEntity
                                 .ok()
                                 .body(response);
             		}
             	 
-            	 crearSesion(usuario.getCodigo(),token);
             	 
+            	 crearSesion(usuario.getCodigo(),token);
+            	 Claims claims = jwtUtil.extraerClaims(token);
+     		    DatosSesiones datos = redisTemplate.opsForValue().get( claims.get("idsecion",String.class));
+            	 System.out.println("codigo usuario"+usuario.getCodigo());
                   // ✅ Crear cookie con el token esta cookie contendra el token con el que trabajalemos duerante todo el logueo
                   Cookie jwtCookie = new Cookie("token", token);
                   jwtCookie.setHttpOnly(true); // no accesible desde JavaScript
@@ -109,7 +116,7 @@ public class AuthController {
                  jwtCookie.setDomain("localhost"); // ⚠️ importante según tu entorno
                   servletResponse.addCookie(jwtCookie);
                 response.put("success", true);
-                response.put("user", usuario);
+                response.put("sesion", datos);
                 
 
                 return ResponseEntity
