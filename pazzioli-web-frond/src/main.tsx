@@ -11,6 +11,7 @@ import './globalstyle.css'
 import NavbarProvider from "./components/contextnavbar.tsx"
 import Providerchart from "./modules/inicio/components/contextchart.tsx"
 import Providerapp from './context.tsx'
+import Providerusuario from './modules/usuarios/contextusuario.tsx'
 createRoot(document.getElementById('root')!).render(
 
    // <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100">
@@ -22,8 +23,10 @@ createRoot(document.getElementById('root')!).render(
     <Providerchart>
    <NavbarProvider>
    <Authprovider>
+    <Providerusuario>
     
     <App />
+    </Providerusuario>
     </Authprovider>
     </NavbarProvider>
     </Providerchart>

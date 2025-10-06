@@ -321,7 +321,7 @@ let video= new Blob([new Uint8Array(result)],{type:'video/mp4'})
              }} ></li>}
 
 
-             <li style={{position:"absolute",right:'0',height:'100%',display:"flex" ,justifyContent:"center", alignItems:"center",  gap:'12px'}}>
+             <li style={{position:"absolute",right:'0',height:'100%',display:"flex" ,justifyContent:"center", alignItems:"center",  gap:'12px',marginRight:"32px"}}>
                 <div>
                 <img  src="imgs/imagennoti.svg"/>
                 </div>

@@ -229,10 +229,10 @@ return (
   </div></button>
 </div>
 
- { tablein ? <div style={{display:"flex" ,gap:'15px'}} className="indicadoreschar">
+ { tablein ? <div style={{display:"flex" ,gap:'15px',marginRight:'20px'}} className="indicadoreschar">
   <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#51A2FF",width:"15px",height:"15px"}}></div><span>Ventas actuales</span></div>
   <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#31C950",width:"15px",height:"15px"}}></div><span>Ventas anteriores</span></div>
-</div>:<div style={{display:"flex" ,gap:'15px'}} className="indicadoreschar">
+</div>:<div style={{display:"flex" ,gap:'15px',marginRight:'20px'}} className="indicadoreschar" >
   <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#F09700",width:"15px",height:"15px"}}></div><span>Gastos actuales</span></div>
   <div style={{display:"flex" ,gap:"6px",alignItems:'center'}}> <div style={{background:"#FFB93B",width:"15px",height:"15px"}}></div><span>Gastos anteriores</span></div>
 </div> }

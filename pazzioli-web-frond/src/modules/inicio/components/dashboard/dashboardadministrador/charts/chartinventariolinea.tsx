@@ -183,7 +183,7 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.descripcion}</span>  <span>${`${lineas.totalLinea.toLocaleString('de-DE')}(${lineas.porcentaje?.toFixed(2)}%)`}</span>
+                      <span>{lineas.descripcion}</span>  <span>${`${lineas.totalLinea.toLocaleString('de-DE')}  (${lineas.porcentaje?.toFixed(2)}%)`}</span>
                  </div>
              
                   <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>

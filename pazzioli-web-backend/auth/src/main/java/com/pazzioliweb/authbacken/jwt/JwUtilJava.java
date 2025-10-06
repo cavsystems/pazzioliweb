@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.redis.RedisConfig;
+import com.pazzioliweb.usuariosbacken.dtos.PermisosrolesDTOS;
 import com.pazzioliweb.usuariosbacken.entity.Permiso;
 import com.pazzioliweb.usuariosbacken.entity.PermisoRol;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
@@ -105,7 +106,7 @@ public class JwUtilJava {
 	    	List<String> permisosUsuarioActivo=new ArrayList<String>();
 	    	if(!permisosUsuario.isEmpty()) {
   			  for (PermisoRol p : permisosUsuario) {
-  				  permisosUsuarioActivo.add(p.getCodigorol().getNombre());						
+  				  permisosUsuarioActivo.add(p.getCodigopermiso().getNombre());						
 				}
   		  	}
 	    	return permisosUsuarioActivo;

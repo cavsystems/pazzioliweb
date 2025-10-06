@@ -15,7 +15,7 @@ export function Modalsocursal({visible, setVisible,setBodega,bodega,datosempresa
     const [codigodepar,setcodigodepart]=useState('0')
    const [codigomunicipio,setcodigomunicipio]=useState('0')
 
-  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigodepartamento:0, departamento: ''})
+  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigoDepartamento:0, departamento: ''})
    const [municipio,setmunicipio]=useState<municipio[]>([])
    const [codigopostal,setcodigopostal]=useState('')
 
@@ -48,7 +48,7 @@ const traercodigopostal=async (codigomunici:number)=>{
 const traermuni=async()=>{
   if(departactual.codigo!==0){
     
-    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigodepartamento}`)
+    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigoDepartamento}`)
     setmunicipio(muni.data.repuesta)
    
    console.log("municipiooooo",muni.data.repuesta)

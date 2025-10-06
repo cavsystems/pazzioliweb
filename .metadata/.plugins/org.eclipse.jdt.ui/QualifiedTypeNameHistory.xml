@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.dtos.RolesDTOS"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.PermisoRepository"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.dtos.PermisosDTOS"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.PermisoRolRepository"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.entity.Permiso"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.entity.PermisoRol"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.dtos.CrearusuarioDTOS"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.repositorio.RolesRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.dtos.CrearpermisoroDTOS"/>
 </qualifiedTypeNameHistroy>

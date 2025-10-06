@@ -1,0 +1,30 @@
+.containerusuario {
+     width: 100%;
+  
+}
+
+.containerimgusuario{
+        margin-top: 10%;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+    .usuariomodal{
+        flex-wrap: wrap;
+    }
+    
+}
+
+
+.tableusuario{
+  box-shadow:    0px 3px 6px 3px rgba(0, 0, 0, 0.0509803922) !important;
+}
+
+.modal-custom-size {
+  max-width: 500px;   /* ancho fijo */
+  height: 200px;      /* alto fijo */
+  margin: auto;       /* centra horizontalmente */
+  display: flex;
+  align-items: center; /* centra verticalmente */
+}
+
