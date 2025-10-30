@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.pazzioliweb.productosmodule.repositori.ProductosRespitori;
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
+import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
 @Service
 public class ProductosService {
@@ -55,6 +56,19 @@ public class ProductosService {
     	Pageable pageable = PageRequest.of(page, size, sort);
     	Page<LineaProductosDTO> totalLineasXBodegas = productoRepositori.getTotalesPorLineaXBodegas(pageable);
         return totalLineasXBodegas;
+    }
+    
+    public Double totallinea(){
+    	
+    	Double totali =productoRepositori. getTotalGloballineas();
+    	return totali;
+    	
+    }
+    
+    
+    public Double totallineabodega(int BodegaId) {
+    	Double totalbo=productoRepositori.getTotalGloballineasXbodega(BodegaId);
+    	return totalbo;
     }
     public Page<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId,int page, int size, String sortField, String sortDirection) {
     	Sort sort = sortDirection.equalsIgnoreCase("desc")

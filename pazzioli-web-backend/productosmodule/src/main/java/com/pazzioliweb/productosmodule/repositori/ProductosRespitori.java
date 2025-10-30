@@ -47,6 +47,39 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		       "group by l.descripcion")
 		Page<LineaProductosDTO> getTotalesPorLineaGlobal(Pageable pageable);
 	
+	
+	@Query(value = """
+		       SELECT SUM(totalLinea) as totalLinea
+		       FROM (
+		           SELECT l.descripcion,
+		                  SUM(p.costo * e.existencia) as totalLinea,
+		                  SUM(e.existencia) as totalExistencia
+		           FROM productos p
+		           JOIN lineas l ON l.linea_id = p.linea_id
+		           JOIN existencias e ON p.producto_id = e.producto_id
+		           GROUP BY l.descripcion
+		       ) AS sub
+		       """, nativeQuery = true)
+		Double getTotalGloballineas();
+	
+	
+	@Query(value = """
+		       SELECT SUM(totalLinea) as totalLinea
+		       FROM (
+		           SELECT l.descripcion,
+		                  SUM(p.costo * e.existencia) as totalLinea,
+		                  SUM(e.existencia) as totalExistencia
+		           FROM productos p
+		           JOIN lineas l ON l.linea_id = p.linea_id
+		           JOIN existencias e ON p.producto_id = e.producto_id
+		              WHERE e.bodega_id = :bodegaId
+		           GROUP BY l.descripcion
+		       ) AS sub
+		       """, nativeQuery = true)
+		Double getTotalGloballineasXbodega(@Param("bodegaId") int bodegaId);
+	
+
+	
 	@Query("""
 		    SELECT 
 	        l.descripcion AS descripcion,
@@ -61,6 +94,21 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		""")
 		Page<LineaProductosDTO> getTotalesPorLineaXBodegas(Pageable pageable);
 	
+	
+	
+	@Query("""
+		    SELECT 
+	        l.descripcion AS descripcion,
+	        sum(p.costo * x.existencia) AS totalLinea,
+	        sum(x.existencia) as cantidadLinea,
+	        b.nombre AS bodega
+		    FROM Productos p
+		    JOIN p.linea l
+		    JOIN p.existencias x
+		    JOIN x.bodega b
+		    GROUP BY l.descripcion, b.nombre
+		""")
+		List<LineaProductosDTO> getTotalesPorLineaXBodegastotal();
 	@Query("""
 			SELECT 
 	        l.descripcion AS descripcion,

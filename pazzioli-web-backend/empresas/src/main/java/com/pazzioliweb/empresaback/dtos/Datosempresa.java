@@ -8,9 +8,9 @@ import com.pazzioliweb.commonbacken.entity.Departamento;
 import com.pazzioliweb.commonbacken.entity.Impuestos;
 import com.pazzioliweb.commonbacken.entity.Municipio;
 import com.pazzioliweb.commonbacken.entity.Pais;
+import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.empresasback.entity.Actividadeconomica;
 import com.pazzioliweb.empresasback.entity.Regimen;
-import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 @Component
 public class Datosempresa {

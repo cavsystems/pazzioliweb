@@ -3,7 +3,7 @@ package com.pazzioliweb.empresasback.entity;
 import com.pazzioliweb.commonbacken.entity.Departamento;
 import com.pazzioliweb.commonbacken.entity.Municipio;
 import com.pazzioliweb.commonbacken.entity.Pais;
-import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 
 import jakarta.persistence.Column;

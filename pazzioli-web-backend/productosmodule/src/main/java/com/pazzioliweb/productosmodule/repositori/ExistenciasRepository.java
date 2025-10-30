@@ -22,7 +22,8 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	            e.existencia AS existencia,
 	            e.stockMin AS stockMin,
 	            e.stockMax AS stockMax,
-	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento
+	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento,
+	            e.ubicacion AS ubicacion
 	        FROM Existencias e
 	        JOIN e.producto p
 	        JOIN e.bodega b
@@ -40,7 +41,8 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	            e.existencia AS existencia,
 	            e.stockMin AS stockMin,
 	            e.stockMax AS stockMax,
-	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento
+	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento,
+	            e.ubicacion AS ubicacion
 	        FROM Existencias e
 	        JOIN e.producto p
 	        JOIN e.bodega b
@@ -59,7 +61,8 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	            e.existencia AS existencia,
 	            e.stockMin AS stockMin,
 	            e.stockMax AS stockMax,
-	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento
+	            e.fechaUltimoMovimiento AS fechaUltimoMovimiento,
+	            e.ubicacion AS ubicacion
 	        FROM Existencias e
 	        JOIN e.producto p
 	        JOIN e.bodega b

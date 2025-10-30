@@ -503,7 +503,9 @@ z-index: 10 !important;
 position: relative;
 left: 8px;
 }
-
+.activepagi>a{
+    background: hsl(246, 79%, 52%) !important;
+}
 .navsiguienteresponsive   .lilogomenu{
     width: 100%;
 }

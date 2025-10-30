@@ -11,7 +11,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.pazzioliweb.authbacken.jwt.JwUtilJava;
@@ -99,10 +98,11 @@ public class Jwtfilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 	    String path = request.getRequestURI();
-	    System.out.println("productos"+path.startsWith("/api/productos") +path);
+	    //System.out.println("productos"+path.startsWith("/api/productos") +path);
 	    return path.startsWith("/api/auth") || path.startsWith("/ws/") ||  path.startsWith("/api/empresa") ||  path.startsWith("/api/productos") 
 	    		|| path.startsWith("/api/bodegas") || path.startsWith("/api/grupos") || path.startsWith("/api/lineas") || path.startsWith("/api/precios")
-	    		|| path.startsWith("/api/existencias");
+	    		|| path.startsWith("/api/existencias") || path.startsWith("/api/terceros") || path.startsWith("/api/comprobantes") || path.startsWith("/api/cajas")
+	    		|| path.startsWith("/api/vendedores") || path.startsWith("/api/metodos_pago") || path.startsWith("/api/tipo_totales") || path.startsWith("/api/facturas");
 	}
 	
 

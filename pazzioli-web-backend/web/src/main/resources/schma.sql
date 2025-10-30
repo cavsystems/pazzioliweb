@@ -11,6 +11,317 @@
 
 SET FOREIGN_KEY_CHECKS = 0;
 
+DROP TABLE IF EXISTS `tipo_totales_facturas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*ejemplo:exenta,grabada, iva19,iva5,ICN, etc*/
+CREATE TABLE `tipo_totales_facturas` (
+  `tipo_total_factura_id` int NOT NULL AUTO_INCREMENT,
+  `tipo_total_id` int NOT NULL,
+  `factura_id` int NOT NULL,
+  `base` decimal(10,2) default 0.00,
+  `valor` decimal(10,2) default 0.00,
+  PRIMARY KEY (`tipo_total_factura_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_totales_facturas`
+--
+
+DROP TABLE IF EXISTS `metodos_pago_facturas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*ejemplo:exenta,grabada, iva19,iva5,ICN, etc*/
+CREATE TABLE `metodos_pago_facturas` (
+  `metodo_pago_factura_id` int NOT NULL AUTO_INCREMENT,
+  `metodo_pago_id` int NOT NULL,
+  `factura_id` int NOT NULL,
+  `valor` decimal(10,2) default 0.00,
+  PRIMARY KEY (`metodo_pago_factura_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `metodos_pago_facturas`
+--
+
+DROP TABLE IF EXISTS `facturas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `facturas` (
+  `factura_id` int NOT NULL AUTO_INCREMENT,
+  `consecutivo` int NOT NULL,
+  `comprobante_id` int NOT NULL,
+  `tercero_id` int NOT NULL,
+  `fecha_creacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_emision` date NOT NULL,
+  `fecha_vencimiento` date NOT NULL,
+  `plazo` int NOT NULL DEFAULT 0,
+  `usuario_ingreso_id` int NOT NULL,
+  `fecha_anulo` datetime NULL,
+  `usuario_anulo_id` int NULL,
+  `estado` ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  `pedido_id` int NULL,
+  `remision_id` int NULL,
+  `vendedor_id` int NULL,
+  `descuento` decimal(10,2) DEFAULT 0.00,
+  `caja_id` int NULL,
+  `observaciones` varchar(255) NULL,
+  `saldo` decimal(10,2) DEFAULT 0.00,
+  `total_factura` decimal(10,2) DEFAULT 0.00,
+  PRIMARY KEY (`factura_id`),
+  FOREIGN KEY (`comprobante_id`) REFERENCES `comprobantes`(`comprobante_id`),
+  FOREIGN KEY (`tercero_id`) REFERENCES `terceros`(`tercero_id`),
+  FOREIGN KEY (`usuario_ingreso_id`) REFERENCES `usuarios`(`codigo`),
+  FOREIGN KEY (`vendedor_id`) REFERENCES `vendedores`(`vendedor_id`),
+  FOREIGN KEY (`caja_id`) REFERENCES `cajas`(`caja_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `facturas`
+--
+
+--
+-- Table structure for table `metodos_pago`
+--
+
+DROP TABLE IF EXISTS `metodos_pago`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `metodos_pago` (
+  `metodo_pago_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  `sigla` varchar(50) NOT NULL,
+  `estado` ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  `tipo_negociacion` ENUM('Contado','Credito') DEFAULT 'Contado',
+  PRIMARY KEY (`metodo_pago_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `metodos_pago`
+--
+
+--
+-- Table structure for table `tipo_totales`
+--
+
+DROP TABLE IF EXISTS `tipo_totales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*ejemplo:exenta,grabada, iva19,iva5,ICN, etc*/
+CREATE TABLE `tipo_totales` (
+  `tipo_total_id` int NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(100) NOT NULL,
+  `sigla` varchar(50) NOT NULL,
+  `estado` ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  `tipo` ENUM('IMPUESTO','BASE','DESCUENTO') DEFAULT 'IMPUESTO',
+  PRIMARY KEY (`tipo_total_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_totales`
+--
+
+--
+-- Table structure for table `vendedores`
+--
+
+DROP TABLE IF EXISTS `vendedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `vendedores` (
+  `vendedor_id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
+  `estado` enum('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  `codigo_usuario_creo` int DEFAULT '0',
+  `fechacreado` date NOT NULL DEFAULT (curdate()),
+  PRIMARY KEY (`vendedor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vendedores`
+--
+
+DROP TABLE IF EXISTS `cajas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cajas` (
+  `caja_id` int NOT NULL AUTO_INCREMENT,
+  `usuario_id` int NOT NULL,
+  `monto_inicial` decimal(10,2) NOT NULL default 0.00,
+  `monto_final` decimal(10,2) NOT NULL default 0.00,
+  `fecha_apertura` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_cierre` TIMESTAMP NULL DEFAULT NULL,
+  `comprobante_id` int NOT NULL,
+  `consecutivo` int NOT NULL default 0,
+  `total_recaudo` decimal(10,2) NOT NULL default 0,
+  `estado` ENUM('ABIERTA','CERRADA') DEFAULT 'ABIERTA',
+  PRIMARY KEY (`caja_id`),
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(codigo),
+  FOREIGN KEY (comprobante_id) REFERENCES comprobantes(comprobante_id)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cajas`
+--
+
+DROP TABLE IF EXISTS `categorias_comprobantes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categorias_comprobantes` (
+  `categoria_comprobante_id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NULL,
+  PRIMARY KEY (`categoria_comprobante_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categorias_comprobantes`
+--
+
+DROP TABLE IF EXISTS `comprobantes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comprobantes` (
+  `comprobante_id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `categoria_comprobante_id` int NOT NULL,
+  `inicio_consecutivo` int NULL,
+  `afecta_inventario` ENUM('SI','NO') DEFAULT 'SI',
+  PRIMARY KEY (`comprobante_id`),
+  FOREIGN KEY (`categoria_comprobante_id`) REFERENCES categorias_comprobantes(`categoria_comprobante_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comprobantes`
+--
+
+DROP TABLE IF EXISTS `retenciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `retenciones` (
+  `retencion_id` int NOT NULL AUTO_INCREMENT,
+  `codigo` int NOT NULL DEFAULT 0,
+  `nombre` varchar(100) NULL,
+  `base` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `porcentaje` decimal(10,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`retencion_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `retenciones`
+--
+
+DROP TABLE IF EXISTS `clasificaciones_terceros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clasificaciones_terceros` (
+  `clasificacion_tercero_id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NULL,
+  PRIMARY KEY (`clasificacion_tercero_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clasificaciones_terceros`
+--
+
+DROP TABLE IF EXISTS `anexos_terceros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `anexos_terceros` (
+  `anexo_tercero_id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NULL,
+  `estado` ENUM('ACTIVO','INACTIVO') DEFAULT 'ACTIVO',
+  PRIMARY KEY (`anexo_tercero_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `anexos_terceros`
+--
+
+DROP TABLE IF EXISTS `terceros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `terceros` (
+  `tercero_id` int NOT NULL AUTO_INCREMENT,
+  `tipo_identificacion_id` int NOT NULL,
+  `identificacion` varchar(100) NOT NULL,
+  `dv` varchar(20) NULL,
+  `nombre_1` varchar(100) NULL,
+  `nombre_2` varchar(100) NULL,
+  `apellido_1` varchar(100) NULL,
+  `apellido_2` varchar(100) NULL,
+  `razon_social` varchar(100) NULL,
+  `regimen_id` int NOT NULL,
+  `clasificacion_tercero_id` int NOT NULL,
+  `direccion` varchar(100) NULL,
+  `contactos` varchar(100) NULL,
+  `correo` varchar(100) NULL,
+  `plazo` int NOT NULL DEFAULT 0,
+  `cupo` int NOT NULL DEFAULT 0,
+  `precio_id` int NOT NULL DEFAULT 0,
+  PRIMARY KEY (`tercero_id`),
+  FOREIGN KEY (`regimen_id`) REFERENCES regimen(`codigo`),
+  FOREIGN KEY (`clasificacion_tercero_id`) REFERENCES clasificaciones_terceros(`clasificacion_tercero_id`),
+  FOREIGN KEY (`precio_id`) REFERENCES precios(`precio_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `terceros`
+--
+
+DROP TABLE IF EXISTS `retenciones_terceros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `retenciones_terceros` (
+  `retencion_id` int NOT NULL,
+  `tercero_id` int NOT NULL,
+  PRIMARY KEY (`retencion_id`,`tercero_id`),
+  FOREIGN KEY (`retencion_id`) REFERENCES retenciones(`retencion_id`),
+  FOREIGN KEY (`tercero_id`) REFERENCES terceros(`tercero_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=93292 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `retenciones_terceros`
+--
+
+DROP TABLE IF EXISTS `anexos_terceros_terceros`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `anexos_terceros_terceros` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `anexo_tercero_id` INT NOT NULL,
+  `tercero_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_anexo_tercero`
+    FOREIGN KEY (`anexo_tercero_id`)
+    REFERENCES `anexos_terceros` (`anexo_tercero_id`)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_tercero`
+    FOREIGN KEY (`tercero_id`)
+    REFERENCES `terceros` (`tercero_id`)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `anexos_terceros_terceros`
+--
+
 DROP TABLE IF EXISTS `grupos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -250,6 +561,7 @@ CREATE TABLE `existencias` (
   `stock_min` decimal(10,2) DEFAULT 0.00,
   `stock_max` decimal(10,2) DEFAULT 0.00,
   `fecha_ultimo_movimiento` dateTime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ubicacion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`existencia_id`),
   UNIQUE KEY uq_existencias_producto_bodega (producto_id, bodega_id),
   FOREIGN KEY (producto_id) REFERENCES productos(producto_id),
@@ -742,6 +1054,12 @@ create table bodegas(
 	insert into lineas values (1,'Hogar'),(2,'Papeleria'),(3,'Aseo'),(4,'Dulceria'),(5,'Jugueteria'),(6,'Cacharro'),(7,'Cosmeticos'),(8,'Ropa Dama'),(9,'Ropa Hombre'),(10,'Ropa Niña'),(11,'Ropa Niño');
 	insert into grupos values (1,'Unico');
 	insert into precios values (1,'Detal'),(2,'Mayoreo');
+	insert into clasificaciones_terceros values(1,'Cliente'),(2,'Proveedor');
+	insert into terceros values(1,3,'222222222222','7','','','','','Consumidor Final',2,1,'Direccion','','correo@gmail.com',0,0,1);
+	insert into terceros values(2,3,'111111111111','9','','','','','Inventario fisico',2,2,'Direccion 2','','correo@gmail.com',0,0,1);
+	insert into anexos_terceros values(1,'Observacion','ACTIVO');
+	insert into anexos_terceros_terceros values(1,1,1);
+	
 	insert into productos values (1,'0001','0001','0001','Cafetera',45000,2,1,1,1,null,0,null,'ACTIVO',null,null),
 	(2,'0002','0002','0002','Resma de papel carta',12000,2,2,1,1,null,0,null,'ACTIVO',null,null),
 	(3,'0003','0003','0003','Jabon liquido de manos',8000,2,3,1,1,null,0,null,'ACTIVO',null,null),
@@ -757,9 +1075,45 @@ create table bodegas(
 	insert into bodegas values (1,'Principal',null,46,24,1004,'10144','CR 8 12-15','333 3333','312 458 1245',null);
 	insert into bodegas values (2,'Almacen Centro',null,46,24,1004,'10144','CR 9 11-05','333 3333','312 458 1245',null);
 	insert into bodegas values (3,'Almacen Sur',null,46,24,1004,'10144','CLL 5 34-02','333 3333','312 458 1245',null);
-	insert into existencias values (0,1,1,20,8,30,null),(0,2,1,15,5,15,null),(0,3,1,9,2,10,null),(0,4,1,5,2,7,null),(0,5,1,10,2,10,null),(0,6,1,3,2,10,null),(0,7,1,12,5,10,null),(0,8,1,15,5,10,null),(0,9,1,25,5,10,null),(0,10,1,14,5,10,null),(0,11,1,10,5,10,null),(0,12,1,7,5,10,null);
-	insert into existencias values (0,1,2,30,8,30,null),(0,2,2,20,5,15,null),(0,3,2,5,2,7,null),(0,4,2,7,2,7,null),(0,5,2,3,2,10,null),(0,6,2,1,2,10,null),(0,7,2,7,5,10,null),(0,8,2,20,5,10,null),(0,9,2,30,5,10,null),(0,10,2,18,5,10,null),(0,11,2,10,5,10,null),(0,12,2,3,5,10,null);
+	insert into existencias values (0,1,1,20,8,30,null,'P1A'),(0,2,1,15,5,15,null,'P1A'),(0,3,1,9,2,10,null,'P1B'),(0,4,1,5,2,7,null,'P1B'),(0,5,1,10,2,10,null,'P1A'),(0,6,1,3,2,10,null,'P2A'),(0,7,1,12,5,10,null,'P2A'),(0,8,1,15,5,10,null,'P1A'),(0,9,1,25,5,10,null,'P1B'),(0,10,1,14,5,10,null,'P1C'),(0,11,1,10,5,10,null,'P1C'),(0,12,1,7,5,10,null,'P1C');
+	insert into existencias values (0,1,2,30,8,30,null,'P2C'),(0,2,2,20,5,15,null,'P1A'),(0,3,2,5,2,7,null,'P1A'),(0,4,2,7,2,7,null,'P1A'),(0,5,2,3,2,10,null,'P1A'),(0,6,2,1,2,10,null,'P1A'),(0,7,2,7,5,10,null,'P1A'),(0,8,2,20,5,10,null,'P1A'),(0,9,2,30,5,10,null,'P3A'),(0,10,2,18,5,10,null,'P3A'),(0,11,2,10,5,10,null,'P1B'),(0,12,2,3,5,10,null,'P1A');
 	insert into precios_producto values (0,1,1,82000,null,null,null,null),(0,2,1,22000,null,null,null,null),(0,3,1,12000,null,null,null,null),(0,4,1,500,null,null,null,null),(0,5,1,89000,null,null,null,null),(0,6,1,55000,null,null,null,null),(0,7,1,3500,null,null,null,null),(0,8,1,3500,null,null,null,null),(0,9,1,25000,null,null,null,null),(0,10,1,32000,null,null,null,null),(0,11,1,36000,null,null,null,null),(0,12,1,24000,null,null,null,null);
+	
+	insert into categorias_comprobantes values(1,'Ventas'),(2,'Devoluciones'),(3,'Compras');
+	insert into comprobantes values(1,'Fe',1,1,'SI'),(2,'Nc',2,1,'SI');
+	
+	insert into vendedores values(1,'Vendedore Uno','cr 1','1234574','ACTIVO',1,curdate());
+	
+	insert into metodos_pago values(1,'Efectivo','Efc','ACTIVO','Contado'),(2,'Transferencia','Transf','ACTIVO','Contado');
+	insert into tipo_totales values(1,'Gravada','Grav','ACTIVO','BASE'),(2,'Impuesto de venta','Iva19','ACTIVO','IMPUESTO'),(3,'Exenta','Exc','ACTIVO','BASE');
+	
+	insert into cajas values (1,1,10000,0,CURRENT_TIMESTAMP(),null,1,1,0,'ABIERTA');
+	insert into metodos_pago_facturas values (1, 1, 1, 150000);
+	insert into tipo_totales_facturas values (1,1, 3, 150000, 150000);
+	INSERT INTO facturas (factura_id,consecutivo,comprobante_id,tercero_id,fecha_creacion,fecha_emision,fecha_vencimiento,plazo,usuario_ingreso_id,fecha_anulo,usuario_anulo_id,estado,pedido_id,remision_id,vendedor_id,descuento,caja_id,observaciones,saldo,total_factura) 
+	VALUES (
+		1,
+	    1001,                -- consecutivo
+	    1,                   -- comprobante_id (ejemplo)
+	    1,                   -- tercero_id (ejemplo)
+	    NOW(),               -- fecha_creacion
+	    CURDATE(),           -- fecha_emision
+	    DATE_ADD(CURDATE(), INTERVAL 30 DAY), -- fecha_vencimiento
+	    30,                  -- plazo
+	    1,                   -- usuario_ingreso_id (ejemplo)
+	    NULL,                -- fecha_anulo (aún no anulada)
+	    NULL,                -- usuario_anulo_id (aún no anulado)
+	    'ACTIVO',            -- estado
+	    NULL,                -- pedido_id
+	    NULL,                -- remision_id
+	    1,                   -- vendedor_id (ejemplo)
+	    10,             -- descuento
+	    1,                   -- caja_id (ejemplo)
+	    'Factura de prueba con todos los campos', -- observaciones
+	    0.00,                -- saldo
+	    150000.00            -- total_factura
+	);
+
  /****************************************************************/
   
  

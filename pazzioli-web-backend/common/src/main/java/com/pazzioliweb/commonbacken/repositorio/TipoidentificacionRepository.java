@@ -1,11 +1,10 @@
-package com.pazzioliweb.usuariosbacken.repositorio;
+package com.pazzioliweb.commonbacken.repositorio;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
-import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
+import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 
 public interface TipoidentificacionRepository  extends JpaRepository<Tipoidentificacion, Long> {
 

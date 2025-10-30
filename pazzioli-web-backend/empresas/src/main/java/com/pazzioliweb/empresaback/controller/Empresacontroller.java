@@ -38,9 +38,8 @@ import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
 import com.pazzioliweb.productosmodule.entity.Bodegas;
 import com.pazzioliweb.productosmodule.repositori.BodegasRepository;
-import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.commonbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
-import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
 
 import jakarta.persistence.EntityManager;
@@ -54,6 +53,7 @@ import com.pazzioliweb.commonbacken.entity.Departamento;
 import com.pazzioliweb.commonbacken.entity.Impuestos;
 import com.pazzioliweb.commonbacken.entity.Municipio;
 import com.pazzioliweb.commonbacken.entity.Pais;
+import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 
 @Component
 @RestController

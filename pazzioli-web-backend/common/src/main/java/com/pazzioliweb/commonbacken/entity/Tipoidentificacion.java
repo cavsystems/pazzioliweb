@@ -1,4 +1,4 @@
-package com.pazzioliweb.usuariosbacken.entity;
+package com.pazzioliweb.commonbacken.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -6,11 +6,12 @@ import Chatsloopgiadmin from "./charts/chartsloopgi";
 import { useState } from "react";
 
 function Dashboardadmin() {
-     const {totallinea,bodegas}=chartcontex()
-     const [codigobodega,setcodigobodega]=useState('0');
+     const {totallinea,bodegas,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega,setcodigobodega,traertotalxinventariopage}=chartcontex()
+    
       
     const selectbodega=(e:any)=>{
        setcodigobodega((prev)=> e.target.value)
+       traertotalxinventariopage(1,e.target.value)
     }
     
     return(
@@ -59,7 +60,7 @@ function Dashboardadmin() {
                                                                     >
                                                                       <option value="0" >Seleccione</option>
                                                                      
-                                                                       {bodegas.map((item,key)=>{
+                                                                       {bodegas?.map((item,key)=>{
                                                                         return(
                                                                           <option value={item.codigo.toString()} key={key}>{item.nombre}</option>
   

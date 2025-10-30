@@ -12,11 +12,12 @@ import lombok.Data;
 @Table(name = "regimen")
 public class Regimen {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
-  private String codigoRegimen;
-  private String descripcion;
-  private String estado;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int codigo;
+	
+	private String codigoRegimen;
+	private String descripcion;
+	private String estado;
    public String getCodigoRegimen() {
 	return codigoRegimen;
 }
