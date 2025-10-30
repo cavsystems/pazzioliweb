@@ -7,8 +7,9 @@ function Chartinventariolinea() {
   const [negativo,setnegativo]=useState(false)
   const [numeroregistros,setnumeroregistros]=useState<number[]>([])
   const [pagination,setpagination]=useState(false)
-  const {settotallinea,registropaginador,totalesporlinea,settotalesporlinea,lineasupda,traertotalxinventariopage,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega}=chartcontex()
+  const {settotallinea,registropaginador,totalesporlinea,settotalesporlinea,lineasupda,traertotalxinventariopage,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega,traertotalxinventariopagenext,  totallinea}=chartcontex()
  useEffect(()=>{
+  console.log(currentPage,"cuerrenpage")
                       if (currentPageindex < 0) {
     if (currentPageindex !== 0) setCurrentPageindex(0);
     if (currentPage !== 1) setCurrentPage(1);
@@ -17,6 +18,7 @@ function Chartinventariolinea() {
 
  
   if (currentPage > registropaginador.length) {
+    
     const newIndex = Math.max(0, registropaginador.length - 3);
     const newPage = registropaginador.length > 0 ? registropaginador.length : 1;
 
@@ -161,11 +163,11 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
   try {
     if (Array.isArray(totalesporlinea)) {
       const total = totalesporlinea.reduce((sum:any,linea:any)=>sum+ (linea.totalLinea||0),0);
-      console.log("totales", total);
+      console.log("totales",totallinea);
     
       settotalesporlinea(totalesporlinea.map((linea:any)=> ({
         ...linea,
-        porcentaje: total > 0 ? (linea.totalLinea / total) * 100 : 0,
+        porcentaje: total > 0 ? (linea.totalLinea /   totallinea) * 100 : 0,
       })));
     }
   } catch (e) {
@@ -181,7 +183,7 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.descripcion}</span>  <span>${lineas.totalLinea.toLocaleString('de-DE')}</span>
+                      <span>{lineas.descripcion}</span>  <span>${`${lineas.totalLinea.toLocaleString('de-DE')}  (${lineas.porcentaje?.toFixed(2)}%)`}</span>
                  </div>
              
                   <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>
@@ -212,7 +214,7 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
         setCurrentPage((prev)=> prev-1)
        
                    
-  traertotalxinventariopage(currentPage-1)
+traertotalxinventariopagenext(currentPage-1,codigobodega)
        
         
        
@@ -231,7 +233,7 @@ const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
         setCurrentPageindex(prev=> prev+1)
         setCurrentPage((prev)=>prev+1)
          determinarcontador()
-            traertotalxinventariopage(currentPage+1)
+           traertotalxinventariopagenext(currentPage+1,codigobodega)
           
 
   

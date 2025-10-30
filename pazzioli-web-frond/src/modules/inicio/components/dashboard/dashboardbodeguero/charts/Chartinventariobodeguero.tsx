@@ -2,8 +2,67 @@ import { useEffect, useState } from "react";
 import { chartcontex } from "../../../contextchart";
 import { CPagination, CPaginationItem } from "@coreui/react";
 function Chartinventariobodega(){
+  const {settotallinea,registropaginador,totalesporlinea,settotalesporlinea,lineasupda,traertotalxinventariopage,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega,traertotalxinventariopagenext,settotalnumeroprolinea,totalnumeroprolinea}=chartcontex()
+const [numeroregistros,setnumeroregistros]=useState<number[]>([])
 
-  const {settotalnumeroprolinea}=chartcontex()
+   useEffect(()=>{
+  console.log(currentPage,"cuerrenpage")
+                      if (currentPageindex < 0) {
+    if (currentPageindex !== 0) setCurrentPageindex(0);
+    if (currentPage !== 1) setCurrentPage(1);
+    return;
+  }
+
+ 
+  if (currentPage > registropaginador.length) {
+    
+    const newIndex = Math.max(0, registropaginador.length - 3);
+    const newPage = registropaginador.length > 0 ? registropaginador.length : 1;
+
+    if (currentPageindex !== newIndex) setCurrentPageindex(newIndex);
+    if (currentPage !== newPage) setCurrentPage(newPage);
+    return;
+  }
+
+  // actualizar registros visibles
+  setnumeroregistros(
+    registropaginador.slice(currentPageindex, currentPageindex + 3)
+  );
+                       
+                  
+
+            
+
+ },[currentPage,currentPageindex])
+  useEffect(()=>{
+   
+
+    setnumeroregistros((prev)=> prev=registropaginador.slice(currentPageindex,currentPageindex+3))
+
+  },[registropaginador])
+
+   
+  const determinarcontador=()=>{
+   
+    if(contador===1){
+      console.log("es igual a tres",contador)
+     setcontador(1)
+      
+              setCurrentPageindex(currentPage-1)
+           
+             
+           
+    }else{
+       
+       setcontador(prev=> prev+1)
+    }
+
+
+        
+     
+    
+  }
+
    /* const total = 100; // valor máximo (ej: ventas meta)
   const actual = 65; // valor actual (ej: ventas logradas)
 
@@ -77,27 +136,36 @@ function Chartinventariobodega(){
 ])
 
 useEffect(()=>{
-settotaltodo(lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0))
-const total=lineastotales.reduce((sum:any,linea:any)=>sum+linea.total,0)
-settotalnumeroprolinea(total)
-setLineastotales(lineastotales.map((linea:any)=> {
-   return {
-          ...linea,
-          porcentaje: (linea.total / total) * 100, // ✅ CORREGIDO
-        };
-   
-}))
-},[])
+
+settotaltodo(totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0))
+const total=totalesporlinea.reduce((sum:any,linea:any)=>sum+linea.totalLinea,0)
+
+
+  try {
+    if (Array.isArray(totalesporlinea)) {
+      const total = totalesporlinea.reduce((sum:any,linea:any)=>sum+ (linea.totalLinea||0),0);
+      console.log("totalessssssss",  (totalesporlinea[0].cantidadLinea / totalnumeroprolinea) * 100 ,totalesporlinea[0] );
+    
+      settotalesporlinea(totalesporlinea.map((linea:any)=> ({
+        ...linea,
+        porcentaje: total > 0 ? (linea.cantidadLinea / totalnumeroprolinea) * 100 : 0,
+      })));
+    }
+  } catch (e) {
+    console.error("❌ Error en useEffect de totalesporlinea", e);
+  }
+},[lineasupda])
 
 
   return (
     <div  style={{ padding: "16px 16px 0 16px", borderRadius: "12px", width: "100%",height:'100%',minHeight:'369px',position:"relative" }}>
       {
-        lineastotales.map((lineas:any)=>{
+        totalesporlinea && Array.isArray(totalesporlinea) && totalesporlinea.map((lineas:any)=>{
             return (
                 <>
                  <div className="d-flex justify-content-between" style={{marginBottom:'5px'}}>
-                      <span>{lineas.nombre}</span>  <span>{lineas.total.toLocaleString('de-DE')}</span>
+                      <span>{lineas.descripcion}</span>  <span>{`${lineas.cantidadLinea}(${lineas.porcentaje?.toFixed(2)}%)`
+}</span>
                  </div>
              
                   <div style={{ background: "#eee", borderRadius: "8px", overflow: "hidden", height: "4px" ,  marginBottom:'12px'}}>
@@ -119,19 +187,44 @@ setLineastotales(lineastotales.map((linea:any)=> {
         })
       }
      
-      <CPagination aria-label="Page navigation example"  style={{    position: 'absolute',
+      <CPagination aria-label="Page navigation example" style={{    position: 'absolute',
     width: '100%',
-    bottom: '0' ,left:'0'}} className="paginacionpastel">
-      <CPaginationItem aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
+    bottom: '0'}}>
+      <CPaginationItem aria-label="Previous" onClick={(e)=>{
+      
+        setCurrentPageindex((prev)=> prev-1)
+        setCurrentPage((prev)=> prev-1)
+       
+                   
+traertotalxinventariopagenext(currentPage-1,codigobodega,"cantidadLinea")
+       
+        
+       
+        
+      }}>
+        <span aria-hidden="true" >&laquo;</span>
       </CPaginationItem>
-      <CPaginationItem className="act">1</CPaginationItem>
-      <CPaginationItem>2</CPaginationItem>
-      <CPaginationItem>3</CPaginationItem>
-      <CPaginationItem aria-label="Next">
+      {
+        numeroregistros.map((item,key)=>{
+          return   <CPaginationItem  className={currentPage===item ?`activepagi`:""}>{item}</CPaginationItem>
+        }
+        )
+      }
+     
+      <CPaginationItem aria-label="Next" onClick={(e)=>{
+        setCurrentPageindex(prev=> prev+1)
+        setCurrentPage((prev)=>prev+1)
+         determinarcontador()
+           traertotalxinventariopagenext(currentPage+1,codigobodega,"cantidadLinea")
+          
+
+  
+        
+      }}>
         <span aria-hidden="true">&raquo;</span>
       </CPaginationItem>
     </CPagination>
+      
       
     </div>
   );

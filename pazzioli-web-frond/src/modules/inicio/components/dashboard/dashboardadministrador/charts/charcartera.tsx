@@ -8,10 +8,16 @@ import React, { useEffect } from 'react';
 /* accumulated se usa más adelante para calcular la posición de los labels a partir del ángulo acumulado. */
 let accumulated = 0;
 const data:any = [
-  { id:0,label: '0-30 dias', value: 420000, color: '#53EAFD' ,porcentaje:0 },
-  { id:1,label: '30-60 dias', value: 300000, color: '#21BCFF' ,porcentaje:0},
-  { id:2,label: '60-90 dias', value: 300000, color: '#FFD230' ,porcentaje:0},
-  { id:3,label: '+90 dias', value: 120000, color: '#FF8042' ,porcentaje:0},
+  
+ 
+  
+ 
+
+ { id:0,label: '30-60 dias', value: 120000, color: '#FF8042' ,porcentaje:0},
+ { id:1,label: '60-90 dias', value: 300000, color: '#34A6F4' ,porcentaje:0},
+  { id:2,label: '0-30 dias', value: 120000, color: '#38D5BE' ,porcentaje:0},
+  { id:3,label: '+90 dias', value: 300000, color: '#ffba3bff' ,porcentaje:0},
+
 ];
 /*  Configuras el PieChart con un tamaño fijo, margen derecho y sin leyenda integrada.*/
 const settings = {
@@ -41,7 +47,7 @@ function Chartcartera() {
     })
     settotalcartera(total)
     const dataconporcentaje=data.map((item:any)=>{
-      return {...item,porcentaje: parseFloat(((item.value / total) * 100).toFixed(3))}
+      return {...item,porcentaje: parseFloat(((item.value / total) * 100).toFixed(2))}
     })
     setdatacartera(dataconporcentaje)
      
@@ -218,7 +224,7 @@ font: "normal normal bold 12px/12px Open Sans",
           borderRadius:'10px'
         }}
       />
-      <span>{s.label}-${s.value.toLocaleString('de-DE')}{`(${s.porcentaje})`}</span>
+      <span>{s.label}-${s.value.toLocaleString('de-DE')}{`    (${s.porcentaje}%)`}</span>
     </div>
   ))}
 </div>

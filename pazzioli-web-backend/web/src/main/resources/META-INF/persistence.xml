@@ -9,6 +9,9 @@
          <class>com.pazzioliweb.usuariosbacken.entity.Permiso</class>
           <class>com.pazzioliweb.usuariosbacken.entity.PermisoRol</class>
             <class>com.pazzioliweb.usuariosbacken.entity.Tipopersona</class>
+                        <class>com.pazzioliweb.productosmodule.entity.Usuariobodega</class>
+                           <class>com.pazzioliweb.usuariosbacken.entity.Usuarioclientes</class>
+                            <class>com.pazzioliweb.usuariosbacken.entity.Usuarioclientesusuario</class>
           
           
         

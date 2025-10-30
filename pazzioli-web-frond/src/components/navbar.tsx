@@ -1,9 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navcontex } from "./contextnavbar";
+import api from "../apicofig";
+import { chartcontex } from "../modules/inicio/components/contextchart";
+import { useAppSelector } from "../store/store";
+import { appcontex } from "../context";
 
 function Navbar() {
+  
     const {setnav}=navcontex();
+    const {imagenlogo,setimagenlogo}=chartcontex()
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 914);
+ const usuario= useAppSelector(state => state.authglobal.user);
+ 
+    useEffect(()=>{
+
+
+   const traerfoto=async ()=>{
+   const datosem = await api.get("/empresa/traerinformacionem")
+   console.log("DATOS EMPRESA" ,datosem)
+    console.log("empresa imagen",datosem.data.empresa[0].imagenEmpresa)
+    const reader=new FileReader();
+   
+    reader.readAsArrayBuffer(base64ToBlob(datosem.data.empresa[0].imagenEmpresa,datosem.data.empresa[0].tipoImagen))
+
+    reader.addEventListener('load',(e)=>{
+        const result = e.target?.result;
+        if(result && result instanceof ArrayBuffer ){
+let video= new Blob([new Uint8Array(result)],{type:'video/mp4'})
+        let url=URL.createObjectURL(video)// video contiene un blob valido para crear una urñ
+       setimagenlogo(url);
+       
+        }
+        
+       
+    })
+   }
+   traerfoto();
+    },[usuario])
+
+
+    function base64ToBlob(base64: string, contentType: string) {
+  const byteCharacters = atob(base64);
+  const byteNumbers = new Array(byteCharacters.length);
+
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+
+  const byteArray = new Uint8Array(byteNumbers);
+  return new Blob([byteArray], { type: contentType });
+}
     window.addEventListener('resize', () => {
 
         setIsLargeScreen(window.innerWidth >= 914);
@@ -49,19 +95,19 @@ function Navbar() {
 
                        <li className="navsiguiente">
                         <div> <div className="iconospedidossidebar"> <img src="/imgs/imagenniconcasa.svg" className="imgnavicon" />  <span>Inicio</span></div></div>
-                          <div><div className="iconospedidossidebar"> <span>Menu</span></div></div>
+                          <div><div className="iconospedidossidebar"> <span>Menú</span></div></div>
                          <div ><div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/imgdatafono.svg" className="imgnavicon"/> <span>Caja</span> </div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
                             abrirtogle('caja')
                          }}/></div></div> <div id="caja" className="noactive active" >
                             <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div className="contenlist"></div><span>Facturacion</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Facturación</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Devoluciones</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Recibos de caja</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Comprobantes de egresos</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Comprobantes de egreso</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Consultar facturas</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Consultar devoluciones</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Resoluciones</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>vendedores</span></li>
+                                <li className="listitem"> <div className="contenlist"></div> <span>Vendedores</span></li>
                             </ul>
                             </div></div>
                          <div><div className="iconospedidossidebar"><img src="/imgs/pedidos.svg" className="imgnavicon"/> <span>Pedidos</span></div></div>
@@ -76,14 +122,14 @@ function Navbar() {
                               <ul className="listasidebar" style={{height:"fit-content"}}>
                                 <li className="listitem"> <div className="contenlist"></div><span>Consultar producto</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Bodegas</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Entradas de inventario</span></li>
+                                <li className="listitem"> <div className="contenlist"></div> <span>Entrada de inventario</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Salida de inventario</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Traslado de inventario</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Compras</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Recalcular costos</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Inventario fisico</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Programar descuentos</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Imprimir codigos de barras</span></li>
+                                <li className="listitem"> <div className="contenlist"></div> <span>Imprimir códigos de barras</span></li>
                             </ul>
                             </div></div>
                        <div> <div className="containertogle"><div className="iconospedidossidebar"><img src="/imgs/despacho.svg"/> <span>Despachos</span></div> <div> <img src="/imgs/togle.svg" className="botontogledash" onClick={()=>{
@@ -92,7 +138,7 @@ function Navbar() {
                         <div id="despachos" className="noactive">
                               <ul className="listasidebar" style={{height:"fit-content"}}>
                                 <li className="listitem"> <div className="contenlist"></div><span>Consultar conductores</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Consultar Despachos</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Consultar despachos</span></li>
                               
                                
                             </ul>
@@ -103,8 +149,8 @@ function Navbar() {
                               <ul className="listasidebar" style={{height:"fit-content"}}>
                                 <li className="listitem"> <div className="contenlist"></div><span>Cuentas por cobrar</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Cuentas por pagar</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>AUX cartera CXC</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>AUX cartera CXP</span></li>
+                                <li className="listitem"> <div className="contenlist"></div> <span>Auxiliar de clientes</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span>Auxiliar de provedores</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Monitor de caja</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Inventarios</span></li>
                                
@@ -275,12 +321,12 @@ function Navbar() {
              }} ></li>}
 
 
-             <li style={{position:"absolute",right:'0',height:'100%',display:"flex" ,justifyContent:"center", alignItems:"center",  gap:'12px'}}>
+             <li style={{position:"absolute",right:'0',height:'100%',display:"flex" ,justifyContent:"center", alignItems:"center",  gap:'12px',marginRight:"32px"}}>
                 <div>
                 <img  src="imgs/imagennoti.svg"/>
                 </div>
                  <div className="contentnavline"></div>
-                <div style={{display: 'inline-flex',justifyContent: "center",alignItems: "center",gap: '12px'}}> <span>Luis david</span> <img src="imgs/avatar.svg"/></div>
+                <div style={{display: 'inline-flex',justifyContent: "center",alignItems: "center",gap: '12px'}}> <span>Luis david</span>    {imagenlogo  ? <img src={imagenlogo}  className="imagenlogoavatar"/>:<img src="imgs/avatar.svg"/>}</div>
              </li>
          
         </ul>

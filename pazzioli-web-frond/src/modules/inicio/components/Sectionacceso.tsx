@@ -1,25 +1,32 @@
 import { useEffect, useState, type JSX } from "react";
 import { navcontex } from "../../../components/contextnavbar";
+import { useNavigate } from "react-router";
 
 function Sectionacceso() {
     const [rol,setrool]=useState("cajero")
     const {nav}=navcontex();
+    const navigate=useNavigate();
     const [imgenes, setImgenes] = useState([{
         imgen:'/imgs/compras.svg',
-        label:'Nueva Compra'
+        label:'Nueva compra',
+        link:'/compras'
+        
     },
     {
         imgen: '/imgs/pedidos.svg',
-         label:'Nuevo pedido'
+         label:'Nuevo pedido',
+     link:'/tomapedidos'
 
     },
   
     {
         imgen:'/imgs/facturas.svg',
-         label:'Nueva Factura'
+         label:'Nueva factura',
+         link:'/facturacion'
     },{
         imgen:'/imgs/pagos.svg',
-         label:'Nuevo pago'
+         label:'Nuevo recibo',
+         link:'/recibocaja'
     },
     
    ])
@@ -33,7 +40,9 @@ useEffect(()=>{
         return imgenes.map((item, index) => {
             
             return (
-                <button key={index} className="botonesacceso">
+                <button key={index} className="botonesacceso"  onClick={(e)=>{
+                  navigate(item.link)
+                }}>
                     <div style={{display: 'flex',
 
     flexDirection: 'column',

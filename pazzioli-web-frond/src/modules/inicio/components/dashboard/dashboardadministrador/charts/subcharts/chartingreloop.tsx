@@ -71,6 +71,7 @@ function Ingresoloopchar() {
             fill: true, // rellena el área bajo la línea
           },
           {
+               
             //el nombre de la serie (aparece en la leyenda)
             label: "Ventas",
             //los valores en el eje y
@@ -81,6 +82,7 @@ function Ingresoloopchar() {
             //color de relleno (si lo habilitas en otras configs).
             backgroundColor: "lightblue",
             tension: 0.4, // curva suave
+            borderDash: [5, 5],
           },
     
         ],

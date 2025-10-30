@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.commonbacken.dtos.DatosSesiones;
 import com.pazzioliweb.commonbacken.redis.RedisConfig;
+import com.pazzioliweb.usuariosbacken.dtos.PermisosrolesDTOS;
 import com.pazzioliweb.usuariosbacken.entity.Permiso;
 import com.pazzioliweb.usuariosbacken.entity.PermisoRol;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
@@ -59,6 +60,7 @@ public class JwUtilJava {
 	  	    	sesion.setDbName(db);
 	  	    	sesion.setIdUsuario(sessionId);
 	  	    	sesion.setNivel(u.getCodigorol().getNombre());
+	  	    	
 	  	    	sesion.setCreada(Instant.now());
 	  	    	sesion.setExpira(Instant.now().plus(24, ChronoUnit.HOURS));
 	  	    	redisTemplate.opsForValue().set(sessionId, sesion, Duration.ofHours(24));
@@ -109,7 +111,9 @@ public class JwUtilJava {
   		  	}
 	    	return permisosUsuarioActivo;
 	    }
-
+	    
+	    
+   
 }
 
 

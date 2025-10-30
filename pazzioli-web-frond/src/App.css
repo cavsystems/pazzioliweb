@@ -2,9 +2,19 @@
 
 /*estilos modulo auth*/
 *{
-    z-index: 0 !important;
+
     
   
+}
+
+
+html{
+    overflow: hidden;
+}
+
+.containeroot{
+    overflow: auto !important;
+    max-height: 642px !important;
 }
 
 
@@ -285,7 +295,7 @@ opacity: 1;
 }
 
 .inputselect{
-    padding:22px 16px  5px 10px !important;
+    padding:22px 16px  5px 12px !important;
    border-radius: 6px !important;
 }
 
@@ -504,7 +514,18 @@ position: relative;
 left: 8px;
 }
 .activepagi>a{
-    background: hsl(246, 79%, 52%) !important;
+    background: var(--azul-pazzioli) 0% 0% no-repeat padding-box;
+border: 1px solid var(--gris-bordes);
+background: #5AADDC 0% 0% no-repeat padding-box;
+border: 1px solid #D3D4D4;
+opacity: 1;
+
+color: var(--blanco);
+text-align: center;
+font: normal normal normal 15px/24px Open Sans;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
 }
 .navsiguienteresponsive   .lilogomenu{
     width: 100%;
@@ -630,6 +651,7 @@ padding-top: 5px !important;
     height: 22px;
         position: absolute;
     left:20px;
+    top: 25px !important;
 }
 
 .navpazzioli  .navizquierdores::before {
@@ -640,4 +662,47 @@ padding-top: 5px !important;
   background: #555555;
   box-shadow: 0 6px 0 #555555, 0 12px 0 #555555; /* crea 3 líneas */
   margin-bottom: 5px;
+}
+
+@media (max-width:910px) {
+    .homenavigation{
+        margin-left: 20px !important;
+    }
+    
+}
+
+.navpazzioli   .navizquierdor {
+    list-style: none !important;
+    display: inline-block !important;
+padding-top: 5px !important;
+    font: normal normal normal 14px/19px Open Sans !important;
+    letter-spacing: 0px !important;
+    color: #555555 !important;
+    opacity: 1 !important;
+    width: 22px;
+    height: 22px;
+        position: absolute;
+    left:20px;
+    top: 25px !important;
+}
+
+.navpazzioli  .navizquierdor::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: #555555;
+  box-shadow: 0 6px 0 #555555, 0 12px 0 #555555; /* crea 3 líneas */
+  margin-bottom: 5px;
+}
+
+@media (max-width:910px) {
+    .homenavigation{
+        margin-left: 20px !important;
+    }
+    
+}
+
+.containerdivagregaru{
+ padding-bottom: 60px !important;
 }

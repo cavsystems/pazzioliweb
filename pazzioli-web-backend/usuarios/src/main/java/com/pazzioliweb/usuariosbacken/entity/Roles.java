@@ -27,7 +27,7 @@ public class Roles {
     private String nombre;
     @OneToMany(mappedBy= "codigorol")
    	private List<PermisoRol> permisos_roles;
-
+ 
     // Opcional: relación inversa si la necesitas
     @OneToMany(mappedBy = "codigorol")
     private List<Usuario> usuarios;

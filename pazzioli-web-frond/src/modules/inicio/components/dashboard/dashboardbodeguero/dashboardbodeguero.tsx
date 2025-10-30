@@ -7,8 +7,14 @@ import Chartinventariobodega from "./charts/Chartinventariobodeguero";
 import Charttop from "./charts/charttop";
 
 function Dasboardbodeguero() {
-   const {totalnumeroprolinea}=chartcontex()
+  const {totallinea,bodegas,currentPage,currentPageindex,contador,setCurrentPage,setCurrentPageindex,setcontador,codigobodega,setcodigobodega,traertotalxinventariopage,totalnumeroprolinea}=chartcontex()
     
+        
+    const selectbodega=(e:any)=>{
+        console.log("codigobodega",e.target.value)
+       setcodigobodega((prev)=> e.target.value)
+       traertotalxinventariopage(1,e.target.value,'cantidadLinea')
+    }
     return(
         <>
           <div className="row" style={{maxHeight:'1400px'}}>
@@ -38,14 +44,19 @@ function Dasboardbodeguero() {
                                         placeholder="Tipo de identificacion"
                                         className="inputselect fontletre"
                                     
-                                            value=""
+                                            value={codigobodega}
                                             name='bodega'
-                                       
+                                        onChange={selectbodega}
                                        
                                       >
-                                        <option value="0">bodega1</option>
+                                        <option value="0" >Seleccione</option>
                                        
-                                         <option value="0">bodega2</option>
+                                           {bodegas?.map((item,key)=>{
+                                                                        return(
+                                                                          <option value={item.codigo.toString()} key={key}>{item.nombre}</option>
+  
+                                                                        )
+                                                                       })}
                                       </CFormSelect>
                                       <CFormLabel>País</CFormLabel>
                                     </CFormFloating>

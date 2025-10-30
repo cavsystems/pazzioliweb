@@ -2,7 +2,7 @@ import { ThemeContext } from '@emotion/react';
 import { createContext, useContext } from 'react';
 import { fetchAuth } from '../fetchauth/fetchauth';
 import { Login } from '../authslice/uathslice';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 //context para manejar la autenticacion
 // este contexto se utiliza para manejar el estado de autenticacion de la aplicacion
 //de forma que podamos acceder a el desde cualquier componente de la aplicacion

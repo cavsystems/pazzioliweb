@@ -22,7 +22,7 @@ function Ubicacion({ register, CInputGroup,
   const [codigodepar,setcodigodepart]=useState('0')
    const [codigomunicipio,setcodigomunicipio]=useState('0')
 
-  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigodepartamento:0, departamento: ''})
+  const[departactual,setdeparactual]=useState({codigo:0, codigopais:0, codigoDepartamento:0, departamento: ''})
   const [municipio,setmunicipio]=useState<municipio[]>([])
 
      useEffect(()=>{
@@ -48,8 +48,8 @@ const traercodigopostal=async (codigomunici:number)=>{
   },[departactual])
 const traermuni=async()=>{
   if(departactual.codigo!==0){
-    
-    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigodepartamento}`)
+    console.log("departamento",departactual)
+    const muni=await api.get(`/empresa/codigodeparta?codigo=${departactual.codigoDepartamento}`)
     setmunicipio(muni.data.repuesta)
     setValue("municipio","")
    console.log("municipiooooo",muni.data.repuesta)

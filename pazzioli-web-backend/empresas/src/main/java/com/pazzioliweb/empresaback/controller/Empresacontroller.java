@@ -33,8 +33,10 @@ import com.pazzioliweb.empresaback.dtos.EmpresaResponseauth;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse;
 import com.pazzioliweb.empresaback.dtos.Empresaresponse.Sucursales;
 import com.pazzioliweb.empresasback.entity.Actividadeconomica;
+import com.pazzioliweb.empresasback.entity.Empresa;
 import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
+import com.pazzioliweb.empresasback.repositori.EmpresaRepositori;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
 import com.pazzioliweb.productosmodule.entity.Bodegas;
 import com.pazzioliweb.productosmodule.repositori.BodegasRepository;
@@ -71,6 +73,8 @@ public class Empresacontroller {
 	  @Autowired 
 	  private TipopersonaRepository tipopersonarepositori;
 	  @Autowired 
+	  private EmpresaRepositori repoempresa;
+	  @Autowired 
 	  private TipoidentificacionRepository  tipoidentificacionrepositori;
 	  @Autowired
 	  private ActividadeconomicaRepositori actividadeconomicarepositorio;
@@ -98,7 +102,7 @@ public class Empresacontroller {
 	  private Map<String, Object> response = new HashMap<>();
 	  private Map<String, Boolean> responseempresa = new HashMap<>();
 	 	 @Transactional
-	 //@PostMapping("/crear"")
+	 //@PostMapping("/crear")
 	 	@PostMapping(value = "/crear", consumes = "multipart/form-data")
 	 public ResponseEntity<Map<String, Object>> crearEmpresa(@RequestPart("dto") Empresaresponse dto,@RequestPart(value = "archivo", required = false) MultipartFile archivo) throws Exception{
 	    	 // Aquí request.db es el tenantId}
@@ -163,6 +167,15 @@ public class Empresacontroller {
 		 	 }
 	 
 	 
+	 	 @RequestMapping("/traerinformacionem")
+	 	 public ResponseEntity<Map<String, Object>> traerempresainfo() {
+	 		 List<Empresa>  empresas=repoempresa.findAll();
+	 		 response.clear();
+	 		 response.put("empresa",empresas );
+	 		 return ResponseEntity.ok().body(response);
+	 		 
+	 	 }
+	 	 
 	 @RequestMapping("/traerempresa")
 	 public ResponseEntity<Map<String, Object>> traerempresa() {
 		 
@@ -224,7 +237,7 @@ public class Empresacontroller {
 	 
 	 @RequestMapping("/codigodeparta")
 	 public ResponseEntity<Map<String, Object>> traermunicipio(@RequestParam(defaultValue ="0") int codigo){
-	
+	System.out.println("codigo departamento traer municipio");
 		 List<Municipio> municipios=municipiorepositori.findByCodigoDepartamento(codigo);
 		 
 		 

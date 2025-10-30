@@ -58,16 +58,16 @@ public class ProductosService {
         return totalLineasXBodegas;
     }
     
-    public Double totallinea(){
+    public Optional<TotallineasDTO> totallinea(){
     	
-    	Double totali =productoRepositori. getTotalGloballineas();
+    	Optional<TotallineasDTO >  totali =productoRepositori. getTotalGloballineas();
     	return totali;
     	
     }
     
     
-    public Double totallineabodega(int BodegaId) {
-    	Double totalbo=productoRepositori.getTotalGloballineasXbodega(BodegaId);
+    public Optional<TotallineasDTO > totallineabodega(int BodegaId) {
+    	Optional<TotallineasDTO >   totalbo=productoRepositori.getTotalGloballineasXbodega(BodegaId);
     	return totalbo;
     }
     public Page<LineaProductosDTO> totalPorLineasXBodega(Integer bodegaId,int page, int size, String sortField, String sortDirection) {
