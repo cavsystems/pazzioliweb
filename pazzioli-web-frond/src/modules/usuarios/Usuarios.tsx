@@ -5,11 +5,89 @@ import { Modalusuario } from "./components/Modalusuariosucu";
 import Nuevorol from "./components/modalnuevorol";
 import { usuariocontex } from "./contextusuario";
 import api from "../../apicofig";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CIcon from "@coreui/icons-react";
+import { IoEyeSharp } from "react-icons/io5";
+import { ClassNames } from "@emotion/react";
+import { BsEyeSlashFill } from "react-icons/bs";
+import Modalpersonas from "./components/modalpersonas";
+import Bodegausuario from "./components/Modalbodegausuario";
+import { MdPassword } from 'react-icons/md';
+interface rolesu{
+  codigo:number,
+  usuario:string,
+  rol:string,
+  estado:string,
+ contrasena:string
+}
+
+interface bodegasusuario{
+  departamento
+: 
+string
+direccion
+: 
+string
+municipio
+: 
+string
+nombre
+: 
+string
+}
 function Usuarios() {
+  const [contraseactual,setContraseactual]=useState<number>(-1)
  const { modalrol,setmodalrol,traerroles} = usuariocontex();
+ const [rolesusu,setRolesusu]=useState<rolesu[]>([])
  const[rolesactual,setrolesactual]=useState<string>("");
+ const [visible,setVisible]=useState<boolean>(false);
+ const [visibleper,setVisibleper]=useState<boolean>(false);
+ const [codigousuario,setCodigousuario]=useState<number>(0);
+
+ const [modalbodegas,setModalbodegas]=useState<boolean>(false);
+ const [bodegasusuario,setbodegausuario]=useState<bodegasusuario[]>([]);
+const [codigousuarioseleccionado,setCodigousuarioseleccionado]=useState<number>(0);
+const [botonupdateu,setbotonupdateu]=useState<boolean>(false);
+ useEffect(()=>{
+  console.log("entroroles")
+  const traerrolesusu=async()=>{
+    const usroles=await api.get("usuario/traer/rolesusuario",{
+                                            headers: {
+                                              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                            }})
+
     
+    console.log("usuarioroles",usroles)
+    setRolesusu(usroles.data.rolesusuario)
+  }
+
+  traerrolesusu()
+
+
+
+
+ },[visible])
+
+ const traerbodegausuario=async (codigousuario:number)=>{
+const usubo=await api.get(`usuario/traerusuariobodega?usuarioid=${codigousuario}`,{
+                                            headers: {
+                                              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                            }})
+
+  setbodegausuario(usubo.data.data)
+
+console.log(usubo)
+ }
+    const cifrarcontraseñas=(con:string)=>{
+      let nuevostring=''
+      for (let index = 0; index < con.length; index++) {
+        nuevostring += "*";
+        
+      }
+
+      return nuevostring
+
+    }
     return ( <>
     <div className="d-flex justify-content-center " style={{height:"100%"}}>
         <div className="containerusuario">
@@ -23,20 +101,20 @@ function Usuarios() {
               <div className="col-12">
                  <div  className="tablesucursalescon" >
                                         <div className="tabla-wrapper">
-                                           <CTable className="tablasucursal">
+                                           <CTable  hover 
+  small
+  align="left" className="tablausuario">
                                           
                                           <CTableHead>
                                             <CTableRow>
-                                              <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
-                                            <CTableHeaderCell scope="col" >Apellido</CTableHeaderCell>
-                                              <CTableHeaderCell scope="col" >Direccion</CTableHeaderCell>
-                                              <CTableHeaderCell scope="col" >Numero</CTableHeaderCell>
-                                              <CTableHeaderCell scope="col " >Correo</CTableHeaderCell>
+                                            
                                                 <CTableHeaderCell scope="col">Usuario</CTableHeaderCell>
                                             <CTableHeaderCell scope="col" >Rol</CTableHeaderCell>
+                                              <CTableHeaderCell scope="col" >Contraseña</CTableHeaderCell>
                                              <CTableHeaderCell scope="col" >Estado</CTableHeaderCell>
+                                            
                                 
-                                               <CTableHeaderCell scope="col "  >Acciones</CTableHeaderCell>
+                                               <CTableHeaderCell scope="col "  className="thacciones" >Acciones</CTableHeaderCell>
                                             </CTableRow>
                                           </CTableHead>
                                           <CTableBody>
@@ -45,29 +123,68 @@ function Usuarios() {
                                          
               
                               
-                                  <CTableRow>
-                                <CTableDataCell >Luis David</CTableDataCell>
-                                   <CTableDataCell>Castillo</CTableDataCell>
-                               <CTableDataCell>calle 14#13-30</CTableDataCell>
-                                    <CTableDataCell>3122728269</CTableDataCell>
-                                     <CTableDataCell>luisdacade@gmail.com</CTableDataCell>
-                                      <CTableDataCell>caja 1</CTableDataCell>
-                              <CTableDataCell>Usuariocaja</CTableDataCell>
-                               <CTableDataCell>Activo</CTableDataCell>
+                                 
+                                    {
+                                      rolesusu.map((item,index)=>{
+                                        return <>
+                                         <CTableRow>
+                                              <CTableDataCell>{item.usuario}</CTableDataCell>
+                              <CTableDataCell>{item.rol}</CTableDataCell>
+                               <CTableDataCell><div style={{display: 'flex',
+
+    justifyContent: 'space-between',
+    height: '100%',
+    alignItems: 'center'}}>{contraseactual===index && <span>{item.contrasena} </span>} { contraseactual!==index && <span>{cifrarcontraseñas(item.contrasena)}</span>}  { contraseactual===index &&<img src="imgs/ojoabierto.svg" onClick={()=>{
+      setContraseactual(-1)
+    }}/>} { contraseactual!==index &&<img src="imgs/ojocerrado.svg" onClick={()=>{
+      setContraseactual(index)
+    }}/>}</div>  </CTableDataCell>
+                               <CTableDataCell>{item.estado}</CTableDataCell>
                                     
-                                      <CTableHeaderCell >
-                                        <div className="row justify-content-center g-2" >
+                                      <CTableHeaderCell  >
+                                        <div className="row justify-content-start " style={{gap:"12px" ,width: 'fit-content'}} >
                                             <div className="col-6" style={{ maxWidth: 'fit-content' }}>
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}  >
+                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}   onClick={()=>{
+                                                  setCodigousuarioseleccionado(item.codigo)
+                                                  setVisible(true)
+                                                  setbotonupdateu(true)
+                                                }} >
                                                     <img src="/imgs/imgeditar.svg"/>
                                                 </CButton>
                                             </div>
                                             <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}} >    <HiOutlineOfficeBuilding size={29} color="#fff" /></CButton>
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}}  onClick={()=>{
+                                                   traerbodegausuario(item.codigo)
+                                                   setModalbodegas(true)
+                                                }}>    <HiOutlineOfficeBuilding size={29} color="#fff" /></CButton>
+                                            </div>
+
+                                              <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}}  onClick={()=>{
+                                                  setCodigousuario(item.codigo)
+                                                  setVisibleper(true)
+                                                }}>    <img src="/imgs/usuariotable.svg" style={{    width: '29px',
+    height: '29px',
+    padding: '2px'}}/></CButton>
+                                            </div>
+
+                                           
+
+
+                                          <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '3px 6px 3px 6px', backgroundColor: '#D1D5DC'}}  onClick={()=>{
+                                                   traerbodegausuario(item.codigo)
+                                                   setModalbodegas(true)
+                                                }}>    <MdPassword size={20} color="#000" /></CButton>
                                             </div>
                                         </div>
                                       </CTableHeaderCell>
                                       </CTableRow>
+                                                                                </>}
+                                      )
+                                    }
+                            
+                                
                               
                                             
                 
@@ -78,6 +195,17 @@ function Usuarios() {
                                        
                                         </CTable>
                                         </div>
+
+
+                                           <div className="col-12 d-flex justify-content-center containerdivagregaru"   style={{marginTop:'10px' ,paddingBottom:"100px"}}>
+                    <div className="containersucursalboton">
+                          <CButton className="botonagregarsucursal"  onClick={
+                            ()=> {
+                              setVisible(!visible)
+                            }
+                          }>Agregar</CButton>
+                    </div>
+                   </div>
                                     </div>
             </div>
    <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: modalrol ? "flex":"none"}}>
@@ -85,8 +213,9 @@ function Usuarios() {
                           <CButton className="botonagregarsucursal"  >Crear Usuario</CButton>
                     </div>
 
-
-                    <Modalusuario/>
+                     <Bodegausuario modalbodegas={modalbodegas} setModalbodegas={setModalbodegas}  bodegasusuario={bodegasusuario} setbodegausuario={setbodegausuario}/>
+                    <Modalusuario visible={visible} setVisible={setVisible}  codigousuarioseleccionado={codigousuarioseleccionado} setCodigousuarioseleccionado={setCodigousuarioseleccionado} botonupdateu={botonupdateu} setbotonupdateu={setbotonupdateu}  />
+                    <Modalpersonas visibleper={visibleper} setVisibleper={setVisibleper} codigousuario={codigousuario} setCodigousuario={setCodigousuario} />
 
                     <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:9999,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
                             <div className="card" style={{ width:'400px'}}>

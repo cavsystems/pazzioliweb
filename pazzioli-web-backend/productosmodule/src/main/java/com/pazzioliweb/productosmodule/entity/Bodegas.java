@@ -153,5 +153,6 @@ public class Bodegas {
 		 @ManyToOne
 		 @JoinColumn(name = "codigomunicipio")
 	    private Municipio codigomunicipio;
+		 
 
 }

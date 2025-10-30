@@ -7,14 +7,18 @@
         margin-top: 10%;
     margin-bottom: 50px;
 }
-
+    .usuariomodal {
+        flex-wrap: wrap;
+    }
 @media (max-width: 768px) {
     .usuariomodal{
         flex-wrap: wrap;
     }
     
 }
-
+.thacciones{
+    text-align: left !important;
+}
 
 .tableusuario{
   box-shadow:    0px 3px 6px 3px rgba(0, 0, 0, 0.0509803922) !important;
@@ -28,3 +32,190 @@
   align-items: center; /* centra verticalmente */
 }
 
+
+.tablausuario{
+    
+     min-width: 1200px;
+     margin: 0 !important;
+      
+}
+.tablausuario th:last-child,
+.tablausuario td:last-child {
+width: 90px;
+text-align: left !important;
+  position: sticky;
+  right: 0;
+  border-left: 1px solid #cccccc;
+  background: white; /* Asegura que el contenido no se superponga */
+   z-index: 2; /* Eleva la columna por encima de las demás */
+   box-sizing: border-box !important;
+}
+.tablausuario th:last-child{
+    padding: 6px 8px  6px 15px !important;
+}
+
+.tablausuario th:last-child::before,
+.tablausuario td:last-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;  /* ajusta según ancho del borde */
+  width: 1px;
+  background-color: #cccccc;
+  z-index: 3;   /* encima del contenido de la celda */
+}
+
+.modalformper>div>.modal-content{
+    max-height: 500px !important;
+     box-shadow: 5px -10px 5px 0.5px rgb(0, 0, 0, 0.1);
+     max-width: 500px  !important;
+}
+.modalformper>.modal-dialog{
+    max-width: 100% !important;
+    position: fixed;
+    height: 100vh;
+    width: 100vw !important;
+    justify-content: center;
+  background:rgba(0,0,0,0.1);
+} 
+
+
+
+.continnerper{
+      padding: 0 !important;
+    overflow-x: auto;
+    max-width: 100% !important;
+    height: fit-content;
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.0509803922) !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    border-collapse: separate !important;
+}
+
+.tablausuario td{
+      padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  /* Alinea verticalmente el contenido de la celda al centro,
+en lugar de estar pegado arriba (top) o abajo (bottom).
+Esto es útil cuando en una misma fila tienes texto y elementos como íconos o botones. */
+  vertical-align: middle !important;
+  /* Ese valor solo reduce el espacio vertical entre líneas, esto genera una especie de centrado ya que proporciona
+  espacio entre la parte superior y inferior del texto*/
+  line-height: 1.2 !important;
+}
+.tableusuarioper td{
+      padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  /* Alinea verticalmente el contenido de la celda al centro,
+en lugar de estar pegado arriba (top) o abajo (bottom).
+Esto es útil cuando en una misma fila tienes texto y elementos como íconos o botones. */
+  vertical-align: middle !important;
+  /* Ese valor solo reduce el espacio vertical entre líneas, esto genera una especie de centrado ya que proporciona
+  espacio entre la parte superior y inferior del texto*/
+  line-height: 1.2 !important;
+}
+.tableusuarioper{
+    margin-bottom: 0 !important;
+}
+
+
+
+.tableusuarioper th:last-child,
+.tableusuarioper td:last-child {
+width: 90px;
+text-align: left !important;
+  position: sticky;
+  right: 0;
+  border-left: 1px solid #cccccc;
+  background: white; /* Asegura que el contenido no se superponga */
+   z-index: 2; /* Eleva la columna por encima de las demás */
+   box-sizing: border-box !important;
+}
+
+.tableusuarioper th,
+.tableusuarioper td {
+    border: 1px solid #E0E0E0 !important;
+
+}
+
+.tableusuarioper{
+     border-collapse: collapse !important;
+}
+
+.tableusuarioper th:last-child::before,
+.tableusuarioper td:last-child::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;  /* ajusta según ancho del borde */
+  width: 1px;
+  background-color: #cccccc;
+  z-index: 3;   /* encima del contenido de la celda */
+}
+.modalusuper>div>.modal-content{
+    max-height: 500px !important;
+}
+
+.botonper{
+        background: rgb(33, 188, 255);
+    color: rgb(255, 255, 255) !important;
+    border: none !important;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 10px;
+}
+
+.usuarioperfoo{
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+    box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.1607843137) !important;
+    border-radius: 0px 0px 7px 7px !important;
+    opacity: 1;
+}
+
+/*.tablausuario th,
+.tableusuarioper th{
+    background: #F5F5F5 0% 0% no-repeat padding-box !important;
+    box-shadow: inset 0px -1px 0px #E0E0E0 !important;
+    border-radius: 0px !important;
+    opacity: 1 !important;
+}*/
+
+
+.tableusuarioper {
+  width: 100% !important;
+  table-layout: fixed !important;  /* Esto hace que los widths se respeten */
+}
+
+.tableusuarioper {
+  width: 100%;
+}
+.tablausuario {
+  table-layout: fixed !important;
+  width: auto !important;
+}
+/* Esta es la tabla que quieres controlar manualmente */
+.tablausuario {
+  table-layout: fixed; /* ✅ Respetar widths por columnas */
+  width: fit-content; /* ✅ Se ajusta según tus columnas */
+  max-width: 100%; /* ✅ Evita desbordes feos */
+}
+
+.tablausuario {
+  table-layout: fixed !important;
+  width: max-content !important; /* ✅ usa el ancho real definido */
+}
+
+.tablausuario th,
+.tablausuario td {
+  white-space: nowrap !important; /* ✅ evita que el texto expanda filas */
+}
+
+.container-tabla {
+  overflow-x: auto; /* ✅ scroll si no cabe */
+}
+
+
+/* Columna acciones — fija */
+.tablausuario th:nth-child(5),
+.tablausuario td:nth-child(5) { width: 180px !important; }

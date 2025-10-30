@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -31,14 +33,23 @@ public class SecurityConfig {
 	  @Autowired
 	 private Jwtfilter filtro ;
 	  
+	  @Bean
+	    public PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
+	    }
+	  
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    	
+    
+    		
+    	
     	System.out.println(">>> Usando SecurityConfig principal para configurar rutas");
     	System.out.println("fitro token"+filtro);
     	//CORS ESPECIFICO LA CONFIGURACION QUE TENDRA
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth ->  auth.requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**")
+            .authorizeHttpRequests(auth ->  auth.requestMatchers("/error").permitAll().requestMatchers("/api/auth/**").permitAll().requestMatchers("/ws/**").permitAll().requestMatchers("/api/empresa/**")
             		.permitAll().requestMatchers("/api/digitoverificacion/**").permitAll().requestMatchers("/api/codigoPostal/**")
             		.permitAll().requestMatchers("/api/productos/**").permitAll().requestMatchers("/api/bodegas/**").permitAll().requestMatchers("/api/grupos/**")
             		.permitAll().requestMatchers("/api/lineas/**").permitAll().requestMatchers("/api/precios/**").permitAll().requestMatchers("/api/existencias/**").permitAll().

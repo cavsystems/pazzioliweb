@@ -7,11 +7,12 @@ interface roles{
     codigo:number,
     nombre:string,
 }
-function Formusuario({style}: any) {
+function Formusuario({style,botonupdateu,setbotonupdateu}: any) {
 
         const { register,control,setValue, formState: { errors } } = useFormContext();
        const {setrolactual} = usuariocontex();
     const [roles,setRoles]=useState<roles[]>([])
+
      useEffect(()=>{
 
         const traerroles=async()=>{
@@ -39,83 +40,9 @@ function Formusuario({style}: any) {
 
 
 
-    <div className="col-12  paddingempresa usuariomodal paddingempresamodal" style={{paddingLeft:'12px',gap:"12px"}}>
-                     <CInputGroup >
-                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   {...register('identificacion', { required: 'Este campo es obligatorio' })}             
-  />
-
-     {errors.identificacion? (
-      <CFormLabel style={{ color: "red" }}>Identificación</CFormLabel>
-    ) : (
-      <CFormLabel>Identificación</CFormLabel>
-    )}
-  </CFormFloating>
-            </CInputGroup>
-
-
-
-      
-
-
-              
-           
-
-            </div>
+   
             
-            <div className="col-12  d-flex  paddingempresa usuariomodal paddingempresamodal" style={{paddingLeft:'12px',gap:"12px"}}>
-                     <CInputGroup >
-                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"   {...register('nombre', { required: 'Este campo es obligatorio' })}             
-  />
-     {errors.nombre? (
-      <CFormLabel style={{ color: "red" }}>Nombre</CFormLabel>
-    ) : (
-      <CFormLabel>Nombre</CFormLabel>
-    )}
-  </CFormFloating>
-            </CInputGroup>
-
-
-
-             <CInputGroup >
-                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"       {...register('apellido', { required: 'Este campo es obligatorio' })}           
-  />
-   {errors.apellido? (
-      <CFormLabel style={{ color: "red" }}>Apellido</CFormLabel>
-    ) : (
-      <CFormLabel>Apellido</CFormLabel>
-    )}
-  </CFormFloating>
-            </CInputGroup>
-
-
               
-           
-
-            </div>
-
-
-               <div className="col-12 d-flex paddingempresa usuariomodal  paddingempresamodal" style={{paddingLeft:'12px',gap:"12px"}}>
-
-                 <CInputGroup >
-                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"      {...register('direccion')}            
-  />
-   <CFormLabel htmlFor="identificacion">Dirección</CFormLabel>
-  </CFormFloating>
-            </CInputGroup>
-
-             <CInputGroup >
-                <CFormFloating className="margeniputempresa"  {...register('numerotelefono')}    >
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"        
-  />
-   <CFormLabel htmlFor="identificacion">Número</CFormLabel>
-  </CFormFloating>
-            </CInputGroup>
-
-               </div>
 
 
 
@@ -123,9 +50,13 @@ function Formusuario({style}: any) {
 
                  <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"     {...register('correo')}
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"     {...register('nombre', { required: 'Este campo es obligatorio' })}
   />
-   <CFormLabel htmlFor="identificacion">Correo</CFormLabel>
+  {errors.nombre ? (
+      <CFormLabel style={{ color: "red" }}>Nombre*</CFormLabel>
+    ) : (
+      <CFormLabel>Nombre</CFormLabel>
+    )}
   </CFormFloating>
             </CInputGroup>
 
@@ -135,7 +66,7 @@ function Formusuario({style}: any) {
      
   />
   {errors.usuario ? (
-      <CFormLabel style={{ color: "red" }}>Usuario</CFormLabel>
+      <CFormLabel style={{ color: "red" }}>Usuario*</CFormLabel>
     ) : (
       <CFormLabel>Usuario</CFormLabel>
     )}
@@ -148,29 +79,32 @@ function Formusuario({style}: any) {
 
 
                
-                 <div className="col-12 d-flex paddingempresa usuariomodal  paddingempresamodal"  style={{paddingLeft:'12px',gap:"12px"}}>
+                     {!botonupdateu &&  <div className="col-12 d-flex paddingempresa usuariomodal  paddingempresamodal"  style={{paddingLeft:'12px',gap:"12px"}}>
 
-                 <CInputGroup >
+         <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"     {...register('contrasena', { required: 'Este campo es obligatorio' })}        
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"    {...(botonupdateu
+    ? register('contrasena')
+    : register('contrasena', { required: 'Este campo es obligatorio' }) 
+  )} 
   />
 
     {errors.contrasena? (
-      <CFormLabel style={{ color: "red" }}>Contraseña</CFormLabel>
+      <CFormLabel style={{ color: "red" }}>Contraseña*</CFormLabel>
     ) : (
       <CFormLabel>Contraseña</CFormLabel>
     )}
   </CFormFloating>
             </CInputGroup>
 
-             <CInputGroup >
+           <CInputGroup >
                 <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""  className="inputdatosempresa fontletre"         {...register('confirmarcontrasena' ,{ required: 'Este campo es obligatorio' })}       
+              <CFormInput placeholder=""  className="inputdatosempresa fontletre"         {...(botonupdateu ? register('confirmarcontrasena' ):register('confirmarcontrasena' ,{ required: 'Este campo es obligatorio' }))  }  
   />
 
    
     {errors.confirmarcontrasena? (
-      <CFormLabel style={{ color: "red" }}>confirmar contraseña</CFormLabel>
+      <CFormLabel style={{ color: "red" }}>confirmar contraseña*</CFormLabel>
     ) : (
       <CFormLabel>confirmar contraseña</CFormLabel>
     )}
@@ -179,7 +113,7 @@ function Formusuario({style}: any) {
   </CFormFloating>
             </CInputGroup>
 
-               </div>
+               </div>}
 
 
 

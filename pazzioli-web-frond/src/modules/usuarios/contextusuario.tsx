@@ -41,9 +41,25 @@ telefono
     
 
 }
+interface personas{
+  identificacion:string,
+ apellido:string
+codigo:number
+codigocliente:number
+correo:string
+direccion:string
+nombre: string,
+imagenperfil:ArrayBuffer | null,
+tipoimagen:string
+    }
 interface roles{
     codigo:number,
     nombre:string,
+}
+
+interface permilista{
+  nombre:string,
+  codigo:number
 }
 interface user{
 rolactual:string,
@@ -55,14 +71,36 @@ setmodalrol:Dispatch<SetStateAction<boolean>>
 rolesusua: roles[],
 setRolesusua:Dispatch<SetStateAction< roles[]>>
  traerroles:()=>Promise<void>
+ setPermisoslista:Dispatch<SetStateAction<String[]>>
+ permisoslista: String[]
+  setCheckedItems:Dispatch<SetStateAction<number[]>>
+  checkedItems:number[],errorbodega:boolean,setErrorbodega:Dispatch<SetStateAction<boolean>>
+  usuarioperselect:personas
+  setUsuarioselect:Dispatch<SetStateAction<personas>>
 }
 
 const Usuariocontext =createContext< user | null>(null);
 function Providerusuario({children}: {children: React.ReactNode}) {
-  const [rolactual,setrolactual]=useState<string>("")
+  const [permisoslista,setPermisoslista]=useState<String[]>([])
+  const [usuarioperselect ,setUsuarioselect]=useState<personas>({
+   identificacion:"",
+ 
+ apellido:"",
+codigo:0,
+codigocliente:0,
+correo:"",
+direccion:"",
+nombre:"",
+imagenperfil:null,
+tipoimagen:""
+    
+  })
+  const [rolactual,setrolactual]=useState<string>('0')
   const [tituloactual,setTituloactual]=useState<string>("")
   const [modalrol,setmodalrol]=useState<boolean>(false)
   const [rolesusua,setRolesusua]=useState< roles[]>([])
+ const [checkedItems, setCheckedItems] = useState<number[]>([]);
+ const [errorbodega,setErrorbodega]=useState<boolean>(false)
    const traerroles=async()=>{
               const  datarol=await api.get('usuario/roles',{
             headers: {
@@ -78,7 +116,8 @@ setrolactual,
 tituloactual,
 setTituloactual,
 modalrol,setmodalrol,
-rolesusua,setRolesusua, traerroles
+rolesusua,setRolesusua, traerroles ,
+permisoslista,setPermisoslista,checkedItems, setCheckedItems,errorbodega,setErrorbodega ,usuarioperselect ,setUsuarioselect
 }}> 
       {children}
     </Usuariocontext.Provider>

@@ -102,7 +102,7 @@ public class Empresacontroller {
 	  private Map<String, Object> response = new HashMap<>();
 	  private Map<String, Boolean> responseempresa = new HashMap<>();
 	 	 @Transactional
-	 //@PostMapping("/crear"")
+	 //@PostMapping("/crear")
 	 	@PostMapping(value = "/crear", consumes = "multipart/form-data")
 	 public ResponseEntity<Map<String, Object>> crearEmpresa(@RequestPart("dto") Empresaresponse dto,@RequestPart(value = "archivo", required = false) MultipartFile archivo) throws Exception{
 	    	 // Aquí request.db es el tenantId}

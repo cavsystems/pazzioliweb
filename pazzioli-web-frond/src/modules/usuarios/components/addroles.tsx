@@ -44,7 +44,7 @@ interface Permisos{
     nombre:string,
    
 }
-function Addroles({style}: any) {
+function Addroles({style,setCodigorolper, codigorolper}: any) {
     const {rolactual}=usuariocontex();
 const [indexcheck,setindexcheck]=useState<number>(0)
 const [codigocheck,setcodigocheck]=useState<number>(0)
@@ -55,7 +55,39 @@ const [checkedItems, setCheckedItems] = useState<number[]>([]);
    const [permisos,setPermisos]=useState<Permisos[]>([])
 const {setrolactual,setTituloactual,rolesusua,setRolesusua,traerroles} = usuariocontex();
    const { modalrol,setmodalrol} = usuariocontex();
-   const { register,control,setValue, formState: { errors } } = useFormContext();
+   const { register,control,setValue, formState: { errors } ,getValues} = useFormContext();
+useEffect(()=>{
+if( codigorolper>0 && permisos.length>0){
+  setcodigoroldelete(codigorolper)
+  setrolactual(codigorolper.toString())
+   const permisorol=async()=>{
+                                      permisos.forEach((item)=>{
+                                        const checkboxes = document.getElementById(`checkpermiso${item.codigo}`) as HTMLInputElement;
+                                        checkboxes.checked=false;
+                                      })
+
+                                    const permisoss=await api.get(`usuario/permisosroles?codigoroles=${codigorolper}`,{
+                                            headers: {
+                                              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                            }})
+                                       console.log("permisos roles",permisoss)
+                                            
+                                       const permisosrol: number[] = permisoss.data.permisos.map((p: { codigopermiso: number }) => p.codigopermiso);
+                                      console.log("permisosrol",permisosrol)
+
+                                      if(permisosrol.length>0){    
+                                         permisosrol.forEach((item)=>{
+                                         const checkboxes = document.getElementById(`checkpermiso${item}`) as HTMLInputElement;
+                                           checkboxes.checked=true;
+                                         })
+                                      
+                                      }
+
+                                   } 
+                                   permisorol();
+}
+ 
+},[codigorolper,permisos]);
 useEffect(()=>{
     const traerpermiso=async()=>{
    
@@ -149,7 +181,7 @@ traerpermiso()
                                     const selected =rolesusua.find((r) => r.codigo === Number(value));
                                   if (selected) {
                                     console.log(selected.nombre);
-                                    setrolactual(selected.nombre);
+                                    setrolactual(value);
                                   }
                           }}
                           >
@@ -167,7 +199,7 @@ traerpermiso()
                              
                           </CFormSelect>
                           {fieldState.error ? (
-                            <CFormLabel style={{ color: "red" }}>Rol usuario</CFormLabel>):(<CFormLabel>Rol usuario</CFormLabel>)}
+                            <CFormLabel style={{ color: "red" }}>Rol usuario*</CFormLabel>):(<CFormLabel>Rol usuario</CFormLabel>)}
                           </>
                           
                           )}
@@ -216,7 +248,14 @@ opacity: '1',
                 return <CTableRow>
                      <CTableDataCell scope="col">
              <input type="checkbox" className="checkbox h6  "  id={`checkpermiso${item.codigo}`} onChange={async(e)=>{
-              if(e.target.checked){}else{
+              if(e.target.checked){
+
+                const mensaje= await api.put(`usuario/crearpermisorol/${codigoroldelete}/${item.codigo}`,  null,{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+        }})
+        console.log(mensaje)
+              }else{
                 const mensaje=await api.delete(`usuario/eliminar/${codigoroldelete}/${item.codigo} `,{
         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
