@@ -39,7 +39,7 @@ public class ProductosController {
         this.productoService = productoService;
     }
 
-    @GetMapping("/listar")
+    /*@GetMapping("/listar")
     public ResponseEntity<ApiResponse<List<ProductoDTO>>> listar() {
     	List<ProductoDTO> productosListados = productoService.listarProductos()
     			.stream()
@@ -54,6 +54,42 @@ public class ProductosController {
     			    .status(HttpStatus.OK)
     			    .body(ApiResponse.failure("No hay productos disponibles"));
     	} 
+    }*/
+    @GetMapping("/listar")
+    public ResponseEntity<Map<String, Object>> listar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+
+        Page<ProductoDTO> productosPage = productoService.listar(page, size, sortField, sortDirection);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", productosPage.getContent());
+        response.put("currentPage", productosPage.getNumber());
+        response.put("totalItems", productosPage.getTotalElements());
+        response.put("totalPages", productosPage.getTotalPages());
+
+        return ResponseEntity.ok(response);
+    }
+    
+    @GetMapping("/buscar")
+    public ResponseEntity<Map<String, Object>> buscar(
+            @RequestParam String termino,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+
+        Page<ProductoDTO> resultados = productoService.buscar(termino, page, size, sortField, sortDirection);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", resultados.getContent());
+        response.put("currentPage", resultados.getNumber());
+        response.put("totalItems", resultados.getTotalElements());
+        response.put("totalPages", resultados.getTotalPages());
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -62,13 +98,17 @@ public class ProductosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Productos> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<ApiResponse<ProductoDTO>> buscarPorId(@PathVariable Integer id) {
         return productoService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .map(producto -> ResponseEntity.ok(
+                        ApiResponse.success("Producto encontrado", ProductoDTO.fromEntity(producto))
+                ))
+                .orElse(ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(ApiResponse.failure("Producto no encontrado")));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminar(@PathVariable Integer id) {
         productoService.eliminarProducto(id);
     }

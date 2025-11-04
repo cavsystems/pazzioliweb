@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
@@ -57,7 +58,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		                  SUM(e.existencia) as totalExistencia
 		           FROM productos p
 		           JOIN lineas l ON l.linea_id = p.linea_id
-		           JOIN existencias e ON p.producto_id = e.producto_id
+		           JOIN existencias e ON p.productoId = e.producto_id
 		           GROUP BY l.descripcion
 		       ) AS sub
 		       """, nativeQuery = true)
@@ -72,7 +73,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		                  SUM(e.existencia) as totalExistencia
 		           FROM productos p
 		           JOIN lineas l ON l.linea_id = p.linea_id
-		           JOIN existencias e ON p.producto_id = e.producto_id
+		           JOIN existencias e ON p.productoId = e.producto_id
 		              WHERE e.bodega_id = :bodegaId
 		           GROUP BY l.descripcion
 		       ) AS sub
@@ -124,4 +125,36 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    GROUP BY l.descripcion
 			""")
 		Page<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId,Pageable pageable);
+	
+	@Query("""
+			SELECT p FROM Productos p
+			LEFT JOIN FETCH p.impuestos
+			LEFT JOIN FETCH p.linea
+			LEFT JOIN FETCH p.grupo
+			LEFT JOIN FETCH p.usuario
+			WHERE p.productoId = :id
+			""")
+			Optional<Productos> findByIdWithRelations(@Param("id") Integer id);
+	
+	@Query("""
+			SELECT p FROM Productos p
+			LEFT JOIN FETCH p.impuestos
+			LEFT JOIN FETCH p.linea
+			LEFT JOIN FETCH p.grupo
+			LEFT JOIN FETCH p.usuario
+			""")
+			Page<Productos> traerProductos(Pageable pageable);
+	
+	@Query("""
+		    SELECT p FROM Productos p
+		    LEFT JOIN FETCH p.impuestos
+		    LEFT JOIN FETCH p.linea
+		    LEFT JOIN FETCH p.grupo
+		    LEFT JOIN FETCH p.usuario
+		    WHERE p.descripcion LIKE %:busqueda%
+		       OR p.codigoContable LIKE %:busqueda%
+		       OR p.codigoBarras LIKE %:busqueda%
+		       OR p.referencia LIKE %:busqueda%
+		""")
+		Page<Productos> traerProductosXFiltro(@Param("busqueda") String busqueda, Pageable pageable);
 }

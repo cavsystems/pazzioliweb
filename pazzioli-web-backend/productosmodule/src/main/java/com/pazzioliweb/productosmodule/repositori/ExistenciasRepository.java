@@ -14,9 +14,9 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	@Query("""
 	        SELECT 
 	            e.existencia_id AS existenciaId,
-	            p.producto_id AS productoId,
+	            p.productoId AS productoId,
 	            p.descripcion AS productoDescripcion,
-	            p.codigo_contable AS productoCodigoContable,
+	            p.codigoContable AS productoCodigoContable,
 	            b.codigo AS bodegaCodigo,
 	            b.nombre AS bodegaNombre,
 	            e.existencia AS existencia,
@@ -33,9 +33,9 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	    @Query("""
 	        SELECT 
 	            e.existencia_id AS existenciaId,
-	            p.producto_id AS productoId,
+	            p.productoId AS productoId,
 	            p.descripcion AS productoDescripcion,
-	            p.codigo_contable AS productoCodigoContable,
+	            p.codigoContable AS productoCodigoContable,
 	            b.codigo AS bodegaCodigo,
 	            b.nombre AS bodegaNombre,
 	            e.existencia AS existencia,
@@ -53,9 +53,9 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	    @Query("""
 	        SELECT 
 	            e.existencia_id AS existenciaId,
-	            p.producto_id AS productoId,
+	            p.productoId AS productoId,
 	            p.descripcion AS productoDescripcion,
-	            p.codigo_contable AS productoCodigoContable,
+	            p.codigoContable AS productoCodigoContable,
 	            b.codigo AS bodegaCodigo,
 	            b.nombre AS bodegaNombre,
 	            e.existencia AS existencia,
@@ -66,7 +66,7 @@ public interface ExistenciasRepository extends JpaRepository<Existencias, Intege
 	        FROM Existencias e
 	        JOIN e.producto p
 	        JOIN e.bodega b
-	        WHERE p.producto_id = :productoId
+	        WHERE p.productoId = :productoId
 	        """)
 	    List<ExistenciaDTO> findByProducto(@Param("productoId") Integer productoId);
 }
