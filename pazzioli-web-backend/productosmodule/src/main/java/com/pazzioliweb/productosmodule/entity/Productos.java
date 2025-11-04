@@ -1,5 +1,6 @@
 package com.pazzioliweb.productosmodule.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -53,8 +55,13 @@ public class Productos {
     private Usuario usuario;
 
     @Column(name = "fecha_creacion")
-    private String fechaCreacion;
+    private LocalDateTime fechaCreacion;
 
+    @PrePersist
+    public void prePersist() {
+        fechaCreacion = LocalDateTime.now();
+    }
+    
     @Column(name = "codigo_usuario_modifico")
     private Integer codigoUsuarioModifico;
 
@@ -122,11 +129,11 @@ public class Productos {
 		this.costo = costo;
 	}
 
-	public String getFechaCreacion() {
+	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setFechaCreacion(String fechaCreacion) {
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 

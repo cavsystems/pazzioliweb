@@ -24,12 +24,22 @@ public class TercerosService {
 
     public Page<TerceroDTO> listar(int page, int size, String sortField, String sortDirection) {
     	Sort sort = sortDirection.equalsIgnoreCase("asc")
-                ? Sort.by(sortField).descending()
-                : Sort.by(sortField).ascending();
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
     	Pageable pageable = PageRequest.of(page, size, sort);
 
-        //Page<TerceroDTO> listadoTerceros = terceroRepository.findAllBy(pageable);
     	Page<TerceroDTO> listadoTerceros = terceroRepository.traerTerceros(pageable);
+
+        return listadoTerceros;
+    }
+    
+    public Page<TerceroDTO> buscar(String termino, int page, int size, String sortField, String sortDirection) {
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+    	Pageable pageable = PageRequest.of(page, size, sort);
+
+    	Page<TerceroDTO> listadoTerceros = terceroRepository.traerTercerosXFiltro(termino,pageable);
 
         return listadoTerceros;
     }

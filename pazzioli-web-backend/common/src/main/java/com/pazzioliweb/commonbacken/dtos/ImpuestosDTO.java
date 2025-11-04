@@ -11,23 +11,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ImpuestosDTO {
-	@JsonProperty
-	private Integer codigo;
-	@JsonProperty
+
+    @JsonProperty
+    private Integer codigo;
+    @JsonProperty
     private String nombre;
-	@JsonProperty
+    @JsonProperty
     private double tarifa;
-	@JsonProperty
+    @JsonProperty
     private double base;
-	@JsonProperty
+    @JsonProperty
     private String sigla;
-	@JsonProperty
+    @JsonProperty
     private String estado;
-	
-	public ImpuestosDTO() {
-        // Constructor vacío necesario para Jackson
-    }
-	
+
+    // Constructor vacío necesario para Jackson
+    public ImpuestosDTO() {}
+
     public ImpuestosDTO(Integer codigo, String nombre, double tarifa, double base, String sigla, String estado) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -36,15 +36,18 @@ public class ImpuestosDTO {
         this.sigla = sigla;
         this.estado = estado;
     }
-    
+
+    // Método fromEntity seguro frente a valores nulos
     public static ImpuestosDTO fromEntity(Impuestos impuesto) {
-        return impuesto != null ? new ImpuestosDTO(
-        		impuesto.getCodigo(), 
-        		impuesto.getNombre(), 
-        		impuesto.getTarifa(), 
-        		impuesto.getBase(), 
-        		impuesto.getSigla(),
-        		impuesto.getEstado()
-        		) : null;
+        if (impuesto == null) return null;
+
+        return new ImpuestosDTO(
+            impuesto.getCodigo() != null ? impuesto.getCodigo() : 0,
+            impuesto.getNombre() != null ? impuesto.getNombre() : "",
+            impuesto.getTarifa() != null ? impuesto.getTarifa() : 0.0,
+            impuesto.getBase() != null ? impuesto.getBase() : 0.0,
+            impuesto.getSigla() != null ? impuesto.getSigla() : "",
+            impuesto.getEstado() != null ? impuesto.getEstado() : ""
+        );
     }
 }

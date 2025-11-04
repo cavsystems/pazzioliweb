@@ -1,6 +1,5 @@
 package com.pazzioliweb.tercerosmodule.dtos;
 
-import java.util.List;
 
 import com.pazzioliweb.empresaback.dtos.RegimenDTO;
 import com.pazzioliweb.productosmodule.dtos.PrecioDTO;

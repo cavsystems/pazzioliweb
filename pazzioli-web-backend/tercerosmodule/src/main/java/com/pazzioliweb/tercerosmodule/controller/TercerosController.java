@@ -47,7 +47,26 @@ public class TercerosController {
 
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/buscar")
+    public ResponseEntity<Map<String, Object>> buscar(
+    		@RequestParam String termino,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
 
+        Page<TerceroDTO> tercerosPage = terceroService.buscar(termino,page, size, sortField, sortDirection);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", tercerosPage.getContent());
+        response.put("currentPage", tercerosPage.getNumber());
+        response.put("totalItems", tercerosPage.getTotalElements());
+        response.put("totalPages", tercerosPage.getTotalPages());
+
+        return ResponseEntity.ok(response);
+    }
+    
     @GetMapping("/{id}")
     public ResponseEntity<Terceros> obtener(@PathVariable Integer id) {
         return terceroService.buscarPorId(id)
@@ -55,7 +74,7 @@ public class TercerosController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<Terceros> crear(@RequestBody Terceros tercero) {
         Terceros guardado = terceroService.guardar(tercero);
         return ResponseEntity.status(HttpStatus.CREATED).body(guardado);

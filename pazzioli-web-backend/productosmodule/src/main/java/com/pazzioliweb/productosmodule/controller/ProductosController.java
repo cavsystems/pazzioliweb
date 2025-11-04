@@ -92,7 +92,7 @@ public class ProductosController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     public Productos guardar(@RequestBody Productos producto) {
         return productoService.guardarProducto(producto);
     }

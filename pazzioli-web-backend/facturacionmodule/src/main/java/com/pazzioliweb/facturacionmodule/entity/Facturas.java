@@ -2,9 +2,7 @@ package com.pazzioliweb.facturacionmodule.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -98,5 +96,182 @@ public class Facturas {
 
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<MetodosPagoFacturas> metodosPago = new HashSet<>();
+
+	public Integer getFacturaId() {
+		return facturaId;
+	}
+
+	public void setFacturaId(Integer facturaId) {
+		this.facturaId = facturaId;
+	}
+
+	public Integer getConsecutivo() {
+		return consecutivo;
+	}
+
+	public void setConsecutivo(Integer consecutivo) {
+		this.consecutivo = consecutivo;
+	}
+
+	public Integer getComprobanteId() {
+		return comprobanteId;
+	}
+
+	public void setComprobanteId(Integer comprobanteId) {
+		this.comprobanteId = comprobanteId;
+	}
+
+	public Integer getTerceroId() {
+		return terceroId;
+	}
+
+	public void setTerceroId(Integer terceroId) {
+		this.terceroId = terceroId;
+	}
+
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public LocalDate getFechaEmision() {
+		return fechaEmision;
+	}
+
+	public void setFechaEmision(LocalDate fechaEmision) {
+		this.fechaEmision = fechaEmision;
+	}
+
+	public LocalDate getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setFechaVencimiento(LocalDate fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
+
+	public Integer getPlazo() {
+		return plazo;
+	}
+
+	public void setPlazo(Integer plazo) {
+		this.plazo = plazo;
+	}
+
+	public Integer getUsuarioIngresoId() {
+		return usuarioIngresoId;
+	}
+
+	public void setUsuarioIngresoId(Integer usuarioIngresoId) {
+		this.usuarioIngresoId = usuarioIngresoId;
+	}
+
+	public LocalDateTime getFechaAnulo() {
+		return fechaAnulo;
+	}
+
+	public void setFechaAnulo(LocalDateTime fechaAnulo) {
+		this.fechaAnulo = fechaAnulo;
+	}
+
+	public Integer getUsuarioAnuloId() {
+		return usuarioAnuloId;
+	}
+
+	public void setUsuarioAnuloId(Integer usuarioAnuloId) {
+		this.usuarioAnuloId = usuarioAnuloId;
+	}
+
+	public EstadoFactura getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoFactura estado) {
+		this.estado = estado;
+	}
+
+	public Integer getPedidoId() {
+		return pedidoId;
+	}
+
+	public void setPedidoId(Integer pedidoId) {
+		this.pedidoId = pedidoId;
+	}
+
+	public Integer getRemisionId() {
+		return remisionId;
+	}
+
+	public void setRemisionId(Integer remisionId) {
+		this.remisionId = remisionId;
+	}
+
+	public Integer getVendedorId() {
+		return vendedorId;
+	}
+
+	public void setVendedorId(Integer vendedorId) {
+		this.vendedorId = vendedorId;
+	}
+
+	public Double getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(Double descuento) {
+		this.descuento = descuento;
+	}
+
+	public Integer getCajaId() {
+		return cajaId;
+	}
+
+	public void setCajaId(Integer cajaId) {
+		this.cajaId = cajaId;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
+	public Double getTotalFactura() {
+		return totalFactura;
+	}
+
+	public void setTotalFactura(Double totalFactura) {
+		this.totalFactura = totalFactura;
+	}
+
+	public Set<TipoTotalesFacturas> getTipoTotales() {
+		return tipoTotales;
+	}
+
+	public void setTipoTotales(Set<TipoTotalesFacturas> tipoTotales) {
+		this.tipoTotales = tipoTotales;
+	}
+
+	public Set<MetodosPagoFacturas> getMetodosPago() {
+		return metodosPago;
+	}
+
+	public void setMetodosPago(Set<MetodosPagoFacturas> metodosPago) {
+		this.metodosPago = metodosPago;
+	}
+    
     
 }

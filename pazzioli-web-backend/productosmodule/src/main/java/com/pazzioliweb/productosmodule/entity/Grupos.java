@@ -13,15 +13,15 @@ public class Grupos {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "grupo_id")
-	private int id;
+	private Integer id;
 	
 	private String descripcion;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

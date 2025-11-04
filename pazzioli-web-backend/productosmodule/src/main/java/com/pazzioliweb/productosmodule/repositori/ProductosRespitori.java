@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
-import com.pazzioliweb.productosmodule.dtos.ProductoDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;

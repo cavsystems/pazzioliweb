@@ -25,9 +25,6 @@ public class ProductosService {
         this.productoRepositori = productoRepository;
     }
 
-    /*public List<Productos> listarProductos() {
-        return productoRepositori.findAll();
-    }*/
     public Page<ProductoDTO> listar(int page, int size, String sortField, String sortDirection) {
     	Sort sort = sortDirection.equalsIgnoreCase("asc")
                 ? Sort.by(sortField).descending()

@@ -3,21 +3,24 @@ package com.pazzioliweb.productosmodule.dtos;
 import com.pazzioliweb.productosmodule.entity.Grupos;
 
 public class GrupoDTO {
-	private Integer id;
-    private String descripcion;
+    private Integer grupoId;
+    private String nombre;
 
-    public GrupoDTO(Integer id, String descripcion) {
-        this.id = id;
-        this.descripcion = descripcion;
+    public GrupoDTO() {
     }
 
     public static GrupoDTO fromEntity(Grupos grupo) {
-        return grupo != null ? new GrupoDTO(grupo.getId(), grupo.getDescripcion()) : null;
-    }
-    
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
+        if (grupo == null) return null;
 
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+        GrupoDTO dto = new GrupoDTO();
+        dto.grupoId = grupo.getId() != null ? grupo.getId() : 0;
+        dto.nombre = grupo.getDescripcion() != null ? grupo.getDescripcion() : "";
+        return dto;
+    }
+
+    public Integer getGrupoId() { return grupoId; }
+    public void setGrupoId(Integer grupoId) { this.grupoId = grupoId; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 }
