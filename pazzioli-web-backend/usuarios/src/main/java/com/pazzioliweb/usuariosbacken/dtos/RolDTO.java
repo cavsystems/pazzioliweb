@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class RolDTO {
     public RolDTO(int codigo2, String nombre2) {
 		this.codigo=codigo2;

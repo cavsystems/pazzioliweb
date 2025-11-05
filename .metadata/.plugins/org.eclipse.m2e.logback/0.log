@@ -13465,6 +13465,33 @@
 2025-10-30 08:58:00,463 [Worker-321: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-10-30 08:58:00,496 [Worker-321: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2025-10-30 08:58:00,498 [Worker-321: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+<<<<<<< HEAD
+2025-10-30 10:16:33,260 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2025-10-30 10:16:56,774 [Worker-11: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-10-30 10:16:56,966 [Worker-11: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-10-30 10:16:56,967 [Worker-11: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-10-30 10:16:56,986 [Worker-11: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-10-30 10:18:18,301 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-10-30 10:18:18,311 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-10-30 10:18:18,312 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-10-30 10:18:18,343 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-10-30 10:18:18,343 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-10-30 10:18:18,967 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-10-30 10:18:18,969 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-10-30 10:18:18,970 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-10-30 10:18:18,972 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-10-30 10:18:18,973 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-10-30 10:18:19,293 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-10-30 10:18:19,294 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-10-30 10:18:19,294 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-10-30 10:18:19,295 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-10-30 10:18:19,296 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-10-30 10:18:19,630 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-10-30 10:18:19,631 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-10-30 10:18:19,631 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-10-30 10:18:19,632 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-10-30 10:18:19,633 [Worker-0: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+=======
 >>>>>>> ab3d0b5ba6233b815c0349597fbfc6520925edc1
 2025-10-30 09:58:34,731 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-10-30 09:59:06,192 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
@@ -17142,6 +17169,7 @@
 2025-11-04 15:44:03,172 [Worker-64: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/metodospagomodule: com.pazzioliweb:metodospagomodule:1.0-SNAPSHOT with classifier null to /metodospagomodule/target/classes
 2025-11-04 15:45:21,179 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@d50ab36{STOPPING}[12.0.21,sto=0]
 2025-11-04 15:45:21,188 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@4c2f584a{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+<<<<<<< HEAD
 2025-11-04 16:12:37,200 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
 2025-11-04 16:12:57,194 [Worker-7: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
 2025-11-04 16:12:57,209 [Worker-7: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
@@ -17187,3 +17215,718 @@
 2025-11-04 16:12:58,459 [Worker-7: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cajasmodule: com.pazzioliweb:cajasmodule:1.0-SNAPSHOT with classifier null to /cajasmodule/target/classes
 2025-11-04 16:12:58,461 [Worker-7: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/vendedoresmodule: com.pazzioliweb:vendedoresmodule:1.0-SNAPSHOT with classifier null to /vendedoresmodule/target/classes
 2025-11-04 16:12:58,463 [Worker-7: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/metodospagomodule: com.pazzioliweb:metodospagomodule:1.0-SNAPSHOT with classifier null to /metodospagomodule/target/classes
+=======
+>>>>>>> cdcec2c4ad27722764cb1bc0f02bdb680b81918d
+2025-11-04 15:52:44,986 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2025-11-04 15:53:04,973 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-11-04 15:53:08,171 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-11-04 15:53:12,205 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:12,791 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-11-04 15:53:13,604 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-11-04 15:53:13,650 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:13,709 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:13,710 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:13,965 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-11-04 15:53:14,067 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:14,070 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 15:53:14,070 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:14,070 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:14,268 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-11-04 15:53:14,297 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:facturacionmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,302 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:tercerosmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,304 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:comprobantesmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,307 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:cajasmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,310 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:vendedoresmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,314 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:metodospagomodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:14,344 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-11-04 15:53:14,351 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:14,352 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:14,369 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:14,369 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 15:53:14,870 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:productosmodule:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\productosmodule\pom.xml.
+2025-11-04 15:53:14,880 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:14,903 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:15,476 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-11-04 15:53:15,495 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:15,513 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:15,514 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:16,209 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-11-04 15:53:16,253 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:16,257 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 15:53:16,258 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:16,258 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:16,952 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-11-04 15:53:17,032 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-11-04 15:53:17,037 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:17,038 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:17,075 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:17,076 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 15:53:21,184 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:facturacionmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:facturacionmodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:21,213 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:tercerosmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:tercerosmodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:21,230 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:comprobantesmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:comprobantesmodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:21,246 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:cajasmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:cajasmodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:21,251 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:vendedoresmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:vendedoresmodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:21,265 [Worker-3: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download sources for com.pazzioliweb:metodospagomodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:metodospagomodule:jar:sources:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:282)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:29,168 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:29,182 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:53:29,194 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:29,197 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:33,219 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:33,243 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:53:33,245 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:33,248 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:34,339 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-11-04 15:53:35,420 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:35,447 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:35,447 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:36,146 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:36,148 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:53:36,157 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:36,162 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:36,908 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:productosmodule:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\productosmodule\pom.xml.
+2025-11-04 15:53:37,995 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:38,046 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:38,901 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:38,903 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:53:38,911 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:38,914 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:39,053 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:39,056 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:53:39,061 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:39,062 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:48,366 [Worker-2: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-11-04 15:53:49,426 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:facturacionmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,428 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:tercerosmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,430 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:comprobantesmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,433 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:cajasmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,436 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:vendedoresmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,438 [Worker-2: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:metodospagomodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 15:53:49,455 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-11-04 15:53:49,461 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 15:53:49,461 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 15:53:49,525 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 15:53:49,525 [Worker-2: Building] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 15:53:50,351 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:50,355 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 4 resources from src\main\resources to target\classes
+2025-11-04 15:53:50,394 [Worker-2: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:53:50,397 [Worker-2: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:53:51,077 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:facturacionmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:facturacionmodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:51,087 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:tercerosmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:tercerosmodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:51,095 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:comprobantesmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:comprobantesmodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:51,106 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:cajasmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:cajasmodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:51,118 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:vendedoresmodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:vendedoresmodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:53:51,126 [Worker-15: Download sources and javadoc] ERROR o.e.m.j.internal.DownloadSourcesJob - Could not download javadoc for com.pazzioliweb:metodospagomodule:1.0-SNAPSHOT
+org.eclipse.core.runtime.CoreException: Could not resolve artifact com.pazzioliweb:metodospagomodule:jar:javadoc:1.0-SNAPSHOT
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.lambda$7(MavenImpl.java:540)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:292)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:509)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.resolve(MavenImpl.java:494)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.download(DownloadSourcesJob.java:308)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadAttachments(DownloadSourcesJob.java:294)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadMaven(DownloadSourcesJob.java:252)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.downloadFilesAndPopulateToUpdate(DownloadSourcesJob.java:220)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.lambda$0(DownloadSourcesJob.java:149)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:458)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:339)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:278)
+	at org.eclipse.m2e.core.embedder.IMaven.execute(IMaven.java:300)
+	at org.eclipse.m2e.jdt.internal.DownloadSourcesJob.run(DownloadSourcesJob.java:149)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2025-11-04 15:58:43,996 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:44,035 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:58:44,042 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:44,048 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:58:53,375 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:53,700 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:58:53,874 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:53,990 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:58:56,790 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:56,846 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:58:56,850 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:56,947 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:58:59,010 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:59,298 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 15:58:59,309 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:58:59,314 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 15:59:00,290 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:59:00,301 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2025-11-04 15:59:00,334 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 15:59:00,340 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:01:04,408 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:01:04,440 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:01:04,440 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:01:04,441 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:01:04,442 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:01:04,793 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:01:04,794 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:01:04,796 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:01:04,797 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:01:04,798 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:01:05,201 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:01:05,202 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:01:05,203 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:01:05,204 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:01:05,205 [Worker-11: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:38:00,456 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:38:00,482 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:38:00,483 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:38:00,484 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:38:00,484 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:38:00,816 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:38:00,816 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:38:00,817 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:38:00,817 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:38:00,818 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:38:01,063 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:38:01,063 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:38:01,064 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:38:01,064 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:38:01,065 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:42:45,254 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:42:45,780 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:42:45,788 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:42:45,790 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:42:52,177 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:42:52,178 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:42:52,178 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:42:52,178 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:42:52,179 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:42:52,408 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:42:52,409 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:42:52,409 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:42:52,410 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:42:52,411 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:42:52,770 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:42:52,771 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:42:52,772 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:42:52,773 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:42:52,773 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:51:03,350 [Worker-16: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:51:03,363 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:51:03,366 [Worker-16: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:51:03,368 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:51:14,678 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:51:14,798 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:51:14,805 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:51:14,839 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:51:24,236 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:51:24,237 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:51:24,239 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:51:24,240 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:51:24,240 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:51:24,428 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:51:24,428 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:51:24,429 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:51:24,429 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:51:24,429 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:51:24,584 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:51:24,584 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:51:24,585 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:51:24,585 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:51:24,586 [Worker-13: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:54:35,620 [Worker-16: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:54:35,694 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:54:35,697 [Worker-16: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:54:35,705 [Worker-16: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:56:35,590 [Worker-11: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:56:35,858 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:56:35,861 [Worker-11: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:56:35,864 [Worker-11: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:57:07,117 [Worker-18: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:57:07,151 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 16:57:07,154 [Worker-18: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 16:57:07,173 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 16:57:14,052 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:57:14,052 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:57:14,052 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:57:14,053 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:57:14,053 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:57:14,217 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:57:14,217 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:57:14,217 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:57:14,218 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:57:14,218 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 16:57:14,401 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 16:57:14,402 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 16:57:14,402 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 16:57:14,403 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 16:57:14,403 [Worker-5: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:04:15,968 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:04:15,970 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:04:15,971 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:04:15,971 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:04:15,971 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:04:16,174 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:04:16,175 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:04:16,175 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:04:16,176 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:04:16,176 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:04:16,375 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:04:16,375 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:04:16,375 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:04:16,376 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:04:16,376 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:05:55,731 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-11-04 17:05:57,075 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-11-04 17:05:58,902 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-11-04 17:05:59,080 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:05:59,083 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:05:59,083 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:05:59,083 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:05:59,230 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-11-04 17:05:59,607 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-11-04 17:05:59,617 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:05:59,640 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:05:59,641 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:05:59,794 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:productosmodule:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\productosmodule\pom.xml.
+2025-11-04 17:05:59,810 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:05:59,827 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:05:59,969 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-11-04 17:05:59,985 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:06:00,227 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-11-04 17:06:00,249 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:facturacionmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,278 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:tercerosmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,280 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:comprobantesmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,283 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:cajasmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,293 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:vendedoresmodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,295 [Worker-16: Updating Maven Project] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for com.pazzioliweb:metodospagomodule:jar:1.0-SNAPSHOT is missing, no dependency information available
+2025-11-04 17:06:00,311 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-11-04 17:06:00,316 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:06:00,316 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:06:00,333 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:06:00,333 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:06:03,946 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/main/java
+2025-11-04 17:06:03,951 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/main/resources
+2025-11-04 17:06:03,952 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/test/java
+2025-11-04 17:06:03,956 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/test/resources
+2025-11-04 17:06:04,289 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/main/java
+2025-11-04 17:06:04,290 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/main/resources
+2025-11-04 17:06:04,291 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/test/java
+2025-11-04 17:06:04,291 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/test/resources
+2025-11-04 17:06:04,697 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/main/java
+2025-11-04 17:06:04,699 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/main/resources
+2025-11-04 17:06:04,699 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/test/java
+2025-11-04 17:06:04,700 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/test/resources
+2025-11-04 17:06:05,000 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /productosmodule/src/main/java
+2025-11-04 17:06:05,001 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /productosmodule/src/main/resources
+2025-11-04 17:06:05,002 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /productosmodule/src/test/java
+2025-11-04 17:06:05,004 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /productosmodule/src/test/resources
+2025-11-04 17:06:05,310 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/main/java
+2025-11-04 17:06:05,311 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/main/resources
+2025-11-04 17:06:05,311 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/test/java
+2025-11-04 17:06:05,312 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/test/resources
+2025-11-04 17:06:05,600 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/main/java
+2025-11-04 17:06:05,601 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/main/resources
+2025-11-04 17:06:05,603 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
+2025-11-04 17:06:05,606 [Worker-16: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
+2025-11-04 17:06:06,845 [Worker-16: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 7 poms: local refresh takes 0,00 sec, refresh facades takes 7,00 sec, update config takes 2,00 sec 
+2025-11-04 17:06:10,067 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:10,078 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:10,086 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:10,093 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:12,714 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:12,715 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:12,721 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:12,724 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:12,797 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:12,799 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:12,803 [Worker-13: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:12,805 [Worker-13: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:15,123 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:15,125 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:15,127 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:15,129 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:15,194 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:15,196 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:15,198 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:15,199 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:16,058 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:16,369 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:16,372 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:16,510 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:16,820 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:16,978 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 4 resources from src\main\resources to target\classes
+2025-11-04 17:06:17,034 [Worker-5: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:17,045 [Worker-5: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:36,206 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:36,207 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:36,209 [Worker-3: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:36,215 [Worker-3: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:37,298 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:37,300 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:37,302 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:37,304 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:37,376 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:37,380 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:37,383 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:37,384 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:39,468 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:39,473 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:39,475 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:39,482 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:39,570 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:39,573 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:39,576 [Worker-17: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:39,580 [Worker-17: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:40,381 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:40,383 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:06:40,386 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:40,387 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:40,718 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:40,958 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 4 resources from src\main\resources to target\classes
+2025-11-04 17:06:40,972 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:06:41,052 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:06:46,755 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:06:46,755 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:06:46,755 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:06:46,756 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:06:46,756 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:06:46,929 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:06:46,930 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:06:46,930 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:06:46,931 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:06:46,931 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:06:47,072 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:06:47,072 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:06:47,073 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:06:47,073 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:06:47,073 [Worker-18: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:07:22,705 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:07:22,912 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:07:22,912 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:07:22,912 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:07:24,025 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:07:24,041 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:07:24,041 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:07:24,041 [Worker-4: reload maven project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:11:49,532 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:11:49,536 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:11:49,538 [Worker-21: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:11:49,540 [Worker-21: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:11:50,487 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:11:50,820 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:11:50,823 [Worker-4: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:11:50,825 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:14:52,028 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:14:52,030 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:14:52,036 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:14:52,039 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:15:40,115 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:15:40,118 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:15:40,121 [Worker-19: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:15:40,126 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:18:25,819 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:18:25,823 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:18:25,830 [Worker-22: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:18:25,834 [Worker-22: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:21:43,660 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2025-11-04 17:21:50,585 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: com.pazzioliweb:mi-proyecto:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\pom.xml.
+2025-11-04 17:21:53,859 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:auth:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\auth\pom.xml.
+2025-11-04 17:21:54,235 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:21:54,237 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:21:54,237 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:21:54,238 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:21:54,416 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:common:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\common\pom.xml.
+2025-11-04 17:21:55,126 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:empresas:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\empresas\pom.xml.
+2025-11-04 17:21:55,134 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:21:55,165 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:21:55,165 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:21:55,401 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:productosmodule:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\productosmodule\pom.xml.
+2025-11-04 17:21:55,414 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:21:55,429 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:21:55,582 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:usuarios:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\usuarios\pom.xml.
+2025-11-04 17:21:55,606 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:21:56,027 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.pazzioliweb:web:1.0-SNAPSHOT @ C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\pazzioli-web-backend\web\pom.xml.
+2025-11-04 17:21:56,117 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier  to /auth/target/classes
+2025-11-04 17:21:56,124 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier  to /usuarios/target/classes
+2025-11-04 17:21:56,124 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier  to /common/target/classes
+2025-11-04 17:21:56,141 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier  to /productosmodule/target/classes
+2025-11-04 17:21:56,141 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier  to /empresas/target/classes
+2025-11-04 17:22:01,220 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/main/java
+2025-11-04 17:22:01,226 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/main/resources
+2025-11-04 17:22:01,227 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /auth/src/test/java
+2025-11-04 17:22:01,228 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /auth/src/test/resources
+2025-11-04 17:22:01,992 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/main/java
+2025-11-04 17:22:01,993 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/main/resources
+2025-11-04 17:22:01,994 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /common/src/test/java
+2025-11-04 17:22:01,995 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /common/src/test/resources
+2025-11-04 17:22:02,425 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/main/java
+2025-11-04 17:22:02,426 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/main/resources
+2025-11-04 17:22:02,426 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /empresas/src/test/java
+2025-11-04 17:22:02,427 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /empresas/src/test/resources
+2025-11-04 17:22:02,782 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /productosmodule/src/main/java
+2025-11-04 17:22:02,784 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /productosmodule/src/main/resources
+2025-11-04 17:22:02,784 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /productosmodule/src/test/java
+2025-11-04 17:22:02,785 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /productosmodule/src/test/resources
+2025-11-04 17:22:03,113 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/main/java
+2025-11-04 17:22:03,114 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/main/resources
+2025-11-04 17:22:03,114 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /usuarios/src/test/java
+2025-11-04 17:22:03,115 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /usuarios/src/test/resources
+2025-11-04 17:22:03,485 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/main/java
+2025-11-04 17:22:03,487 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/main/resources
+2025-11-04 17:22:03,488 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /web/src/test/java
+2025-11-04 17:22:03,489 [Worker-24: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /web/src/test/resources
+2025-11-04 17:22:11,689 [Worker-24: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed for 7 poms: local refresh takes 0,00 sec, refresh facades takes 16,00 sec, update config takes 2,00 sec 
+2025-11-04 17:22:22,264 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:22,346 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:22,354 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:22,375 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:23,957 [Worker-28: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:23,959 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:23,963 [Worker-28: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:23,971 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:24,058 [Worker-28: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:24,109 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:24,111 [Worker-28: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:24,267 [Worker-28: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:28,189 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:28,485 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:28,489 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:28,624 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:28,884 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:28,954 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:28,957 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:29,012 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:29,722 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:29,735 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 17:22:29,738 [Worker-30: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:29,757 [Worker-30: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:31,339 [Worker-24: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:31,777 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 4 resources from src\main\resources to target\classes
+2025-11-04 17:22:31,876 [Worker-24: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 17:22:31,879 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 17:22:37,868 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:22:37,869 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:22:37,870 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:22:37,870 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:22:37,871 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:22:38,207 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:22:38,208 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:22:38,208 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:22:38,209 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:22:38,209 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 17:22:38,485 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 17:22:38,486 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 17:22:38,486 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 17:22:38,487 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 17:22:38,487 [Worker-25: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 18:54:16,759 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 18:54:16,911 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-11-04 18:54:16,917 [Worker-31: Building] WARN  o.a.m.s.f.DefaultMavenResourcesFiltering - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-11-04 18:54:16,919 [Worker-31: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\test\resources to target\test-classes
+2025-11-04 18:54:20,777 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 18:54:20,778 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 18:54:20,779 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 18:54:20,781 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 18:54:20,782 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 18:54:20,967 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 18:54:20,967 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 18:54:20,968 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 18:54:20,968 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 18:54:20,968 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+2025-11-04 18:54:21,119 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/auth: com.pazzioliweb:auth:1.0-SNAPSHOT with classifier null to /auth/target/classes
+2025-11-04 18:54:21,120 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/usuarios: com.pazzioliweb:usuarios:1.0-SNAPSHOT with classifier null to /usuarios/target/classes
+2025-11-04 18:54:21,120 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/common: com.pazzioliweb:common:1.0-SNAPSHOT with classifier null to /common/target/classes
+2025-11-04 18:54:21,121 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/productosmodule: com.pazzioliweb:productosmodule:1.0-SNAPSHOT with classifier null to /productosmodule/target/classes
+2025-11-04 18:54:21,121 [Worker-29: Launching PazzioliWebBackendApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/empresas: com.pazzioliweb:empresas:1.0-SNAPSHOT with classifier null to /empresas/target/classes
+>>>>>>> 2417b8a17c24f5713a3f5209f096cfeabd1ff35d

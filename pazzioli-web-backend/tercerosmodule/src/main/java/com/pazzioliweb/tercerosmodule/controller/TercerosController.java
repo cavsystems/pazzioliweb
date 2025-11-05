@@ -3,9 +3,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pazzioliweb.tercerosmodule.dtos.TerceroDTO;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
 import com.pazzioliweb.tercerosmodule.service.TercerosService;
-
+@Component
 @RestController
 @RequestMapping("/api/terceros")
 public class TercerosController {
@@ -36,7 +38,7 @@ public class TercerosController {
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) {
-
+          System.out.println("metodo listar tercero");
         Page<TerceroDTO> tercerosPage = terceroService.listar(page, size, sortField, sortDirection);
 
         Map<String, Object> response = new HashMap<>();

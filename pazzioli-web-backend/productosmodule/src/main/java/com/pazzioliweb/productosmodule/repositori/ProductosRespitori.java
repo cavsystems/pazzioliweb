@@ -57,7 +57,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		                  SUM(e.existencia) as totalExistencia
 		           FROM productos p
 		           JOIN lineas l ON l.linea_id = p.linea_id
-		           JOIN existencias e ON p.productoId = e.producto_id
+		           JOIN existencias e ON p.producto_id = e.producto_id
 		           GROUP BY l.descripcion
 		       ) AS sub
 		       """, nativeQuery = true)
@@ -72,7 +72,7 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		                  SUM(e.existencia) as totalExistencia
 		           FROM productos p
 		           JOIN lineas l ON l.linea_id = p.linea_id
-		           JOIN existencias e ON p.productoId = e.producto_id
+		           JOIN existencias e ON p.producto_id = e.producto_id
 		              WHERE e.bodega_id = :bodegaId
 		           GROUP BY l.descripcion
 		       ) AS sub

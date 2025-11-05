@@ -25,6 +25,7 @@ import Tomapedidos from './modules/tomapedido/tomapedido';
 import Compras from './modules/compras/Compras.';
 import { appcontex } from './context';
 import Usuarios from './modules/usuarios/Usuarios';
+import Terceros from './modules/terceros/views/Terceros';
 
 function App() {
     const{  paginaactual,
@@ -82,6 +83,7 @@ font: 'normal normal normal 14px/19px Open Sans',
         <Route path='/tomapedidos' element={<Tomapedidos/>}/>
          <Route path='/compras' element={<Compras/>}/>
            <Route path='/usuarios' element={<Usuarios/>}/>
+             <Route path='/terceros' element={<Terceros/>}/>
     </Routes>
      </BrowserRouter>
    </div>

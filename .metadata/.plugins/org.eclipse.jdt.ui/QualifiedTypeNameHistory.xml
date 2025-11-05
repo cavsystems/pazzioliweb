@@ -4,4 +4,5 @@
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="io.lettuce.core.dynamic.annotation.Param"/>
     <fullyQualifiedTypeName name="org.springframework.data.repository.query.Param"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.origin.SystemEnvironmentOrigin"/>
 </qualifiedTypeNameHistroy>

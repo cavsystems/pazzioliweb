@@ -7,8 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class UsuarioDTO {
    
 	public UsuarioDTO(int codigo, String nombre, String usuario, String estado, RolDTO rol) {
