@@ -1,5 +1,6 @@
 package com.pazzioliweb.productosmodule.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +15,17 @@ import lombok.Data;
 public class Lineas {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int linea_id;
+	@Column(name = "linea_id")
+	private Integer id;
 	
 	private String descripcion;
 
-	public int getLinea_id() {
-		return linea_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setLinea_id(int linea_id) {
-		this.linea_id = linea_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getDescripcion() {

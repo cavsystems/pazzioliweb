@@ -8,6 +8,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import Paper from "@mui/material/Paper";
 import dayjs from "dayjs";
 import { Identificacion } from "../../empresas/components/components/Identifiicaciones";
+import api from "../../../apicofig";
 /* useRef(initialValue) crea un objeto con .current que puedes asignar a un elemento DOM mediante la propiedad ref*/
 function Actulizartercero() {
     const [claseitem,setclaseitem]=React.useState<string>("chrome")

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.pazzioliweb.commonbacken.entity.Departamento;
 import com.pazzioliweb.commonbacken.entity.Municipio;
 import com.pazzioliweb.commonbacken.entity.Pais;
+import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.commonbacken.repositorio.DepartamentoRepositori;
 import com.pazzioliweb.commonbacken.repositorio.MunicipioRepositori;
 import com.pazzioliweb.commonbacken.repositorio.PaisRepositori;
@@ -16,9 +17,8 @@ import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.empresasback.repositori.ActividadeconomicaRepositori;
 import com.pazzioliweb.empresasback.repositori.RegimenRepositori;
 import com.pazzioliweb.productosmodule.repositori.BodegasRepository;
-import com.pazzioliweb.usuariosbacken.entity.Tipoidentificacion;
+import com.pazzioliweb.commonbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
-import com.pazzioliweb.usuariosbacken.repositorio.TipoidentificacionRepository;
 import com.pazzioliweb.usuariosbacken.repositorio.TipopersonaRepository;
 
 

@@ -13,18 +13,24 @@ import lombok.Data;
 public class Impuestos {
 	  @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int codigo;
-	  private String nombre;
-	  private int tarifa;
-	  private int base;
-	  private String estado;
+	    private Integer codigo;
+	  	private String nombre;
+	  	private Double tarifa;
+	  	private Double base;
+	  	private String estado;
+	  
+	  
+	  
+	  public String getEstado() {
+		return estado;
+	}
 	  public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	  public int getCodigo() {
+	  public Integer getCodigo() {
 		return codigo;
 	}
-	  public void setCodigo(int codigo) {
+	  public void setCodigo(Integer codigo) {
 		  this.codigo = codigo;
 	  }
 	  public String getNombre() {
@@ -33,16 +39,16 @@ public class Impuestos {
 	  public void setNombre(String nombre) {
 		  this.nombre = nombre;
 	  }
-	  public int getTarifa() {
+	  public Double getTarifa() {
 		  return tarifa;
 	  }
-	  public void setTarifa(int tarifa) {
+	  public void setTarifa(Double tarifa) {
 		  this.tarifa = tarifa;
 	  }
-	  public int getBase() {
+	  public Double getBase() {
 		  return base;
 	  }
-	  public void setBase(int base) {
+	  public void setBase(Double base) {
 		  this.base = base;
 	  }
 	  public String getSigla() {

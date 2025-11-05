@@ -2,9 +2,33 @@ import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCe
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import "./Terceros.scss";
 import Actulizartercero from "../components/Actulizartercero";
+import React, { useState } from "react";
+import api from "../../../apicofig";
+interface terceros {
+    razonSocial:string;
+        identificacion:string;
+        clasificacionTercero:{
+            clasificacionTerceroId:number,
+           nombre:string
 
+        }
+}
 function Terceros() {
-    
+    const [terceros,setTerceros]=useState<terceros[]>([])
+    const traerterceros=async (pagina:number)=>{
+       
+    const terceros=await api.get(`terceros/listar?page=${pagina}&size=${7}&sortField=razonSocial&sortDirection=desc`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+    console.log("terceros",terceros.data.content)
+    setTerceros(terceros.data.content)
+}
+
+React.useEffect(()=>{
+    traerterceros(0);
+},[])
+
     return ( 
         <>
           <div className=" d-flex justify-content-center " style={{height:"100%"}}>
@@ -12,7 +36,7 @@ function Terceros() {
              
                     <div className="col-12 d-flex align-items-center justify-content-center flex-column containerimgusuario">
                         <img src="imgs/creusuario.svg" alt=""   style={{maxWidth: "48px", maxHeight: "48px"}}/>
-                        <span className="tituloopaco">Usuarios</span>
+                        <span className="tituloopaco">Terceros</span>
         
                     </div>
                       
@@ -47,11 +71,12 @@ function Terceros() {
                                          
                                             
                                              
-                                                
-                                                 <CTableRow>
-                                                      <CTableDataCell>Juan</CTableDataCell>
-                                      <CTableDataCell>1005860599</CTableDataCell>
-                                       <CTableDataCell>Cliente</CTableDataCell>
+                                                {
+                                                    terceros.map((item)=>{
+                                                        return    <CTableRow>
+                                                      <CTableDataCell>{item.razonSocial}</CTableDataCell>
+                                      <CTableDataCell>{item.identificacion}</CTableDataCell>
+                                       <CTableDataCell>{item.clasificacionTercero.nombre}</CTableDataCell>
                                       
                                             
                                               <CTableHeaderCell  >
@@ -78,6 +103,9 @@ function Terceros() {
                                                 </div>
                                               </CTableHeaderCell>
                                               </CTableRow>
+                                                    })
+                                                }
+                                               
                             
                                               
                                     

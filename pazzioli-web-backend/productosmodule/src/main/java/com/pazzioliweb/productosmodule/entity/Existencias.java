@@ -51,7 +51,10 @@ public class Existencias {
 
     @Column(name = "fecha_ultimo_movimiento")
     private LocalDateTime fechaUltimoMovimiento;
-
+    
+    @Column(name = "ubicacion")
+    private String ubicacion;
+    
     // --- Getters & Setters ---
 
     public Integer getExistencia_id() {
@@ -109,4 +112,12 @@ public class Existencias {
     public void setFechaUltimoMovimiento(LocalDateTime fechaUltimoMovimiento) {
         this.fechaUltimoMovimiento = fechaUltimoMovimiento;
     }
+
+	public String getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(String ubicacion) {
+		this.ubicacion = ubicacion;
+	}
 }

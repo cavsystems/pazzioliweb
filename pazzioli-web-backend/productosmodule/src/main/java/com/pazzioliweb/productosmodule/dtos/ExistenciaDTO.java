@@ -20,4 +20,5 @@ public interface ExistenciaDTO {
     BigDecimal getStockMin();
     BigDecimal getStockMax();
     LocalDateTime getFechaUltimoMovimiento();
+    String getUbicacion();
 }

@@ -1,199 +1,106 @@
 package com.pazzioliweb.productosmodule.dtos;
 
+import java.time.LocalDateTime;
+
+import com.pazzioliweb.commonbacken.dtos.ImpuestosDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
+import com.pazzioliweb.usuariosbacken.dtos.UsuarioDTO;
 
 public class ProductoDTO {
-	private int productoId;
+
+    private Integer productoId;
     private String codigoContable;
     private String codigoBarras;
     private String referencia;
     private String descripcion;
-    private double costo;
-    private int impuestoId;
-    private int lineaId;
-    private int grupoId;
-    private int usuarioId;
-    private String fechaCreacion;
-    private int codigoUsuarioModifico;
+    private Double costo;
+    private ImpuestosDTO impuesto;
+    private LineaDTO linea;
+    private GrupoDTO grupo;
+    private UsuarioDTO usuario;
+    private LocalDateTime fechaCreacion;
+    private Integer codigoUsuarioModifico;
     private String fechaModificacion;
     private String estado;
     private String fechaUltimaVenta;
     private String fechaUltimaCompra;
 
-    // ✅ Constructor
-    public ProductoDTO(int productoId, String codigoContable, String codigoBarras, String referencia,
-                       String descripcion, double costo, int impuestoId, int lineaId, int grupoId, int usuarioId,
-                       String fechaCreacion, int codigoUsuarioModifico, String fechaModificacion,
-                       String estado, String fechaUltimaVenta, String fechaUltimaCompra) {
-        this.productoId = productoId;
-        this.codigoContable = codigoContable;
-        this.codigoBarras = codigoBarras;
-        this.referencia = referencia;
-        this.descripcion = descripcion;
-        this.costo = costo;
-        this.impuestoId = impuestoId;
-        this.lineaId = lineaId;
-        this.grupoId = grupoId;
-        this.usuarioId = usuarioId;
-        this.fechaCreacion = fechaCreacion;
-        this.codigoUsuarioModifico = codigoUsuarioModifico;
-        this.fechaModificacion = fechaModificacion;
-        this.estado = estado;
-        this.fechaUltimaVenta = fechaUltimaVenta;
-        this.fechaUltimaCompra = fechaUltimaCompra;
+    public ProductoDTO() {
     }
 
-    // ✅ Getters (puedes generarlos automáticamente en tu IDE)
-    
-
-    // ✅ Mapper estático para convertir desde la entidad
     public static ProductoDTO fromEntity(Productos producto) {
-        return new ProductoDTO(
-                producto.getProducto_id(),
-                producto.getCodigo_contable(),
-                producto.getCodigo_barras(),
-                producto.getReferencia(),
-                producto.getDescripcion(),
-                producto.getCosto(),
-                /*producto.getImpuestos() != null ? producto.getImpuestos().getImpuesto_id() : 0,
-                producto.getLinea() != null ? producto.getLinea().getLinea_id() : 0,
-                producto.getGrupo() != null ? producto.getGrupo().getGrupo_id() : 0,
-                producto.getUsuario() != null ? producto.getUsuario().getUsuario_id() : 0,*/
-                0,0,0,0,
-                producto.getFecha_creacion(),
-                producto.getCodigo_usuario_modifico(),
-                producto.getFecha_modificacion(),
-                producto.getEstado(),
-                producto.getFecha_ultima_venta(),
-                producto.getFecha_ultima_compra()
-        );
+        if (producto == null) return null;
+
+        ProductoDTO dto = new ProductoDTO();
+        dto.productoId = producto.getProductoId();
+        dto.codigoContable = producto.getCodigoContable();
+        dto.codigoBarras = producto.getCodigoBarras();
+        dto.referencia = producto.getReferencia();
+        dto.descripcion = producto.getDescripcion();
+        dto.costo = producto.getCosto() != null ? producto.getCosto() : 0.0;
+
+        dto.impuesto = producto.getImpuestos() != null ? ImpuestosDTO.fromEntity(producto.getImpuestos()) : null;
+        dto.linea = producto.getLinea() != null ? LineaDTO.fromEntity(producto.getLinea()) : null;
+        dto.grupo = producto.getGrupo() != null ? GrupoDTO.fromEntity(producto.getGrupo()) : null;
+        dto.usuario = producto.getUsuario() != null ? UsuarioDTO.fromEntity(producto.getUsuario()) : null;
+        
+        dto.setFechaCreacion(producto.getFechaCreacion());
+        dto.codigoUsuarioModifico = producto.getCodigoUsuarioModifico() != null ? producto.getCodigoUsuarioModifico() : 0;
+        dto.fechaModificacion = producto.getFechaModificacion() != null ? producto.getFechaModificacion() : "";
+        dto.estado = producto.getEstado() != null ? producto.getEstado() : "ACTIVO";
+        dto.fechaUltimaVenta = producto.getFechaUltimaVenta() != null ? producto.getFechaUltimaVenta() : "";
+        dto.fechaUltimaCompra = producto.getFechaUltimaCompra() != null ? producto.getFechaUltimaCompra() : "";
+
+        return dto;
     }
 
-	public int getProductoId() {
-		return productoId;
-	}
+    // ✅ Getters y setters para todos los campos
+    public Integer getProductoId() { return productoId; }
+    public void setProductoId(Integer productoId) { this.productoId = productoId; }
 
-	public void setProductoId(int productoId) {
-		this.productoId = productoId;
-	}
+    public String getCodigoContable() { return codigoContable; }
+    public void setCodigoContable(String codigoContable) { this.codigoContable = codigoContable; }
 
-	public String getCodigoContable() {
-		return codigoContable;
-	}
+    public String getCodigoBarras() { return codigoBarras; }
+    public void setCodigoBarras(String codigoBarras) { this.codigoBarras = codigoBarras; }
 
-	public void setCodigoContable(String codigoContable) {
-		this.codigoContable = codigoContable;
-	}
+    public String getReferencia() { return referencia; }
+    public void setReferencia(String referencia) { this.referencia = referencia; }
 
-	public String getCodigoBarras() {
-		return codigoBarras;
-	}
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
-	}
+    public Double getCosto() { return costo; }
+    public void setCosto(Double costo) { this.costo = costo; }
 
-	public String getReferencia() {
-		return referencia;
-	}
+    public ImpuestosDTO getImpuesto() { return impuesto; }
+    public void setImpuesto(ImpuestosDTO impuesto) { this.impuesto = impuesto; }
 
-	public void setReferencia(String referencia) {
-		this.referencia = referencia;
-	}
+    public LineaDTO getLinea() { return linea; }
+    public void setLinea(LineaDTO linea) { this.linea = linea; }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public GrupoDTO getGrupo() { return grupo; }
+    public void setGrupo(GrupoDTO grupo) { this.grupo = grupo; }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public UsuarioDTO getUsuario() { return usuario; }
+    public void setUsuario(UsuarioDTO usuario) { this.usuario = usuario; }
 
-	public double getCosto() {
-		return costo;
-	}
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+    public Integer getCodigoUsuarioModifico() { return codigoUsuarioModifico; }
+    public void setCodigoUsuarioModifico(Integer codigoUsuarioModifico) { this.codigoUsuarioModifico = codigoUsuarioModifico; }
 
-	public int getImpuestoId() {
-		return impuestoId;
-	}
+    public String getFechaModificacion() { return fechaModificacion; }
+    public void setFechaModificacion(String fechaModificacion) { this.fechaModificacion = fechaModificacion; }
 
-	public void setImpuestoId(int impuestoId) {
-		this.impuestoId = impuestoId;
-	}
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-	public int getLineaId() {
-		return lineaId;
-	}
+    public String getFechaUltimaVenta() { return fechaUltimaVenta; }
+    public void setFechaUltimaVenta(String fechaUltimaVenta) { this.fechaUltimaVenta = fechaUltimaVenta; }
 
-	public void setLineaId(int lineaId) {
-		this.lineaId = lineaId;
-	}
-
-	public int getGrupoId() {
-		return grupoId;
-	}
-
-	public void setGrupoId(int grupoId) {
-		this.grupoId = grupoId;
-	}
-
-	public int getUsuarioId() {
-		return usuarioId;
-	}
-
-	public void setUsuarioId(int usuarioId) {
-		this.usuarioId = usuarioId;
-	}
-
-	public String getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	public void setFechaCreacion(String fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
-
-	public int getCodigoUsuarioModifico() {
-		return codigoUsuarioModifico;
-	}
-
-	public void setCodigoUsuarioModifico(int codigoUsuarioModifico) {
-		this.codigoUsuarioModifico = codigoUsuarioModifico;
-	}
-
-	public String getFechaModificacion() {
-		return fechaModificacion;
-	}
-
-	public void setFechaModificacion(String fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public String getFechaUltimaVenta() {
-		return fechaUltimaVenta;
-	}
-
-	public void setFechaUltimaVenta(String fechaUltimaVenta) {
-		this.fechaUltimaVenta = fechaUltimaVenta;
-	}
-
-	public String getFechaUltimaCompra() {
-		return fechaUltimaCompra;
-	}
-
-	public void setFechaUltimaCompra(String fechaUltimaCompra) {
-		this.fechaUltimaCompra = fechaUltimaCompra;
-	}
+    public String getFechaUltimaCompra() { return fechaUltimaCompra; }
+    public void setFechaUltimaCompra(String fechaUltimaCompra) { this.fechaUltimaCompra = fechaUltimaCompra; }
 }
+

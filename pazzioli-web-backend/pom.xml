@@ -34,6 +34,12 @@
         <module>web</module>
         <module>empresas</module>
         <module>productosmodule</module>
+        <module>facturacionmodule</module>
+        <module>tercerosmodule</module>
+        <module>comprobantesmodule</module>
+        <module>cajasmodule</module>
+        <module>vendedoresmodule</module>
+        <module>metodospagomodule</module>
     </modules>
 <!--configuracion para gestionar versiones de dependencias configuramos el bom bill 
 el cual es org.springframework.boot  esto lo hacemos esto para gestionar  las versiones de despendencias

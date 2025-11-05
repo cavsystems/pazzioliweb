@@ -1,12 +1,13 @@
 package com.pazzioliweb.usuariosbacken.dtos;
 
+import com.pazzioliweb.usuariosbacken.entity.Usuario;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class UsuarioDTO {
    
 	public UsuarioDTO(int codigo, String nombre, String usuario, String estado, RolDTO rol) {
@@ -17,6 +18,19 @@ public class UsuarioDTO {
 		this.estado = estado;
 		this.rol = rol;
 	}
+	
+	public static UsuarioDTO fromEntity(Usuario usuario) {
+        if (usuario == null) return null;
+
+        return new UsuarioDTO(
+            usuario.getCodigo(),
+            usuario.getNombre(),
+            usuario.getUsuario(),
+            usuario.getEstado(),
+            usuario.getCodigorol() != null ? RolDTO.fromEntity(usuario.getCodigorol()) : null
+        );
+    }
+	
 	private int codigo;
     public int getCodigo() {
 		return codigo;

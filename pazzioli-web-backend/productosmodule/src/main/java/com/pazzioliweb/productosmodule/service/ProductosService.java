@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.productosmodule.repositori.ProductosRespitori;
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
@@ -24,16 +25,31 @@ public class ProductosService {
         this.productoRepositori = productoRepository;
     }
 
-    public List<Productos> listarProductos() {
-        return productoRepositori.findAll();
+    public Page<ProductoDTO> listar(int page, int size, String sortField, String sortDirection) {
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).descending()
+                : Sort.by(sortField).ascending();
+    	Pageable pageable = PageRequest.of(page, size, sort);
+
+    	Page<Productos> listadoProductos = productoRepositori.traerProductos(pageable);
+
+        return listadoProductos.map(ProductoDTO::fromEntity);
     }
 
+    public Page<ProductoDTO> buscar(String termino, int page, int size, String sortField, String sortDirection) {
+        Sort.Direction direction = sortDirection.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+
+        Page<Productos> pageProductos = productoRepositori.traerProductosXFiltro(termino, pageable);
+        return pageProductos.map(ProductoDTO::fromEntity);
+    }
+    
     public Productos guardarProducto(Productos producto) {
         return productoRepositori.save(producto);
     }
 
     public Optional<Productos> buscarPorId(Integer id) {
-        return productoRepositori.findById(id);
+        return productoRepositori.findByIdWithRelations(id);
     }
 
     public void eliminarProducto(Integer id) {

@@ -165,6 +165,8 @@ Esto es útil cuando en una misma fila tienes texto y elementos como íconos o b
 .tablaterceros th:nth-child(4),
 .tablaterceros td:nth-child(4) {
   width: 20%;
+  max-width:130px;
+  min-width:130px;
 }
 .inputfechanacimiento{
     width: 100% !important;

@@ -124,4 +124,36 @@ public interface ProductosRespitori  extends JpaRepository<Productos,Integer> {
 		    GROUP BY l.descripcion
 			""")
 		Page<LineaProductosDTO> getTotalesPorLineaXBodega(@Param("bodegaId")Integer bodedaId,Pageable pageable);
+	
+	@Query("""
+			SELECT p FROM Productos p
+			LEFT JOIN FETCH p.impuestos
+			LEFT JOIN FETCH p.linea
+			LEFT JOIN FETCH p.grupo
+			LEFT JOIN FETCH p.usuario
+			WHERE p.productoId = :id
+			""")
+			Optional<Productos> findByIdWithRelations(@Param("id") Integer id);
+	
+	@Query("""
+			SELECT p FROM Productos p
+			LEFT JOIN FETCH p.impuestos
+			LEFT JOIN FETCH p.linea
+			LEFT JOIN FETCH p.grupo
+			LEFT JOIN FETCH p.usuario
+			""")
+			Page<Productos> traerProductos(Pageable pageable);
+	
+	@Query("""
+		    SELECT p FROM Productos p
+		    LEFT JOIN FETCH p.impuestos
+		    LEFT JOIN FETCH p.linea
+		    LEFT JOIN FETCH p.grupo
+		    LEFT JOIN FETCH p.usuario
+		    WHERE p.descripcion LIKE %:busqueda%
+		       OR p.codigoContable LIKE %:busqueda%
+		       OR p.codigoBarras LIKE %:busqueda%
+		       OR p.referencia LIKE %:busqueda%
+		""")
+		Page<Productos> traerProductosXFiltro(@Param("busqueda") String busqueda, Pageable pageable);
 }
