@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pazzioliweb.tercerosmodule.dtos.TerceroDTO;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
 import com.pazzioliweb.tercerosmodule.service.TercerosService;
+import com.pazzioliweb.tercerosmodule.repositori.ClasificacionTerceroRepository
+import com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero
 @Component
 @RestController
 @RequestMapping("/api/terceros")
 public class TercerosController {
 	private final TercerosService terceroService;
-
+    @Autowired
+    private ClasificacionTerceroRepository repositoriclasificacion
     @Autowired
     public TercerosController(TercerosService terceroService) {
         this.terceroService = terceroService;
@@ -99,5 +102,15 @@ public class TercerosController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+    
+    
+    @GetMapping("/traer/clasificacion")
+    public ResponseEntity<Object> traerclasificaciontercero(){
+    	System.out.println("entro clasificacion tercero");
+    	List<ClasificacionTercero> clasi=repositoriclasificacion.findAll();
+    	
+    	return ResponseEntity.ok().body(clasi)
+    	
     }
 }
