@@ -9,11 +9,13 @@ import com.pazzioliweb.productosmodule.entity.Precios;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -53,13 +55,7 @@ public class Terceros {
 
     @Column(name = "direccion", length = 100)
     private String direccion;
-
-    @Column(name = "contactos", length = 100)
-    private String contactos;
-
-    @Column(name = "correo", length = 100)
-    private String correo;
-
+    
     @Column(name = "plazo", nullable = false)
     private Integer plazo = 0;
 
@@ -158,22 +154,6 @@ public class Terceros {
 		this.direccion = direccion;
 	}
 
-	public String getContactos() {
-		return contactos;
-	}
-
-	public void setContactos(String contactos) {
-		this.contactos = contactos;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
-
 	public Integer getPlazo() {
 		return plazo;
 	}
@@ -213,5 +193,27 @@ public class Terceros {
 
 	public void setPrecio(Precios precio) {
 		this.precio = precio;
+	}
+	
+	@OneToMany(mappedBy = "tercero", fetch = FetchType.LAZY)
+    private List<ContactoTercero> contactos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "tercero", fetch = FetchType.LAZY)
+    private List<SedeTercero> sedes = new ArrayList<>();
+
+	public List<ContactoTercero> getContactos() {
+		return contactos;
+	}
+
+	public void setContactos(List<ContactoTercero> contactos) {
+		this.contactos = contactos;
+	}
+
+	public List<SedeTercero> getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(List<SedeTercero> sedes) {
+		this.sedes = sedes;
 	}
 }

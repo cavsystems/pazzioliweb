@@ -43,8 +43,11 @@
         <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProductoId</class>
         
         <!-- Terceros -->
-        <class>com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero</class>        
+        <class>com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero</class>    
+        <class>com.pazzioliweb.tercerosmodule.entity.ContactoTercero</class>
+        <class>com.pazzioliweb.tercerosmodule.entity.SedeTercero</class>
         <class>com.pazzioliweb.tercerosmodule.entity.Terceros</class>
+        <class>com.pazzioliweb.tercerosmodule.entity.TipoContacto</class>
         
         <!-- Comprobantes -->
         <class>com.pazzioliweb.comprobantesmodule.entity.CategoriasComprobantes</class>

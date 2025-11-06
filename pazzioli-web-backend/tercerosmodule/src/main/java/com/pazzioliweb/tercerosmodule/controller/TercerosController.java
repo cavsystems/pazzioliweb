@@ -3,7 +3,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.origin.SystemEnvironmentOrigin;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pazzioliweb.tercerosmodule.dtos.TerceroDTO;
+import com.pazzioliweb.tercerosmodule.dtos.TerceroDTOImpl;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
 import com.pazzioliweb.tercerosmodule.service.TercerosService;
 @Component
@@ -39,7 +38,7 @@ public class TercerosController {
             @RequestParam(defaultValue = "id") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) {
           System.out.println("metodo listar tercero");
-        Page<TerceroDTO> tercerosPage = terceroService.listar(page, size, sortField, sortDirection);
+        Page<TerceroDTOImpl> tercerosPage = terceroService.listar(page, size, sortField, sortDirection);
 
         Map<String, Object> response = new HashMap<>();
         response.put("content", tercerosPage.getContent());
@@ -58,7 +57,7 @@ public class TercerosController {
             @RequestParam(defaultValue = "id") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) {
 
-        Page<TerceroDTO> tercerosPage = terceroService.buscar(termino,page, size, sortField, sortDirection);
+        Page<TerceroDTOImpl> tercerosPage = terceroService.buscar(termino,page, size, sortField, sortDirection);
 
         Map<String, Object> response = new HashMap<>();
         response.put("content", tercerosPage.getContent());

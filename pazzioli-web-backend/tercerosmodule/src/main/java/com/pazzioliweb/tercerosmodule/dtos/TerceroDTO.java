@@ -1,6 +1,8 @@
 package com.pazzioliweb.tercerosmodule.dtos;
 
 
+import java.util.List;
+
 import com.pazzioliweb.empresaback.dtos.RegimenDTO;
 import com.pazzioliweb.productosmodule.dtos.PrecioDTO;
 
@@ -14,13 +16,13 @@ public interface TerceroDTO {
     String getApellido2();
     String getRazonSocial();
     String getDireccion();
-    String getContactos();
-    String getCorreo();
     Integer getPlazo();
     Integer getCupo();
-    
+
     TipoIdentificacionDTO getTipoIdentificacion();
     ClasificacionTerceroDTO getClasificacionTercero();
     PrecioDTO getPrecio();
     RegimenDTO getRegimen();
+    List<ContactoTerceroDTO> getContactos();
+    List<SedeTerceroDTO> getSedes();
 }

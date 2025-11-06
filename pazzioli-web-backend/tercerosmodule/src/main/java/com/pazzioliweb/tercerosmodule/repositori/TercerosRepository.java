@@ -28,21 +28,19 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
 		        t.apellido2 AS apellido2,
 		        t.razonSocial AS razonSocial,
 		        t.direccion AS direccion,
-		        t.contactos AS contactos,
-		        t.correo AS correo,
 		        t.plazo AS plazo,
 		        t.cupo AS cupo,
 		        ti AS tipoIdentificacion,
-		         c AS clasificacionTercero,
-		         p as precio,
-		         r as regimen
+		        c AS clasificacionTercero,
+		        p AS precio,
+		        r AS regimen
 		    FROM Terceros t
 		    LEFT JOIN t.tipoIdentificacion ti
 		    LEFT JOIN t.clasificacionTercero c
 		    LEFT JOIN t.precio p
 		    LEFT JOIN t.regimen r
-		    """)
-	Page<TerceroDTO> traerTerceros(Pageable pageable);
+		""")
+		Page<TerceroDTO> traerTerceros(Pageable pageable);
 	
 	@Query("""
 		    SELECT 
@@ -55,8 +53,6 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
 		        t.apellido2 AS apellido2,
 		        t.razonSocial AS razonSocial,
 		        t.direccion AS direccion,
-		        t.contactos AS contactos,
-		        t.correo AS correo,
 		        t.plazo AS plazo,
 		        t.cupo AS cupo,
 		        ti AS tipoIdentificacion,
@@ -72,4 +68,34 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
 		       OR t.razonSocial LIKE %:busqueda%
 		""")
 		Page<TerceroDTO> traerTercerosXFiltro(@Param("busqueda") String busqueda, Pageable pageable);
+	
+
+    @Query("""
+        SELECT DISTINCT t
+        FROM Terceros t
+        LEFT JOIN FETCH t.tipoIdentificacion
+        LEFT JOIN FETCH t.clasificacionTercero
+        LEFT JOIN FETCH t.precio
+        LEFT JOIN FETCH t.regimen
+        LEFT JOIN FETCH t.contactos
+        LEFT JOIN FETCH t.sedes
+        """)
+    Page<Terceros> findAllWithAllRelations(Pageable pageable);
+
+    @Query("""
+        SELECT DISTINCT t
+        FROM Terceros t
+        LEFT JOIN FETCH t.tipoIdentificacion
+        LEFT JOIN FETCH t.clasificacionTercero
+        LEFT JOIN FETCH t.precio
+        LEFT JOIN FETCH t.regimen
+        LEFT JOIN FETCH t.contactos
+        LEFT JOIN FETCH t.sedes
+        WHERE t.identificacion LIKE %:busqueda%
+           OR t.razonSocial LIKE %:busqueda%
+        """)
+    Page<Terceros> findByBusquedaWithAllRelations(@Param("busqueda") String busqueda, Pageable pageable);
+    
+    @Query("SELECT t FROM Terceros t WHERE t.identificacion LIKE :busqueda OR t.razonSocial LIKE :busqueda")
+    Page<Terceros> buscarPorIdentificacionORazonSocial(@Param("busqueda") String busqueda, Pageable pageable);
 }

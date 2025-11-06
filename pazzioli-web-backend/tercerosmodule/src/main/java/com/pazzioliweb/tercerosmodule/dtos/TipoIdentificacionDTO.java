@@ -2,6 +2,6 @@ package com.pazzioliweb.tercerosmodule.dtos;
 
 public interface TipoIdentificacionDTO {
 	Integer getCodigo();
-    String getCodigoTipoIdentificacion();
+    Integer getCodigoTipoIdentificacion();
     String getTipoIdentificacion();
 }
