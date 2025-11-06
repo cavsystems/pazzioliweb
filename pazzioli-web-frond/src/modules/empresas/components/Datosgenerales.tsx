@@ -25,6 +25,7 @@ import api from "../../../apicofig";
     let datos=await api.get('/empresa/traerempresa')
    
    setdatosempresa(datos.data.datos)
+   
    console.log(datos.data.datos)
 
   }

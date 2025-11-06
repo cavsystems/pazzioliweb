@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pazzioliweb.tercerosmodule.dtos.TerceroDTOImpl;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
 import com.pazzioliweb.tercerosmodule.service.TercerosService;
+import com.pazzioliweb.tercerosmodule.repositori.ClasificacionTerceroRepository;
+import com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero;
 @Component
 @RestController
 @RequestMapping("/api/terceros")
 public class TercerosController {
 	private final TercerosService terceroService;
-
+    
     @Autowired
     public TercerosController(TercerosService terceroService) {
         this.terceroService = terceroService;

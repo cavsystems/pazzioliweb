@@ -15,6 +15,7 @@ interface terceros {
 }
 function Terceros() {
     const [terceros,setTerceros]=useState<terceros[]>([])
+    const [visiblemodalcrear,setvisiblemodalcrear]=useState<boolean>(false)
     const traerterceros=async (pagina:number)=>{
        
     const terceros=await api.get(`terceros/listar?page=${pagina}&size=${7}&sortField=razonSocial&sortDirection=desc`,{
@@ -124,7 +125,9 @@ React.useEffect(()=>{
         
                                                    <div className="col-12 d-flex justify-content-center containerdivagregaru"   style={{marginTop:'10px' ,paddingBottom:"100px"}}>
                             <div className="containersucursalboton">
-                                  <CButton className="botonagregarsucursal" >Agregar</CButton>
+                                  <CButton className="botonagregarsucursal" onClick={()=>{
+                                    setvisiblemodalcrear(true)
+                                  }}>Agregar</CButton>
                             </div>
                            </div>
                                             </div>
@@ -133,7 +136,7 @@ React.useEffect(()=>{
              
         
             </div>
-            <Actulizartercero/>
+            <Actulizartercero visiblemodal={visiblemodalcrear}  setvisiblemodal={setvisiblemodalcrear}/>
             </div>
         </>
      );
