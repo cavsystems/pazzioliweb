@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.pazzioliweb.tercerosmodule.dtos.TerceroDTO;
+import com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
 
 @Repository
@@ -68,7 +69,6 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
 		       OR t.razonSocial LIKE %:busqueda%
 		""")
 		Page<TerceroDTO> traerTercerosXFiltro(@Param("busqueda") String busqueda, Pageable pageable);
-	
 
     @Query("""
         SELECT DISTINCT t
@@ -77,6 +77,7 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
         LEFT JOIN FETCH t.clasificacionTercero
         LEFT JOIN FETCH t.precio
         LEFT JOIN FETCH t.regimen
+        LEFT JOIN FETCH t.retenciones r
         LEFT JOIN FETCH t.contactos
         LEFT JOIN FETCH t.sedes
         """)
@@ -89,6 +90,7 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
         LEFT JOIN FETCH t.clasificacionTercero
         LEFT JOIN FETCH t.precio
         LEFT JOIN FETCH t.regimen
+        LEFT JOIN FETCH t.retenciones
         LEFT JOIN FETCH t.contactos
         LEFT JOIN FETCH t.sedes
         WHERE t.identificacion LIKE %:busqueda%
@@ -96,6 +98,68 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
         """)
     Page<Terceros> findByBusquedaWithAllRelations(@Param("busqueda") String busqueda, Pageable pageable);
     
-    @Query("SELECT t FROM Terceros t WHERE t.identificacion LIKE :busqueda OR t.razonSocial LIKE :busqueda")
-    Page<Terceros> buscarPorIdentificacionORazonSocial(@Param("busqueda") String busqueda, Pageable pageable);
+    @Query("""
+    		SELECT new com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO(
+    	        t.terceroId,
+    	        t.identificacion,
+    	        t.razonSocial,
+    	        ti.tipoIdentificacion,
+    	        c.nombre,
+    	        r.descripcion
+    	    )
+    	    FROM Terceros t
+    	    LEFT JOIN t.tipoIdentificacion ti
+    	    LEFT JOIN t.clasificacionTercero c
+    	    LEFT JOIN t.regimen r
+    		WHERE LOWER(t.identificacion) LIKE LOWER(:busqueda)
+    		OR LOWER(t.razonSocial) LIKE LOWER(:busqueda)
+    		""")
+    Page<TerceroResumenDTO> buscarPorIdentificacionORazonSocial(@Param("busqueda") String busqueda, Pageable pageable);
+    
+    @Query("""
+    	    SELECT DISTINCT t
+    	    FROM Terceros t
+    	    LEFT JOIN FETCH t.tipoIdentificacion ti
+    	    LEFT JOIN FETCH t.clasificacionTercero c
+    	    LEFT JOIN FETCH t.precio p
+    	    LEFT JOIN FETCH t.regimen r
+    	    LEFT JOIN FETCH t.retenciones rt
+    	    LEFT JOIN FETCH t.contactos con
+    	    LEFT JOIN FETCH t.sedes s
+    	    LEFT JOIN FETCH s.departamento d
+    		LEFT JOIN FETCH s.municipio m
+    	    """)
+    	List<Terceros> traerTercerosConDetalles();
+    
+    @Query("""
+    	    SELECT new com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO(
+    	        t.terceroId,
+    	        t.identificacion,
+    	        t.razonSocial,
+    	        ti.tipoIdentificacion,
+    	        c.nombre,
+    	        r.descripcion
+    	    )
+    	    FROM Terceros t
+    	    LEFT JOIN t.tipoIdentificacion ti
+    	    LEFT JOIN t.clasificacionTercero c
+    	    LEFT JOIN t.regimen r
+    	""")
+    	Page<TerceroResumenDTO> listarTercerosBasicos(Pageable pageable);
+    
+    @Query("""
+    	    SELECT t
+    	    FROM Terceros t
+    	    LEFT JOIN FETCH t.tipoIdentificacion ti
+    	    LEFT JOIN FETCH t.clasificacionTercero c
+    	    LEFT JOIN FETCH t.precio p
+    	    LEFT JOIN FETCH t.regimen r
+    	    LEFT JOIN FETCH t.retenciones rt
+    	    LEFT JOIN FETCH t.contactos con
+    	    LEFT JOIN FETCH t.sedes s
+    	    LEFT JOIN FETCH s.departamento d
+    	    LEFT JOIN FETCH s.municipio m
+    	    WHERE t.terceroId = :id
+    	    """)
+    	Optional<Terceros> buscarPorIdConDetalles(@Param("id") Integer id);
 }

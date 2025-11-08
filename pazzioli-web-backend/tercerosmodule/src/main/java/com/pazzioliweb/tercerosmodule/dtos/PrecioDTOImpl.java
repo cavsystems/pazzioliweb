@@ -13,7 +13,14 @@ public class PrecioDTOImpl implements PrecioDTO {
         dto.descripcion = entity.getDescripcion();
         return dto;
     }
-
+    
+    public Precios toEntity() {
+    	Precios entity = new Precios();
+        entity.setPrecio_id(this.precio_id);
+        entity.setDescripcion(this.descripcion);
+        return entity;
+    }
+    
     @Override public Integer getPrecio_id() { return precio_id; }
     @Override public String getDescripcion() { return descripcion; }
 }

@@ -7,11 +7,24 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 public class DataSourceMultiTenantConnectionProviderImpl implements MultiTenantConnectionProvider {
+	
+	@Value("${spring.datasource.host:localhost}")
+    private String dbHost;
 
+    @Value("${spring.datasource.port:3306}")
+    private String dbPort;
+
+    @Value("${spring.datasource.username:root}")
+    private String dbUser;
+
+    @Value("${spring.datasource.password:root}")
+    private String dbPass;
+	
     private final Map<String, DataSource> dataSources = new HashMap<>();
 
     public DataSourceMultiTenantConnectionProviderImpl() {
@@ -26,6 +39,10 @@ public class DataSourceMultiTenantConnectionProviderImpl implements MultiTenantC
         ds.setUsername("root");
         ds.setPassword("root125");
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        /*ds.setJdbcUrl("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName);
+        ds.setUsername(dbUser);
+        ds.setPassword(dbPass);
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");*/
         return ds;
     }
 

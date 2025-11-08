@@ -1,12 +1,14 @@
 package com.pazzioliweb.tercerosmodule.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.pazzioliweb.commonbacken.entity.Retenciones;
 import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.productosmodule.entity.Precios;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -195,25 +199,51 @@ public class Terceros {
 		this.precio = precio;
 	}
 	
-	@OneToMany(mappedBy = "tercero", fetch = FetchType.LAZY)
-    private List<ContactoTercero> contactos = new ArrayList<>();
+	@OneToMany(mappedBy = "tercero", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Set<ContactoTercero> contactos = new HashSet<>();
 
-    @OneToMany(mappedBy = "tercero", fetch = FetchType.LAZY)
-    private List<SedeTercero> sedes = new ArrayList<>();
+	@OneToMany(mappedBy = "tercero", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Set<SedeTercero> sedes = new HashSet<>();
 
-	public List<ContactoTercero> getContactos() {
+	public Set<ContactoTercero> getContactos() {
 		return contactos;
 	}
 
-	public void setContactos(List<ContactoTercero> contactos) {
+	public void setContactos(Set<ContactoTercero> contactos) {
 		this.contactos = contactos;
 	}
 
-	public List<SedeTercero> getSedes() {
+	public Set<SedeTercero> getSedes() {
 		return sedes;
 	}
 
-	public void setSedes(List<SedeTercero> sedes) {
+	public void setSedes(Set<SedeTercero> sedes) {
 		this.sedes = sedes;
 	}
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinTable(
+	    name = "retenciones_terceros",
+	    joinColumns = @JoinColumn(name = "tercero_id"),
+	    inverseJoinColumns = @JoinColumn(name = "retencion_id")
+	)
+	private Set<Retenciones> retenciones = new HashSet<>();
+	
+	// helper add/remove
+    public void addRetencion(Retenciones r) {
+        retenciones.add(r);
+    }
+    public void removeRetencion(Retenciones r) {
+        retenciones.remove(r);
+    }
+    
+	public Set<Retenciones> getRetenciones() {
+		return retenciones;
+	}
+
+	public void setRetenciones(Set<Retenciones> retenciones) {
+		this.retenciones = retenciones;
+	}
+	
+	
 }

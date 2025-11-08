@@ -1,12 +1,17 @@
 package com.pazzioliweb.tercerosmodule.dtos;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.pazzioliweb.productosmodule.dtos.PrecioDTO;
 import com.pazzioliweb.tercerosmodule.entity.Terceros;
-import com.pazzioliweb.empresaback.dtos.RegimenDTO;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.pazzioliweb.commonbacken.dtos.RetencionesDTO;
+import com.pazzioliweb.commonbacken.entity.Retenciones;
 import com.pazzioliweb.empresaback.dtos.RegimenDTOImpl;
+
+import com.pazzioliweb.tercerosmodule.entity.ContactoTercero;
+import com.pazzioliweb.tercerosmodule.entity.SedeTercero;
 
 public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.TerceroDTO {
 
@@ -22,88 +27,193 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
     private Integer plazo;
     private Integer cupo;
 
-    private TipoIdentificacionDTO tipoIdentificacion;
-    private ClasificacionTerceroDTO clasificacionTercero;
-    private PrecioDTO precio;
-    private RegimenDTO regimen;
-
+    // Relaciones
+    private TipoIdentificacionDTOImpl  tipoIdentificacion;
+    private ClasificacionTerceroDTOImpl  clasificacionTercero;
+    private RegimenDTOImpl regimen;
+    private PrecioDTOImpl precio;
+    
+    @JsonDeserialize(contentAs = ContactoTerceroDTOImpl.class)
     private List<ContactoTerceroDTO> contactos;
+    
+    @JsonDeserialize(contentAs = SedeTerceroDTOImpl.class)
     private List<SedeTerceroDTO> sedes;
+    
+    private List<RetencionesDTO> retenciones;
 
-    // ------------------ Método de conversión ------------------
+    public List<RetencionesDTO> getRetenciones() {
+		return retenciones;
+	}
+	public void setRetenciones(List<RetencionesDTO> retenciones) {
+		this.retenciones = retenciones;
+	}
+	// Getters y setters
+    public Integer getTerceroId() { return terceroId; }
+    public void setTerceroId(Integer terceroId) { this.terceroId = terceroId; }
+
+    public String getIdentificacion() { return identificacion; }
+    public void setIdentificacion(String identificacion) { this.identificacion = identificacion; }
+
+    public String getDv() { return dv; }
+    public void setDv(String dv) { this.dv = dv; }
+
+    public String getNombre1() { return nombre1; }
+    public void setNombre1(String nombre1) { this.nombre1 = nombre1; }
+
+    public String getNombre2() { return nombre2; }
+    public void setNombre2(String nombre2) { this.nombre2 = nombre2; }
+
+    public String getApellido1() { return apellido1; }
+    public void setApellido1(String apellido1) { this.apellido1 = apellido1; }
+
+    public String getApellido2() { return apellido2; }
+    public void setApellido2(String apellido2) { this.apellido2 = apellido2; }
+
+    public String getRazonSocial() { return razonSocial; }
+    public void setRazonSocial(String razonSocial) { this.razonSocial = razonSocial; }
+
+    public String getDireccion() { return direccion; }
+    public void setDireccion(String direccion) { this.direccion = direccion; }
+
+    public Integer getPlazo() { return plazo; }
+    public void setPlazo(Integer plazo) { this.plazo = plazo; }
+
+    public Integer getCupo() { return cupo; }
+    public void setCupo(Integer cupo) { this.cupo = cupo; }
+
+    public TipoIdentificacionDTOImpl  getTipoIdentificacion() { return tipoIdentificacion; }
+    public void setTipoIdentificacion(TipoIdentificacionDTOImpl  tipoIdentificacion) { this.tipoIdentificacion = tipoIdentificacion; }
+
+    public ClasificacionTerceroDTOImpl  getClasificacionTercero() { return clasificacionTercero; }
+    public void setClasificacionTercero(ClasificacionTerceroDTOImpl  clasificacionTercero) { this.clasificacionTercero = clasificacionTercero; }
+
+    public RegimenDTOImpl getRegimen() { return regimen; }
+    public void setRegimen(RegimenDTOImpl regimen) { this.regimen = regimen; }
+
+    public PrecioDTOImpl getPrecio() { return precio; }
+    public void setPrecio(PrecioDTOImpl precio) { this.precio = precio; }
+
+    public List<ContactoTerceroDTO> getContactos() { return contactos; }
+    public void setContactos(List<ContactoTerceroDTO> contactos) { this.contactos = contactos; }
+
+    public List<SedeTerceroDTO> getSedes() { return sedes; }
+    public void setSedes(List<SedeTerceroDTO> sedes) { this.sedes = sedes; }
+
+    // Método helper para convertir desde la entidad
     public static TerceroDTOImpl fromEntity(Terceros t) {
         TerceroDTOImpl dto = new TerceroDTOImpl();
-        dto.terceroId = t.getTerceroId();
-        dto.identificacion = t.getIdentificacion();
-        dto.dv = t.getDv();
-        dto.nombre1 = t.getNombre1();
-        dto.nombre2 = t.getNombre2();
-        dto.apellido1 = t.getApellido1();
-        dto.apellido2 = t.getApellido2();
-        dto.razonSocial = t.getRazonSocial();
-        dto.direccion = t.getDireccion();
-        dto.plazo = t.getPlazo();
-        dto.cupo = t.getCupo();
+        dto.setTerceroId(t.getTerceroId());
+        dto.setIdentificacion(t.getIdentificacion());
+        dto.setDv(t.getDv());
+        dto.setNombre1(t.getNombre1());
+        dto.setNombre2(t.getNombre2());
+        dto.setApellido1(t.getApellido1());
+        dto.setApellido2(t.getApellido2());
+        dto.setRazonSocial(t.getRazonSocial());
+        dto.setDireccion(t.getDireccion());
+        dto.setPlazo(t.getPlazo());
+        dto.setCupo(t.getCupo());
 
-        dto.tipoIdentificacion = t.getTipoIdentificacion() != null
-                ? TipoIdentificacionDTOImpl.fromEntity(t.getTipoIdentificacion())
-                : null;
+        if (t.getTipoIdentificacion() != null) {
+            dto.setTipoIdentificacion(TipoIdentificacionDTOImpl.fromEntity(t.getTipoIdentificacion()));
+        }
 
-        dto.clasificacionTercero = t.getClasificacionTercero() != null
-                ? ClasificacionTerceroDTOImpl.fromEntity(t.getClasificacionTercero())
-                : null;
+        if (t.getClasificacionTercero() != null) {
+            dto.setClasificacionTercero(ClasificacionTerceroDTOImpl.fromEntity(t.getClasificacionTercero()));
+        }
 
-        dto.precio = t.getPrecio() != null
-                ? PrecioDTOImpl.fromEntity(t.getPrecio())
-                : null;
+        if (t.getRegimen() != null) {
+            dto.setRegimen(RegimenDTOImpl.fromEntity(t.getRegimen()));
+        }
 
-        dto.regimen = t.getRegimen() != null
-                ? RegimenDTOImpl.fromEntity(t.getRegimen())
-                : null;
+        if (t.getPrecio() != null) {
+            dto.setPrecio(PrecioDTOImpl.fromEntity(t.getPrecio()));
+        }
+        
+        if (t.getRetenciones() != null) {
+            dto.setRetenciones(
+                t.getRetenciones().stream()
+                 .map(r -> new RetencionesDTO(r.getRetencionId(), r.getCodigo(), r.getNombre(), r.getBase(), r.getPorcentaje()))
+                 .collect(Collectors.toList())
+            );
+        }
+        
+        if (t.getContactos() != null) {
+        	dto.setContactos(
+        		    t.getContactos().stream()
+        		     .map(c -> (ContactoTerceroDTO) ContactoTerceroDTOImpl.fromEntity(c))
+        		     .collect(Collectors.toList())
+        		);
+        }
 
-        dto.contactos = t.getContactos() != null
-                ? t.getContactos().stream()
-                    .map(ContactoTerceroDTOImpl::fromEntity)
-                    .collect(Collectors.toList())
-                : null;
-
-        dto.sedes = t.getSedes() != null
-                ? t.getSedes().stream()
-                    .map(SedeTerceroDTOImpl::fromEntity)
-                    .collect(Collectors.toList())
-                : null;
+        if (t.getSedes() != null) {
+            dto.setSedes(
+                t.getSedes().stream()
+                 .map(c -> (SedeTerceroDTO) SedeTerceroDTOImpl.fromEntity(c))
+                 .collect(Collectors.toList())
+            );
+        }
 
         return dto;
     }
+    
+ // Conversión a entidad
+    public Terceros toEntity() {
+        Terceros entidad = new Terceros();
+        entidad.setTerceroId(this.terceroId);
+        entidad.setIdentificacion(this.identificacion);
+        entidad.setDv(this.dv);
+        entidad.setNombre1(this.nombre1);
+        entidad.setNombre2(this.nombre2);
+        entidad.setApellido1(this.apellido1);
+        entidad.setApellido2(this.apellido2);
+        entidad.setRazonSocial(this.razonSocial);
+        entidad.setDireccion(this.direccion);
+        entidad.setPlazo(this.plazo);
+        entidad.setCupo(this.cupo);
 
-    // ------------------ Getters ------------------
-    @Override public Integer getTerceroId() { return terceroId; }
-    @Override public String getIdentificacion() { return identificacion; }
-    @Override public String getDv() { return dv; }
-    @Override public String getNombre1() { return nombre1; }
-    @Override public String getNombre2() { return nombre2; }
-    @Override public String getApellido1() { return apellido1; }
-    @Override public String getApellido2() { return apellido2; }
-    @Override public String getRazonSocial() { return razonSocial; }
-    @Override public String getDireccion() { return direccion; }
-    @Override public Integer getPlazo() { return plazo; }
-    @Override public Integer getCupo() { return cupo; }
+        if (this.tipoIdentificacion != null)
+            entidad.setTipoIdentificacion(this.tipoIdentificacion.toEntity());
 
-    @Override public TipoIdentificacionDTO getTipoIdentificacion() { return tipoIdentificacion; }
-    @Override public ClasificacionTerceroDTO getClasificacionTercero() { return clasificacionTercero; }
-    @Override public PrecioDTO getPrecio() { return precio; }
-    @Override public RegimenDTO getRegimen() { return regimen; }
+        if (this.regimen != null)
+            entidad.setRegimen(this.regimen.toEntity());
 
-    @Override public List<ContactoTerceroDTO> getContactos() { return contactos; }
-    @Override public List<SedeTerceroDTO> getSedes() { return sedes; }
+        if (this.clasificacionTercero != null)
+            entidad.setClasificacionTercero(this.clasificacionTercero.toEntity());
 
-    // ------------------ Setters ------------------
-    public void setContactos(List<ContactoTerceroDTO> contactos) {
-        this.contactos = contactos;
-    }
+        if (this.precio != null)
+            entidad.setPrecio(this.precio.toEntity());
+        
+        if (this.retenciones != null && !this.retenciones.isEmpty()) {
+            Set<Retenciones> retencionesEntity = this.retenciones.stream()
+                .map(r -> {
+                    Retenciones ret = new Retenciones();
+                    ret.setRetencion_id(r.getRetencionId());
+                    ret.setCodigo(r.getCodigo());
+                    ret.setNombre(r.getNombre());
+                    ret.setBase(r.getBase());
+                    ret.setPorcentaje(r.getPorcentaje());
+                    return ret;
+                })
+                .collect(Collectors.toSet());
+            entidad.setRetenciones(retencionesEntity);
+        }
+        
+        if (this.sedes != null) {
+            Set<SedeTercero> sedesEntity = this.sedes.stream()
+                .map((SedeTerceroDTO sedeDTO) -> ((SedeTerceroDTOImpl) sedeDTO).toEntity())
+                .collect(Collectors.toSet());
+            entidad.setSedes(sedesEntity);
+        }
 
-    public void setSedes(List<SedeTerceroDTO> sedes) {
-        this.sedes = sedes;
+        if (this.contactos != null) {
+            Set<ContactoTercero> contactosEntity = this.contactos.stream()
+                .map((ContactoTerceroDTO contactoDTO) -> ((ContactoTerceroDTOImpl) contactoDTO).toEntity())
+                .collect(Collectors.toSet());
+            entidad.setContactos(contactosEntity);
+        }
+
+        return entidad;
     }
 }
 

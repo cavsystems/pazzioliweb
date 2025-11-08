@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTOImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.MunicipioInfoDTOImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Departamento"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.ContactoTerceroDTOImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.entity.Regimen"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.productosmodule.entity.Precios"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.ContactoTercero"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.TipoContacto"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Tipoidentificacion"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO"/>
+</qualifiedTypeNameHistroy>
