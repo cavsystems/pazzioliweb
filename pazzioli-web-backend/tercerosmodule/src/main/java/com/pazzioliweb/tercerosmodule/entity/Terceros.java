@@ -1,5 +1,6 @@
 package com.pazzioliweb.tercerosmodule.entity;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -245,5 +246,34 @@ public class Terceros {
 		this.retenciones = retenciones;
 	}
 	
-	
+	@Column(name = "fecha_nacimiento")
+	private LocalDate fechaNacimiento;
+	@Column(name = "matricula_mercantil")
+	private String matriculaMercantil;
+	@Column(name = "actividad_economica_id")
+	private Integer actividadEconomicaId;
+
+	public LocalDate getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getMatriculaMercantil() {
+		return matriculaMercantil;
+	}
+
+	public void setMatriculaMercantil(String matriculaMercantil) {
+		this.matriculaMercantil = matriculaMercantil;
+	}
+
+	public Integer getActividadEconomicaId() {
+		return actividadEconomicaId;
+	}
+
+	public void setActividadEconomicaId(Integer actividadEconomicaId) {
+		this.actividadEconomicaId = actividadEconomicaId;
+	}
 }

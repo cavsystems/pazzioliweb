@@ -1,5 +1,7 @@
 package com.pazzioliweb.tercerosmodule.dtos;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,7 +42,11 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
     private List<SedeTerceroDTO> sedes;
     
     private List<RetencionesDTO> retenciones;
-
+    
+    private String fechaNacimiento;
+    private String matriculaMercantil;
+    private Integer actividadEconomicaId;
+    
     public List<RetencionesDTO> getRetenciones() {
 		return retenciones;
 	}
@@ -98,8 +104,18 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
 
     public List<SedeTerceroDTO> getSedes() { return sedes; }
     public void setSedes(List<SedeTerceroDTO> sedes) { this.sedes = sedes; }
-
-    // Método helper para convertir desde la entidad
+    
+    
+    
+    public String getFechaNacimiento() {return fechaNacimiento;}
+	public void setFechaNacimiento(String fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
+	public String getMatriculaMercantil() {return matriculaMercantil;}
+	public void setMatriculaMercantil(String matriculaMercantil) {this.matriculaMercantil = matriculaMercantil;}
+	public Integer getActividadEconomicaId() {return actividadEconomicaId;}
+	public void setActividadEconomicaId(Integer actividadEconomicaId) {this.actividadEconomicaId = actividadEconomicaId;}
+	
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	// Método helper para convertir desde la entidad
     public static TerceroDTOImpl fromEntity(Terceros t) {
         TerceroDTOImpl dto = new TerceroDTOImpl();
         dto.setTerceroId(t.getTerceroId());
@@ -153,7 +169,19 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
                  .collect(Collectors.toList())
             );
         }
-
+        
+        if(t.getFechaNacimiento() != null) {
+        	dto.setFechaNacimiento(t.getFechaNacimiento().format(FORMATTER));
+        }
+        
+        if(t.getMatriculaMercantil() != null) {
+        	dto.setMatriculaMercantil(t.getMatriculaMercantil());
+        }
+        
+        if(t.getActividadEconomicaId() != null) {
+        	dto.setActividadEconomicaId(t.getActividadEconomicaId());
+        }
+        
         return dto;
     }
     
@@ -212,7 +240,16 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
                 .collect(Collectors.toSet());
             entidad.setContactos(contactosEntity);
         }
-
+        
+        if (this.fechaNacimiento != null)
+            entidad.setFechaNacimiento(LocalDate.parse(this.fechaNacimiento, FORMATTER));
+        
+        if (this.matriculaMercantil != null)
+            entidad.setMatriculaMercantil(this.matriculaMercantil);
+        
+        if (this.actividadEconomicaId != null)
+            entidad.setActividadEconomicaId(this.actividadEconomicaId);
+        
         return entidad;
     }
 }

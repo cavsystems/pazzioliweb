@@ -25,4 +25,8 @@ public interface TerceroDTO {
     RegimenDTO getRegimen();
     List<ContactoTerceroDTO> getContactos();
     List<SedeTerceroDTO> getSedes();
+    
+    String getFechaNacimiento();
+    String getMatriculaMercantil();
+    Integer getActividadEconomicaId();
 }

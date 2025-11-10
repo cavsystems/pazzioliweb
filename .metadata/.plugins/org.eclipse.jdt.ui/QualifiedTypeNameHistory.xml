@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTOImpl"/>
-    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTO"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
@@ -14,4 +13,10 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.TipoContacto"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Tipoidentificacion"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.repositori.SedeTerceroRepository"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.controller.SedeTerceroController"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.service.SedeTerceroService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
 </qualifiedTypeNameHistroy>
