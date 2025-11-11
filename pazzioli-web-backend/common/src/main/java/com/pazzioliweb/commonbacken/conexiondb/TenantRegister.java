@@ -16,7 +16,7 @@ public class TenantRegister {
 
 	    public void registerNewTenant(String tenantId) {
 	        DataSource ds = DataSourceBuilder.create()
-	                .url("jdbc:mysql://localhost:3323/" + tenantId + "?serverTimezone=UTC")
+	                .url("jdbc:mysql://localhost:3306/" + tenantId + "?serverTimezone=UTC")
 	                .username("root")
 	                .password("root125")
 	                .driverClassName("com.mysql.cj.jdbc.Driver")

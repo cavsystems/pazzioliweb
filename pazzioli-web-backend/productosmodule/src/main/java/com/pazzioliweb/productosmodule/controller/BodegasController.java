@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
+import com.pazzioliweb.commonbacken.util.PasswordUtils;
 import com.pazzioliweb.productosmodule.dtos.BodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoDTO;
 import com.pazzioliweb.productosmodule.entity.Bodegas;
@@ -89,12 +90,12 @@ public class BodegasController {
 			response.clear();
 		 System.out.println(nombrerol.getContrasena());
 	      Optional<Roles> rol= reporoles.findByCodigo(nombrerol.getRol());
-	    
+	    String encrippassword=PasswordUtils.encrypt(nombrerol.getContrasena());
 	    
 		 Usuario nuevousu=new Usuario();
 		 nuevousu.setNombre(nombrerol.getNombre());
 		 nuevousu.setUsuario(nombrerol.getUsuario());
-		 nuevousu.setContrasena(nombrerol.getContrasena());
+		 nuevousu.setContrasena(encrippassword);
 		 nuevousu.setEstado(nombrerol.getEstado());
 		 nuevousu.setCodigousuariocreado(1);
 		 nuevousu.setCodigorol(rol.get());

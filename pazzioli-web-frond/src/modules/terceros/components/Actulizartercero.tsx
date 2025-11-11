@@ -10,9 +10,11 @@ import dayjs from "dayjs";
 import { Identificacion } from "../../empresas/components/components/Identifiicaciones";
 import api from "../../../apicofig";
 /* useRef(initialValue) crea un objeto con .current que puedes asignar a un elemento DOM mediante la propiedad ref*/
-function Actulizartercero({visiblemodal,setvisiblemodal}:any) {
+function Actulizartercero({visiblemodal,setvisiblemodal,actulizar,setActualizar,terceroupdate,setTerceroupdate,traerterceros}:any) {
     const [claseitem,setclaseitem]=React.useState<string>("chrome")
     const [rotate, setRotate] = React.useState(false);
+
+    
         const [rotate1, setRotate1] = React.useState(false);
         const [rotate2, setRotate2] = React.useState(false);
         const [rotate4,setRotate4]=React.useState(false)
@@ -34,7 +36,20 @@ function Actulizartercero({visiblemodal,setvisiblemodal}:any) {
          const [municipio2,setMunicipio2]=React.useState<{codigo:number,municipio:string,codigoDepartamento:number,codigoMunicipio:number}[]>([]);
     const [selectedDate, setSelectedDate] = React.useState(dayjs()); // 👈 estado para la fecha
    const [esjuridica,setesjuridica]=React.useState<boolean>(false)
-
+   const [precios,setprecios]=React.useState<{
+    precio_id: number, descripcion: string
+   }[]>([])
+   const [retenciones,setretenciones]=React.useState<{
+    retencionId:number,
+    codigo:number,
+    nombre:string,
+    base:number,
+    porsentaje:number
+   }[]>([])
+   const[retencionescheck,setretencionescheck]=React.useState<{
+       retencionId:number,
+        nombre:string
+    }[]>([])
     const [actividadeconomica,setactividadeconomica]=React.useState([])
       const [filtrodes, setFiltro] = React.useState('');
       const [filtroco, setFiltroco] = React.useState(0);
@@ -90,6 +105,14 @@ const [regimen2,setregimen2]=React.useState<{
   }
   traerinformacion();
  },[])
+ React.useEffect(() => {
+  if (rotate4) {
+    retencionescheck.forEach((item) => {
+      const element = document.getElementById(`idretencion${item.retencionId}`) as HTMLInputElement | null;
+      if (element) element.checked = true;
+    });
+  }
+}, [rotate4]);
       const methods = useForm({
                  mode: 'onSubmit',
                   shouldUnregister: false,
@@ -97,6 +120,7 @@ const [regimen2,setregimen2]=React.useState<{
              
    tipoidentificacion:"0"  ,
    identificacion:"",
+   tipopersona:'0',
    dijitoverificacion:"",
     nombre1:"",
     nombre2:"",
@@ -114,11 +138,38 @@ const [regimen2,setregimen2]=React.useState<{
     digitodeverificacion:"",
     clasificaciontercero:"",
     direccion:"",
+    tiporegimen:'0',
+    precios:'0',
+    retenciones:[],
+    cupo:"",
+    matriculamercantil:""
+  
 
 
                   // Agrega todos los campos que usas en todos los pasos
                 },
               });
+
+              React.useEffect(()=>{
+                if(actulizar && terceroupdate.identificacion){
+                  methods.setValue("identificacion",terceroupdate.identificacion)
+                  console.log("clasificacion tercero",terceroupdate.clasificacionTercero)
+                  methods.setValue("clasificaciontercero",terceroupdate.clasificacionTercero.clasificacionTerceroId)
+                   methods.setValue("digitodeverificacion",terceroupdate.dv)
+                    methods.setValue("tipoidentificacion",terceroupdate.tipoIdentificacion.codigo)
+                      methods.setValue("nombre1",terceroupdate.nombre1)
+                        methods.setValue("nombre2",terceroupdate.nombre2)
+                          methods.setValue("apellido1",terceroupdate.apellido1)
+                           methods.setValue("apellido2",terceroupdate.apellido2)
+                           methods.setValue("razonsocial",terceroupdate.razonSocial)
+                           methods.setValue("plazo",terceroupdate.plazo)
+                                 methods.setValue("tiporegimen",terceroupdate.regimen.codigo)
+                                    methods.setValue("precios",terceroupdate.precio.precio_id)
+
+
+                   
+                }
+              },[actulizar,terceroupdate])
    React.useEffect(()=>{
   traerdataauto()
 
@@ -140,13 +191,97 @@ const crearcodigomu = (codigomuni: string): string => {
     : "00" + codigomuni;
 };
 
+ const onSubmit = async (data: any) => {
+    if(retencionescheck.length<=0){
+         return
+    }
+    console.log("data tercero",data)
+  let databody={
+    identificacion:data.identificacion,
+    dv:data.digitoverificacion,
+    nombre1:data.nombre1,
+    nombre2:data.nombre2,
+    apellido1:data.apellido1,
+    apellido2:data.apellido2,
+    razonSocial:data.razonsocial && data.razonsocial!=="" ? data.razonsocial:data.nombre1+data.nombre2 ,
+    direccion:data.direccion,
+   plazo:Number(data.plazo),
+   cupo:Number(data.cupo),
+  tipoIdentificacion:{
+    codigo:data.tipoidentificacion
+  },
+  
+  clasificacionTercero:{
+    clasificacionTerceroId:Number(data.clasificaciontercero)
+
+  },
+
+  regimen:{
+    codigo:Number(data.tiporegimen)
+  },
+
+  precio:{
+    precio_id:Number(data.precios)
+
+  },
+
+
+retenciones:retencionescheck,
+
+fechaNacimiento:data.fechaNacimiento,
+
+actividadEconomicaId:CIIU==='' ? 0:CIIU,
+ 
+matriculaMercantil:data.matriculamercantil
+
+      
+  }
+  if(!actulizar){
+  try {
+     const datosreturn=await api.post("terceros/crear",
+    
+    databody,{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+          
+        }}
+  
+  );
+  console.log("datos return",datosreturn)
+  traerterceros(0)
+  
+ 
+  } catch (error) {
+     console.log(error)
+    
+  }
+  }else{
+    console.log("entro a actualizar",data)
+
+    
+  }
+  
+ }
+
+
   const traerinformacion= async ()=>{
     let datos=await api.get('/empresa/traerempresa')
  let datosclasificacion= await api.get(`clasificacionesTerceros/listar?page=0&size=7&sortField=nombre&sortDirection=desc`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-    console.log("datos clasificacion",datosclasificacion)
+let traerretenciones= await api.get("terceros/traerretenciones/retenciones",{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+let traerprecios= await api.get("precios/listar",{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+    console.log("precios datos",traerprecios.data.data)
+    
+    setprecios(traerprecios.data.data)
+      setretenciones(traerretenciones.data)
     setClasificacionTercero(datosclasificacion.data.content)
    let municipioss:{codigo:number,municipio:string,codigoDepartamento:number}[]=[]
      let departamentoss:{codigo:number,departamento:string,codigoDepartamento:number}[]=[]
@@ -172,6 +307,7 @@ setDepartamento2(datos.data.datos.departamento)
 
   const traercodigopostal=async (codigomunici:string)=>{
    const codigoposta= await api.get(`/codigoPostal/codigopostal?codigomunicipio=${Number(codigomunici)}`)
+
    console.log("codigo postal",codigoposta)
   
    const postal=codigoposta.data.respuesta.replace("\r","");
@@ -208,6 +344,8 @@ return (
                 visible={visiblemodal}
                   onClose={()=>{
                     setvisiblemodal(false)
+                 setActualizar(false)
+
                   }}
                   
                 aria-labelledby="VerticallyCenteredScrollableExample2"
@@ -224,9 +362,9 @@ return (
 
                 <CModalBody>
                   <FormProvider {...methods}>
-                      <form className="row paddinginput" >
+                      <form className="row paddinginput"  onSubmit={methods.handleSubmit(onSubmit)}>
             <div className="col-12">
-               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Identicación</h6>
+               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Identificación</h6>
 
             </div>
 
@@ -252,7 +390,7 @@ return (
                              <Controller
                            control={methods.control}
                           name="clasificaciontercero"
-                           defaultValue=''
+                           defaultValue='0'
                           
                             rules={{ required: "Este campo es obligatorio" }}
                            render={({ field,fieldState }) => (
@@ -274,7 +412,7 @@ return (
                            >
                            
                              
-                        <option value="">Elije una opción</option>
+                        <option value="0">Elije una opción</option>
                             {
                                 clasificaciontercero?.map((item)=>{
                                     return <>
@@ -479,7 +617,7 @@ return (
              </div>
                 </div>
                   <div className="col-12">
-               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Datos Generales</h6>
+               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Datos generales</h6>
 
             </div>
              <div className="col-12 "   >
@@ -580,61 +718,10 @@ return (
 
 
 
-                             <div className="col-12 col-md-6 col-sm-6   inputterceroright" >
-
-                         <CInputGroup >
-                                                 {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
-                                                 CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
-                                                 Debe incluir placeholder en el select para que funcione correctamente.
-                                                 La etiqueta (label), se queda flotando arriba incluso después de elegir una opción*/}
-                                 
-                                 
-                                 {/**el control nos servira para panipular los select a nuestro
-                                  * antojo, ya que react-hook-form no permite manipular los select
-                                  * directamente, por eso usamos el controller
-                                  
-                                 
-                                 */}                <CFormFloating className="margeniputempresa">
-                             <Controller
-                           control={methods.control}
-                           name="genero"
-                           defaultValue=''
-                            rules={{ required: "Este campo es obligatorio" }}
-                           render={({ field,fieldState }) => (
-                             <>
-                           <CFormSelect
-                           {...field}
-                             size="lg"
-                             placeholder="Estado"
-                             className="inputselect fontletre "
-                            
-                         
-                              onChange={(e:any) => {
-                                 // importante para que RHF sepa del cambio
-                                   // lógica adicional...
-                             const value = e.target.value;
-                            
-                                 field.onChange(value);
-                           }}
-                           >
-                           
                              
-                            <option value="MASCULINO">MASCULINO</option>
-                                         <option value="FEMENINO">FEMENINO</option>
-                              
-                           </CFormSelect>
-                      <CFormLabel>Genero</CFormLabel>
-                           </>
-                           
-                           )}
-                         />
-                         
-                         </CFormFloating>
-                          </CInputGroup>
-                        </div>
 
                         
-                             <div className="col-12  col-md-6 col-sm-6 inputterceroleft">
+                             <div className="col-12  col-md-6 col-sm-6 inputterceroright">
                             <div className="containerfecha margeniputempresa" >
                                 <div className="containerfechanacimiento">
                                 <input type="text" className="inputfechanacimiento"   {...methods.register("fechanacimiento",{required:true})}  placeholder="DD/MM/YY" onClick={()=>{
@@ -713,10 +800,10 @@ Dentro del DateCalendar puedes personalizar:
 
 
 
-                        <div className="col-12 col-md-6 col-sm-6 inputterceroright" >
+                        <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
                                    <CInputGroup >
                                            <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"         
+                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"   {...methods.register("cupo")}      
                                 
                              />
                         
@@ -733,7 +820,7 @@ Dentro del DateCalendar puedes personalizar:
 
 
 
-     <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
+     <div className="col-12 col-md-6 col-sm-6 inputterceroright" >
                                    <CInputGroup  >
                                            <CFormFloating className="margeniputempresa">
                                          <CFormInput placeholder=""  className="inputdatosempresa fontletre"       {...methods.register("plazo",{required:true})}    
@@ -784,7 +871,7 @@ Dentro del DateCalendar puedes personalizar:
                         </div>
 
 
-                        <div className="col-12 col-md-6 col-sm-6   inputterceroright" >
+                        <div className="col-12 col-md-6 col-sm-6   inputterceroleft" >
 
                          <CInputGroup >
                                                  {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
@@ -802,7 +889,7 @@ Dentro del DateCalendar puedes personalizar:
                              <Controller
                            control={methods.control}
                           name="tiporegimen"
-                           defaultValue=''
+                           defaultValue='0'
                           
                             rules={{ required: "Este campo es obligatorio" }}
                            render={({ field,fieldState }) => (
@@ -824,7 +911,7 @@ Dentro del DateCalendar puedes personalizar:
                            >
                            
                              
-                            <option value="">Elige una opción</option>
+                            <option value="0">Elige una opción</option>
                                          {
                                             regimen.map((item)=>{
                                                 return <>
@@ -850,7 +937,7 @@ Dentro del DateCalendar puedes personalizar:
 
 
 
-                        <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
+                        <div className="col-12 col-md-6 col-sm-6 inputterceroright" >
                                  <CInputGroup >
                                                  {/* CoreUI soporta etiquetas flotantes (floating labels) en selects. Estas etiquetas se mantienen por encima y en posición flotante incluso cuando se selecciona un valor 
                                                  CFormFloating envuelve el <CFormSelect> y etiqueta para aplicar el estilo flotante.
@@ -866,8 +953,8 @@ Dentro del DateCalendar puedes personalizar:
                                  */}                <CFormFloating className="margeniputempresa">
                              <Controller
                            control={methods.control}
-                          name="tiporegimen"
-                           defaultValue='Activo'
+                          name="precios"
+                           defaultValue='0'
                           
                             rules={{ required: "Este campo es obligatorio" }}
                            render={({ field,fieldState }) => (
@@ -889,8 +976,15 @@ Dentro del DateCalendar puedes personalizar:
                            >
                            
                              
-                            <option value="NATURAL">NATURAL</option>
-                                         <option value="JURIDICA">JURIDICA</option>
+                            <option value="0">Elige una opción</option>
+                            {
+                              precios.map((item)=>{
+                                return <>
+                                <option value={item.precio_id}>{item.descripcion}</option>
+                                </>
+                              })
+                            }
+                                         
                               
                            </CFormSelect>
                       <CFormLabel>Precios</CFormLabel>
@@ -904,10 +998,11 @@ Dentro del DateCalendar puedes personalizar:
                         </div>
 
 
-                         <div className="col-12  col-md-6 col-sm-6 inputterceroright">
+                         <div className="col-12  col-md-6 col-sm-6 inputterceroleft">
                             <CInputGroup >
                                            <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"         
+                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre" 
+                                         {...methods.register("matriculamercantil")}        
                                 
                              />
                         
@@ -921,10 +1016,10 @@ Dentro del DateCalendar puedes personalizar:
                                        </CInputGroup>
                         </div>
                         
-<div className="col-12  col-md-6 col-sm-6 inputterceroleft">
+<div className="col-12  col-md-6 col-sm-6 inputterceroright">
                                                  <CInputGroup className="" >
                <CFormFloating className="margeniputempresa">
-              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre inputcomple"   value={filtrodes}        {...methods.register('Actividadeconomica', { required: 'Este campo es obligatorio' })}    onChange={(e: any) => {
+              <CFormInput placeholder=""     list="actividades" className="inputdatosempresa fontletre inputcomple"   value={filtrodes}        {...methods.register('Actividadeconomica')}    onChange={(e: any) => {
                  const valor = e.target.value;
                 setFiltro(e.target.value);
                 setmostrardes(true)
@@ -934,9 +1029,8 @@ Dentro del DateCalendar puedes personalizar:
     // Llamar al onChange original de react-hook-form
     methods.register('Actividadeconomica').onChange(e);
   }}/>
-    { methods.formState.errors.Actividadeconomica ? (
-    <CFormLabel style={{ color: "red" }}>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>):(
-  <CFormLabel>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>)}
+   
+  <CFormLabel>{"Actividad económica (CIIU)"+" "+CIIU}</CFormLabel>
     
      {filtrodes && mostrardes && (
       <ul className={`lista-opcionesaut ${tipohove}`}>
@@ -956,234 +1050,75 @@ Dentro del DateCalendar puedes personalizar:
             </div>
 
 
-            <div className="col-12  col-md-6 col-sm-6 inputterceroright">
-               <div className="d-flex  flex-wrap flex-column" style={{position:"relative"}}>
-                  <ul  className="d-flex container1  flex-wrap">
-             
-                <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}} ><input style={{width:"100%"}} className="inputestilotercero " placeholder="Retenciones" /> <div ><img  src="imgs/togle.svg" onClick={()=>{
+            <div className="col-12  col-md-6 col-sm-6 inputterceroleft inputretencion" style={{height:"82px"}}>
+               <div className="d-flex  flex-wrap flex-column margeniputempresa" style={{position:"relative",height: "calc(100% - 12px)"}}   >
+                  <ul  className="d-flex container1  flex-wrap" >
+                   {
+                    retencionescheck.map((item)=>{
+                        return <>
+                        <li className="classitemitem2"><span className="spanitemrete">{item.nombre.length>10 ? item.nombre.substring(0,10)+"...":item.nombre}</span> <button className="botoncerrar" type="button" onClick={()=>{
+                            if (rotate4) {
+  
+      const element = document.getElementById(`idretencion${item.retencionId}`) as HTMLInputElement | null;
+      if (element) element.checked = false;
+    
+  }
+                          setretencionescheck(retencionescheck.filter(item2=> item2.retencionId!==item.retencionId))
+                            
+                            
+                      
+                        }}></button></li>
+                        </>
+                    })
+                   }
+                <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className="inputestilotercero " placeholder="Retenciones" /> <div ><img  src="imgs/togle.svg" onClick={()=>{
+                    
+
+                    
                     setRotate4(!rotate4)
-                }} className={`${rotate4 ? 'rotate':''} `}/></div> <div style={{alignSelf:'1'}}  className="botoncerrarall"><button className="botoncerrar botoncerrarall"></button></div>  </li >
+                }} className={`${rotate4 ? 'rotate':''} `}/></div> <div style={{alignSelf:'1'}}  className="botoncerrarall"><button className="botoncerrar botoncerrarall" type="button" onClick={()=>{
+                  if(rotate4){
+                    retencionescheck.forEach((item2)=>{
+                         const element = document.getElementById(`idretencion${item2.retencionId}`) as HTMLInputElement | null;
+      if (element) element.checked = false;
+                    })
+
+                 
+                  }
+               setretencionescheck([])
+                }}></button></div>  </li >
                   </ul>
                 { rotate4 && (<div className="containeritemli">
                   <ul className="itemcontli">
-
-                    <li className="licheckterceros" > <input type="checkbox"/>ReteFuente</li>
-                    <li className="licheckterceros"><input type="checkbox"/>ReteIca</li>
-                    <li className="licheckterceros"> <input type="checkbox"/>ReteIva</li>
+                     {
+                        retenciones.map((item)=>{
+                            return <>
+                            <li className="licheckterceros" > <input type="checkbox" id={`idretencion${item.retencionId}`}  onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
+                                  if (e.target.checked) {
+      // el checkbox está seleccionado
+      setretencionescheck((prev)=> [...prev,{retencionId:item.retencionId,nombre:item.nombre}])
+    } else {
+        setretencionescheck(retencionescheck.filter(item2=> item2.retencionId!=item.retencionId))
+      // el checkbox no está seleccionado
+    }
+                            }}/> <span>{item.nombre}</span></li>
+                            </>
+                        })
+                     }
+                    
+               
                   </ul>
                   </div>)}
                </div>
             </div>
 
-            
-                    </div>
-             </div>
 
 
 
-             
-                </div>
-
-
-
-                 <div className="col-12">
-               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Ubicación</h6>
-
-            </div>
-
-            <div className="col-12 "   >
-                <div>
-                    <div className="row ">
-                        <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
-                                 <CInputGroup  >
-                                           <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"       {...methods.register("pais",{required:true})}    
-                                 onChange={(e)=>{
-                                let value=e.target.value
-                                setPaises2(paises.filter(pa=>pa.toString().startsWith(value) || pa.toString().endsWith(value) ))
-                                
-                             }}
-                               
-                             />
-                         <CFormLabel>País</CFormLabel>
-                        <img src="imgs/togle.svg" className={`imagenplazo  ${rotate1 ? "rotate":""}`}  onClick={()=>{
-                            setRotate1(!rotate1)
-                           
-                            
-                              // enfoque el input
-
-    if(!rotate1){
-         const inputPlazo = document.querySelector("input[name='pais']") as HTMLInputElement | null;;
-      inputPlazo?.focus();
-  
-    }
-
-                        }} />
-
-                        <div className={`containerplazos ${rotate1 ? "mostrarplazos":"mostrarplazosnone"}`} >
-                               <ul className={`plazoitem ${claseitem}`} >
-                            {paises2.map((pa,index)=>(
-                             
-                                    <li key={index} className="classitemitem" onClick={()=>{
-                                        methods.setValue("pais",pa.toString())
-                                      
-                                        //setplazo(false)
-                                        setRotate1(false)
-                                    }}>{pa}</li>
-                              
-                            ))
-                            }
-                              </ul>
-                        </div>
-
-                          
-                         
-                                
-                               
-                            
-                             </CFormFloating>
-                                       </CInputGroup>
-                        </div>
-
-                         <div className="col-12 col-md-6 col-sm-6 inputterceroright" >
-                                 <CInputGroup  >
-                                           <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"       {...methods.register("departamento",{required:true})}    
-                                 onChange={(e)=>{
-                                let value=e.target.value
-                                setDepartamento2(departamento.filter(pa=>pa.departamento.startsWith(value.toUpperCase()) || pa.departamento.toString().endsWith(value.toUpperCase()) ))
-                                
-                             }}
-                               
-                             />
-                         <CFormLabel>Departamento</CFormLabel>
-                        <img src="imgs/togle.svg" className={`imagenplazo  ${rotate2 ? "rotate":""}`}  onClick={()=>{
-                            setRotate2(!rotate2)
-                           
-                            
-                              // enfoque el input
-
-    if(!rotate2){
-         const inputPlazo = document.querySelector("input[name='departamento']") as HTMLInputElement | null;;
-      inputPlazo?.focus();
-  
-    }
-
-                        }} />
-
-                        <div className={`containerplazos ${rotate2 ? "mostrarplazos":"mostrarplazosnone"}`} >
-                               <ul className={`plazoitem ${claseitem}`} >
-                            {departamento2.map((pa,index)=>(
-                             
-                                    <li key={index} className="classitemitem" onClick={()=>{
-                                        methods.setValue("departamento",pa.departamento.toString())
-                                              methods.setValue("municipio","")
-                                      setdepartamentoobject(pa)
-                                     let codigodepar=codigodepartamento.find((item)=> item.departamento===pa.departamento)
-                                        
-                                          setMunicipio2(municipio.filter((item)=>item.codigoDepartamento===codigodepar?.codigoDepartamento))
-                                          console.log("municipios filtradas",municipio2,codigodepar,pa,codigodepartamento)
-                                        //setplazo(false)
-                                        setRotate2(false)
-                                    }}>{pa.departamento}</li>
-                              
-                            ))
-                            }
-                              </ul>
-                        </div>
-
-                          
-                         
-                                
-                               
-                            
-                             </CFormFloating>
-                                       </CInputGroup>
-                        </div>
-
-
-
-
-
-                           <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
-                                 <CInputGroup>
-                                           <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"       {...methods.register("municipio",{required:true})}    
-                                 onChange={(e)=>{
-                                let value=e.target.value
-                                setMunicipio2(municipio.filter(pa=>(pa.municipio.toString().startsWith(value.toUpperCase()) || pa.municipio.toString().endsWith(value.toUpperCase())) && pa.codigoDepartamento===departamentoobject.codigoDepartamento))
-                                
-                             }}
-                               
-                             />
-                         <CFormLabel>Municipio</CFormLabel>
-                        <img src="imgs/togle.svg" className={`imagenplazo  ${rotate3 ? "rotate":""}`}  onClick={()=>{
-                            setRotate3(!rotate3)
-                           
-                            
-                              // enfoque el input
-
-    if(!rotate3){
-         const inputPlazo = document.querySelector("input[name='municipio']") as HTMLInputElement | null;;
-      inputPlazo?.focus();
-  
-    }
-
-                        }} />
-
-                        <div className={`containerplazos ${rotate3 ? "mostrarplazos":"mostrarplazosnone"}`} >
-                               <ul className={`plazoitem ${claseitem}`} >
-                            {municipio2.map((pa,index)=>(
-                             
-                                    <li key={index} className="classitemitem" onClick={()=>{
-                                        methods.setValue("municipio",pa.municipio.toString())
-                                        setmunicipioobject(pa)
-                                        console.log("municipioactual",pa)
-                                        let codigopos= departamentoobject.codigoDepartamento.toString()+crearcodigomu(pa.codigoMunicipio.toString())
-                                        traercodigopostal(codigopos)
-                                        //setplazo(false)
-                                        setRotate3(false)
-                                    }}>{pa.municipio}</li>
-                              
-                            ))
-                            }
-                              </ul>
-                        </div>
-
-                          
-                         
-                                
-                               
-                            
-                             </CFormFloating>
-                                       </CInputGroup>
-                        </div>
-
-
-
-                        <div className="col-12  col-md-6 col-sm-6 inputterceroright">
+                  <div className="col-12  col-md-6 col-sm-6 inputterceroleft">
                             <CInputGroup >
                                            <CFormFloating className="margeniputempresa">
-                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"   {...methods.register("codigopostal",{required:true}) }     
-                                
-                             />
-                        
-                            <CFormLabel >Codigo postal</CFormLabel>
-                          
-                         
-                                
-                               
-                            
-                             </CFormFloating>
-                                       </CInputGroup>
-                        </div>
-
-
-                        <div className="col-12 col-md-6 col-sm-6  inputterceroleft" >
-                                   <CInputGroup >
-                                           <CFormFloating className="margeniputempresa">
-                                          <CFormTextarea placeholder=""  className="inputdatosempresa fontletre"   
-                                          {...methods.register("direccion",{required:true})}          
+                                         <CFormInput placeholder=""  className="inputdatosempresa fontletre"   {...methods.register("direccion")}      
                                 
                              />
                         
@@ -1197,19 +1132,18 @@ Dentro del DateCalendar puedes personalizar:
                                        </CInputGroup>
                         </div>
 
+            
 
-
-
-
-                       
-
-
-
-                        
-
+            
                     </div>
              </div>
+
+
+
+             
                 </div>
+
+
 
 
                  
@@ -1218,8 +1152,9 @@ Dentro del DateCalendar puedes personalizar:
            
 
                   <div  className="d-flex justify-content-center" style={{marginTop:'15px'}}>
-                <button type="submit" className="botoncontinuarguardar"  key="guardar"    
-                >Guardar</button>
+               {actulizar ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    
+                >Actualizar</button>: <button type="submit" className="botoncontinuarguardar"  key="guardar"    
+                >Guardar</button>}
                </div>
 
 

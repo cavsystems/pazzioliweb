@@ -29,7 +29,7 @@ function Bodegausuario({modalbodegas,setModalbodegas ,bodegasusuario,setbodegaus
                
                   
               >
-                <CModalHeader>
+                <CModalHeader  style={{background:'SELECT * FROM cavsystems.tipoidentificacion;'}}>
                     
                   <CModalTitle id="VerticallyCenteredScrollableExample2">Personas</CModalTitle>
                 </CModalHeader>
@@ -38,7 +38,7 @@ function Bodegausuario({modalbodegas,setModalbodegas ,bodegasusuario,setbodegaus
                 <CModalBody>
                  <div className="col-12"  >
                     <div style={{maxHeight:"300px",overflowY:"auto",overflowX:"hidden"}} className="continnerper">
-     <CTable className="tabla tableusuarioper">
+     <CTable  striped small className="tabla tableusuarioper">
           <CTableHead>
            
             <CTableRow>

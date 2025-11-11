@@ -19,4 +19,5 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.service.SedeTerceroService"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.util.PasswordUtils"/>
 </qualifiedTypeNameHistroy>

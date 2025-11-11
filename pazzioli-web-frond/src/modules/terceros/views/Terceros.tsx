@@ -4,7 +4,12 @@ import "./Terceros.scss";
 import Actulizartercero from "../components/Actulizartercero";
 import React, { useState } from "react";
 import api from "../../../apicofig";
+import Contactotercero from "../components/contactos/Contactoster";
+import Iconupdate from "../../../icons/iconupdate";
+import Iconbodega from "../../../icons/Iconbodega";
+import Usuariosicon from "../../../icons/Isuarios";
 interface terceros {
+   terceroId:number
     razonSocial:string;
         identificacion:string;
         clasificacionTercero:{
@@ -13,9 +18,71 @@ interface terceros {
 
         }
 }
+
+
+interface terceroupdate{
+
+
+  apellido1
+: 
+string,
+apellido2
+: 
+string,
+clasificacionTercero
+: 
+{nombre: string, clasificacionTerceroId: number}
+contactos
+: 
+string
+correo
+: 
+string
+cupo
+: 
+number
+direccion
+: 
+string
+dv
+: 
+string
+identificacion
+: 
+string
+nombre1
+: 
+string
+nombre2
+: 
+string
+plazo
+: 
+number
+precio
+: 
+{precio_id: number, descripcion: string}
+razonSocial
+: 
+string
+regimen
+: 
+{codigo: number, codigoRegimen:string, descripcion: string, estado: string}
+terceroId
+: number
+tipoIdentificacion
+: 
+{codigo: number, codigoTipoIdentificacion: number, tipoIdentificacion: string}
+  
+}
 function Terceros() {
+   const [botonactual,setbotonactual]=React.useState(0)
     const [terceros,setTerceros]=useState<terceros[]>([])
     const [visiblemodalcrear,setvisiblemodalcrear]=useState<boolean>(false)
+    const [modalcontacto,setmodalcontacto]=useState<boolean>(false)
+    const [itemactual,setitemactual]=useState<number>(0)
+    const [actulizar,setActualizar]=useState<boolean>(false)
+    const [terceroupdate,setTerceroupdate]=useState<terceroupdate>()
     const traerterceros=async (pagina:number)=>{
        
     const terceros=await api.get(`terceros/listar?page=${pagina}&size=${7}&sortField=razonSocial&sortDirection=desc`,{
@@ -24,6 +91,7 @@ function Terceros() {
             }})
     console.log("terceros",terceros.data.content)
     setTerceros(terceros.data.content)
+    setvisiblemodalcrear(false)
 }
 
 React.useEffect(()=>{
@@ -46,7 +114,7 @@ React.useEffect(()=>{
                                                 <div className="tabla-wrapper">
                                                    <CTable  
 
-            hover
+        
           
           small
           align="left" className="tablaterceros">
@@ -81,20 +149,46 @@ React.useEffect(()=>{
                                       
                                             
                                               <CTableHeaderCell  >
-                                                <div className="row" style={{gap:"12px" }} >
+                                                <div className="row" style={{gap:"12px" ,paddingLeft:"12px",paddingRight:"15px" }} >
                                                     <div className="col-6" style={{ maxWidth: 'fit-content' }} >
-                                                        <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}  >
-                                                            <img src="/imgs/imgeditar.svg"/>
+                                                        <CButton  className="buttoniconnormal"  onClick={async()=>{
+
+                                                          const terceroactulizar= await api.get(`terceros/${item.terceroId}`)
+                                                          console.log("tercero Actulizar",terceroactulizar)
+                                                          setTerceroupdate(terceroactulizar.data)
+                                                        setActualizar(true)
+                                                          setvisiblemodalcrear(true)
+                                                     
+
+
+                                                        
+                                                        }}  onMouseEnter={()=>{
+                                                          setbotonactual(1)
+                                                          setitemactual(item.terceroId)
+                                                        }}  onMouseLeave={()=>{
+                                                          setbotonactual(0)
+                                                        }}>
+                                                          <Iconupdate  width={16} height={18} color={botonactual===1 && itemactual===item.terceroId ? "#fff":"#555"}/> 
                                                         </CButton>
                                                     </div>
                                                     <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                        <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}}  >    <HiOutlineOfficeBuilding size={29} color="#fff" /></CButton>
+                                                        <CButton  className="buttoniconnormal"  onMouseEnter={()=>{
+                                                          setbotonactual(2)
+                                                          setitemactual(item.terceroId)
+                                                        }}  onMouseLeave={()=>{
+                                                          setbotonactual(0)
+                                                        }}  >    <Iconbodega  width={19} height={19.5} color={botonactual===2 && itemactual===item.terceroId ? "#fff":"#555"}/></CButton>
                                                     </div>
         
                                                       <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                        <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}} >    <img src="/imgs/usuariotable.svg" style={{    width: '29px',
-            height: '29px',
-            padding: '2px'}}/></CButton>
+                                                        <CButton  className="buttoniconnormal"  onClick={()=>{
+                                                          setmodalcontacto(!modalcontacto)
+                                                        }}  onMouseEnter={()=>{
+                                                          setbotonactual(3)
+                                                          setitemactual(item.terceroId)
+                                                        }}  onMouseLeave={()=>{
+                                                          setbotonactual(0)
+                                                        }}>    <Usuariosicon width={19} height={19.5} color={botonactual===3 && itemactual===item.terceroId ? "#fff":"#555" }/></CButton>
                                                     </div>
         
                                                    
@@ -136,7 +230,10 @@ React.useEffect(()=>{
              
         
             </div>
-            <Actulizartercero visiblemodal={visiblemodalcrear}  setvisiblemodal={setvisiblemodalcrear}/>
+            <Actulizartercero visiblemodal={visiblemodalcrear}  setvisiblemodal={setvisiblemodalcrear}   actulizar={actulizar}
+  setActualizar={setActualizar} terceroupdate={terceroupdate} setTerceroupdate={setTerceroupdate}  traerterceros={traerterceros}/>
+
+  < Contactotercero  modalcontacto={modalcontacto} setmodalcontacto={setmodalcontacto}  traerterceros={traerterceros}  />
             </div>
         </>
      );
