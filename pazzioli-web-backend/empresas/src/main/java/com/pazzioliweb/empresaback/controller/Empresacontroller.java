@@ -186,6 +186,7 @@ public class Empresacontroller {
 		 List<Pais> pais=paisrepository.findAll();
 		 List<Departamento> departamento=departamentorepositori.findAll();
 		 List<Municipio> municipio=municipiorepositori.findAll();
+		 System.out.println("nombre tipo persona"+tipersona.get(0).getNombre());
 		 datosempresa.setTipopersona(tipersona);
 		 datosempresa.setTipoidentificacion(tipoidentificacion);
 		 datosempresa.setRegimen(regimen);

@@ -266,6 +266,7 @@ matriculaMercantil:data.matriculamercantil
 
   const traerinformacion= async ()=>{
     let datos=await api.get('/empresa/traerempresa')
+          console.log("empresas datos",datos)
  let datosclasificacion= await api.get(`clasificacionesTerceros/listar?page=0&size=7&sortField=nombre&sortDirection=desc`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
@@ -279,7 +280,7 @@ let traerprecios= await api.get("precios/listar",{
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
     console.log("precios datos",traerprecios.data.data)
-    
+  
     setprecios(traerprecios.data.data)
       setretenciones(traerretenciones.data)
     setClasificacionTercero(datosclasificacion.data.content)
