@@ -46,6 +46,7 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
     private String fechaNacimiento;
     private String matriculaMercantil;
     private Integer actividadEconomicaId;
+    private TipoPersonaDTOImpl tipoPersona;
     
     public List<RetencionesDTO> getRetenciones() {
 		return retenciones;
@@ -114,6 +115,9 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
 	public Integer getActividadEconomicaId() {return actividadEconomicaId;}
 	public void setActividadEconomicaId(Integer actividadEconomicaId) {this.actividadEconomicaId = actividadEconomicaId;}
 	
+	public TipoPersonaDTOImpl getTipoPersona() {return tipoPersona;}
+	public void setTipoPersona(TipoPersonaDTOImpl tipoPersona) {this.tipoPersona = tipoPersona;}
+
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	// Método helper para convertir desde la entidad
     public static TerceroDTOImpl fromEntity(Terceros t) {
@@ -180,6 +184,10 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
         
         if(t.getActividadEconomicaId() != null) {
         	dto.setActividadEconomicaId(t.getActividadEconomicaId());
+        }
+        
+        if(t.getTipoPersona() != null) {
+        	dto.setTipoPersona(TipoPersonaDTOImpl.fromEntity(t.getTipoPersona()));
         }
         
         return dto;
@@ -249,6 +257,9 @@ public class TerceroDTOImpl implements com.pazzioliweb.tercerosmodule.dtos.Terce
         
         if (this.actividadEconomicaId != null)
             entidad.setActividadEconomicaId(this.actividadEconomicaId);
+        
+        if(this.tipoPersona != null)
+        	entidad.setTipoPersona(this.tipoPersona.toEntity());
         
         return entidad;
     }

@@ -128,6 +128,7 @@ public interface TercerosRepository extends JpaRepository<Terceros, Integer>{
     	    LEFT JOIN FETCH t.sedes s
     	    LEFT JOIN FETCH s.departamento d
     		LEFT JOIN FETCH s.municipio m
+    		LEFT JOIN FETCH t.tipoPersona tp
     	    """)
     	List<Terceros> traerTercerosConDetalles();
     

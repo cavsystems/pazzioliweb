@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTOImpl"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoIdentificacionDTO"/>
-    <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.MunicipioInfoDTOImpl"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Departamento"/>
@@ -19,4 +18,9 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.service.SedeTerceroService"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoPersonaDTO"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoContactoInfoImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoPersonaDTOImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.entity.Tipopersona"/>
 </qualifiedTypeNameHistroy>

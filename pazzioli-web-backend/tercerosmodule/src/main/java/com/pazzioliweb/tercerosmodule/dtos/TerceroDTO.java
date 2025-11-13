@@ -29,4 +29,5 @@ public interface TerceroDTO {
     String getFechaNacimiento();
     String getMatriculaMercantil();
     Integer getActividadEconomicaId();
+    TipoPersonaDTO getTipoPersona();
 }
