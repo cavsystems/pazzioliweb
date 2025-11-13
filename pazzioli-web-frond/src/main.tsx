@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
    <StyledEngineProvider injectFirst>
     <Provider store={store}>
       < Providerapp>
-    <Providerchart>
+
    <NavbarProvider>
    <Authprovider>
     <Providerusuario>
@@ -29,7 +29,7 @@ createRoot(document.getElementById('root')!).render(
     </Providerusuario>
     </Authprovider>
     </NavbarProvider>
-    </Providerchart>
+    
     </Providerapp>
     </Provider>
     </StyledEngineProvider>

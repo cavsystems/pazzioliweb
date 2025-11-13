@@ -8,19 +8,36 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.ContactoTerceroDTOImpl"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.empresasback.entity.Regimen"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.productosmodule.entity.Precios"/>
-    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.ContactoTercero"/>
-    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.TipoContacto"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Tipoidentificacion"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.repositori.SedeTerceroRepository"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.controller.SedeTerceroController"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.service.SedeTerceroService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="java.awt.print.Pageable"/>
+<<<<<<< HEAD
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoPersonaDTO"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoContactoInfoImpl"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.TipoPersonaDTOImpl"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.usuariosbacken.entity.Tipopersona"/>
+=======
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.util.PasswordUtils"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.commonbacken.entity.Retenciones"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.ContactoTerceroDTO.TipoContactoInfo"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.repositori.ContactoTerceroRepository"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.Terceros"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.TipoContacto"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.controller.Contactosterceros"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.ContactoTercero"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+>>>>>>> 408d7e2ac93d1d38273263242fa0bf625cb9d97f
 </qualifiedTypeNameHistroy>

@@ -13,6 +13,9 @@ import { BsEyeSlashFill } from "react-icons/bs";
 import Modalpersonas from "./components/modalpersonas";
 import Bodegausuario from "./components/Modalbodegausuario";
 import { MdPassword } from 'react-icons/md';
+import Iconbodega from "../../icons/Iconbodega";
+import Usuariosicon from "../../icons/Isuarios";
+import Iconcandado from "./Iconcandado";
 interface rolesu{
   codigo:number,
   usuario:string,
@@ -48,6 +51,38 @@ function Usuarios() {
  const [bodegasusuario,setbodegausuario]=useState<bodegasusuario[]>([]);
 const [codigousuarioseleccionado,setCodigousuarioseleccionado]=useState<number>(0);
 const [botonupdateu,setbotonupdateu]=useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 800px)").matches);
+  const [lastchild, setlastchild] = useState("Acciones");
+
+const [isMedia, setIsMedia] =useState(false);
+    useEffect(() => {
+   const mq = window.matchMedia("(max-width: 800px)");
+
+  // 👇 Comprobación inicial al montar el componente
+  if (mq.matches) {
+    setlastchild('...')
+    setIsMedia(true)
+    setIsMobile(true)
+  } else {
+    setlastchild('Acciones')
+    setIsMedia(false)
+    setIsMobile(false)
+  }
+
+  const handleChange = (e) => {
+    if (e.matches) {
+      setlastchild('...')
+      setIsMedia(true)
+    } else {
+      setlastchild('Acciones')
+      setIsMedia(false)
+    }
+    setIsMobile(e.matches)
+  }
+
+  mq.addEventListener('change', handleChange)
+  return () => mq.removeEventListener('change', handleChange)
+  }, []);
  useEffect(()=>{
   console.log("entroroles")
   const traerrolesusu=async()=>{
@@ -102,6 +137,7 @@ console.log(usubo)
                  <div  className="tablesucursalescon" >
                                         <div className="tabla-wrapper">
                                            <CTable  hover 
+                                           striped
   small
   align="left" className="tablausuario">
                                           
@@ -110,11 +146,11 @@ console.log(usubo)
                                             
                                                 <CTableHeaderCell scope="col">Usuario</CTableHeaderCell>
                                             <CTableHeaderCell scope="col" >Rol</CTableHeaderCell>
-                                              <CTableHeaderCell scope="col" >Contraseña</CTableHeaderCell>
+                                           
                                              <CTableHeaderCell scope="col" >Estado</CTableHeaderCell>
                                             
                                 
-                                               <CTableHeaderCell scope="col "  className="thacciones" >Acciones</CTableHeaderCell>
+                                               <CTableHeaderCell scope="col "  className="thacciones" >{lastchild}</CTableHeaderCell>
                                             </CTableRow>
                                           </CTableHead>
                                           <CTableBody>
@@ -130,20 +166,22 @@ console.log(usubo)
                                          <CTableRow>
                                               <CTableDataCell>{item.usuario}</CTableDataCell>
                               <CTableDataCell>{item.rol}</CTableDataCell>
-                               <CTableDataCell><div style={{display: 'flex',
-
-    justifyContent: 'space-between',
-    height: '100%',
-    alignItems: 'center'}}>{contraseactual===index && <span>{item.contrasena} </span>} { contraseactual!==index && <span>{cifrarcontraseñas(item.contrasena)}</span>}  { contraseactual===index &&<img src="imgs/ojoabierto.svg" onClick={()=>{
-      setContraseactual(-1)
-    }}/>} { contraseactual!==index &&<img src="imgs/ojocerrado.svg" onClick={()=>{
-      setContraseactual(index)
-    }}/>}</div>  </CTableDataCell>
+                             
                                <CTableDataCell>{item.estado}</CTableDataCell>
                                     
-                                      <CTableHeaderCell  >
-                                        <div className="row justify-content-start " style={{gap:"12px" ,width: 'fit-content'}} >
-                                            <div className="col-6" style={{ maxWidth: 'fit-content' }}>
+                                      <CTableDataCell onMouseEnter={(e)=>{
+                                        e.stopPropagation()
+                                        setlastchild("Acciones")
+                                        setIsMobile(false)
+                                      }}  onMouseLeave={(e)=>{
+                                        e.stopPropagation()
+                                       if (isMedia){
+                                         setlastchild("...")
+                                        setIsMobile(true)
+                                       }
+                                      }}>
+                                        <div className=" d-flex justify-content-start flex-nowrap  classitemaccionboton" style={{gap:"12px" ,width: 'fit-content'}} >
+                                            <div style={{ maxWidth: 'fit-content' }}>
                                                 <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}   onClick={()=>{
                                                   setCodigousuarioseleccionado(item.codigo)
                                                   setVisible(true)
@@ -152,33 +190,33 @@ console.log(usubo)
                                                     <img src="/imgs/imgeditar.svg"/>
                                                 </CButton>
                                             </div>
-                                            <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}}  onClick={()=>{
+
+                                            {  !isMobile &&   <div   style={{ maxWidth: 'fit-content' }} >
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8',opacity:1}}  onClick={()=>{
                                                    traerbodegausuario(item.codigo)
                                                    setModalbodegas(true)
-                                                }}>    <HiOutlineOfficeBuilding size={29} color="#fff" /></CButton>
-                                            </div>
+                                                }} >    <Iconbodega width={25} height={25}/></CButton>
+                                            </div>}
 
-                                              <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: 0, backgroundColor: '#21BCFF'}}  onClick={()=>{
+                                              {  !isMobile &&    <div   style={{ maxWidth: 'fit-content' }} >
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8'}}  onClick={()=>{
                                                   setCodigousuario(item.codigo)
                                                   setVisibleper(true)
-                                                }}>    <img src="/imgs/usuariotable.svg" style={{    width: '29px',
-    height: '29px',
-    padding: '2px'}}/></CButton>
-                                            </div>
+                                                }}>  <Usuariosicon color={"#ffff"} width={25} height={25}/></CButton>
+                                            </div>}
 
                                            
 
 
-                                          <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '3px 6px 3px 6px', backgroundColor: '#D1D5DC'}}  onClick={()=>{
+                                         {   !isMobile &&   <div   style={{ maxWidth: 'fit-content' }} >
+                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8'}}   onClick={()=>{
                                                    traerbodegausuario(item.codigo)
                                                    setModalbodegas(true)
-                                                }}>    <MdPassword size={20} color="#000" /></CButton>
-                                            </div>
+                                                }}>  <Iconcandado/></CButton>
+                                            </div>}
+                                          
                                         </div>
-                                      </CTableHeaderCell>
+                                      </CTableDataCell>
                                       </CTableRow>
                                                                                 </>}
                                       )

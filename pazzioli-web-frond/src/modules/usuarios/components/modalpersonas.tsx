@@ -97,6 +97,7 @@ function Modalpersonas({visibleper,setVisibleper,codigousuario,setCodigousuario}
                  <div className="col-12"  >
                     <div style={{maxHeight:"300px",overflowY:"auto",overflowX:"hidden"}} className="continnerper">
      <CTable   
+     striped
   hover 
   small
   align="left" className="tabla tableusuarioper">
@@ -105,7 +106,7 @@ function Modalpersonas({visibleper,setVisibleper,codigousuario,setCodigousuario}
             
               <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
                 <CTableHeaderCell scope="col" >Apellido</CTableHeaderCell>
-                 <CTableHeaderCell scope="col" >Direccion</CTableHeaderCell>
+                 <CTableHeaderCell scope="col" >Dirección</CTableHeaderCell>
                    <CTableHeaderCell scope="col" >Correo</CTableHeaderCell>
                    <CTableHeaderCell scope="col "  className="thacciones">Acciones</CTableHeaderCell>
   
@@ -119,8 +120,8 @@ function Modalpersonas({visibleper,setVisibleper,codigousuario,setCodigousuario}
                 <CTableDataCell>{item.apellido}  </CTableDataCell>
                 <CTableDataCell>{item.direccion}  </CTableDataCell>
                      <CTableDataCell>{item.correo}</CTableDataCell>
-                         <CTableDataCell style={{ minWidth: '120px' }}>
-                                                             <div className="row justify-content-start " style={{gap:"5px",marginLeft:"12px"}} >
+                         <CTableDataCell style={{ minWidth: '100px' }}>
+                                                             <div className="row justify-content-center" style={{gap:"5px"}} >
                                                                   <input type="checkbox" className="checkbox h6  " id={`idcliente${item.codigo}`}  onChange={async(e)=>{
                                                                  await api.put(`usuario/asignarpersona/${codigousuario}/${item.codigo}`, null, {
   headers: {
