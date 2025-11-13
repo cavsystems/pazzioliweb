@@ -8,19 +8,12 @@ import Contactotercero from "../components/contactos/Contactoster";
 import Iconupdate from "../../../icons/iconupdate";
 import Iconbodega from "../../../icons/Iconbodega";
 import Usuariosicon from "../../../icons/Isuarios";
+import Sedester from "../components/sedes/sedes";
 interface terceros {
-   terceroId:number
-    razonSocial:string;
-        identificacion:string;
-        clasificacionTercero:{
-            clasificacionTerceroId:number,
-           nombre:string
-
-        }
-}
-
-
-interface terceroupdate{
+ actividadEconomicaId
+:number,
+fechaNacimiento: string | null,
+matriculaMercantil:string | null,
 
 
   apellido1
@@ -73,10 +66,78 @@ terceroId
 tipoIdentificacion
 : 
 {codigo: number, codigoTipoIdentificacion: number, tipoIdentificacion: string}
+
+
+  
+}
+
+
+interface terceroupdate{
+
+actividadEconomicaId
+:number,
+fechaNacimiento: string | null,
+matriculaMercantil:string | null,
+
+
+  apellido1
+: 
+string,
+apellido2
+: 
+string,
+clasificacionTercero
+: 
+{nombre: string, clasificacionTerceroId: number}
+contactos
+: 
+string
+correo
+: 
+string
+cupo
+: 
+number
+direccion
+: 
+string
+dv
+: 
+string
+identificacion
+: 
+string
+nombre1
+: 
+string
+nombre2
+: 
+string
+plazo
+: 
+number
+precio
+: 
+{precio_id: number, descripcion: string}
+razonSocial
+: 
+string
+regimen
+: 
+{codigo: number, codigoRegimen:string, descripcion: string, estado: string}
+terceroId
+: number
+tipoIdentificacion
+: 
+{codigo: number, codigoTipoIdentificacion: number, tipoIdentificacion: string}
+
+
   
 }
 function Terceros() {
+   const [modalsede,setmodalsede]=useState<boolean>(false)
    const [botonactual,setbotonactual]=React.useState(0)
+   const [terceroid,setterceroid]=React.useState(0)
     const [terceros,setTerceros]=useState<terceros[]>([])
     const [visiblemodalcrear,setvisiblemodalcrear]=useState<boolean>(false)
     const [modalcontacto,setmodalcontacto]=useState<boolean>(false)
@@ -177,12 +238,15 @@ React.useEffect(()=>{
                                                           setitemactual(item.terceroId)
                                                         }}  onMouseLeave={()=>{
                                                           setbotonactual(0)
-                                                        }}  >    <Iconbodega  width={19} height={19.5} color={botonactual===2 && itemactual===item.terceroId ? "#fff":"#555"}/></CButton>
+                                                        }}  onClick={()=>{
+                                                          setmodalsede(true)
+                                                        }}>    <Iconbodega  width={19} height={19.5} color={botonactual===2 && itemactual===item.terceroId ? "#fff":"#555"}/></CButton>
                                                     </div>
         
                                                       <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                         <CButton  className="buttoniconnormal"  onClick={()=>{
                                                           setmodalcontacto(!modalcontacto)
+                                                          setterceroid(item.terceroId)
                                                         }}  onMouseEnter={()=>{
                                                           setbotonactual(3)
                                                           setitemactual(item.terceroId)
@@ -233,7 +297,8 @@ React.useEffect(()=>{
             <Actulizartercero visiblemodal={visiblemodalcrear}  setvisiblemodal={setvisiblemodalcrear}   actulizar={actulizar}
   setActualizar={setActualizar} terceroupdate={terceroupdate} setTerceroupdate={setTerceroupdate}  traerterceros={traerterceros}/>
 
-  < Contactotercero  modalcontacto={modalcontacto} setmodalcontacto={setmodalcontacto}  traerterceros={traerterceros}  />
+  < Contactotercero  modalcontacto={modalcontacto} setmodalcontacto={setmodalcontacto}  terceroid={terceroid} setterceroid={setterceroid}   traerterceros={traerterceros}  />
+  <Sedester  modalsede={modalsede} setmodalsede={setmodalsede} terceroId={terceroid} setterceroid={setterceroid} />
             </div>
         </>
      );

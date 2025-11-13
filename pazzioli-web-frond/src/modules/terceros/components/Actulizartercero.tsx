@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import dayjs from "dayjs";
 import { Identificacion } from "../../empresas/components/components/Identifiicaciones";
 import api from "../../../apicofig";
+import Modalformcontacto from "./contactos/modalformcontacto";
 /* useRef(initialValue) crea un objeto con .current que puedes asignar a un elemento DOM mediante la propiedad ref*/
 function Actulizartercero({visiblemodal,setvisiblemodal,actulizar,setActualizar,terceroupdate,setTerceroupdate,traerterceros}:any) {
     const [claseitem,setclaseitem]=React.useState<string>("chrome")
@@ -271,7 +272,7 @@ matriculaMercantil:data.matriculamercantil
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-let traerretenciones= await api.get("terceros/traerretenciones/retenciones",{
+let traerretenciones= await api.get("retencion/traerretenciones/retenciones",{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
@@ -1168,6 +1169,7 @@ Dentro del DateCalendar puedes personalizar:
              </form>
              </FormProvider>
                             
+                         
                 </CModalBody>
             
 
