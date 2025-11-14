@@ -7,4 +7,5 @@
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.SedeTercero"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTOImpl"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.tercerosmodule.entity.Terceros"/>
 </qualifiedTypeNameHistroy>
