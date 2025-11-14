@@ -219,6 +219,39 @@ public class TercerosService {
         if (dto.getTipoPersona() != null && dto.getTipoPersona().getCodigo() != null) {
             tercero.setTipoPersona(entityManager.getReference(Tipopersona.class, dto.getTipoPersona().getCodigo()));
         }
+        
+     // SEDES
+        if (dto.getSedes() != null) {
+
+            tercero.getSedes().clear();
+
+            dto.getSedes().forEach(sdto -> {
+                SedeTercero nuevaSede = new SedeTercero();
+
+                nuevaSede.setNombreSede(sdto.getNombreSede());
+                nuevaSede.setDireccion(sdto.getDireccion());
+                nuevaSede.setTelefono(sdto.getTelefono());
+                nuevaSede.setPrincipal(sdto.getPrincipal());
+                nuevaSede.setActivo(sdto.getActivo());
+
+                if (sdto.getDepartamento() != null && sdto.getDepartamento().getDepartamentoId() != null) {
+                    nuevaSede.setDepartamento(
+                            entityManager.getReference(Departamento.class, sdto.getDepartamento().getDepartamentoId())
+                    );
+                }
+
+                if (sdto.getMunicipio() != null && sdto.getMunicipio().getMunicipioId() != null) {
+                    nuevaSede.setMunicipio(
+                            entityManager.getReference(Municipio.class, sdto.getMunicipio().getMunicipioId())
+                    );
+                }
+
+                nuevaSede.setTercero(tercero);
+
+                tercero.getSedes().add(nuevaSede);
+            });
+        }
+        // ------------------------------------------------
 
         // Guardar cambios
         Terceros actualizado = terceroRepository.save(tercero);
