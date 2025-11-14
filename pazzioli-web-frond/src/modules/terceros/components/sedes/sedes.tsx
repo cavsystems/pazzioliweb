@@ -5,19 +5,49 @@ import Iconupdate from "../../../../icons/iconupdate";
 import api from "../../../../apicofig";
 import Sedeformtercero from "./sedesformtercero";
 interface sedeterceros{
-
+activo
+: 
+boolean
+departamento
+: 
+{departamentoId: number, nombre: string}
+direccion
+: 
+string
+municipio
+: 
+{municipioId: number, nombre: string}
+nombreSede
+: 
+string,
+principal
+: 
+boolean
+sedeId
+: 
+number
+telefono
+: 
+string
 }
 function Sedester({modalsede,setmodalsede,terceroid,setterceroid}:any) {
     const [botonactual,setbotonactual]=React.useState(0)
     const [modal,setmodal]=React.useState<boolean>(false)
     const [actulizar,setactulizar]=React.useState<boolean>(false)
-
+     const [sedesterceros,setsedesterceros]=React.useState<sedeterceros[]>([])
     useEffect(()=>{
-      
+        console.log("id tercero",terceroid)
+      traersedetercero(terceroid)
     },[terceroid])
 
-    const traersedetercero=async(terceroid:number)=>{
-        
+    const traersedetercero=async(terceroi:number)=>{
+          const sedeterceros=await api.get(`sedeTercero/listarPorTerceroId/${terceroi}?page=0&size=${10}&sortField=sedeId&sortDirection=desc`,{
+                    headers: {
+                      'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                    }})
+
+      console.log("sede terceros",sedeterceros)
+      setsedesterceros(sedeterceros.data.content)
     }
     return (<CModal
                 alignment="center"
@@ -62,13 +92,16 @@ function Sedester({modalsede,setmodalsede,terceroid,setterceroid}:any) {
           <CTableBody>
     
              
-                   <CTableRow>
-                       <CTableDataCell>Centro  </CTableDataCell>
-                        <CTableDataCell>calle5#13-41</CTableDataCell>
-                         <CTableDataCell>312454400</CTableDataCell>
-                          <CTableDataCell>valle cuaca</CTableDataCell>
-                           <CTableDataCell>Cali</CTableDataCell>
-                                   <CTableDataCell style={{ minWidth: '100px' }}> 
+                  
+                    {
+                        sedesterceros.map((itemsede)=>{
+                            return  <CTableRow>
+                             <CTableDataCell>{itemsede.nombreSede}</CTableDataCell>
+                        <CTableDataCell>{itemsede.direccion}</CTableDataCell>
+                         <CTableDataCell>{itemsede.telefono}</CTableDataCell>
+                          <CTableDataCell>{itemsede.departamento.nombre}</CTableDataCell>
+                           <CTableDataCell>{itemsede.municipio.nombre}</CTableDataCell>
+                            <CTableDataCell style={{ minWidth: '100px' }}> 
                                  <div className="d-flex justify-content-start" style={{gap:"12px"}} >
                                 <div style={{width:"30px" , height:"30px" ,display:"flex",justifyContent:"center"}} >
                                 <input type="checkbox"/>
@@ -98,7 +131,12 @@ function Sedester({modalsede,setmodalsede,terceroid,setterceroid}:any) {
                       </div>                                         
                              </div>
                              </CTableDataCell>
-                  </CTableRow>
+                            </CTableRow>
+                        })
+                    }
+                   
+                                  
+              
               
                
                
@@ -126,7 +164,7 @@ function Sedester({modalsede,setmodalsede,terceroid,setterceroid}:any) {
         
  
 </div>
-            <Sedeformtercero  actulizar={actulizar} setactulizar={actulizar}  terceroid={terceroid}  modal={modal} setmodal={setmodal}/>
+            <Sedeformtercero  actulizar={actulizar} setactulizar={actulizar}  terceroid={terceroid}  modal={modal} setmodal={setmodal}  traersedetercero={traersedetercero}/>
                 </CModalBody>
                 
 

@@ -219,7 +219,7 @@ React.useEffect(()=>{
                                                           setTerceroupdate(terceroactulizar.data)
                                                         setActualizar(true)
                                                           setvisiblemodalcrear(true)
-                                                     
+                                                      
 
 
                                                         
@@ -236,6 +236,7 @@ React.useEffect(()=>{
                                                         <CButton  className="buttoniconnormal"  onMouseEnter={()=>{
                                                           setbotonactual(2)
                                                           setitemactual(item.terceroId)
+                                                             setterceroid(item.terceroId)
                                                         }}  onMouseLeave={()=>{
                                                           setbotonactual(0)
                                                         }}  onClick={()=>{
@@ -298,7 +299,7 @@ React.useEffect(()=>{
   setActualizar={setActualizar} terceroupdate={terceroupdate} setTerceroupdate={setTerceroupdate}  traerterceros={traerterceros}/>
 
   < Contactotercero  modalcontacto={modalcontacto} setmodalcontacto={setmodalcontacto}  terceroid={terceroid} setterceroid={setterceroid}   traerterceros={traerterceros}  />
-  <Sedester  modalsede={modalsede} setmodalsede={setmodalsede} terceroId={terceroid} setterceroid={setterceroid} />
+  <Sedester  modalsede={modalsede} setmodalsede={setmodalsede} terceroid={terceroid} setterceroid={setterceroid} />
             </div>
         </>
      );

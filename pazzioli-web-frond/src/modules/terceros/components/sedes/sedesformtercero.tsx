@@ -10,7 +10,7 @@ telefono:string
   municipio:string
   departamento:string
 }
-function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal}:any) {
+function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,traersedetercero}:any) {
   const [claseitem,setclaseitem]=React.useState<string>("chrome")
       const [departamento,setDepartamento]=React.useState<{codigo:number,departamento:string,codigoDepartamento:number}[]>([]);
        const [rotate3, setRotate3] = React.useState(false);
@@ -26,23 +26,42 @@ function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal}:any
                const onSubmit = async (data: any) => {
 
                 if(!actulizar){
-                    let body={
+
+                    let sedes={
+                        
                       nombreSede:data.sede,
                       direccion:data.direccion,
                       telefono:data.telefono,
                       principal:false,
                       activo:true,
-                      departamento:departamentoobject,
-                      municipio:municipioobject
-
+                      departamento:{departamentoId:departamentoobject.codigo},
+                      municipio:{municipioId:municipioobject.codigo}
+                        
 
                     }
-                    const crearsede=await api.put(`terceros/actualizar/${terceroid}`,body,{
+                    let sedesarray:{
+                           nombreSede:string,
+                      direccion:string,
+                      telefono:string,
+                      principal:boolean,
+                      activo:boolean,
+                      departamento:{departamentoId:number},
+                      municipio:{municipioId:number}
+                    }[]=[]
+                    sedesarray.push(sedes)
+                    let sedesbody={
+                        sedes:sedesarray
+                    }
+                    const crearsede=await api.put(`terceros/actualizar/${terceroid}`,sedesbody,{
                         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
           
         }
                 })
+                console.log("terceroupdat",crearsede)
+                traersedetercero(terceroid);
+                setmodal(false)
+                
                 }
                }
                const onError=(error:any)=>{
@@ -174,6 +193,25 @@ setDepartamento2(datos.data.datos.departamento)
                    ) : (
                      <CFormLabel>Dirección</CFormLabel>
                    )}
+                 </CFormFloating>
+                           </CInputGroup>
+               
+                         
+               
+                              </div>
+
+
+                                <div className="col-12 d-flex paddingempresa usuariomodal  paddingempresamodal"  style={{paddingLeft:'12px',gap:"12px"}}>
+               
+                               
+               
+                              <CInputGroup >
+                               <CFormFloating className="margeniputempresa">
+                             <CFormInput placeholder=""  className="inputdatosempresa fontletre"     {...register('telefono')}
+                 />
+                 
+                     <CFormLabel>Telefono</CFormLabel>
+          
                  </CFormFloating>
                            </CInputGroup>
                

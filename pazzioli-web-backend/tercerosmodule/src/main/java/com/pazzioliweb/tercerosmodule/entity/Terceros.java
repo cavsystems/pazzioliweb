@@ -8,6 +8,7 @@ import com.pazzioliweb.commonbacken.entity.Retenciones;
 import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.productosmodule.entity.Precios;
+import com.pazzioliweb.usuariosbacken.entity.Tipopersona;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -275,5 +276,17 @@ public class Terceros {
 
 	public void setActividadEconomicaId(Integer actividadEconomicaId) {
 		this.actividadEconomicaId = actividadEconomicaId;
+	}
+	
+	@ManyToOne
+    @JoinColumn(name = "tipo_persona_id")
+    private Tipopersona tipoPersona;
+
+	public Tipopersona getTipoPersona() {
+		return tipoPersona;
+	}
+
+	public void setTipoPersona(Tipopersona tipoPersona) {
+		this.tipoPersona = tipoPersona;
 	}
 }
