@@ -103,8 +103,9 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
             
               <CTableHeaderCell scope="col" >Tipo contacto</CTableHeaderCell>
                 <CTableHeaderCell scope="col" >Valor</CTableHeaderCell>
+                    <CTableHeaderCell scope="col" >  <div className="d-flex justify-content-center" style={{gap:"12px"}} >Principal</div></CTableHeaderCell>
                
-                   <CTableHeaderCell scope="col "  className="thacciones">Acciones</CTableHeaderCell>
+                   <CTableHeaderCell scope="col "  className="thacciones"><div className="d-flex justify-content-start" style={{gap:"12px"}} >Acciones </div></CTableHeaderCell>
   
             </CTableRow>
           </CTableHead>
@@ -115,15 +116,14 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
                   return <CTableRow>
                        <CTableDataCell>{item.tipoContacto.nombre}  </CTableDataCell>
                         <CTableDataCell>{item.valorContacto}</CTableDataCell>
-                                   <CTableDataCell style={{ minWidth: '100px' }}> 
-                                 <div className="d-flex justify-content-start" style={{gap:"12px"}} >
-                                <div style={{width:"30px" , height:"30px" ,display:"flex",justifyContent:"center"}} >
-                                <input type="checkbox" id={`checkcont${item.contactoId}`}  onChange={(e)=>{
+                        <CTableDataCell>    <div className="d-flex justify-content-center" style={{gap:"12px"}} > <input type="checkbox" id={`checkcont${item.contactoId}`}  onChange={(e)=>{
                                   console.log(e.target.checked)
                                   actulizarestadocheck(e.target.checked,item);
 
-                                }} />
-                                </div>
+                                }} /> </div> </CTableDataCell>
+                                   <CTableDataCell style={{ minWidth: '100px' }}> 
+                                 <div className="d-flex justify-content-center" style={{gap:"12px"}} >
+                               
                                                                               
                                                                                                 
                                <div   style={{ maxWidth: 'fit-content' }} >

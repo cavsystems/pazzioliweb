@@ -1,17 +1,30 @@
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import Iconeliminar from "../../../../icons/iconeliminar";
-import React from "react";
+import React, { useEffect } from "react";
 import Iconupdate from "../../../../icons/iconupdate";
 import api from "../../../../apicofig";
+import Sedeformtercero from "./sedesformtercero";
+interface sedeterceros{
 
-function Sedester({modalsede,semodalsede,terceroid,setterceroid}:any) {
+}
+function Sedester({modalsede,setmodalsede,terceroid,setterceroid}:any) {
     const [botonactual,setbotonactual]=React.useState(0)
+    const [modal,setmodal]=React.useState<boolean>(false)
+    const [actulizar,setactulizar]=React.useState<boolean>(false)
+
+    useEffect(()=>{
+      
+    },[terceroid])
+
+    const traersedetercero=async(terceroid:number)=>{
+        
+    }
     return (<CModal
                 alignment="center"
                 scrollable
                 visible={modalsede}
                 onClose={()=>{
-semodalsede(false)
+ setmodalsede(false)
                    setterceroid(0)
                 }}
                 aria-labelledby="VerticallyCenteredScrollableExample2"
@@ -113,7 +126,7 @@ semodalsede(false)
         
  
 </div>
-                            
+            <Sedeformtercero  actulizar={actulizar} setactulizar={actulizar}  terceroid={terceroid}  modal={modal} setmodal={setmodal}/>
                 </CModalBody>
                 
 
@@ -121,7 +134,9 @@ semodalsede(false)
     
              
              
-               <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"   >Agregar</button>   
+               <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
+               setmodal(true)
+               }} >Agregar</button>   
                      </CModalFooter>
                  </CModal>);
 }

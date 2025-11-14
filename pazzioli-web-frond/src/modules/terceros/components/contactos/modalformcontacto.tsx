@@ -140,6 +140,10 @@ const onError=(error:any)=>{
                    <h6 className="h6 " style={{padding:'15px 10px 5px 12px ',marginLeft:'1rem'}}>Contacto</h6>
     
                 </div>
+
+
+        
+
     
     
     
