@@ -13,6 +13,8 @@ function Formusuario({style,botonupdateu,setbotonupdateu}: any) {
        const {setrolactual} = usuariocontex();
     const [roles,setRoles]=useState<roles[]>([])
 
+    
+
      useEffect(()=>{
 
         const traerroles=async()=>{

@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.pazzioliweb.commonbacken.util.PasswordUtils;
+import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTOImpl;
 import com.pazzioliweb.usuariosbacken.dtos.CrearpermisoroDTOS;
 import com.pazzioliweb.usuariosbacken.dtos.CrearusuarioDTOS;
 import com.pazzioliweb.usuariosbacken.dtos.CrearusuariorolDTOS;
@@ -454,6 +456,28 @@ return ResponseEntity.ok().body(response);
 	  
 	  
 	  
+  }
+  
+  
+  
+  @PutMapping("actualizar/id/{idusuario}")
+  public ResponseEntity<Object> restablecercontrasena(@PathVariable Integer idusuario, @RequestBody CrearusuarioDTOS dto){
+	  Optional<Usuario> usuarioop=usurepo.findByCodigo(idusuario);
+	  if(!usuarioop.isEmpty() && usuarioop.isPresent()) {
+		
+		  Usuario usuario=usuarioop.get();
+		  usuario.setContrasena(PasswordUtils.encrypt(usuario.getContrasena()));
+		  
+		  usurepo.save(usuario);
+		  
+	
+		  
+		  
+		  
+		  return ResponseEntity.ok(true); // Status 200 con booleano
+	    }
+
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
   }
 
 

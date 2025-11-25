@@ -1,0 +1,144 @@
+.bordertipopro{
+   border: 1px solid var(--gris-bordes) !important;
+    border-radius: 20px;
+    padding: 10px 10px !important;
+max-width: 208px;
+   
+}
+
+.contproduct{
+    .modal-content{
+    max-width: 700px;
+    }
+}
+
+.checkboxpro{
+    width: 18px;
+  height: 18px;
+    border-radius: 20px !important;
+    appearance: none !important; /* Quita estilo del navegador */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+    cursor: pointer;
+  display: inline-block;
+  position: relative;
+   background: white;       /* importante */
+  border: 2px solid #333;  /* IMPORTANTE */
+
+}
+
+
+.checkboxpro:checked {
+  background-color:blue !important;
+}
+
+/* Dibujar el check */
+.checkboxpro:checked::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  top: 1px;
+  left: 5px;
+  transform: rotate(45deg);
+}
+
+.selectproct{
+   
+}
+
+.selectproct select{
+    width: 100%;
+}
+
+.selctproduct{
+        background: var(--blanco) 0% 0% no-repeat padding-box !important;
+    border: 1px solid var(--gris-bordes) !important;
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+    border: 1px solid #D3D4D4 !important;
+    border-radius: 12px !important;
+    opacity: 1 !important;
+    outline: none;
+    padding: 10px 8px;
+}
+.inputproduct{
+     border-radius: 12px !important;
+    opacity: 1 !important;
+    outline: none;
+    padding: 8px 8px !important;
+}
+
+
+.titulospro{
+    font-family: var(--unnamed-font-family-open-sans);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-normal);
+    font-size: var(--unnamed-font-size-14);
+    line-height: var(--unnamed-line-spacing-17);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--gris-pazzioli);
+    margin-left: 12px;
+}
+
+.containertipospro{
+    column-gap: 12px !important;
+}
+
+.tiposerviciopro{
+       font-family: var(--unnamed-font-family-open-sans);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-bold);
+    font-size: var(--unnamed-font-size-14);
+    line-height: var(--unnamed-line-spacing-17);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: #555;
+}
+
+.inputprocttex{
+  display: flex;
+  flex-direction: column;
+  min-width: 317px;
+}
+
+.inputcodigosbarra{
+    position: relative;
+}
+
+.botoncodigobarra{
+  width: fit-content;
+    position: absolute;
+    right: 45px;
+    top:28px;
+    border: none;
+   
+/* UI Properties */
+background: var(--blanco) 0% 0% no-repeat padding-box;
+
+opacity: 1;
+border-radius: 7px;
+
+font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal normal 14px/19px Open Sans;
+letter-spacing: 0px;
+color:#5AADDC;
+opacity: 1;
+}
+
+
+.ojocodigobarra{
+    right: 15px;
+    top:25px;
+}
+
+.botoncodigobarra:active{
+   
+    color:#555;
+    cursor: pointer;
+
+}
+

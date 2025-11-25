@@ -26,6 +26,7 @@ import Compras from './modules/compras/Compras.';
 import { appcontex } from './context';
 import Usuarios from './modules/usuarios/Usuarios';
 import Terceros from './modules/terceros/views/Terceros';
+import Productos from './modules/productos/productos';
 
 function App() {
     const{  paginaactual,
@@ -84,6 +85,8 @@ font: 'normal normal normal 14px/19px Open Sans',
          <Route path='/compras' element={<Compras/>}/>
            <Route path='/usuarios' element={<Usuarios/>}/>
              <Route path='/terceros' element={<Terceros/>}/>
+
+             <Route path='/productos' element={<Productos/>}/>
     </Routes>
      </BrowserRouter>
    </div>

@@ -1,7 +1,8 @@
 import { CFormFloating, CFormInput, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle } from "@coreui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import api from "../../../../apicofig";
+
 interface FormData{
  tipocontacto:string,
 sede:string
@@ -10,7 +11,11 @@ telefono:string
   municipio:string
   departamento:string
 }
-function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,traersedetercero}:any) {
+function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,traersedetercero,idsedeter,setidsedeter}:any) {
+
+
+
+
   const [claseitem,setclaseitem]=React.useState<string>("chrome")
       const [departamento,setDepartamento]=React.useState<{codigo:number,departamento:string,codigoDepartamento:number}[]>([]);
        const [rotate3, setRotate3] = React.useState(false);
@@ -22,11 +27,45 @@ function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,trae
                 const [departamentoobject,setdepartamentoobject] = React.useState<{codigo:number,departamento:string,codigoDepartamento:number}>({codigo:0,departamento:"",codigoDepartamento:0})   
                    const [municipioobject,setmunicipioobject] = React.useState<{codigo:number,municipio:string,codigoDepartamento:number,codigoMunicipio:number}>({codigo:0,municipio:"",codigoDepartamento:0,codigoMunicipio:0})   
                    const [municipio,setMunicipio]=React.useState<{codigo:number,municipio:string,codigoDepartamento:number,codigoMunicipio:number}[]>([]);
-               const [municipio2,setMunicipio2]=React.useState<{codigo:number,municipio:string,codigoDepartamento:number,codigoMunicipio:number}[]>([]);
+                   const [municipio2,setMunicipio2]=React.useState<{codigo:number,municipio:string,codigoDepartamento:number,codigoMunicipio:number}[]>([]);
+
+                   useEffect(()=>{
+                 
+                     if(idsedeter?.nombreSede){
+                        methods.setValue("sede",idsedeter.nombreSede)
+                          methods.setValue("direccion",idsedeter.direccion)
+                            methods.setValue("telefono",idsedeter.telefono)
+                            methods.setValue("municipio",idsedeter.municipio.nombre)
+                             methods.setValue("departamento",idsedeter.departamento.nombre)
+                           
+
+                             
+                            let departamento2=departamento
+                            let codigodepartamentofilter=departamento.find((item)=> item.codigo === idsedeter.departamento.departamentoId)
+                                                        let codigomunicipiofilter:{
+                                                            codigo: number;
+    municipio: string;
+    codigoDepartamento: number;
+    codigoMunicipio: number
+                                                    } | undefined =municipio.find((item)=> item.codigo === idsedeter.municipio.municipioId)
+                             if(codigomunicipiofilter){
+                                setmunicipioobject(codigomunicipiofilter)
+                             }
+
+                             if(codigodepartamentofilter){
+                                setdepartamentoobject(codigodepartamentofilter)
+                             }
+
+                          
+                             console.log("nombre sede tercero ", municipio)
+                            setDepartamento2(prev=> departamento2.filter(item=> item.departamento.startsWith(idsedeter.departamento.nombre.toUpperCase()) || item.departamento.toString().endsWith(idsedeter.departamento.nombre.toUpperCase())))
+                            
+                                   
+                          setMunicipio2(prev=> municipio.filter(item=> item.codigoDepartamento === codigodepartamentofilter?.codigoDepartamento))
+                     }
+                   },[idsedeter,departamento])
                const onSubmit = async (data: any) => {
-
-                if(!actulizar){
-
+                       console.log("sedes crear",municipioobject)
                     let sedes={
                         
                       nombreSede:data.sede,
@@ -39,7 +78,7 @@ function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,trae
                         
 
                     }
-                    let sedesarray:{
+ let sedesarray:{
                            nombreSede:string,
                       direccion:string,
                       telefono:string,
@@ -49,9 +88,15 @@ function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,trae
                       municipio:{municipioId:number}
                     }[]=[]
                     sedesarray.push(sedes)
-                    let sedesbody={
+                    console.log("sedes crear",sedes)
+
+                       let sedesbody={
                         sedes:sedesarray
                     }
+                if(!actulizar){
+ 
+                   
+                 
                     const crearsede=await api.put(`terceros/actualizar/${terceroid}`,sedesbody,{
                         headers: {
           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
@@ -61,7 +106,36 @@ function  Sedeformtercero({actulizar,setactulizar, terceroid,modal,setmodal,trae
                 console.log("terceroupdat",crearsede)
                 traersedetercero(terceroid);
                 setmodal(false)
-                
+                methods.reset({
+                    telefono:"",
+                    direccion:"",
+                    sede:"",
+                    municipio:"",
+                    departamento:""
+                })
+                }else{
+                    console.log(sedesbody.sedes[0])
+                    console.log("entro actulizar")
+                   const crearsede=await api.put(`sedeTercero/actualizar/${idsedeter.sedeId
+}`,sedesbody.sedes[0],{
+                        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+          
+        }
+                })
+
+                      console.log("terceroactulizar",crearsede)
+                traersedetercero(terceroid);
+                setmodal(false)
+                setidsedeter({})
+                setactulizar(false)
+                methods.reset({
+                    telefono:"",
+                    direccion:"",
+                    sede:"",
+                    municipio:"",
+                    departamento:""
+                })
                 }
                }
                const onError=(error:any)=>{
@@ -135,7 +209,15 @@ setDepartamento2(datos.data.datos.departamento)
                                        visible={modal}
                                      onClose={()=>{
                                     setmodal(false)
-           
+                                    setactulizar(false)
+                                      methods.reset({
+                    telefono:"",
+                    direccion:"",
+                    sede:"",
+                    municipio:"",
+                    departamento:""
+                })
+                setidsedeter({})
                                      }}
                                        aria-labelledby="VerticallyCenteredScrollableExample2"
                                       className="col-12 modalformper"
@@ -310,6 +392,7 @@ setDepartamento2(datos.data.datos.departamento)
                              
                                     <li key={index} className="classitemitem" onClick={()=>{
                                         methods.setValue("municipio",pa.municipio.toString())
+                                        console.log("muncipio actual",pa)
                                         setmunicipioobject(pa)
                                   
                                         //setplazo(false)

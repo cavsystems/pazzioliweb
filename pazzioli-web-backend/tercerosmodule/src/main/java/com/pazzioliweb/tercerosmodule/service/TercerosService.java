@@ -1,7 +1,9 @@
 package com.pazzioliweb.tercerosmodule.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,6 +23,7 @@ import com.pazzioliweb.commonbacken.entity.Tipoidentificacion;
 import com.pazzioliweb.empresasback.entity.Regimen;
 import com.pazzioliweb.productosmodule.entity.Precios;
 import com.pazzioliweb.tercerosmodule.dtos.ContactoTerceroDTOImpl;
+import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO;
 import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTOImpl;
 import com.pazzioliweb.tercerosmodule.dtos.TerceroDTOImpl;
 import com.pazzioliweb.tercerosmodule.dtos.TerceroResumenDTO;
@@ -223,33 +226,60 @@ public class TercerosService {
      // SEDES
         if (dto.getSedes() != null) {
 
-            tercero.getSedes().clear();
+            // Crear mapa para sedes existentes
+            Map<Integer, SedeTercero> existentes = tercero.getSedes().stream()
+                    .collect(Collectors.toMap(SedeTercero::getSedeId, s -> s));
 
-            dto.getSedes().forEach(sdto -> {
-                SedeTercero nuevaSede = new SedeTercero();
+            for (SedeTerceroDTO sdto : dto.getSedes()) {
 
-                nuevaSede.setNombreSede(sdto.getNombreSede());
-                nuevaSede.setDireccion(sdto.getDireccion());
-                nuevaSede.setTelefono(sdto.getTelefono());
-                nuevaSede.setPrincipal(sdto.getPrincipal());
-                nuevaSede.setActivo(sdto.getActivo());
+                // ACTUALIZAR una sede existente
+                if (sdto.getSedeId() != null && existentes.containsKey(sdto.getSedeId())) {
 
-                if (sdto.getDepartamento() != null && sdto.getDepartamento().getDepartamentoId() != null) {
-                    nuevaSede.setDepartamento(
-                            entityManager.getReference(Departamento.class, sdto.getDepartamento().getDepartamentoId())
-                    );
+                    SedeTercero existente = existentes.get(sdto.getSedeId());
+
+                    if (sdto.getNombreSede() != null) existente.setNombreSede(sdto.getNombreSede());
+                    if (sdto.getDireccion() != null) existente.setDireccion(sdto.getDireccion());
+                    if (sdto.getTelefono() != null) existente.setTelefono(sdto.getTelefono());
+                    if (sdto.getPrincipal() != null) existente.setPrincipal(sdto.getPrincipal());
+                    if (sdto.getActivo() != null) existente.setActivo(sdto.getActivo());
+
+                    if (sdto.getDepartamento() != null) {
+                        existente.setDepartamento(
+                                entityManager.getReference(Departamento.class, sdto.getDepartamento().getDepartamentoId())
+                        );
+                    }
+
+                    if (sdto.getMunicipio() != null) {
+                        existente.setMunicipio(
+                                entityManager.getReference(Municipio.class, sdto.getMunicipio().getMunicipioId())
+                        );
+                    }
                 }
+                else {
+                    // CREAR una nueva
+                    SedeTercero nueva = new SedeTercero();
 
-                if (sdto.getMunicipio() != null && sdto.getMunicipio().getMunicipioId() != null) {
-                    nuevaSede.setMunicipio(
-                            entityManager.getReference(Municipio.class, sdto.getMunicipio().getMunicipioId())
-                    );
+                    nueva.setNombreSede(sdto.getNombreSede());
+                    nueva.setDireccion(sdto.getDireccion());
+                    nueva.setTelefono(sdto.getTelefono());
+                    nueva.setPrincipal(sdto.getPrincipal());
+                    nueva.setActivo(sdto.getActivo());
+
+                    if (sdto.getDepartamento() != null) {
+                        nueva.setDepartamento(
+                                entityManager.getReference(Departamento.class, sdto.getDepartamento().getDepartamentoId())
+                        );
+                    }
+                    if (sdto.getMunicipio() != null) {
+                        nueva.setMunicipio(
+                                entityManager.getReference(Municipio.class, sdto.getMunicipio().getMunicipioId())
+                        );
+                    }
+
+                    nueva.setTercero(tercero);
+                    tercero.getSedes().add(nueva); // ← IMPORTANTE: ahora se añade en vez de reemplazar todo
                 }
-
-                nuevaSede.setTercero(tercero);
-
-                tercero.getSedes().add(nuevaSede);
-            });
+            }
         }
         // ------------------------------------------------
 

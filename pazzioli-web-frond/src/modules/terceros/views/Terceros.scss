@@ -41,14 +41,14 @@
 }
 
 .inputterceroleft{
-    padding: 12px  12px 0px 0px  !important;
+    padding: 0px  12px 0px 0px  !important;
 }
 
 @media (max-width:575px) {
     .inputterceroleft{
-    padding: 12px  0px 0px 0px  !important;}
+    padding: 0px  0px 0px 0px  !important;}
     .inputterceroright{
-     padding: 12px  0px 0px 0px  !important;}
+     padding: 0px  0px 0px 0px  !important;}
     
 }
 
@@ -57,7 +57,7 @@ padding-left:20px !important ;
 padding-right: 20px !important;
 }
 .inputterceroright{
-     padding: 12px  0px 0px 0px  !important;
+     padding: 0px  0px 0px 0px  !important;
 }
 .tablaterceros th:last-child,
 .tablaterceros td:last-child {
@@ -72,14 +72,20 @@ text-align: left !important;
    
 }
 
-.tablaterceros th:last-child{
-    padding: 6px 8px  6px 20px !important;
+ 
+ .tablaterceros th {
+padding-left: 12px !important;
+padding: 12px 15px 12px 15px !important;
+ }
 
-}
+.tablaterceros th:last-child {
+padding-left: 12px !important;
+padding: 12px 15px 12px 21px !important;
+ }
 
 .tablaterceros th:last-child::before,
 .tablaterceros td:last-child::before {
-  content: "";
+  
   position: absolute;
   top: 0;
   bottom: 0;
@@ -117,6 +123,10 @@ Esto es útil cuando en una misma fila tienes texto y elementos como íconos o b
   espacio entre la parte superior y inferior del texto*/
   line-height: 1.2 !important;
 }
+
+.tablaterceros td {
+padding: 4px 15px 4px 15px !important;
+ }
 .botoncerrarall{
     display: flex
 ;
@@ -177,12 +187,7 @@ opacity: 1 !important;
 
 /* Columna acciones — fija */
 
-.tablaterceros th:nth-child(4),
-.tablaterceros td:nth-child(4) {
-  width: 150px;
-  max-width:150px;
-  min-width:150px;
-}
+
 .inputfechanacimiento{
     width: 100% !important;
 }
@@ -523,10 +528,6 @@ text-align: left !important;
 }
 
 
-.tablacontactos th:last-child{
-    padding: 6px 8px  6px 20px !important;
-
-}
 
 .tablacontactos th:last-child::before,
 .tablacontactos td:last-child::before {
@@ -554,6 +555,31 @@ Esto es útil cuando en una misma fila tienes texto y elementos como íconos o b
     border-collapse: collapse;
   border-spacing: 0;
 }
+.tablacontactos th{
+padding:10px 0px 10px 12px !important;
+}
+
+.tablacontactos td{
+padding:3px 0px 3px 12px !important;
+}
+
+.tablacontactos td:last-child{
+  padding:3px 0px 3px 0px !important;
+}
+
+.tablacontactos th:last-child{
+  padding:10px 0px 10px 0px !important;
+}
+
+.tablacontactos th:nth-child(3){
+padding:10px 0px 10px 0px !important;
+}
+
+.tablacontactos td:nth-child(3){
+ padding:3px 0px 3px 0px !important;
+}
+
+
 
 .tablacontactos th,
 .tablacontactos td {
@@ -622,4 +648,24 @@ font: normal normal normal 14px/19px Open Sans;
 letter-spacing: 0px;
 color: #555555 !important;
 opacity: 1;
+}
+
+
+.titulosencabezadoster{
+    padding:15px 10px 5px 0px ;
+    margin-left:15px
+}
+
+.fitcontentsuperior{
+  margin-bottom: 50px !important;
+width: fit-content;
+
+
+}
+
+
+.fitcontentinferior{
+  width: fit-content;
+  margin-top: 20px !important;
+  
 }

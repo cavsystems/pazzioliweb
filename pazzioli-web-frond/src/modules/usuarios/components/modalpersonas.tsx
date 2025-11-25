@@ -95,9 +95,9 @@ function Modalpersonas({visibleper,setVisibleper,codigousuario,setCodigousuario}
 
                 <CModalBody>
                  <div className="col-12"  >
-                    <div style={{maxHeight:"300px",overflowY:"auto",overflowX:"hidden"}} className="continnerper">
+                    <div style={{maxHeight:"300px",overflowY:"auto",overflowX:"auto"}} className="continnerper">
      <CTable   
-     striped
+   
   hover 
   small
   align="left" className="tabla tableusuarioper">

@@ -1,0 +1,166 @@
+import { CButton, CTab, CTabContent, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTabList, CTabPanel, CTabs } from "@coreui/react";
+import { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import Datosgeneralesproduct from "./components/Datosgeneralesproduct";
+import Variantes from "./components/variantes";
+import Iconsproduct from "../../icons/iconsproducto";
+import Iconupdate from "../../icons/iconupdate";
+import Iconbodega from "../../icons/Iconbodega";
+import Usuariosicon from "../../icons/Isuarios";
+import Formproduct from "./components/formproducto";
+import "./product.scss"
+
+function Productos() {
+     const [itemsformempresa, setitemsformempresa] = useState(1)
+      const methods = useForm({
+          mode: 'onSubmit',
+           shouldUnregister: false,
+         defaultValues: {
+          Actividadeconomica: "",
+     correoempresa:"",
+     celularempresa:"",
+     codigopostal:"",
+     digitodeverificacion:"",
+     departamento:"",
+     municipio:"",
+     nombrecomercial:"",
+     numeroidentificacion:"",
+     pais:"",
+     primerapellido:"",
+     primernombre: "",
+     razonsocial:"",
+     regimen:"",
+     segundoapellido:"",
+     segundonombre:"",
+     telefonofijo:"",
+     tipodeidentificacion: "",
+     tipodepersona:"",
+     archivoLogo:null,
+     impuestos:[],
+     sucursales:[],
+     
+           // Agrega todos los campos que usas en todos los pasos
+         },
+       });
+
+      const onSubmit=(data:any)=>{
+
+      }
+      const onError=(data:any)=>{
+
+      }
+    return ( <>
+      
+         <div className=" d-flex justify-content-center " style={{height:"100%"}}>
+                       <div className="containerusuario row  align-items-center justify-content-center flex-column">
+                                 <div className="col-12 d-flex align-items-center justify-content-center flex-column containerimgusuario">
+                            <Iconsproduct width={60} height={60}/>
+                               <span className="tituloopaco" >Productos</span>
+                               </div>
+               
+                         
+                             
+                             <div className="col-12">
+                                <div  className="tablesucursalescon" >
+                                                       <div className="tabla-wrapper">
+                                                          <CTable  
+       
+               
+                 
+                 small
+                 align="left" className="tablaterceros">
+                                                         
+                                                         <CTableHead>
+                                                           <CTableRow>
+                                                           
+                                                               <CTableHeaderCell scope="col">Codigo</CTableHeaderCell>
+                                                           <CTableHeaderCell scope="col" >Descripcion</CTableHeaderCell>
+                                                             <CTableHeaderCell scope="col" >Cantidad</CTableHeaderCell>
+                                                              <CTableHeaderCell scope="col" >Precio1</CTableHeaderCell>
+                                                              <CTableHeaderCell scope="col" >Precio2</CTableHeaderCell>
+                                                           <CTableHeaderCell scope="col" >Precio3</CTableHeaderCell>
+                                                               <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
+                                               
+                                               
+                                                             
+                                                           </CTableRow>
+                                                         </CTableHead>
+                                                         <CTableBody>
+                                                         
+                                                         
+                                                        
+                             
+                                             
+                                                
+                                                   
+                                                    
+                                                   <CTableRow>
+                                                             <CTableDataCell>12393090</CTableDataCell>
+                                             <CTableDataCell>Camiseta manga larga</CTableDataCell>
+                                              <CTableDataCell>50</CTableDataCell>
+                                                <CTableDataCell>50000</CTableDataCell>
+                                                   <CTableDataCell>50000</CTableDataCell>
+                                                      <CTableDataCell>50000</CTableDataCell>
+                                                     
+                                             
+                                                   
+                                                     <CTableDataCell >
+                                                       <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
+                                                           <div className="col-6" style={{ maxWidth: 'fit-content' }} >
+                                                               <CButton  className="buttoniconnormal">
+                                                                 <Iconupdate  width={16} height={18} color={"#555"}/> 
+                                                               </CButton>
+                                                           </div>
+                                                           <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                               <CButton  className="buttoniconnormal"  >    <Iconbodega  width={19} height={19.5} color={"#555"}/></CButton>
+                                                           </div>
+               
+                                                             <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                               <CButton  className="buttoniconnormal"  >    <Usuariosicon width={19} height={19.5} color={"#555" }/></CButton>
+                                                           </div>
+               
+                                                          
+               
+               
+                                                        
+                                                       </div>
+                                                     </CTableDataCell>
+                                                     </CTableRow>
+                                                          
+                                                      
+                                   
+                                                     
+                                           
+                                               
+                                             
+                                                           
+                               
+                                                             
+                                                       
+                                                            
+                                                         </CTableBody>
+                                                      
+                                                       </CTable>
+                                                       </div>
+               
+               
+                                                   </div>
+                                                   
+                           </div>
+                
+                    
+                                                      
+                              
+                                         <CButton className="botonagregarsucursal fitcontentinferior" 
+                                       >Agregar</CButton>
+                                  
+                           <Formproduct/>  
+               
+                   </div>
+                  
+                   </div>  
+           
+    </> );
+}
+
+export default Productos;
