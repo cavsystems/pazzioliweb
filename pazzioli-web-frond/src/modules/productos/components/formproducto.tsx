@@ -1,8 +1,9 @@
-import { CButton, CFormFloating, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
+import { CButton, CFormFloating, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form";
 import Ojoquetodolove from "../../../icons/ojoquetodolove";
 import { useState } from "react";
 import Formprobasico from "./formprobasico/formprobasico";
+import Variantes from "./variantes";
 
 function Formproduct() {
 
@@ -38,7 +39,14 @@ function Formproduct() {
             });
             const [rotate,setrotate]=useState(false);
              const [tap,settap]=useState(1);
-             
+             const [  botonupdateu,setbotonupdateu]=useState(false);
+             const onSubmit=()=>{
+
+             }
+
+              const onError=()=>{
+
+             }
                  const { register,control,setValue, formState: { errors } } = methods;
     return ( <>
       <FormProvider {...methods}>
@@ -57,14 +65,33 @@ function Formproduct() {
                         
                       
                       {
-                        tap===1?
+                        tap===1 &&
                         <Formprobasico/>
+                       
+                      }
+
+
+                       {
+                        tap===2?
+                        <Variantes/>
                         :null
                       }
 
 
                            
                     </CModalBody>
+
+                    <CModalFooter style={{justifyContent: 'center',display:'flex'}} className="fottersucursal">
+                               <button type="button"  className="botonretroceder" onClick={()=>
+                       settap((prev) => (prev - 1))
+                      } style={tap<2 ? {display:'none'}:{display:''}}>Atras</button>
+                    
+                    
+                           {tap>=2 ?  botonupdateu ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={methods.handleSubmit(onSubmit, onError)}>Actualizar</button>:<button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={methods.handleSubmit(onSubmit, onError)}>Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={(e)=>{
+                       settap((prev) => (prev + 1))
+                      e.stopPropagation();}
+                      }>Continuar</button>}
+                            </CModalFooter>
 
           </CModal>
           </FormProvider>

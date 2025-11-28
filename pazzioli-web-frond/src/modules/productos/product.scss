@@ -5,7 +5,12 @@
 max-width: 208px;
    
 }
-
+.paddingleftformpro{
+    padding-left: 12px !important;
+}
+.inputconcondigoba{
+  padding-top: 12px !important;
+}
 .contproduct{
     .modal-content{
     max-width: 750px;
@@ -99,7 +104,7 @@ max-width: 208px;
 .inputprocttex{
   display: flex;
   flex-direction: column;
-  min-width: 317px;
+
 }
 
 .inputcodigosbarra{
@@ -173,17 +178,13 @@ opacity: 1;
      margin: 0 !important;
       
 }
-
 .tablaproducts th:last-child,
-.tablaproducts td:last-child {
-width: 90px;
-text-align: left !important;
-  position: sticky;
-  right: 0;
-  border-left: 1px solid #cccccc;
-  background: white; /* Asegura que el contenido no se superponga */
-   z-index: 2; /* Eleva la columna por encima de las demás */
-   box-sizing: border-box !important;
+.tablaproducts td:last-child {width: 90px;text-align: left !important;
+ position: sticky;
+ right: 0;
+ border-left: 1px solid #cccccc;
+ background: white; /* Asegura que el contenido no se superponga */
+  z-index: 2; /* Eleva la columna por encima de las demás */ box-sizing: border-box !important;
    
 }
 
@@ -230,9 +231,18 @@ padding: 0px 15px 0px 15px !important;
 border-radius: 12px !important;
     opacity: 1 !important;
     outline: none;
-    padding: 8px 8px !important;
+    padding: 12px 0px !important;
     border: none !important;
-    width: 300px;
+    width:100px;
+}
+.iteminput1{
+  border-radius: 12px !important;
+    opacity: 1 !important;
+    outline: none;
+    padding: 12px 0px !important;
+    border: none !important;
+    display:inline-block;
+    width: 100%;
 }
 
  .tablaproducts th,
@@ -241,6 +251,10 @@ border-radius: 12px !important;
   
  
 }
+.tablaperzonalinalida1 th{
+width: 50% !important;
+}
+
 
 
 .tablaproducts td {
@@ -257,10 +271,56 @@ opacity: 1 !important;
 }
 
 
-.tablaproducts th{
-  width: 50%;
+
+
+
+
+@media (max-width:767px) {
+  .paddingleftformpro{
+    padding-left: 0px !important;
+  }
 }
 
-.tablaproducts th:last-child{
-  width: 30%;
+
+.botonagregarvariante{
+  background: #F3F4F7 0% 0% no-repeat padding-box;
+border-radius: 10px;
+opacity: 1;
+border: none;
+display: flex;
+align-items: center;
+column-gap: 8px;
+max-width: 200px;
+padding: 5px 5px;
+
+font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: left;
+font: normal normal bold 14px/17px Open Sans;
+letter-spacing: 0px;
+color: #555555;
+opacity: 1;
 }
+
+
+.variantescontainer{
+  padding: 5px 20px !important;
+}
+
+.classitemitemproduct{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+    display: flex;
+    max-height: 30px;
+  
+    align-items: center;
+    gap: 15px;
+    padding: 0.0625rem 0.5rem;
+    background-color: #e7eaee;
+    border: 1px #dbdfe6;
+    border-radius: 0.25rem !important;
+}
+    

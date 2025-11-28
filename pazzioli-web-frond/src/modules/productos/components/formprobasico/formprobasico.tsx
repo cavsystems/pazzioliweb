@@ -11,34 +11,23 @@ function Formprobasico() {
                      const { register,control,setValue, formState: { errors } } =useFormContext();
     return (  <>
       <div  className="row containertipospro" style={{padding:"0px 20px 0px 20px"}}>
-                            <div className="col-12  col-md-12 col-sm-12  inputretencion titulospro " style={{marginLeft:"20px"}}>
-                             <label form="slectform1" className="" >Tipo de producto</label>
-                           
-                             </div>
-                      
+                          
+                               <label form="slectform1" className="titulospro" >Tipo de producto</label>
                               <select className="selctproduct">
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                </select>
                             
                          
 
-
-
-                                 <div className="col-12 d-flex column-gap-3 flex-wrap">
-                                  <div className=" flex-grow-1 " style={{paddingTop:"12px"}}>
+                                <div className="col-12 col-md-6 column-gap-3 " >
+                                  
                              
-                            <div className="inputprocttex" >
-                                 <label form="inputdescrip" className="titulospro">Codigo</label>
+                            <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                                 <label form="inputdescrip" className="titulospro" >Codigo</label>
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
                             </div>
-                            </div>
-                             <div className=" flex-grow-1 " style={{paddingTop:"12px"}}>
+                           
                              
-                            <div className="inputprocttex" >
-                                 <label form="inputdescrip" className="titulospro">Descripción</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
-                            </div>
-                            </div>
                             
                             
                        
@@ -47,18 +36,33 @@ function Formprobasico() {
                             
                             </div>
 
-
-                            <div className="col-12 d-flex column-gap-3 flex-wrap">
-                                  <div className=" flex-grow-1 " style={{paddingTop:"12px"}}>
+                                 <div className="col-12  col-md-6 column-gap-3 paddingleftformpro "  >
+                               
                              
-                            <div className="inputprocttex" >
+                             
+                            <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                                 <label form="inputdescrip" className="titulospro">Descripción</label>
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
+                            </div>
+                         
+                            
+                            
+                       
+  
+
+                            
+                            </div>
+
+                              <div className="col-12 col-md-6 column-gap-3" >
+                                 <div className="inputprocttex" style={{paddingTop:"12px"}}>
                                  <label form="inputdescrip" className="titulospro">Referencia</label>
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
                             </div>
-                            </div>
-                              <div className="flex-grow-1   "  style={{paddingTop:"12px"}}>
+                              </div>
 
-                             <div className="inputprocttex">
+
+                                <div className="col-12  col-md-6 column-gap-3 paddingleftformpro"  >
+                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
                               <label form="slectform1" className="titulospro">Unidad de medida</label>
                                <select className="selctproduct">
                                 <option value={""} id="slectform1">Elige una opcion</option>
@@ -68,15 +72,12 @@ function Formprobasico() {
 
                                
                              </div>
+                                </div>
 
-                             
-                            </div>
-  
 
                             
-                            </div>
                             
-                            <div className="col-12 " >
+                            <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
                               <label form="slectform1" className="titulospro">Impuesto</label>
                                <select className="selctproduct">
@@ -89,28 +90,70 @@ function Formprobasico() {
                              </div>
                             </div>
 
-                            <div className="col-12 d-flex column-gap-3 flex-wrap">
-                                  <div className="flex-grow-1" style={{paddingTop:"12px"}}>
+                            <div className="col-12 col-md-6 inputconcondigoba" >
+                                
                              
-                            <div className="inputprocttex inputcodigosbarra" >
+                            <div className="inputprocttex inputcodigosbarra paddingleftformpro"   >
                                  <label form="inputdescrip" className="titulospro">Codigos de barra</label>
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
                                  <button className="botoncodigobarra"><span>Agregar</span> <span>2</span></button>
                                  <button style={{position:"absolute",width:"fit-content",border:"none",background:"#fff"}} className="ojocodigobarra"><Ojoquetodolove/></button>
                             </div>
-                            </div>
+                          
                        
   
 
                             
                             </div>
 
+                             <div className="col-12 col-md-6 column-gap-3 " >
+                                 <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                                 <label form="inputdescrip" className="titulospro">Costo</label>
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
+                            </div>
+                              </div>
+
+                                 <div className="col-12 col-md-6 column-gap-3 paddingleftformpro" >
+                                 <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                                 <label form="inputdescrip" className="titulospro">Manifiesto</label>
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
+                            </div>
+                              </div>
+
+
+
+                               <div className="col-12 col-md-6 " >
+                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                              <label form="slectform1" className="titulospro">Linea</label>
+                               <select className="selctproduct">
+                                <option value={""} id="slectform1">Elige una opcion</option>
+                               </select>
+
+
+
+                               
+                             </div>
+                            </div>
+                             <div className="col-12 col-md-6  paddingleftformpro" >
+                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                              <label form="slectform1" className="titulospro">Grupo</label>
+                               <select className="selctproduct">
+                                <option value={""} id="slectform1">Elige una opcion</option>
+                               </select>
+
+
+
+                               
+                             </div>
+                            </div>
+
+                              
+
                             
-                            <div className="col-12 d-flex column-gap-3 flex-wrap">
+                            <div className="col-12">
 
-                               <div className="flex-grow-1   "  style={{paddingTop:"12px"}}>
-
-                             <div className="inputprocttex">
+                          
+                             <div className="inputprocttex" style={{width:"100%", paddingTop:"12px"}}>
                               <div className="d-flex justify-content-between"> <label form="slectform1" className="titulospro titulolista">Lista  de precios</label>   <img  src="imgs/togle.svg"  className={` ${rotate ? 'rotate':''} `}  onClick={()=>{
                               setrotate(!rotate);
                               }}/> </div>
@@ -125,7 +168,7 @@ function Formprobasico() {
                              </div>
 
                              
-                            </div>
+       
                                   
                              
 
@@ -141,7 +184,7 @@ function Formprobasico() {
         
           
           small
-          align="left" className="tablaproducts">
+          align="left" className="tablaproducts tablaperzonalinalida1">
                                                   
                                                   <CTableHead>
                                                     <CTableRow>
@@ -165,22 +208,18 @@ function Formprobasico() {
                                              
                                             
                                                      <CTableRow>
-                                                      <CTableDataCell>Precio1</CTableDataCell>
-                                      <CTableDataCell><input placeholder="0" className="inputitem"/></CTableDataCell>
+                                                      <CTableDataCell>   <select className="iteminput1">
+                                <option value={""} id="slectform1">Detal</option>
+                                  <option value={""} id="slectform1">Por mayoreo</option>
+                               </select></CTableDataCell>
+                                      <CTableDataCell><input placeholder="0" className="iteminput1"/></CTableDataCell>
                                      
                                       
                                             
                                           
                                               </CTableRow>
 
-                                              <CTableRow>
-                                                      <CTableDataCell>Precio2</CTableDataCell>
-                                      <CTableDataCell><input placeholder="0" className="inputitem"/></CTableDataCell>
-                                     
-                                      
-                                            
-                                          
-                                              </CTableRow>
+                                        
                                               
                                                 
                                                
@@ -212,11 +251,11 @@ function Formprobasico() {
                             
                             </div>
 
-                              <div className="col-12 d-flex column-gap-3 flex-wrap">
+                              <div className="col-12 ">
 
-                               <div className="flex-grow-1   "  style={{paddingTop:"12px"}}>
+                              
 
-                             <div className="inputprocttex">
+                             <div className="inputprocttex"  style={{paddingTop:"12px"}}>
                               <div className="d-flex justify-content-between"> <label form="slectform1" className="titulospro titulolista">Bodegas</label>   <img  src="imgs/togle.svg"  className={` ${rotate ? 'rotate':''} `}  onClick={()=>{
                               setrotate(!rotate);
                               }}/> </div>
@@ -230,8 +269,7 @@ function Formprobasico() {
                                
                              </div>
 
-                             
-                            </div>
+                    
                                   
                              
 
@@ -247,7 +285,7 @@ function Formprobasico() {
         
           
           small
-          align="left" className="tablaproducts">
+          align="left" className="tablaproducts tablapersonalizada">
                                                   
                                                   <CTableHead>
                                                     <CTableRow>
@@ -255,6 +293,9 @@ function Formprobasico() {
                                                             Estado
                                                             </div></CTableHeaderCell>
                                                         <CTableHeaderCell scope="col">Bodega</CTableHeaderCell>
+                                                    
+                                                    <CTableHeaderCell scope="col" >Stock maximo</CTableHeaderCell>
+                                                    <CTableHeaderCell scope="col" >Stock minimo</CTableHeaderCell>
                                                     <CTableHeaderCell scope="col" >Ubicación</CTableHeaderCell>
                                                    
                                                     
@@ -276,6 +317,8 @@ function Formprobasico() {
                                                          <CTableDataCell><div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><input type="checkbox"/></div></CTableDataCell>
                                                       <CTableDataCell>Bodega sur</CTableDataCell>
                                       <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
+                                         <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
+                                            <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
                                      
                                       
                                             
@@ -286,6 +329,8 @@ function Formprobasico() {
                                                        <CTableDataCell><div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><input type="checkbox"/></div></CTableDataCell>
                                                       <CTableDataCell>Bodega sur</CTableDataCell>
                                       <CTableDataCell><input type="text" className="inputitem"/></CTableDataCell>
+                                        <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
+                                            <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
                                      
                                       
                                             

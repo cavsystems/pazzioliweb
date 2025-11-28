@@ -756,3 +756,17 @@ letter-spacing: var(--unnamed-character-spacing-0) !important;
 color: var(--blanco) !important;
  /* rojo más fuerte */
 }
+
+.colsinpadding{
+    padding: 0px !important;
+    padding-top: 15px !important;
+}
+
+.inputsearchvariantes{
+    border-radius: 12px !important;
+        opacity: 1 !important;
+        outline: none;
+        padding: 5px 5px !important;
+        border: none !important;
+        width:100%;
+}
