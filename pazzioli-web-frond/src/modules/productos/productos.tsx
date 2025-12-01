@@ -1,4 +1,4 @@
-import { CButton, CTab, CTabContent, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTabList, CTabPanel, CTabs } from "@coreui/react";
+import { CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CTab, CTabContent, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTabList, CTabPanel, CTabs } from "@coreui/react";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Datosgeneralesproduct from "./components/Datosgeneralesproduct";
@@ -12,6 +12,7 @@ import "./product.scss"
 
 function Productos() {
      const [itemsformempresa, setitemsformempresa] = useState(1)
+     const [modalproducto,setmodalproducto]=useState(true)
       const methods = useForm({
           mode: 'onSubmit',
            shouldUnregister: false,
@@ -149,7 +150,36 @@ function Productos() {
                            </div>
                 
                     
-                                                      
+                                         <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: modalproducto ? "flex":"none"}}>
+                                                            
+                                                             <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:9999,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
+                                                                     <div className="card" style={{ width:'400px'}}>
+                                                                         <div className="card-body">
+                                                                                       <CInputGroup >
+                                                          <CFormFloating className="margeniputempresa">
+                                         
+                                                       <CFormInput placeholder=""  className="inputdatosempresa fontletre"   />
+                                                     
+                                          
+                                         <CFormLabel>Codigo de barras</CFormLabel>
+                                            
+                                                       </CFormFloating>
+                                                     </CInputGroup>
+                                                                             </div>
+                                         
+                                                                             <div className="card-footer d-flex justify-content-center"  >
+                                                                                       <button type="button"  className="botonretroceder" onClick={()=>{
+                                                                                        setmodalproducto(false)
+                                                                                       }}>Cancelar</button>
+                                         
+                                                  
+                                               <button type="button" className="botoncontinuar"  >Guardar</button>
+                                         
+                                                                             </div>
+                                                                     </div>
+                                                                     </div>
+                                                                     
+                                                            </div>             
                               
                                          <CButton className="botonagregarsucursal fitcontentinferior" 
                                        >Agregar</CButton>
