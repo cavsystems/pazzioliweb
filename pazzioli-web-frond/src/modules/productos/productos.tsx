@@ -7,12 +7,17 @@ import Iconsproduct from "../../icons/iconsproducto";
 import Iconupdate from "../../icons/iconupdate";
 import Iconbodega from "../../icons/Iconbodega";
 import Usuariosicon from "../../icons/Isuarios";
-import Formproduct from "./components/formproducto";
+import u from "./components/formproducto";
 import "./product.scss"
+import Providercodigobarras, { codigosbarrascontex } from "./contextcodigobarras";
+import Formproduct from "./components/formproducto";
 
 function Productos() {
      const [itemsformempresa, setitemsformempresa] = useState(1)
      const [modalproducto,setmodalproducto]=useState(true)
+     const {codigomodal,setcodigomodal, setcodigobarra}=codigosbarrascontex()
+     const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
+
       const methods = useForm({
           mode: 'onSubmit',
            shouldUnregister: false,
@@ -51,7 +56,7 @@ function Productos() {
 
       }
     return ( <>
-      
+        
          <div className=" d-flex justify-content-center " style={{height:"100%"}}>
                        <div className="containerusuario row  align-items-center justify-content-center flex-column">
                                  <div className="col-12 d-flex align-items-center justify-content-center flex-column containerimgusuario">
@@ -74,12 +79,12 @@ function Productos() {
                                                          <CTableHead>
                                                            <CTableRow>
                                                            
-                                                               <CTableHeaderCell scope="col">Codigo</CTableHeaderCell>
-                                                           <CTableHeaderCell scope="col" >Descripcion</CTableHeaderCell>
+                                                               <CTableHeaderCell scope="col">Código</CTableHeaderCell>
+                                                           <CTableHeaderCell scope="col" >Descripción</CTableHeaderCell>
                                                              <CTableHeaderCell scope="col" >Cantidad</CTableHeaderCell>
-                                                              <CTableHeaderCell scope="col" >Precio1</CTableHeaderCell>
-                                                              <CTableHeaderCell scope="col" >Precio2</CTableHeaderCell>
-                                                           <CTableHeaderCell scope="col" >Precio3</CTableHeaderCell>
+                                                              <CTableHeaderCell scope="col" >Precio 1</CTableHeaderCell>
+                                                              <CTableHeaderCell scope="col" >Precio 2</CTableHeaderCell>
+                                                           <CTableHeaderCell scope="col" >Precio 3</CTableHeaderCell>
                                                                <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
                                                
                                                
@@ -150,7 +155,7 @@ function Productos() {
                            </div>
                 
                     
-                                         <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: modalproducto ? "flex":"none"}}>
+                                         <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: codigomodal ? "flex":"none"}}>
                                                             
                                                              <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:9999,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
                                                                      <div className="card" style={{ width:'400px'}}>
@@ -158,7 +163,9 @@ function Productos() {
                                                                                        <CInputGroup >
                                                           <CFormFloating className="margeniputempresa">
                                          
-                                                       <CFormInput placeholder=""  className="inputdatosempresa fontletre"   />
+                                                       <CFormInput placeholder=""  className="inputdatosempresa fontletre"  onChange={(e)=>{
+                                                        setcodigobarra(e.target.value)
+                                                       }}  />
                                                      
                                           
                                          <CFormLabel>Codigo de barras</CFormLabel>
@@ -169,7 +176,7 @@ function Productos() {
                                          
                                                                              <div className="card-footer d-flex justify-content-center"  >
                                                                                        <button type="button"  className="botonretroceder" onClick={()=>{
-                                                                                        setmodalproducto(false)
+                                                                                       setcodigomodal(false)
                                                                                        }}>Cancelar</button>
                                          
                                                   
@@ -181,14 +188,17 @@ function Productos() {
                                                                      
                                                             </div>             
                               
-                                         <CButton className="botonagregarsucursal fitcontentinferior" 
+                                         <CButton className="botonagregarsucursal fitcontentinferior" onClick={()=>{
+                                          setmodalformproducto(true)
+                                         }}
                                        >Agregar</CButton>
                                   
-                           <Formproduct/>  
+                           <Formproduct  modalformproducto={modalformproducto} setmodalformproducto={setmodalformproducto}/>  
                
                    </div>
                   
                    </div>  
+                 
            
     </> );
 }

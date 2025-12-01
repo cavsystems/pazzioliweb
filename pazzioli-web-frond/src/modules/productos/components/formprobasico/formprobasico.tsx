@@ -11,19 +11,33 @@ function Formprobasico() {
                      const { register,control,setValue, formState: { errors } } =useFormContext();
     return (  <>
       <div  className="row containertipospro" style={{padding:"0px 20px 0px 20px"}}>
-                          
-                               <label form="slectform1" className="titulospro" >Tipo de producto</label>
-                              <select className="selctproduct">
+                               
+                             
+                            
+                            <div className="col-12  col-md-6 column-gap-3 "  >
+                               
+                             
+                             
+                            <div className="inputprocttex" style={{paddingTop:"12px"}}>
+                                  <label form="slectform1" className="titulospro" style={{padding:"0px 1px 0px 1px"}} >Tipo de producto</label>
+                                    <select className="selctproduct">
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                </select>
-                            
+                            </div>
                          
+                            
+                            
+                       
+  
 
-                                <div className="col-12 col-md-6 column-gap-3 " >
+                            
+                            </div>
+
+                                <div className="col-12 col-md-6 column-gap-3 paddingleftformpro " >
                                   
                              
                             <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                                 <label form="inputdescrip" className="titulospro" >Codigo</label>
+                                 <label form="inputdescrip" className="titulospro" >Código</label>
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
                             </div>
                            
@@ -36,22 +50,16 @@ function Formprobasico() {
                             
                             </div>
 
-                                 <div className="col-12  col-md-6 column-gap-3 paddingleftformpro "  >
-                               
-                             
-                             
-                            <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                                 <label form="inputdescrip" className="titulospro">Descripción</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
-                            </div>
-                         
-                            
-                            
-                       
-  
+                              
 
-                            
-                            </div>
+                            <div className="col-12">
+                                <div className="d-flex flex-column" style={{paddingTop:"12px"}}>
+                                 
+                           <label form="inputdescrip" className="titulospro">Descripción</label>
+                                 
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}/>
+                               </div>
+                               </div>
 
                               <div className="col-12 col-md-6 column-gap-3" >
                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
@@ -249,119 +257,11 @@ function Formprobasico() {
   
 
                             
-                            </div>
-
-                              <div className="col-12 ">
-
-                              
-
-                             <div className="inputprocttex"  style={{paddingTop:"12px"}}>
-                              <div className="d-flex justify-content-between"> <label form="slectform1" className="titulospro titulolista">Bodegas</label>   <img  src="imgs/togle.svg"  className={` ${rotate ? 'rotate':''} `}  onClick={()=>{
-                              setrotate(!rotate);
-                              }}/> </div>
-                              
-                               
-                              
-                               
+                          
 
 
-
-                               
-                             </div>
-
-                    
-                                  
                              
-
-                              <div className={`flex-grow-1 ${rotate ? '':'displaynonelist'}`} style={{paddingTop:"12px"}}>
-
-                             <div className={`inputprocttex justify-content-center align-items-center row-gap-3`}>
-                              
-                              
-                               
-                                <div className="tablalistaprecio">
-                                <CTable  
-
-        
-          
-          small
-          align="left" className="tablaproducts tablapersonalizada">
-                                                  
-                                                  <CTableHead>
-                                                    <CTableRow>
-                                                        <CTableHeaderCell scope="col"><div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-                                                            Estado
-                                                            </div></CTableHeaderCell>
-                                                        <CTableHeaderCell scope="col">Bodega</CTableHeaderCell>
-                                                    
-                                                    <CTableHeaderCell scope="col" >Stock maximo</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col" >Stock minimo</CTableHeaderCell>
-                                                    <CTableHeaderCell scope="col" >Ubicación</CTableHeaderCell>
-                                                   
-                                                    
-                                        
-                                                      
-                                                    </CTableRow>
-                                                  </CTableHead>
-                                                  <CTableBody>
-                                                  
-                                                  
-                                                 
-                      
-                                      
-                                         
-                                            
-                                             
-                                            
-                                                     <CTableRow>
-                                                         <CTableDataCell><div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><input type="checkbox"/></div></CTableDataCell>
-                                                      <CTableDataCell>Bodega sur</CTableDataCell>
-                                      <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
-                                         <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
-                                            <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
-                                     
-                                      
-                                            
-                                          
-                                              </CTableRow>
-
-                                              <CTableRow>
-                                                       <CTableDataCell><div style={{display:"flex",justifyContent:"center",alignItems:"center"}}><input type="checkbox"/></div></CTableDataCell>
-                                                      <CTableDataCell>Bodega sur</CTableDataCell>
-                                      <CTableDataCell><input type="text" className="inputitem"/></CTableDataCell>
-                                        <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
-                                            <CTableDataCell><input type="text"  className="inputitem"/></CTableDataCell>
-                                     
-                                      
-                                            
-                                          
-                                              </CTableRow>
-                                              
-                                                
-                                               
                             
-                                              
-                                    
-                                        
-                                      
-                                                    
-                        
-                                                      
-                                                
-                                                     
-                                                  </CTableBody>
-                                               
-                                                </CTable>
-                                                </div>
-                               
-                                
-                                       
-                               
-                               
-                             </div>
-
-                             
-                            </div>
   
 
                             

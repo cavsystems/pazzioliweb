@@ -5,7 +5,7 @@ import { useState } from "react";
 import Formprobasico from "./formprobasico/formprobasico";
 import Variantes from "./variantes";
 
-function Formproduct() {
+function Formproduct({modalformproducto,setmodalformproducto}:any) {
 
      const methods = useForm({
                mode: 'onSubmit',
@@ -53,8 +53,10 @@ function Formproduct() {
      <CModal
             alignment="center"
             scrollable
-            visible={true}
-           
+            visible={modalformproducto}
+           onClose={()=>{
+            setmodalformproducto(false)
+           }}
             aria-labelledby="VerticallyCenteredScrollableExample2"
            className="col-12 contproduct"
           >

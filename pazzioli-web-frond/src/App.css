@@ -770,3 +770,8 @@ color: var(--blanco) !important;
         border: none !important;
         width:100%;
 }
+
+
+.inputradios{
+    border-radius: 6px !important;
+}

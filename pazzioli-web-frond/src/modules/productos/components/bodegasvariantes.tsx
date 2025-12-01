@@ -94,8 +94,8 @@ ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                                  <CTableRow>
                                                                  
                                                                      <CTableHeaderCell scope="col">Bodega</CTableHeaderCell>
-                                                                 <CTableHeaderCell scope="col" >Stockminimo</CTableHeaderCell>
-                                                                  <CTableHeaderCell scope="col" >Stockmaximo</CTableHeaderCell>
+                                                                 <CTableHeaderCell scope="col" >Minimo</CTableHeaderCell>
+                                                                  <CTableHeaderCell scope="col" >Maximo</CTableHeaderCell>
                                                                     <CTableHeaderCell scope="col" >Ubicación</CTableHeaderCell>
                                                                       <CTableHeaderCell scope="col" >Existencia</CTableHeaderCell>
                                                                              <CTableHeaderCell scope="col "  className="thacciones"><div className="d-flex justify-content-center" style={{gap:"12px"}} >Acciones </div></CTableHeaderCell>
