@@ -23,6 +23,7 @@ interface Variante {
   codigovariante: number;
   atributos: { [key: string]: string }; // <--- dinámico
   bodega: bodegas[];
+  codigobarras:string
 }
 function Variantes() {
   const [variantes, setVariantes] = useState<Variante[]>([]);
@@ -34,11 +35,14 @@ function Variantes() {
 stockMinimo:number;}[]>([]);
  const [modalbo,setmodalbo]=useState<boolean>(false);
  const [indexvariante,setindexvariante]=useState<number>(0);
+ const [codigovariante,
+       setcodigovariante]=useState<number>(0)
  const {codigomodal,setcodigomodal,  Codigobarra,
        setcodigobarra ,  actulizarbarra,
        setactulizarbarras,
        guardar,
-       setguardar}=codigosbarrascontex()
+       setguardar
+     }=codigosbarrascontex()
        useEffect(()=>{
         if(actulizarbarra){
           console.log(Codigobarra)
@@ -63,6 +67,10 @@ stockMinimo:number;}[]>([]);
 };
 
 const agregarVariante = () => {
+  let codigovariante=0;
+  const maxCodigo = variantes.length === 0 
+  ? 1 
+  : Math.max(...variantes.map(v => v.codigovariante)) + 1;
   const nuevosAtributos:{ [key: string]: string } = {};
   atributoscelda.forEach(a => {
     nuevosAtributos[a] = "";  // cada atributo tendrá un input
@@ -71,9 +79,10 @@ const agregarVariante = () => {
   setVariantes(prev => [
     ...prev,
     {
-      codigovariante: 0,
+      codigovariante:maxCodigo,
       atributos: nuevosAtributos,
-      bodega: []
+      bodega: [],
+      codigobarras:""
     }
   ]);
 };
@@ -112,7 +121,7 @@ const agregarVariante = () => {
                        <div className="d-flex  flex-wrap flex-column " style={{position:"relative",height: "100%"}}   >
                           <ul  className="d-flex container1  flex-wrap" >
                          
-                        <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className="inputestilotercero " placeholder="Retenciones" /> <div ><img  src="imgs/togle.svg"  className={`${'rotate'} `} onClick={()=>{
+                        <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className="inputestilotercero " placeholder="Tipo caracteristica" /> <div ><img  src="imgs/togle.svg"  className={`${'rotate'} `} onClick={()=>{
                           setrotate4(!rotate4)
                         }}/></div> <div style={{alignSelf:'1'}}  className="botoncerrarall"><button className="botoncerrar botoncerrarall" type="button" ></button></div>  </li >
                           </ul>
@@ -179,6 +188,8 @@ const agregarVariante = () => {
               nuevas[i].atributos[attr] = e.target.value;
               setVariantes(nuevas);
             }}
+        
+          className="borderinputvariantes"
           />
         </CTableDataCell>
       ))}

@@ -11,6 +11,9 @@ setactulizarbarras:Dispatch<SetStateAction<boolean>>
 guardar:number
 setguardar:Dispatch<SetStateAction<number>>
 
+ codigovariante:number,
+       setcodigovariante:Dispatch<SetStateAction<number>>
+
 
 }
 
@@ -22,6 +25,8 @@ function Providercodigobarras({children}: {children: React.ReactNode}) {
        const [Codigobarra,setcodigobarra]=useState<string>("")
       const [actulizarbarra,setactulizarbarras]=useState<boolean>(false)
       const [guardar,setguardar]=useState<number>(0)
+      const [codigovariante,
+       setcodigovariante]=useState<number>(0)
  
     return ( 
     < Contextcodigobarras.Provider value={{ 
@@ -32,7 +37,9 @@ function Providercodigobarras({children}: {children: React.ReactNode}) {
        guardar,
        setguardar,
        Codigobarra,
-       setcodigobarra
+       setcodigobarra,
+       codigovariante,
+       setcodigovariante
 }}> 
       {children}
     </ Contextcodigobarras.Provider>

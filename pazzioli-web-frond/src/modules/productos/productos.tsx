@@ -13,6 +13,7 @@ import Providercodigobarras, { codigosbarrascontex } from "./contextcodigobarras
 import Formproduct from "./components/formproducto";
 
 function Productos() {
+  
      const [itemsformempresa, setitemsformempresa] = useState(1)
      const [modalproducto,setmodalproducto]=useState(true)
      const {codigomodal,setcodigomodal, setcodigobarra}=codigosbarrascontex()
