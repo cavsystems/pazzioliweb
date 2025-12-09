@@ -1,36 +1,19 @@
 package com.pazzioliweb.productosmodule.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.pazzioliweb.productosmodule.entity.Lineas;
-import com.pazzioliweb.productosmodule.repositori.LineasRepositori;
 
-@Service
-public class LineasService {
-private final LineasRepositori lineaRepositori;
+public interface LineasService {
+	Lineas crear(Lineas l);
 	
-	@Autowired
-	public LineasService(LineasRepositori lineaRepositori) {
-		this.lineaRepositori = lineaRepositori;
-	}
+	Lineas actualizar(Integer id, Lineas l);
 	
-	public List<Lineas> listarLineas(){
-		return lineaRepositori.findAll();
-	}
+	void eliminar(Integer id);
 	
-	public Lineas guardarLinea(Lineas linea) {
-		return lineaRepositori.save(linea);
-	}
+	Lineas buscarPorId(Integer id);
 	
-	public Optional<Lineas> buscarPorId(Integer id){
-		return lineaRepositori.findById(id);
-	}
+	Page<Lineas> listar(Pageable pageable);
 	
-	public void eliminarLinea(Integer id) {
-		lineaRepositori.deleteById(id);
-    }
 }

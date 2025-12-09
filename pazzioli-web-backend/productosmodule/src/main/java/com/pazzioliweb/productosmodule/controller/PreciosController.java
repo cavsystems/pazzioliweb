@@ -1,61 +1,78 @@
 package com.pazzioliweb.productosmodule.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
-import com.pazzioliweb.productosmodule.entity.Precios;
-import com.pazzioliweb.productosmodule.service.PreciosService;
+import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.PrecioCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.PrecioResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.PrecioUpdateDTO;
+import com.pazzioliweb.productosmodule.service.PrecioServiceImpl;
+
 
 @RestController
 @RequestMapping("/api/precios")
 public class PreciosController {
-	@Autowired
-	private PreciosService precioService;
-	
-	@Autowired
-	public PreciosController(PreciosService precioService) {
-		this.precioService = precioService;
-	}
-	
-	@GetMapping("/listar")
-	public ResponseEntity<ApiResponse<List<Precios>>> listar(){
-		List<Precios> listadoPrecios = precioService.listarPrecios();
-		if(!listadoPrecios.isEmpty()) {
-			return ResponseEntity
-    				.ok(ApiResponse.success("Precios encontrados",listadoPrecios));
-		}else {
-			System.out.println("no hay precios");
-    		return ResponseEntity
-    			    .status(HttpStatus.OK)
-    			    .body(ApiResponse.failure("No hay precios disponibles"));
-		} 
-	}
-	
-	@PostMapping
-	public Precios guardar(@RequestBody Precios precio) {
-		return precioService.guardarPrecio(precio);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Precios> buscarPorId(@PathVariable Integer id) {
-        return precioService.buscarPorId(id)
+
+    private final PrecioServiceImpl service;
+
+    public PreciosController(PrecioServiceImpl service) {
+        this.service = service;
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<PaginationResponse<PrecioResponseDTO>> listar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "precioId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        
+        Page<PrecioResponseDTO> resultado = service.listar(pageable);
+    	
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PrecioResponseDTO> obtener(@PathVariable Integer id) {
+        return service.obtenerPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-	
-	@DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Integer id) {
-		precioService.eliminarPrecio(id);
+
+    @PostMapping("crear-por-dto")
+    public ResponseEntity<PrecioResponseDTO> crear(@RequestBody PrecioCreateDTO dto) {
+        return ResponseEntity.ok(service.crear(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PrecioResponseDTO> actualizar(@PathVariable Integer id, @RequestBody PrecioUpdateDTO dto) {
+        return service.actualizar(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+        boolean eliminado = service.eliminar(id);
+        return eliminado ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }

@@ -103,8 +103,10 @@ public class Jwtfilter extends OncePerRequestFilter {
 	    		|| path.startsWith("/api/bodegas") || path.startsWith("/api/grupos") || path.startsWith("/api/lineas") || path.startsWith("/api/precios")
 	    		|| path.startsWith("/api/existencias") || path.startsWith("/api/terceros") || path.startsWith("/api/comprobantes") || path.startsWith("/api/cajas")
 	    		|| path.startsWith("/api/vendedores") || path.startsWith("/api/metodos_pago") || path.startsWith("/api/tipo_totales") || path.startsWith("/api/facturas")
-                || path.startsWith("/api/usuario") || path.startsWith("/api/clasificacionesTerceros") || path.startsWith("/api/sedeTercero") || path.startsWith("/api/retencion") || 
-                path.startsWith("/api/contactos");
+                || path.startsWith("/api/usuario") || path.startsWith("/api/clasificacionesTerceros") || path.startsWith("/api/sedeTercero") || path.startsWith("/api/retencion")
+                || path.startsWith("/api/contactos") || path.startsWith("/api/tipos-caracteristica") || path.startsWith("/api/caracteristicas") || path.startsWith("/api/variantes")
+                || path.startsWith("/api/variante-detalle") || path.startsWith("/api/precios-producto-variante") || path.startsWith("/api/productoMaster")
+                || path.startsWith("/api/unidadesMedida") || path.startsWith("/api/unidadesMedidaProducto");
 	}
 	
 

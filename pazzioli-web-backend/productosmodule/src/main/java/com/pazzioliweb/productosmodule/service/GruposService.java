@@ -1,36 +1,18 @@
 package com.pazzioliweb.productosmodule.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.pazzioliweb.productosmodule.entity.Grupos;
-import com.pazzioliweb.productosmodule.repositori.GrupoRepositori;
 
-@Service
-public class GruposService {
-	private final GrupoRepositori grupoRepositori;
+public interface GruposService {
+	Grupos crear(Grupos g);
 	
-	@Autowired
-	public GruposService(GrupoRepositori grupoRepositori) {
-		this.grupoRepositori = grupoRepositori;
-	}
+	Grupos actualizar(Integer id, Grupos g);
 	
-	public List<Grupos> listarGrupos(){
-		return grupoRepositori.findAll();
-	}
+	void eliminar(Integer id);
 	
-	public Grupos guardarGrupo(Grupos grupo) {
-		return grupoRepositori.save(grupo);
-	}
+	Grupos buscarPorId(Integer id);
 	
-	public Optional<Grupos> buscarPorId(Integer id){
-		return grupoRepositori.findById(id);
-	}
-	
-	public void eliminarGrupo(Integer id) {
-    	grupoRepositori.deleteById(id);
-    }
+	Page<Grupos> listar(Pageable pageable);
 }

@@ -20,7 +20,7 @@ import lombok.Data;
 @Table(
     name = "existencias",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uq_existencias_producto_bodega", columnNames = {"producto_id", "bodega_id"})
+        @UniqueConstraint(name = "uq_existencias_producto_bodega", columnNames = {"producto_variantes_id", "bodega_id"})
     }
 )
 public class Existencias {
@@ -28,12 +28,12 @@ public class Existencias {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "existencia_id")
-    private Integer existencia_id;
+    private Integer existenciaId;
 
     // Relación con Producto
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "producto_id", referencedColumnName = "producto_id", nullable = false)
-    private Productos producto;
+    @JoinColumn(name = "producto_variantes_id", referencedColumnName = "producto_variantes_id", nullable = false)
+    private ProductoVariante productoVariante;
 
     // Relación con Bodega
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -57,23 +57,23 @@ public class Existencias {
     
     // --- Getters & Setters ---
 
-    public Integer getExistencia_id() {
-        return existencia_id;
+    public Integer getExistenciaId() {
+        return existenciaId;
     }
 
-    public void setId(Integer existencia_id) {
-        this.existencia_id = existencia_id;
+    public void setExistenciaId(Integer existenciaId) {
+        this.existenciaId = existenciaId;
     }
 
-    public Productos getProducto() {
-        return producto;
-    }
+    public ProductoVariante getProductoVariante() {
+		return productoVariante;
+	}
 
-    public void setProducto(Productos producto) {
-        this.producto = producto;
-    }
+	public void setProductoVariante(ProductoVariante productoVariante) {
+		this.productoVariante = productoVariante;
+	}
 
-    public Bodegas getBodega() {
+	public Bodegas getBodega() {
         return bodega;
     }
 

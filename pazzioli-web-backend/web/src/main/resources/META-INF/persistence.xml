@@ -37,11 +37,15 @@
         <class>com.pazzioliweb.productosmodule.entity.Grupos</class>
         <class>com.pazzioliweb.productosmodule.entity.Lineas</class>
         <class>com.pazzioliweb.productosmodule.entity.Precios</class>
-        <class>com.pazzioliweb.productosmodule.entity.PreciosProducto</class>
+        <class>com.pazzioliweb.productosmodule.entity.PreciosProductoVariante</class>
         <class>com.pazzioliweb.productosmodule.entity.Productos</class>
         <class>com.pazzioliweb.productosmodule.entity.UnidadesMedida</class>
         <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProducto</class>
         <class>com.pazzioliweb.productosmodule.entity.UnidadesMedidaProductoId</class>
+        <class>com.pazzioliweb.productosmodule.entity.ProductoVariante</class>
+        <class>com.pazzioliweb.productosmodule.entity.ProductoVarianteDetalle</class>
+        <class>com.pazzioliweb.productosmodule.entity.TipoCaracteristica</class>
+        <class>com.pazzioliweb.productosmodule.entity.Caracteristica</class>
         
         <!-- Terceros -->
         <class>com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero</class>    

@@ -1,41 +1,27 @@
 package com.pazzioliweb.productosmodule.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.pazzioliweb.productosmodule.dtos.ExistenciaDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Existencias;
-import com.pazzioliweb.productosmodule.repositori.ExistenciasRepository;
 
-@Service
-public class ExistenciasService {
-	@Autowired
-    private ExistenciasRepository existenciasRepository;
+public interface ExistenciasService {
+	List<ExistenciasResponseDTO> crear(List<ExistenciasCreateDTO> existencia);
 
-    public List<ExistenciaDTO> listarExistencias() {
-        return existenciasRepository.findAllExistencias();
-    }
-    
-    public List<ExistenciaDTO> listarExistenciasXBodega(Integer id) {
-        return existenciasRepository.findByBodega(id);
-    }
-    
-    public List<ExistenciaDTO> listarExistenciasXProducto(Integer id) {
-        return existenciasRepository.findByProducto(id);
-    }
+	ExistenciasResponseDTO actualizar(Integer id, ExistenciasUpdateDTO existencia);
 
-    public Optional<Existencias> buscarPorId(Integer id) {
-        return existenciasRepository.findById(id);
-    }
+    void eliminar(Integer id);
 
-    public Existencias guardarExistencia(Existencias existencia) {
-        return existenciasRepository.save(existencia);
-    }
+    ExistenciasResponseDTO buscarPorId(Integer id);
 
-    public void eliminarExistencia(Integer id) {
-        existenciasRepository.deleteById(id);
-    }
+    Page<ExistenciasResponseDTO> listar(Pageable pageable);
+
+    Page<ExistenciasResponseDTO> listarPorVariante(Integer varianteId, Pageable pageable);
+
+    Page<ExistenciasResponseDTO> listarPorBodega(Integer bodegaId, Pageable pageable);
 }
