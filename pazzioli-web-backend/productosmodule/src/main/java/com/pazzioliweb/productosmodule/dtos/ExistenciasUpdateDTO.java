@@ -3,10 +3,19 @@ package com.pazzioliweb.productosmodule.dtos;
 import java.math.BigDecimal;
 
 public class ExistenciasUpdateDTO {
+	
+	private Integer bodega;
 	private BigDecimal existencia;
     private BigDecimal stockMin;
     private BigDecimal stockMax;
     private String ubicacion;
+    
+	public Integer getBodega() {
+		return bodega;
+	}
+	public void setBodega(Integer bodega) {
+		this.bodega = bodega;
+	}
 	public BigDecimal getExistencia() {
 		return existencia;
 	}

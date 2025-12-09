@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
@@ -140,6 +141,63 @@ public class ProductosController {
     public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
     	productosService.eliminar(id);
         return ResponseEntity.noContent().build(); // 204 sin cuerpo
+    }
+    
+    // ------------------------------------------------------
+    // LISTA TOTAL INVENTARIO POR CADA LINEA, DE TODAS LAS BODEGAS
+    // ------------------------------------------------------
+    @GetMapping("/listarTotalInventarioPorLineaTodasBodegas")
+    public ResponseEntity<PaginationResponse<LineaProductosDTO>> listarTotalInventarioPorLineasTodasBodegas(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "descripcion") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        
+        Page<LineaProductosDTO> resultados = productosService.listarTotalesPorLineaTodasBodegas(pageable);
+
+        PaginationResponse<LineaProductosDTO> response = new PaginationResponse<>(
+                resultados.getContent(),
+                resultados.getNumber(),
+                resultados.getTotalElements(),
+                resultados.getTotalPages()
+        );
+
+        return ResponseEntity.ok(response);
+    }
+
+    // ------------------------------------------------------
+    // LISTA TOTAL INVENTARIO POR CADA LINEA, DE UNA BODEGA ESPECIFICA
+    // ------------------------------------------------------
+    @GetMapping("/listarTotalInventarioPorLineaXBodega/{bodegaId}")
+    public ResponseEntity<PaginationResponse<LineaProductosDTO>> listarTotalesPorLineaXBodegaId(
+    		@PathVariable Integer bodegaId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "descripcion") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        
+        Page<LineaProductosDTO> resultados = productosService.listarTotalesPorLineaXBodegaId(bodegaId,pageable);
+
+        PaginationResponse<LineaProductosDTO> response = new PaginationResponse<>(
+                resultados.getContent(),
+                resultados.getNumber(),
+                resultados.getTotalElements(),
+                resultados.getTotalPages()
+        );
+
+        return ResponseEntity.ok(response);
     }
     
 }

@@ -3,6 +3,7 @@ package com.pazzioliweb.productosmodule.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
@@ -21,5 +22,6 @@ public interface ProductoVarianteService {
 
     Page<ProductoVarianteResponseDTO> listarPorProducto(Integer productoId, Pageable pageable);
     
-    //ProductoVarianteResponseDTO convertirAResponse(ProductoVariante pv);
+    Page<ProductoInventarioDTO> listarInventarioBasico(Pageable pageable);
+    
 }

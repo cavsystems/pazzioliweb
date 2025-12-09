@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
@@ -100,5 +101,11 @@ public class ProductoVarianteServiceImpl implements ProductoVarianteService{
     	Page<ProductoVariante> pagina = varianteRepository.findByProductoProductoId(productoId, pageable);
     	
         return pagina.map(mapper::toResponseDto); 
+    }
+    
+    @Override
+    public Page<ProductoInventarioDTO> listarInventarioBasico(Pageable pageable){
+    	Page<ProductoInventarioDTO> pagina = varianteRepository.listarInventario(pageable);
+    	return pagina;
     }
 }

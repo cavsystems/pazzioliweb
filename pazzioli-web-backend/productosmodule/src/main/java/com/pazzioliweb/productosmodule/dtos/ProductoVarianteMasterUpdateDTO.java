@@ -20,7 +20,7 @@ public class ProductoVarianteMasterUpdateDTO {
     private List<PreciosProductoVarianteUpdateDTO> preciosUpdate;
 
     // EXISTENCIAS (solo crear por ahora)
-    private List<ExistenciasCreateDTO> existencias;
+    private List<ExistenciasUpdateDTO> existencias;
 
 	public Long getProductoVarianteId() {
 		return productoVarianteId;
@@ -78,11 +78,11 @@ public class ProductoVarianteMasterUpdateDTO {
 		this.preciosUpdate = preciosUpdate;
 	}
 
-	public List<ExistenciasCreateDTO> getExistencias() {
+	public List<ExistenciasUpdateDTO> getExistencias() {
 		return existencias;
 	}
 
-	public void setExistencias(List<ExistenciasCreateDTO> existencias) {
+	public void setExistencias(List<ExistenciasUpdateDTO> existencias) {
 		this.existencias = existencias;
 	}
     

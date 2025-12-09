@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
-import com.pazzioliweb.productosmodule.entity.Existencias;
 
 public interface ExistenciasService {
 	List<ExistenciasResponseDTO> crear(List<ExistenciasCreateDTO> existencia);

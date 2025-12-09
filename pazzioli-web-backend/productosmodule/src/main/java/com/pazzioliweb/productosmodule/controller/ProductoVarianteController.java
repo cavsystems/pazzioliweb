@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
@@ -98,6 +99,25 @@ public class ProductoVarianteController {
 
         Page<ProductoVarianteResponseDTO> resultado =
                 varianteService.listarPorProducto(productoId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+    
+    @GetMapping("/listarInventarioBasico")
+    public ResponseEntity<PaginationResponse<ProductoInventarioDTO>> listarInventarioBasico(
+        	@RequestParam(defaultValue = "0") int page,
+        	@RequestParam(defaultValue = "10") int size,
+        	@RequestParam(defaultValue = "varianteId") String sortField,
+        	@RequestParam(defaultValue = "asc") String sortDirection
+    ){
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ProductoInventarioDTO> resultado =
+                varianteService.listarInventarioBasico(pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
