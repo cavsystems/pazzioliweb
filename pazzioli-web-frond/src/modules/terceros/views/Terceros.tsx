@@ -137,6 +137,7 @@ tipoIdentificacion
 function Terceros() {
    const [modalsede,setmodalsede]=useState<boolean>(false)
    const [botonactual,setbotonactual]=React.useState(0)
+   
    const [terceroid,setterceroid]=React.useState(0)
     const [terceros,setTerceros]=useState<terceros[]>([])
     const [visiblemodalcrear,setvisiblemodalcrear]=useState<boolean>(false)
@@ -162,13 +163,13 @@ React.useEffect(()=>{
     return ( 
         <>
           <div className=" d-flex justify-content-center " style={{height:"100%"}}>
-                <div className="containerusuario">
-             
-                    <div className="col-12 d-flex align-items-center justify-content-center flex-column containerimgusuario">
+                <div className="containerusuario row  align-items-center justify-content-center flex-column">
+                          <div className="col-12 d-flex align-items-center justify-content-center flex-column containerimgusuario">
                         <img src="imgs/creusuario.svg" alt=""   style={{maxWidth: "48px", maxHeight: "48px"}}/>
-                        <span className="tituloopaco">Terceros</span>
+                        <span className="tituloopaco" >Terceros</span>
+                        </div>
         
-                    </div>
+                  
                       
                       <div className="col-12">
                          <div  className="tablesucursalescon" >
@@ -209,36 +210,43 @@ React.useEffect(()=>{
                                        <CTableDataCell>{item.clasificacionTercero.nombre}</CTableDataCell>
                                       
                                             
-                                              <CTableHeaderCell  >
-                                                <div className="row" style={{gap:"12px" ,paddingLeft:"12px",paddingRight:"15px" }} >
+                                              <CTableDataCell >
+                                                <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
                                                     <div className="col-6" style={{ maxWidth: 'fit-content' }} >
-                                                        <CButton  className="buttoniconnormal"  onClick={async()=>{
-
+                                                        <CButton  className="buttoniconnormal"  onClick={async(e)=>{
+                                                         e.stopPropagation()
                                                           const terceroactulizar= await api.get(`terceros/${item.terceroId}`)
                                                           console.log("tercero Actulizar",terceroactulizar)
                                                           setTerceroupdate(terceroactulizar.data)
                                                         setActualizar(true)
                                                           setvisiblemodalcrear(true)
-                                                     
+                                                      
 
 
                                                         
-                                                        }}  onMouseEnter={()=>{
+                                                        }}  onMouseEnter={(e)=>{
+                                                         e.stopPropagation()
                                                           setbotonactual(1)
                                                           setitemactual(item.terceroId)
-                                                        }}  onMouseLeave={()=>{
+                                                        }}  onMouseLeave={(e)=>{
+                                                          e.stopPropagation()
                                                           setbotonactual(0)
                                                         }}>
                                                           <Iconupdate  width={16} height={18} color={botonactual===1 && itemactual===item.terceroId ? "#fff":"#555"}/> 
                                                         </CButton>
                                                     </div>
                                                     <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                        <CButton  className="buttoniconnormal"  onMouseEnter={()=>{
+                                                        <CButton  className="buttoniconnormal"  onMouseEnter={(e)=>{
+                                                          e.stopPropagation()
                                                           setbotonactual(2)
                                                           setitemactual(item.terceroId)
-                                                        }}  onMouseLeave={()=>{
+                                                             
+                                                        }}  onMouseLeave={(e)=>{
+                                                          e.stopPropagation()
                                                           setbotonactual(0)
-                                                        }}  onClick={()=>{
+                                                        }}  onClick={(e)=>{
+                                                          e.stopPropagation()
+                                                          setterceroid(item.terceroId)
                                                           setmodalsede(true)
                                                         }}>    <Iconbodega  width={19} height={19.5} color={botonactual===2 && itemactual===item.terceroId ? "#fff":"#555"}/></CButton>
                                                     </div>
@@ -260,7 +268,7 @@ React.useEffect(()=>{
         
                                                  
                                                 </div>
-                                              </CTableHeaderCell>
+                                              </CTableDataCell>
                                               </CTableRow>
                                                     })
                                                 }
@@ -281,24 +289,25 @@ React.useEffect(()=>{
                                                 </div>
         
         
-                                                   <div className="col-12 d-flex justify-content-center containerdivagregaru"   style={{marginTop:'10px' ,paddingBottom:"100px"}}>
-                            <div className="containersucursalboton">
-                                  <CButton className="botonagregarsucursal" onClick={()=>{
-                                    setvisiblemodalcrear(true)
-                                  }}>Agregar</CButton>
-                            </div>
-                           </div>
                                             </div>
+                                            
                     </div>
          
              
+                                               
+                       
+                                  <CButton className="botonagregarsucursal fitcontentinferior" onClick={()=>{
+                                    setvisiblemodalcrear(true)
+                                  }}>Agregar</CButton>
+                           
+                      
         
             </div>
             <Actulizartercero visiblemodal={visiblemodalcrear}  setvisiblemodal={setvisiblemodalcrear}   actulizar={actulizar}
   setActualizar={setActualizar} terceroupdate={terceroupdate} setTerceroupdate={setTerceroupdate}  traerterceros={traerterceros}/>
 
   < Contactotercero  modalcontacto={modalcontacto} setmodalcontacto={setmodalcontacto}  terceroid={terceroid} setterceroid={setterceroid}   traerterceros={traerterceros}  />
-  <Sedester  modalsede={modalsede} setmodalsede={setmodalsede} terceroId={terceroid} setterceroid={setterceroid} />
+  <Sedester  modalsede={modalsede} setmodalsede={setmodalsede} terceroid={terceroid} setterceroid={setterceroid} />
             </div>
         </>
      );

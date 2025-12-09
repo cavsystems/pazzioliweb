@@ -31,14 +31,14 @@ function Bodegausuario({modalbodegas,setModalbodegas ,bodegasusuario,setbodegaus
               >
                 <CModalHeader  style={{background:'SELECT * FROM cavsystems.tipoidentificacion;'}}>
                     
-                  <CModalTitle id="VerticallyCenteredScrollableExample2">Personas</CModalTitle>
+                  <CModalTitle id="VerticallyCenteredScrollableExample2">Bodegas</CModalTitle>
                 </CModalHeader>
 
 
                 <CModalBody>
                  <div className="col-12"  >
                     <div style={{maxHeight:"300px",overflowY:"auto",overflowX:"hidden"}} className="continnerper">
-     <CTable  striped small className="tabla tableusuarioper">
+     <CTable   small className="tabla tableusuariobodega">
           <CTableHead>
            
             <CTableRow>

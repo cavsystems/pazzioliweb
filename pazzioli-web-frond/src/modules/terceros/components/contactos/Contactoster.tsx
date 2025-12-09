@@ -1,9 +1,10 @@
 import { CButton, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import Iconupdate from "../../../../icons/iconupdate";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Iconeliminar from "../../../../icons/iconeliminar";
 import Modalformcontacto from "./modalformcontacto";
 import api from "../../../../apicofig";
+import Modalconfirmar from "../../../../components/alertconfimacion";
 interface contactoter{
   contactoId
 : 
@@ -22,6 +23,7 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
     const [botonactual,setbotonactual]=React.useState(0)
     const [visiblemodalfor,setvisiblemodalfor]=React.useState<boolean>(false)
      const [actulizar,setactulizar]=React.useState<boolean>(false)
+       const [itemactual,setitemactual]=useState<number>(0)
        const [contactoter,setcontactoter]=React.useState<contactoter>()
     const [contactosterceros,setcontactosterceros]=React.useState<contactoter[]>([])
           useEffect(()=>{
@@ -103,8 +105,9 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
             
               <CTableHeaderCell scope="col" >Tipo contacto</CTableHeaderCell>
                 <CTableHeaderCell scope="col" >Valor</CTableHeaderCell>
+                    <CTableHeaderCell scope="col" >  <div className="d-flex justify-content-center" style={{gap:"12px"}} >Principal</div></CTableHeaderCell>
                
-                   <CTableHeaderCell scope="col "  className="thacciones">Acciones</CTableHeaderCell>
+                   <CTableHeaderCell scope="col "  className="thacciones"><div className="d-flex justify-content-center" style={{gap:"12px"}} >Acciones </div></CTableHeaderCell>
   
             </CTableRow>
           </CTableHead>
@@ -115,15 +118,14 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
                   return <CTableRow>
                        <CTableDataCell>{item.tipoContacto.nombre}  </CTableDataCell>
                         <CTableDataCell>{item.valorContacto}</CTableDataCell>
-                                   <CTableDataCell style={{ minWidth: '100px' }}> 
-                                 <div className="d-flex justify-content-start" style={{gap:"12px"}} >
-                                <div style={{width:"30px" , height:"30px" ,display:"flex",justifyContent:"center"}} >
-                                <input type="checkbox" id={`checkcont${item.contactoId}`}  onChange={(e)=>{
+                        <CTableDataCell>    <div className="d-flex justify-content-center" style={{gap:"12px"}} > <input type="checkbox" id={`checkcont${item.contactoId}`}  onChange={(e)=>{
                                   console.log(e.target.checked)
                                   actulizarestadocheck(e.target.checked,item);
 
-                                }} />
-                                </div>
+                                }} /> </div> </CTableDataCell>
+                                   <CTableDataCell style={{ minWidth: '100px' }}> 
+                                 <div className="d-flex justify-content-center" style={{gap:"12px"}} >
+                               
                                                                               
                                                                                                 
                                <div   style={{ maxWidth: 'fit-content' }} >
@@ -133,12 +135,14 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
                                                                                 setcontactoter(item)
                                                                                }}  onMouseEnter={()=>{
                                                                                 setbotonactual(1)
-                                                                               }}  onMouseLeave={()=>setbotonactual(0)}>      <Iconupdate  width={16} height={16} color={botonactual===1 ? "#fff":"#555"}/>  </CButton>
+                                                                                setitemactual(item.contactoId)
+                                                                               }}  onMouseLeave={()=>setbotonactual(0)}>      <Iconupdate  width={16} height={16} color={botonactual===1   && itemactual===item.contactoId ? "#fff":"#555"}/>  </CButton>
                                                                            </div>      
 
                               <div   style={{ maxWidth: 'fit-content' }} >
                                                                                <CButton  className="buttoniconnormaleliminar"  onMouseEnter={()=>{
                                                                                 setbotonactual(2)
+                                                                                  setitemactual(item.contactoId)
                                                                                }}  onMouseLeave={()=>setbotonactual(0)} onClick={async()=>{
                                                                                    
             const atulizar= await api.delete(`contactos/eliminar/${item.contactoId}`,{
@@ -149,7 +153,7 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
                               })
                        traerterceros()
                                                                                   
-                      }}>      <Iconeliminar  width={16} height={16} color={botonactual===2 ? "#fff":"#555"}/>  </CButton>
+                      }}>      <Iconeliminar  width={16} height={16} color={botonactual===2 && itemactual===item.contactoId ? "#fff":"#555"}/>  </CButton>
                       </div>                                         
                              </div>
                              </CTableDataCell>
@@ -171,7 +175,7 @@ function Contactotercero({modalcontacto,setmodalcontacto,setterceroid,terceroid}
              
                 
          
-                <Modalformcontacto visiblemodalfor={visiblemodalfor} setvisiblemodalfor={setvisiblemodalfor}  terceroid={terceroid}  setcontactosterceros={setcontactosterceros} actulizar={actulizar} setactulizar={setactulizar}  contactoter={contactoter}/>
+                <Modalformcontacto visiblemodalfor={visiblemodalfor} setvisiblemodalfor={setvisiblemodalfor}  terceroid={terceroid}  setcontactosterceros={setcontactosterceros} actulizar={actulizar} setactulizar={setactulizar}  contactoter={contactoter} />
             
            
           </CTableBody>

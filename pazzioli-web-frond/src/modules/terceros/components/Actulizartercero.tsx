@@ -121,7 +121,7 @@ const [regimen2,setregimen2]=React.useState<{
              
    tipoidentificacion:"0"  ,
    identificacion:"",
-   tipopersona:'0',
+   tipopersona:'',
    dijitoverificacion:"",
     nombre1:"",
     nombre2:"",
@@ -153,6 +153,8 @@ const [regimen2,setregimen2]=React.useState<{
 
               React.useEffect(()=>{
                 if(actulizar && terceroupdate.identificacion){
+                  methods.setValue("tipoidentificacion",terceroupdate.tipoIdentificacion.codigo
+)
                   methods.setValue("identificacion",terceroupdate.identificacion)
                   console.log("clasificacion tercero",terceroupdate.clasificacionTercero)
                   methods.setValue("clasificaciontercero",terceroupdate.clasificacionTercero.clasificacionTerceroId)
@@ -166,8 +168,15 @@ const [regimen2,setregimen2]=React.useState<{
                            methods.setValue("plazo",terceroupdate.plazo)
                                  methods.setValue("tiporegimen",terceroupdate.regimen.codigo)
                                     methods.setValue("precios",terceroupdate.precio.precio_id)
+                                    methods.setValue("tipopersona",terceroupdate.tipoPersona.codigo)
+                                  methods.setValue("direccion",terceroupdate.direccion)
 
-
+                                 setretencionescheck(terceroupdate.retenciones)
+                  if(terceroupdate.tipoPersona.codigo===1){
+                    setesjuridica(true)
+                  }else{
+                      setesjuridica(false)
+                  }
                    
                 }
               },[actulizar,terceroupdate])
@@ -193,18 +202,20 @@ const crearcodigomu = (codigomuni: string): string => {
 };
 
  const onSubmit = async (data: any) => {
-    if(retencionescheck.length<=0){
+   /* if(retencionescheck.length<=0){
          return
-    }
+    }*/
     console.log("data tercero",data)
   let databody={
+    tipoPersona:{codigo:data.tipopersona},
     identificacion:data.identificacion,
-    dv:data.digitoverificacion,
+    dv:data.digitodeverificacion
+,
     nombre1:data.nombre1,
     nombre2:data.nombre2,
     apellido1:data.apellido1,
     apellido2:data.apellido2,
-    razonSocial:data.razonsocial && data.razonsocial!=="" ? data.razonsocial:data.nombre1+data.nombre2 ,
+    razonSocial:(data.razonsocial && data.razonsocial!=="") && data.tipopersona==="1" ? data.razonsocial:data.nombre1+" "+data.nombre2+" "+data.apellido1+" "+data.apellido2 ,
     direccion:data.direccion,
    plazo:Number(data.plazo),
    cupo:Number(data.cupo),
@@ -249,6 +260,37 @@ matriculaMercantil:data.matriculamercantil
   
   );
   console.log("datos return",datosreturn)
+
+
+
+                        methods.reset({
+                        tipoidentificacion:"0"  ,
+   identificacion:"",
+   tipopersona:'',
+   dijitoverificacion:"",
+    nombre1:"",
+    nombre2:"",
+    apellido1:"",
+    apellido2:"",
+    razonsocial:"",
+    fechanacimiento: "",
+    genero: "",
+    plazo:"0",
+    pais:'Colombia',
+    departamento:'',
+    municipio:'',
+    Actividadeconomica:"",
+    codigopostal:"",
+    digitodeverificacion:"",
+    clasificaciontercero:"",
+    direccion:"",
+    tiporegimen:'0',
+    precios:'0',
+    retenciones:[],
+    cupo:"",
+    matriculamercantil:"" 
+                      })
+                      setretencionescheck([])
   traerterceros(0)
   
  
@@ -257,9 +299,46 @@ matriculaMercantil:data.matriculamercantil
     
   }
   }else{
-    console.log("entro a actualizar",data)
+  
+      
+      const crearsede=await api.put(`terceros/actualizar/${terceroupdate.terceroId
+}`, databody,{
+                        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+          
+        }
+                })
 
-    
+                 methods.reset({
+                        tipoidentificacion:"0"  ,
+   identificacion:"",
+   tipopersona:'',
+   dijitoverificacion:"",
+    nombre1:"",
+    nombre2:"",
+    apellido1:"",
+    apellido2:"",
+    razonsocial:"",
+    fechanacimiento: "",
+    genero: "",
+    plazo:"0",
+    pais:'Colombia',
+    departamento:'',
+    municipio:'',
+    Actividadeconomica:"",
+    codigopostal:"",
+    digitodeverificacion:"",
+    clasificaciontercero:"",
+    direccion:"",
+    tiporegimen:'0',
+    precios:'0',
+    retenciones:[],
+    cupo:"",
+    matriculamercantil:"" 
+                      })
+                      setretencionescheck([])
+
+                 traerterceros(0)
   }
   
  }
@@ -285,6 +364,7 @@ let traerprecios= await api.get("precios/listar",{
     setprecios(traerprecios.data.data)
       setretenciones(traerretenciones.data)
     setClasificacionTercero(datosclasificacion.data.content)
+    
    let municipioss:{codigo:number,municipio:string,codigoDepartamento:number}[]=[]
      let departamentoss:{codigo:number,departamento:string,codigoDepartamento:number}[]=[]
    municipioss=datos.data.datos.municipio
@@ -336,6 +416,11 @@ setDepartamento2(datos.data.datos.departamento)
                         console.log("año",currentMonth)
     setCurrentYear(newYear.year());
   };
+  
+const onError=(error:any)=>{
+  console.log("error",error)
+
+}
 
 return ( 
          
@@ -347,7 +432,34 @@ return (
                   onClose={()=>{
                     setvisiblemodal(false)
                  setActualizar(false)
-
+                      methods.reset({
+                        tipoidentificacion:""  ,
+   identificacion:"",
+   tipopersona:'',
+   dijitoverificacion:"",
+    nombre1:"",
+    nombre2:"",
+    apellido1:"",
+    apellido2:"",
+    razonsocial:"",
+    fechanacimiento: "",
+    genero: "",
+    plazo:"0",
+    pais:'Colombia',
+    departamento:'',
+    municipio:'',
+    Actividadeconomica:"",
+    codigopostal:"",
+    digitodeverificacion:"",
+    clasificaciontercero:"",
+    direccion:"",
+    tiporegimen:'0',
+    precios:'0',
+    retenciones:[],
+    cupo:"",
+    matriculamercantil:"" 
+                      })
+                    setretencionescheck([])
                   }}
                   
                 aria-labelledby="VerticallyCenteredScrollableExample2"
@@ -366,12 +478,12 @@ return (
                   <FormProvider {...methods}>
                       <form className="row paddinginput"  onSubmit={methods.handleSubmit(onSubmit)}>
             <div className="col-12">
-               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Identificación</h6>
+               <h6 className="h6 titulosencabezadoster" >Identificación</h6>
 
             </div>
 
 
-             <div className="col-12 "   >
+             <div className=""   >
                 <div>
                     <div className="row ">
                          <div className="col-12 col-md-6 col-sm-6   inputterceroleft" >
@@ -414,7 +526,7 @@ return (
                            >
                            
                              
-                        <option value="0">Elije una opción</option>
+                        <option value="0"></option>
                             {
                                 clasificaciontercero?.map((item)=>{
                                     return <>
@@ -471,11 +583,17 @@ return (
                              const value = e.target.value;
                              console.log(e.target.value.trim())
                                 if(e.target.value.trim()==="1"){
+                                  methods.setValue("apellido1","")
+                                   methods.setValue("nombre1","")
+                                    methods.setValue("apellido2","")
+                                     methods.setValue("nombre2","")
                                     settipoidentificacion(tipoidentificacion2.filter((item)=> item.tipoIdentificacion==="Nit"))
                                     console.log("regimen2",regimen2)
                                     setregimen(regimen2.filter((item)=> item.descripcion!=="No responsable de iva"))
                                     setesjuridica(true)
                                 }else{
+                                    methods.setValue("razonsocial","")
+                                        methods.setValue("tiporegimen","")
                                     settipoidentificacion(tipoidentificacion2.filter((item)=> item.tipoIdentificacion!=="Nit"))
                                        setregimen(regimen2.filter((item)=> item.descripcion!=="Regimen simple de tributación"))
                                      setesjuridica(false)
@@ -485,7 +603,7 @@ return (
                            >
                            
                              
-                            <option value="">Elije una opción</option>
+                            <option value=""></option>
                             {
                                 tipopersona?.map((item)=>{
                                     return <>
@@ -545,7 +663,7 @@ return (
                            >
                            
                              
-                        <option value="">Elije una opción</option>
+                        <option value=""></option>
                             {
                                 tipoidentificacion?.map((item)=>{
                                     return <>
@@ -619,10 +737,10 @@ return (
              </div>
                 </div>
                   <div className="col-12">
-               <h6 className="h6 " style={{padding:'15px 10px 0px 0px ',marginLeft:'1rem'}}>Datos generales</h6>
+               <h6 className="h6 titulosencabezadoster" >Datos generales</h6>
 
             </div>
-             <div className="col-12 "   >
+             <div className=""   >
                 <div>
                     <div className="row ">
                         <div className="col-12 col-md-6 col-sm-6 inputterceroleft" >
@@ -666,7 +784,7 @@ return (
                                    <CInputGroup >
                                            <CFormFloating className="margeniputempresa">
                                          <CFormInput placeholder=""  className="inputdatosempresa fontletre"         
-                                {...methods.register("apellido1",{required:true})} disabled={esjuridica}
+                                {...methods.register("apellido1")} disabled={esjuridica}
                              />
                         
                             <CFormLabel >Apellido1</CFormLabel>
@@ -683,7 +801,7 @@ return (
                             <CInputGroup >
                                            <CFormFloating className="margeniputempresa">
                                          <CFormInput placeholder=""  className="inputdatosempresa fontletre"         
-                                  {...methods.register("apellido2",{required:true})} disabled={esjuridica}
+                                  {...methods.register("apellido2")} disabled={esjuridica}
                              />
                         
                             <CFormLabel >Apellido2</CFormLabel>
@@ -726,7 +844,7 @@ return (
                              <div className="col-12  col-md-6 col-sm-6 inputterceroright">
                             <div className="containerfecha margeniputempresa" >
                                 <div className="containerfechanacimiento">
-                                <input type="text" className="inputfechanacimiento"   {...methods.register("fechanacimiento",{required:true})}  placeholder="DD/MM/YY" onClick={()=>{
+                                <input type="text" className="inputfechanacimiento"   {...methods.register("fechanacimiento")}  placeholder="DD/MM/YY" onClick={()=>{
                                     setpicker(!picker)
                                 }} />
                                 <CFormLabel  className="labelfechanacimiento">Fecha nacimiento</CFormLabel>
@@ -1008,7 +1126,7 @@ Dentro del DateCalendar puedes personalizar:
                                 
                              />
                         
-                            <CFormLabel >Matricula Mercantil</CFormLabel>
+                            <CFormLabel >Matricula mercantil</CFormLabel>
                           
                          
                                 
@@ -1053,7 +1171,7 @@ Dentro del DateCalendar puedes personalizar:
 
 
             <div className="col-12  col-md-6 col-sm-6 inputterceroleft inputretencion" style={{height:"82px"}}>
-               <div className="d-flex  flex-wrap flex-column margeniputempresa" style={{position:"relative",height: "calc(100% - 12px)"}}   >
+               <div className="d-flex  flex-wrap flex-column margeniputempresa" style={{position:"relative",height: "calc(100% - 25px)"}}   >
                   <ul  className="d-flex container1  flex-wrap" >
                    {
                     retencionescheck.map((item)=>{
@@ -1124,7 +1242,7 @@ Dentro del DateCalendar puedes personalizar:
                                 
                              />
                         
-                            <CFormLabel >Direccion</CFormLabel>
+                            <CFormLabel >Dirección</CFormLabel>
                           
                          
                                 
@@ -1133,6 +1251,11 @@ Dentro del DateCalendar puedes personalizar:
                              </CFormFloating>
                                        </CInputGroup>
                         </div>
+
+
+
+
+                        
 
             
 
@@ -1155,8 +1278,8 @@ Dentro del DateCalendar puedes personalizar:
 
                   <div  className="d-flex justify-content-center" style={{marginTop:'15px'}}>
                {actulizar ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    
-                >Actualizar</button>: <button type="submit" className="botoncontinuarguardar"  key="guardar"    
-                >Guardar</button>}
+                onClick={methods.handleSubmit(onSubmit,onError)}  >Actualizar</button>: <button type="submit" className="botoncontinuarguardar"  key="actulizar"     
+                onClick={methods.handleSubmit(onSubmit,onError)}  >Guardar</button>}
                </div>
 
 

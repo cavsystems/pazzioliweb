@@ -86,7 +86,7 @@ opacity: 1;
 }
 
 .containerimgempresa{
-    margin-top: 20%;
+    margin-top: 15%;
     margin-bottom: 50px;
 }
 
@@ -110,7 +110,7 @@ letter-spacing: var(--unnamed-character-spacing-0);
 color: var(--blanco);
 text-align: left;
 display: inline-block;
-max-width: 130px !important;
+max-width: 140px !important;
 }
 .botoncontinuarguardar{
      background: #97BD13 0% 0% no-repeat padding-box;
@@ -122,9 +122,11 @@ max-width: 130px !important;
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
 letter-spacing: var(--unnamed-character-spacing-0);
 color: var(--blanco);
-text-align: left;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 display: inline-block;
-max-width: 130px !important;   
+max-width: 140px !important;   
 }
 
 .padingbotoncontinuar{
@@ -456,12 +458,41 @@ position: relative;
 
 @media (max-width:601px) {
     .containerimgempresa{
-        margin-top: 35%;
+        margin-top: 25%;
     }
 
     .containerimgempresasucu {
-        margin-top: 35%;
+        margin-top: 25%;
     }
    
     
+}
+
+.rowpading{
+    padding: 8px;
+}
+
+.titulosencabezados{
+    padding:15px 10px 5px 12px ;
+    margin-left:1rem
+}
+@media (max-width:765px) {
+
+    .titulosencabezados{
+    padding:15px 10px 5px 18px ;
+    margin-left:1rem
+}
+}
+
+@media (max-width:832px){
+    .modal-dialog{
+    padding:40px !important;
+
+}
+}
+
+
+.containerformen{
+    overflow: auto !important;
+    max-height: 490px !important;
 }

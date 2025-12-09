@@ -20,12 +20,14 @@ import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTO;
 import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTOImpl;
 import com.pazzioliweb.tercerosmodule.service.SedeTerceroService;
 import com.pazzioliweb.tercerosmodule.entity.SedeTercero;
+import com.pazzioliweb.tercerosmodule.repositori.SedeTerceroRepository;
 
 @RestController
 @RequestMapping("/api/sedeTercero")
 public class SedeTerceroController {
 	private final SedeTerceroService service;
-	
+	@Autowired
+	 private SedeTerceroRepository sederepo;
 	@Autowired
 	public SedeTerceroController(SedeTerceroService service) {
 		this.service = service;
@@ -68,4 +70,24 @@ public class SedeTerceroController {
 	    service.eliminar(id);
 	    return ResponseEntity.noContent().build();
 	}
+	
+	
+	@PutMapping("/actualizar/{idtercero}/{idsede}/{esprincipal}")
+	public ResponseEntity<Void> actualizarprincipal(@PathVariable Integer idtercero, @PathVariable Integer idsede,@PathVariable Boolean esprincipal){
+		
+	   List<SedeTercero> sedeter=sederepo.findBysedetercero(idtercero);
+	   for(SedeTercero ter:sedeter) {
+		   if(idsede==ter.getSedeId()) {
+		   ter.setPrincipal(esprincipal);
+		   }else {
+			   ter.setPrincipal(false);
+		   }
+		   
+		   sederepo.save(ter);
+	   }
+	   
+	   return ResponseEntity.noContent().build();
+	   }
+	
+	
 }

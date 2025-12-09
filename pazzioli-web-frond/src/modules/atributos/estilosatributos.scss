@@ -1,0 +1,37 @@
+
+.inputsearch{
+    position: relative;
+    height: fit-content;
+}
+
+.padingtop{
+    padding-top: 12px !important;
+}
+
+.inputsearch{
+    position: relative;
+}
+
+.inputlinea{
+    
+   border-radius: 12px !important;
+        opacity: 1 !important;
+        outline: none;
+        padding: 12px 12px 12px 12px !important;
+        border: none !important;
+        width:100%;
+}
+
+.labellinea{
+    position: absolute;
+    left: 10px;
+    top:15px;
+   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-pazzioli);
+text-align: left;
+font: normal normal normal 14px/19px Open Sans;
+letter-spacing: 0px;
+color: #908E92;
+opacity: 1;
+}

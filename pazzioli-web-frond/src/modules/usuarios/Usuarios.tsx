@@ -16,6 +16,11 @@ import { MdPassword } from 'react-icons/md';
 import Iconbodega from "../../icons/Iconbodega";
 import Usuariosicon from "../../icons/Isuarios";
 import Iconcandado from "./Iconcandado";
+import Iconeliminar from "../../icons/iconeliminar";
+import React from "react";
+import Iconupdate from "../../icons/iconupdate";
+import Iconcandados from "../../icons/iconcandado";
+import Modalpassword from "./components/modalpassword";
 interface rolesu{
   codigo:number,
   usuario:string,
@@ -41,12 +46,14 @@ string
 function Usuarios() {
   const [contraseactual,setContraseactual]=useState<number>(-1)
  const { modalrol,setmodalrol,traerroles} = usuariocontex();
+    const [botonactual,setbotonactual]=React.useState(0)
+    const [modalpass,setmodalpass]=React.useState(false)
  const [rolesusu,setRolesusu]=useState<rolesu[]>([])
  const[rolesactual,setrolesactual]=useState<string>("");
  const [visible,setVisible]=useState<boolean>(false);
  const [visibleper,setVisibleper]=useState<boolean>(false);
  const [codigousuario,setCodigousuario]=useState<number>(0);
-
+const [itemactual,setitemactual]=useState<number>(0)
  const [modalbodegas,setModalbodegas]=useState<boolean>(false);
  const [bodegasusuario,setbodegausuario]=useState<bodegasusuario[]>([]);
 const [codigousuarioseleccionado,setCodigousuarioseleccionado]=useState<number>(0);
@@ -137,7 +144,7 @@ console.log(usubo)
                  <div  className="tablesucursalescon" >
                                         <div className="tabla-wrapper">
                                            <CTable  hover 
-                                           striped
+                                           
   small
   align="left" className="tablausuario">
                                           
@@ -182,37 +189,77 @@ console.log(usubo)
                                       }}>
                                         <div className=" d-flex justify-content-start flex-nowrap  classitemaccionboton" style={{gap:"12px" ,width: 'fit-content'}} >
                                             <div style={{ maxWidth: 'fit-content' }}>
-                                                <CButton  className="btnsucursal" style={{ maxWidth: 'fit-content',padding:'0' }}   onClick={()=>{
+                                                <CButton   className="buttoniconnormal"   onClick={()=>{
                                                   setCodigousuarioseleccionado(item.codigo)
                                                   setVisible(true)
                                                   setbotonupdateu(true)
-                                                }} >
-                                                    <img src="/imgs/imgeditar.svg"/>
+                                                }}
+                                                
+                                                 onMouseEnter={(e)=>{
+                                                         e.stopPropagation()
+                                                          setbotonactual(1)
+                                                          setitemactual(item.codigo)
+                                                        }}  onMouseLeave={(e)=>{
+                                                          e.stopPropagation()
+                                                          setbotonactual(0)
+                                                        }}>
+                                                <Iconupdate  width={16} height={16} color={botonactual===1 && itemactual===item.codigo ? "#fff":"#555"}/>
                                                 </CButton>
                                             </div>
 
                                             {  !isMobile &&   <div   style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8',opacity:1}}  onClick={()=>{
+                                               
+
+                                                <CButton  className="buttoniconnormal"  onMouseEnter={(e)=>{
+                                                          e.stopPropagation()
+                                                          setbotonactual(2)
+                                                          setitemactual(item.codigo)
+                                                             
+                                                        }}  onMouseLeave={(e)=>{
+                                                          e.stopPropagation()
+                                                          setbotonactual(0)
+                                                        }}  
+                                                        
+                                                        onClick={()=>{
                                                    traerbodegausuario(item.codigo)
                                                    setModalbodegas(true)
-                                                }} >    <Iconbodega width={25} height={25}/></CButton>
+                                                }} >    <Iconbodega  width={19} height={19.5} color={botonactual===2 && itemactual===item.codigo ? "#fff":"#555"}/></CButton>
                                             </div>}
 
                                               {  !isMobile &&    <div   style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8'}}  onClick={()=>{
+                                              
+
+
+
+                                                    <CButton  className="buttoniconnormal" onClick={()=>{
                                                   setCodigousuario(item.codigo)
                                                   setVisibleper(true)
-                                                }}>  <Usuariosicon color={"#ffff"} width={25} height={25}/></CButton>
+                                                }}  onMouseEnter={()=>{
+                                                                                                          setbotonactual(3)
+                                                                                                          setitemactual(item.codigo)
+                                                                                                        }}  onMouseLeave={()=>{
+                                                                                                          setbotonactual(0)
+                                                                                                        }}>    <Usuariosicon width={19} height={19.5} color={botonactual===3 && itemactual===item.codigo ? "#fff":"#555" }/></CButton>
                                             </div>}
 
                                            
 
 
                                          {   !isMobile &&   <div   style={{ maxWidth: 'fit-content' }} >
-                                                <CButton  className="btnsucursal"  style={{ maxWidth: 'fit-content', padding: '2px', backgroundColor: '#38BDF8'}}   onClick={()=>{
-                                                   traerbodegausuario(item.codigo)
-                                                   setModalbodegas(true)
-                                                }}>  <Iconcandado/></CButton>
+                                                <CButton  className="buttoniconnormal"   onClick={()=>{
+                                                setCodigousuarioseleccionado(item.codigo)
+                                                   setmodalpass(true)
+                                                }}
+                                                
+                                                
+                                                onMouseEnter={()=>{
+                                                                                                          setbotonactual(4)
+                                                                                                          setitemactual(item.codigo)
+                                                                                                        }}  onMouseLeave={()=>{
+                                                                                                          setbotonactual(0)
+                                                                                                        }}   
+                                                                                                        
+                                                                                                      >  <Iconcandados width={19} height={19.5} color={botonactual===4 && itemactual===item.codigo ? "#fff":"#555" } strok={2}/></CButton>
                                             </div>}
                                           
                                         </div>
@@ -235,7 +282,11 @@ console.log(usubo)
                                         </div>
 
 
-                                           <div className="col-12 d-flex justify-content-center containerdivagregaru"   style={{marginTop:'10px' ,paddingBottom:"100px"}}>
+                                         
+                                    </div>
+
+
+                                      <div className="col-12 d-flex justify-content-center containerdivagregaru"   style={{marginTop:'10px' ,paddingBottom:"100px"}}>
                     <div className="containersucursalboton">
                           <CButton className="botonagregarsucursal"  onClick={
                             ()=> {
@@ -244,7 +295,6 @@ console.log(usubo)
                           }>Agregar</CButton>
                     </div>
                    </div>
-                                    </div>
             </div>
    <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: modalrol ? "flex":"none"}}>
                     <div className="containersucursalboton">
@@ -254,7 +304,7 @@ console.log(usubo)
                      <Bodegausuario modalbodegas={modalbodegas} setModalbodegas={setModalbodegas}  bodegasusuario={bodegasusuario} setbodegausuario={setbodegausuario}/>
                     <Modalusuario visible={visible} setVisible={setVisible}  codigousuarioseleccionado={codigousuarioseleccionado} setCodigousuarioseleccionado={setCodigousuarioseleccionado} botonupdateu={botonupdateu} setbotonupdateu={setbotonupdateu}  />
                     <Modalpersonas visibleper={visibleper} setVisibleper={setVisibleper} codigousuario={codigousuario} setCodigousuario={setCodigousuario} />
-
+                    < Modalpassword  modalpass={modalpass} setmodalpass={setmodalpass} idtercero={codigousuarioseleccionado} setidtercero={setCodigousuarioseleccionado}/>
                     <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:9999,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
                             <div className="card" style={{ width:'400px'}}>
                                 <div className="card-body">

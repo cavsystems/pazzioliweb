@@ -120,11 +120,12 @@ let video= new Blob([new Uint8Array(result)],{type:'video/mp4'})
                             abrirtogle('inventario')
                          }}/></div></div> <div id="inventario" className="noactive">
                               <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div className="contenlist"></div><span>Consultar producto</span></li>
+                                    <li className="listitem"> <div className="contenlist"></div><span>Atributos</span></li>  
+                                <li className="listitem"> <div className="contenlist"></div><span>Productos</span></li>
+                              
                                 <li className="listitem"> <div className="contenlist"></div><span>Bodegas</span></li>
-                                <li className="listitem"> <div className="contenlist"></div> <span>Entrada de inventario</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Salida de inventario</span></li>
-                                <li className="listitem"> <div className="contenlist"></div><span>Traslado de inventario</span></li>
+                               
+                                <li className="listitem"> <div className="contenlist"></div><span>Movimientos</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Compras</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Recalcular costos</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Inventario fisico</span></li>
@@ -260,11 +261,11 @@ let video= new Blob([new Uint8Array(result)],{type:'video/mp4'})
                             abrirtogle('inventario')
                          }}/></div></div> <div id="inventario" className="noactive">
                               <ul className="listasidebar" style={{height:"fit-content"}}>
-                                <li className="listitem"> <div><div className="contenlist"></div><span>Consultar producto</span></div></li>
+                                    <li className="listitem"> <div><div className="contenlist"></div><span>Atributos</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div><span>Producto</span></div></li>
                                 <li className="listitem"> <div><div className="contenlist"></div><span>Bodegas</span></div></li>
-                                <li className="listitem"> <div><div className="contenlist"></div> <span>Entradas de inventario</span></div></li>
-                                <li className="listitem"> <div><div className="contenlist"></div><span>Salida de inventario</span></div></li>
-                                <li className="listitem"> <div><div className="contenlist"></div><span>Traslado de inventario</span></div></li>
+                                <li className="listitem"> <div><div className="contenlist"></div> <span>Movimientos</span></div></li>
+                               
                                 <li className="listitem"> <div><div className="contenlist"></div> <span>Compras</span></div></li>
                                 <li className="listitem"> <div><div className="contenlist"></div><span>Recalcular costos</span></div></li>
                                 <li className="listitem"> <div><div className="contenlist"></div> <span>Inventario fisico</span></div></li>

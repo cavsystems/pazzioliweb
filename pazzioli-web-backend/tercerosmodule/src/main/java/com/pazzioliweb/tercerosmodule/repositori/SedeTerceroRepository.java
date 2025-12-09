@@ -19,4 +19,15 @@ public interface SedeTerceroRepository extends JpaRepository<SedeTercero, Intege
 		    WHERE s.tercero.terceroId = :terceroId
 		""")
 		Page<SedeTercero> findByTercero_TerceroIdConRelaciones(@Param("terceroId") Integer terceroId, Pageable pageable);
+	
+	
+	
+	@Query("""
+		    SELECT s FROM SedeTercero s
+		    WHERE s.tercero.terceroId = :terceroId
+		""")
+		List<SedeTercero> findBysedetercero(@Param("terceroId") Integer terceroId);
+	
+	
+	
 }

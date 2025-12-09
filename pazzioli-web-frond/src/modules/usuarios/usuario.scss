@@ -105,12 +105,15 @@ text-align: left !important;
 
 
 
+
+
+
 .tableusuarioper td{
     font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans) !important;
 letter-spacing: var(--unnamed-character-spacing-0) !important;
 color: var(--gris-textos) !important;
 text-align: left !important;
-font: normal normal normal 13px/17px Open Sans !important;
+font: normal normal normal 12px/17px Open Sans !important;
 letter-spacing: 0px !important;
 color: #555555 !important;
 opacity: 1 !important;
@@ -283,6 +286,16 @@ opacity: 1 !important;
 }
 
 
+.tablausuario th{
+   padding:10px 15px 10px 15px !important ;
+}
+.tablausuario td{
+  padding:4px 15px 4px 15px !important ;
+}
+
+.tablausuario th:last-child{
+   padding:10px 15px 10px 22px !important ;
+}
 .container-tabla {
   overflow-x: auto; /* ✅ scroll si no cabe */
 }
@@ -295,3 +308,81 @@ opacity: 1 !important;
 
 
 
+/* tabla  usuarios bodega */
+
+.tableusuariobodega{
+    
+     border-collapse: collapse;
+  width: 100%;
+  table-layout: auto; /* ✅ permite ajustar el ancho dinámicamente */
+ min-width: 600px; /* opcional, según tu diseño */
+     margin: 0 !important;
+      
+}
+
+
+
+
+.tableusuariobodega td{
+      padding-top: 4px !important;
+  padding-bottom: 4px !important;
+   padding-left: 15px !important;
+  /* Alinea verticalmente el contenido de la celda al centro,
+en lugar de estar pegado arriba (top) o abajo (bottom).
+Esto es útil cuando en una misma fila tienes texto y elementos como íconos o botones. */
+  vertical-align: middle !important;
+  /* Ese valor solo reduce el espacio vertical entre líneas, esto genera una especie de centrado ya que proporciona
+  espacio entre la parte superior y inferior del texto*/
+  line-height: 1.2 !important;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans) !important;
+letter-spacing: var(--unnamed-character-spacing-0) !important;
+color: var(--gris-textos) !important;
+text-align: left !important;
+font: normal normal normal 12px/17px Open Sans !important;
+letter-spacing: 0px !important;
+color: #555555 !important;
+opacity: 1 !important;
+}
+.tableusuariobodega th{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-17) var(--unnamed-font-family-open-sans) !important;
+letter-spacing: var(--unnamed-character-spacing-0) !important;
+color: var(--gris-textos) !important;
+text-align: left !important;
+font: normal normal bold 13px/17px Open Sans !important;
+letter-spacing: 0px !important;
+color: #555555 !important;
+opacity: 1 !important;
+}
+
+
+
+
+
+
+
+
+.tableusuariobodega th{
+   padding:10px 15px 10px 15px !important ;
+}
+.tableusuariobodega td{
+  padding:4px 15px 4px 15px !important ;
+}
+
+
+.container-tabla {
+  overflow-x: auto; /* ✅ scroll si no cabe */
+}
+
+
+
+.modalusupassword .modal-content {
+  max-width: 400px;
+}
+.modalusupassword div{
+  justify-content: center;
+}
+
+.paddingempresamodal{
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
