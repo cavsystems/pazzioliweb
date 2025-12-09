@@ -9,14 +9,14 @@ public class PrecioDTOImpl implements PrecioDTO {
 
     public static PrecioDTOImpl fromEntity(Precios entity) {
         PrecioDTOImpl dto = new PrecioDTOImpl();
-        dto.precio_id = entity.getPrecio_id();
+        dto.precio_id = entity.getPrecioId();
         dto.descripcion = entity.getDescripcion();
         return dto;
     }
     
     public Precios toEntity() {
     	Precios entity = new Precios();
-        entity.setPrecio_id(this.precio_id);
+        entity.setPrecioId(this.precio_id);
         entity.setDescripcion(this.descripcion);
         return entity;
     }

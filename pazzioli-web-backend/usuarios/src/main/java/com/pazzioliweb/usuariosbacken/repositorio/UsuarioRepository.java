@@ -8,7 +8,7 @@ import com.pazzioliweb.usuariosbacken.entity.Usuario;
 
 import java.util.Optional;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     Optional<Usuario> findByUsuario(String usuario);
     Optional <Usuario> findByCodigo(int codigo);
     @Query("SELECT u FROM Usuario u JOIN u.codigorol r WHERE u.codigo = :codigo")

@@ -1,0 +1,22 @@
+package com.pazzioliweb.productosmodule.service;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.pazzioliweb.productosmodule.dtos.PrecioCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.PrecioResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.PrecioUpdateDTO;
+
+public interface PrecioService {
+	PrecioResponseDTO crear(PrecioCreateDTO dto);
+
+    Optional<PrecioResponseDTO> obtenerPorId(Integer id);
+
+    Page<PrecioResponseDTO> listar(Pageable pageable);
+
+    Optional<PrecioResponseDTO> actualizar(Integer id, PrecioUpdateDTO dto);
+
+    boolean eliminar(Integer id);
+}

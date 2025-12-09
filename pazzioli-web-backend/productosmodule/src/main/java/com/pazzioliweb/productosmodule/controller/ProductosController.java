@@ -1,234 +1,145 @@
 package com.pazzioliweb.productosmodule.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
-import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
-import com.pazzioliweb.productosmodule.dtos.ProductoDTO;
-import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
-import com.pazzioliweb.productosmodule.dtos.TotallineasDTO;
+import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
 import com.pazzioliweb.productosmodule.service.ProductosService;
 
-@Component
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/productos")
+@RequiredArgsConstructor
 public class ProductosController {
-	@Autowired
-	private ProductosService productoService;
 
-    @Autowired
-    public ProductosController(ProductosService productoService) {
-        this.productoService = productoService;
+    private final ProductosService productosService;
+    
+    public ProductosController(ProductosService productosService) {
+        this.productosService = productosService;
     }
-
-    /*@GetMapping("/listar")
-    public ResponseEntity<ApiResponse<List<ProductoDTO>>> listar() {
-    	List<ProductoDTO> productosListados = productoService.listarProductos()
-    			.stream()
-    	        .map(ProductoDTO::fromEntity)
-    	        .toList();
-    	if(!productosListados.isEmpty()) {
-    		return ResponseEntity
-    				.ok(ApiResponse.success("Productos encontrados",productosListados));
-    	}else {
-    		System.out.println("no hay productos");
-    		return ResponseEntity
-    			    .status(HttpStatus.OK)
-    			    .body(ApiResponse.failure("No hay productos disponibles"));
-    	} 
-    }*/
+    
+    // ------------------------------------------------------
+    // LISTAR PAGINADO
+    // ------------------------------------------------------
     @GetMapping("/listar")
-    public ResponseEntity<Map<String, Object>> listar(
+    public ResponseEntity<PaginationResponse<ProductoResponseDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "descripcion") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
 
-        Page<ProductoDTO> productosPage = productoService.listar(page, size, sortField, sortDirection);
+        Pageable pageable = PageRequest.of(page, size, sort);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("content", productosPage.getContent());
-        response.put("currentPage", productosPage.getNumber());
-        response.put("totalItems", productosPage.getTotalElements());
-        response.put("totalPages", productosPage.getTotalPages());
+        Page<Productos> resultado = productosService.listar(pageable);
+        
+        Page<ProductoResponseDTO> dtoPage = resultado.map(productosService::convertirAResponse);
+
+        PaginationResponse<ProductoResponseDTO> response =
+                new PaginationResponse<ProductoResponseDTO>(
+                        dtoPage.getContent(),
+                        dtoPage.getNumber(),
+                        dtoPage.getTotalElements(),
+                        dtoPage.getTotalPages()
+                );
 
         return ResponseEntity.ok(response);
     }
-    
+
+    // ------------------------------------------------------
+    // BUSCAR POR FILTRO
+    // ------------------------------------------------------
     @GetMapping("/buscar")
-    public ResponseEntity<Map<String, Object>> buscar(
+    public ResponseEntity<PaginationResponse<Productos>> buscar(
             @RequestParam String termino,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "productoId") String sortField,
             @RequestParam(defaultValue = "asc") String sortDirection) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
 
-        Page<ProductoDTO> resultados = productoService.buscar(termino, page, size, sortField, sortDirection);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        
+        Page<Productos> resultados = productosService.buscarPorFiltro(
+                termino, pageable
+        );
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("content", resultados.getContent());
-        response.put("currentPage", resultados.getNumber());
-        response.put("totalItems", resultados.getTotalElements());
-        response.put("totalPages", resultados.getTotalPages());
+        PaginationResponse<Productos> response = new PaginationResponse<>(
+                resultados.getContent(),
+                resultados.getNumber(),
+                resultados.getTotalElements(),
+                resultados.getTotalPages()
+        );
 
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/crear")
-    public Productos guardar(@RequestBody Productos producto) {
-        return productoService.guardarProducto(producto);
-    }
-
+    // ------------------------------------------------------
+    // OBTENER POR ID
+    // ------------------------------------------------------
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<ProductoDTO>> buscarPorId(@PathVariable Integer id) {
-        return productoService.buscarPorId(id)
-                .map(producto -> ResponseEntity.ok(
-                        ApiResponse.success("Producto encontrado", ProductoDTO.fromEntity(producto))
-                ))
-                .orElse(ResponseEntity
-                        .status(HttpStatus.NOT_FOUND)
-                        .body(ApiResponse.failure("Producto no encontrado")));
+    public ResponseEntity<ProductoResponseDTO> obtener(@PathVariable Integer id) {
+        return productosService.buscarPorIdConRelaciones(id)
+                .map(p -> ResponseEntity.ok(productosService.convertirAResponse(p)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/eliminar/{id}")
-    public void eliminar(@PathVariable Integer id) {
-        productoService.eliminarProducto(id);
-    }
-    
-    @GetMapping("/totalesPorLineasGlobal")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLinea(
-    		@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "7") int size,
-             @RequestParam(defaultValue = "descripcion") String sortField,
-            @RequestParam(defaultValue = "asc") String sortDirection){
-    	System.out.println("pagina actual"+page);
-    	 int inicio=0;
-    	if(page>0) {
-    		  inicio = page-1;
-    	}
-    	
-    	 System.out.println("pagina actual"+inicio);
-    	 System.out.println("pagina tamaño"+size);
- 
-    	 
-    	 Optional<TotallineasDTO >  totalli=productoService.totallinea();
-        
-    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasGlobal(inicio,size,sortField,sortDirection);
-    	if(!totalesLineas.isEmpty()) {
-    		for(LineaProductosDTO totalesli: totalesLineas.getContent()) {
-    			System.out.println("pagina actual"+ totalesli.getTotalLinea());
-    		}
-    		Map<String, Object> response = new HashMap<>();
-    		response.put("totalGloballineas", totalli);
-            response.put("content", totalesLineas.getContent());      // la lista de resultados
-            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
-            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
-            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
-            return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
-    	}else {
-    		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(ApiResponse.failure("No hay datos disponibles"));
-    	}
-    }
-    
-    @GetMapping("/totalesPorLineasXBodegas")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLineaXBodegas(
-    		@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "7") int size,
-            @RequestParam(defaultValue = "descripcion") String sortField,
-            @RequestParam(defaultValue = "asc") String sortDirection){
-    	
-    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodegas(page,size,sortField,sortDirection);
-    	if(!totalesLineas.isEmpty()) {
-    		Map<String, Object> response = new HashMap<>();
-            response.put("content", totalesLineas.getContent());      // la lista de resultados
-            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
-            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
-            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
-            return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
-    	}else {
-    		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(ApiResponse.failure("No hay datos disponibles"));
-    	}
-    }
-    
-    @GetMapping("/totalesPorLineasXBodega/{bodegaID}")
-    public ResponseEntity<ApiResponse<Map<String, Object>>> totalesPorLineaXBodega(
-    		@PathVariable Integer bodegaID,
-    		@RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "7") int size,
-            @RequestParam(defaultValue = "descripcion") String sortField,
-            @RequestParam(defaultValue = "asc") String sortDirection){
-				int inicio=0;
-				System.out.println("bodegamid"+bodegaID);
-				if(page>0) {
-     		  inicio = page-1;
-     	} 
-    	Page<LineaProductosDTO> totalesLineas=productoService.totalPorLineasXBodega(bodegaID,inicio,size,sortField,sortDirection);
-    	Optional<TotallineasDTO >   totalli=productoService.totallineabodega(bodegaID);
-    	if(!totalesLineas.isEmpty()) {
-    		Map<String, Object> response = new HashMap<>();
-    		response.put("totalGloballineas", totalli);
-            response.put("content", totalesLineas.getContent());      // la lista de resultados
-            response.put("currentPage", totalesLineas.getNumber());   // número de página actual
-            response.put("totalItems", totalesLineas.getTotalElements()); // total de registros
-            response.put("totalPages", totalesLineas.getTotalPages());    // número total de páginas
-            return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", response));
-    	}else {
-    		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body(ApiResponse.failure("No hay datos disponibles"));
-    	}
-    }
-    
-    @GetMapping("/totalInventarioGlobal")
-    public ResponseEntity<ApiResponse<Optional<TotalInventarioDTO>>> totalInventarioGlobal(){
-    	Optional<TotalInventarioDTO> totales=productoService.totalInventarioGlobal();
-    	if(!totales.isEmpty()) {
-            return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", totales));
-    	}else {
-    		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(ApiResponse.failure("No hay datos disponibles"));
-    	}
-    }
-    
-    @GetMapping("/totalInventarioXBodega/{bodegaID}")
-    public ResponseEntity<ApiResponse<Optional<TotalInventarioDTO>>> totalInventarioXBodega(@PathVariable Integer bodegaID){
-    	Optional<TotalInventarioDTO> totales=productoService.totalInventarioXBodega(bodegaID);
-    	if(!totales.isEmpty()) {
-            return ResponseEntity
-            		.ok(ApiResponse.success("Totales por línea obtenidos correctamente", totales));
-    	}else {
-    		System.out.println("no hay datos");
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(ApiResponse.failure("No hay datos disponibles"));
-    	}
+    // ------------------------------------------------------
+    // CREAR
+    // ------------------------------------------------------
+    @PostMapping("/crear-por-dto")
+    public ResponseEntity<ProductoResponseDTO> crearPorDTO(@RequestBody ProductoCreateDTO dto) {
+        Productos creado = productosService.guardarDesdeDTO(dto);
+        ProductoResponseDTO response = productosService.convertirAResponse(creado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    // ------------------------------------------------------
+    // ACTUALIZAR
+    // ------------------------------------------------------
+    @PutMapping("/{id}")
+    public ResponseEntity<ProductoResponseDTO> actualizar(
+            @PathVariable Integer id,
+            @RequestBody ProductoUpdateDTO dto) {
+
+        Productos actualizado = productosService.actualizarDesdeDTO(id, dto);
+
+        ProductoResponseDTO response = productosService.convertirAResponse(actualizado);
+
+        return ResponseEntity.ok(response);
+    }
+
+    // ------------------------------------------------------
+    // ELIMINAR
+    // ------------------------------------------------------
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+    	productosService.eliminar(id);
+        return ResponseEntity.noContent().build(); // 204 sin cuerpo
+    }
+    
 }
-

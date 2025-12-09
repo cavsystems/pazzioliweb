@@ -27,11 +27,11 @@ public class Productos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "producto_id")
     private Integer productoId;
-
-    @Column(name = "codigo_contable")
+    
+    @Column(name = "codigo_contable",unique = true)
     private String codigoContable;
 
-    @Column(name = "codigo_barras")
+    @Column(name = "codigo_barras",unique = true)
     private String codigoBarras;
 
     private String referencia;
@@ -66,20 +66,17 @@ public class Productos {
     private Integer codigoUsuarioModifico;
 
     @Column(name = "fecha_modificacion")
-    private String fechaModificacion;
+    private LocalDateTime fechaModificacion;
 
     private String estado;
 
     @Column(name = "fecha_ultima_venta")
-    private String fechaUltimaVenta;
+    private LocalDateTime fechaUltimaVenta;
 
     @Column(name = "fecha_ultima_compra")
-    private String fechaUltimaCompra;
+    private LocalDateTime fechaUltimaCompra;
 	
-	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = false)
-    private List<Existencias> existencias = new ArrayList<>();
-	
-	
+    String manifiesto;
 	
 	public Integer getProductoId() {
 		return productoId;
@@ -145,11 +142,11 @@ public class Productos {
 		this.codigoUsuarioModifico = codigoUsuarioModifico;
 	}
 
-	public String getFechaModificacion() {
+	public LocalDateTime getFechaModificacion() {
 		return fechaModificacion;
 	}
 
-	public void setFechaModificacion(String fechaModificacion) {
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
 
@@ -161,19 +158,19 @@ public class Productos {
 		this.estado = estado;
 	}
 
-	public String getFechaUltimaVenta() {
+	public LocalDateTime getFechaUltimaVenta() {
 		return fechaUltimaVenta;
 	}
 
-	public void setFechaUltimaVenta(String fechaUltimaVenta) {
+	public void setFechaUltimaVenta(LocalDateTime fechaUltimaVenta) {
 		this.fechaUltimaVenta = fechaUltimaVenta;
 	}
 
-	public String getFechaUltimaCompra() {
+	public LocalDateTime getFechaUltimaCompra() {
 		return fechaUltimaCompra;
 	}
 
-	public void setFechaUltimaCompra(String fechaUltimaCompra) {
+	public void setFechaUltimaCompra(LocalDateTime fechaUltimaCompra) {
 		this.fechaUltimaCompra = fechaUltimaCompra;
 	}
 
@@ -192,12 +189,30 @@ public class Productos {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+	public String getManifiesto() {
+		return manifiesto;
+	}
 
-	public List<Existencias> getExistencias() {return existencias;}
-    public void setExistencias(List<Existencias> existencias) {this.existencias = existencias;}
+	public void setManifiesto(String manifiesto) {
+		this.manifiesto = manifiesto;
+	}
+
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ProductoVariante> variantes = new ArrayList<>();
     
     public Impuestos getImpuestos() { return impuestos; }
     public Lineas getLinea() { return linea; }
     public Grupos getGrupo() { return grupo; }
     public Usuario getUsuario() { return usuario; }
+
+	public List<ProductoVariante> getVariantes() {
+		return variantes;
+	}
+
+	public void setVariantes(List<ProductoVariante> variantes) {
+		this.variantes = variantes;
+	}
+    
+    
 }

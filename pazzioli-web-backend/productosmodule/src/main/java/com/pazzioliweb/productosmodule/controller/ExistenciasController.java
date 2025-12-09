@@ -2,95 +2,118 @@ package com.pazzioliweb.productosmodule.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
-import com.pazzioliweb.productosmodule.dtos.ExistenciaDTO;
-import com.pazzioliweb.productosmodule.entity.Existencias;
+import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
 import com.pazzioliweb.productosmodule.service.ExistenciasService;
 
 @RestController
 @RequestMapping("/api/existencias")
 public class ExistenciasController {
-	@Autowired
-	private ExistenciasService existenciaService;
-	
-	@Autowired
-	public ExistenciasController(ExistenciasService existenciaService) {
-		this.existenciaService = existenciaService;
-	}
-	
-	@GetMapping("/listar")
-	public ResponseEntity<ApiResponse<List<ExistenciaDTO>>> listar(){
-		try {
-			List<ExistenciaDTO> listadoExistencias = existenciaService.listarExistencias();
-			if(!listadoExistencias.isEmpty()) {
-				return ResponseEntity
-	    				.ok(ApiResponse.success("Existencias encontradas",listadoExistencias));
-			}else {
-				System.out.println("no hay unidadesMedida");
-	    		return ResponseEntity
-	    			    .status(HttpStatus.OK)
-	    			    .body(ApiResponse.failure("No hay existencias disponibles"));
-			} 
-		} catch (Exception ex) {
-	        ex.printStackTrace(); // Para ver el error real en consola
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(ApiResponse.failure("Error al listar existencias: " + ex.getMessage()));
-	    }
-	}
-	
-	@GetMapping("/listarPorBodega/{bodegaId}")
-	public ResponseEntity<ApiResponse<List<ExistenciaDTO>>> listarExistenciasPorBodega(@PathVariable Integer bodegaId){
-		List<ExistenciaDTO> listadoExistencias = existenciaService.listarExistenciasXBodega(bodegaId);
-		if(!listadoExistencias.isEmpty()) {
-			return ResponseEntity
-    				.ok(ApiResponse.success("Existencias encontradas",listadoExistencias));
-		}else {
-			System.out.println("no hay unidadesMedida");
-    		return ResponseEntity
-    			    .status(HttpStatus.OK)
-    			    .body(ApiResponse.failure("No hay existencias disponibles"));
-		}
-	}
-	
-	@GetMapping("/listarPorProducto/{productoId}")
-	public ResponseEntity<ApiResponse<List<ExistenciaDTO>>> listarExistenciasPorProducto(@PathVariable Integer productoId){
-		List<ExistenciaDTO> listadoExistencias = existenciaService.listarExistenciasXProducto(productoId);
-		if(!listadoExistencias.isEmpty()) {
-			return ResponseEntity
-    				.ok(ApiResponse.success("Existencias encontradas",listadoExistencias));
-		}else {
-			System.out.println("no hay unidadesMedida");
-    		return ResponseEntity
-    			    .status(HttpStatus.OK)
-    			    .body(ApiResponse.failure("No hay existencias disponibles"));
-		}
-	}
-	
-	@PostMapping
-	public Existencias guardar(@RequestBody Existencias existencia) {
-		return existenciaService.guardarExistencia(existencia);
-	}
-	
-	@GetMapping("/{id}")
-	public ResponseEntity<Existencias> buscarPorId(@PathVariable Integer id) {
-        return existenciaService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+	private final ExistenciasService service;
+
+    public ExistenciasController(ExistenciasService service) {
+        this.service = service;
     }
-	
-	@DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Integer id) {
-		existenciaService.eliminarExistencia(id);
+
+    @PostMapping("/crear-por-dto")
+    public ResponseEntity<List<ExistenciasResponseDTO>> crear(@RequestBody List<ExistenciasCreateDTO> dto) {
+        return ResponseEntity.ok(service.crear(dto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ExistenciasResponseDTO> actualizar(
+            @PathVariable Integer id,
+            @RequestBody ExistenciasUpdateDTO dto) {
+
+        return ResponseEntity.ok(service.actualizar(id, dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+        service.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ExistenciasResponseDTO> buscarPorId(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<PaginationResponse<ExistenciasResponseDTO>> listar(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "existenciaId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ExistenciasResponseDTO> resultado = service.listar(pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+
+    @GetMapping("/variante/{varianteId}")
+    public ResponseEntity<PaginationResponse<ExistenciasResponseDTO>> listarPorVariante(
+            @PathVariable Integer varianteId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "existenciaId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ExistenciasResponseDTO> resultado =
+        		service.listarPorVariante(varianteId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+
+    @GetMapping("/bodega/{bodegaId}")
+    public ResponseEntity<PaginationResponse<ExistenciasResponseDTO>> listarPorBodega(
+            @PathVariable Integer bodegaId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "existenciaId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ExistenciasResponseDTO> resultado =
+        		service.listarPorBodega(bodegaId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
 }

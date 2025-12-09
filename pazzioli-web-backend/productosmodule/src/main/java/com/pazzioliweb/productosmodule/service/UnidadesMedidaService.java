@@ -1,36 +1,23 @@
 package com.pazzioliweb.productosmodule.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import com.pazzioliweb.productosmodule.entity.UnidadesMedida;
-import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaRepository;
+import com.pazzioliweb.productosmodule.dtos.UnidadMedidaCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.UnidadMedidaResponseDTO;
+import com.pazzioliweb.productosmodule.dtos.UnidadMedidaUpdateDTO;
 
-@Service
-public class UnidadesMedidaService {
-private final UnidadesMedidaRepository unidadMedidaRepository;
+public interface UnidadesMedidaService {
+
+	List<UnidadMedidaResponseDTO> crear(List<UnidadMedidaCreateDTO> dtos);
 	
-	@Autowired
-	public UnidadesMedidaService(UnidadesMedidaRepository unidadMedidaRepository) {
-		this.unidadMedidaRepository = unidadMedidaRepository;
-	}
+	UnidadMedidaResponseDTO actualizar(Integer id, UnidadMedidaUpdateDTO dto);
 	
-	public List<UnidadesMedida> listarUnidadesMedida(){
-		return unidadMedidaRepository.findAll();
-	}
+	UnidadMedidaResponseDTO obtenerPorId(Integer id);
 	
-	public UnidadesMedida guardarUnidadesMedida(UnidadesMedida unidadMedida) {
-		return unidadMedidaRepository.save(unidadMedida);
-	}
+	Page<UnidadMedidaResponseDTO> listar(Pageable pageable);
 	
-	public Optional<UnidadesMedida> buscarPorId(Integer id){
-		return unidadMedidaRepository.findById(id);
-	}
-	
-	public void eliminarUnidadMedida(Integer id) {
-		unidadMedidaRepository.deleteById(id);
-    }
+	void eliminar(Integer id);
 }
