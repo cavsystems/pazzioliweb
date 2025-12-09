@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CTable, CTableHead, CTableBody, CTableRow, CTableHeaderCell, CTableDataCell, CFormSelect, CFormInput, CButton } from "@coreui/react";
 import Iconupdate from "../../../icons/iconupdate";
 import Iconbodega from "../../../icons/Iconbodega";
@@ -6,6 +6,8 @@ import Usuariosicon from "../../../icons/Isuarios";
 import Bodegasvariantes from "./bodegasvariantes";
 import Iconcodigobarras from "../../../icons/iconcodigobarras";
 import { codigosbarrascontex } from "../contextcodigobarras";
+import Iconfoto from "../../../icons/iconfoto";
+import Downloadimg from "../../../icons/icondonwloadimg";
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
@@ -21,18 +23,76 @@ existencias?:number;
 
 interface Variante {
   codigovariante: number;
+  imagen:"";
+  
   atributos: { [key: string]: string }; // <--- dinámico
   bodega: bodegas[];
   codigobarras:string
 }
-function Variantes() {
+function Variantes({variantedefault,multivariable,setmultivariable}:any) {
+    //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
+  const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [variantes, setVariantes] = useState<Variante[]>([]);
   const [atributos, setAtributos] = useState<string[]>(["Talla","Color","Material"]);
+  const [imgdefault,setimgdefault]=useState<string>("");
   const [rotate4,setrotate4]=useState<boolean>(false);
   const [atributoscelda, setAtributoscelda] = useState<string[]>([]);
  const [bodegaSeleccionada, setBodegaSeleccionada] = useState<{nombre:string;
   stockMaximo:number;
 stockMinimo:number;}[]>([]);
+useEffect(() => {
+  fileRefs.current = fileRefs.current.slice(0, variantes.length);
+}, [variantes.length]);
+//use efect para controlar el drag drop
+/* Si haces drop sobre un elemento que no tiene preventDefault() 
+en los eventos dragover y drop, el navegador tratará de abrir ese 
+archivo como si lo arrastraras sobre la página, causando la ventana emergente o recarga.
+
+Y en tu caso, aunque lo aplicas en el contenedor, el img dentro del dropzone
+ también recibe el evento, y ahí no estás previniendo el comportamiento. */
+
+useEffect(() => {
+    if(variantedefault.imagen){
+     convertiraurl(variantedefault.imagen)
+  }
+  
+  const prevent = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  window.addEventListener("dragover", prevent);
+  window.addEventListener("drop", prevent);
+
+  return () => {
+    window.removeEventListener("dragover", prevent);
+    window.removeEventListener("drop", prevent);
+  };
+}, []);
+const convertiraurl = (file: File) => {
+
+    const reader = new FileReader();
+    reader.onload = () => setimgdefault(reader.result as string);
+    reader.readAsDataURL(file);
+ 
+};
+// Manejar archivos arrastrados
+const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      actualizarVariante(index, "imagen", reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+
+const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault();
+};
  const [modalbo,setmodalbo]=useState<boolean>(false);
  const [indexvariante,setindexvariante]=useState<number>(0);
  const [codigovariante,
@@ -80,6 +140,7 @@ const agregarVariante = () => {
     ...prev,
     {
       codigovariante:maxCodigo,
+      imagen:"",
       atributos: nuevosAtributos,
       bodega: [],
       codigobarras:""
@@ -117,12 +178,15 @@ const agregarVariante = () => {
     <div>
       <div className="row" style={{padding:"12px 20px 12px 20px"}}>
           <h3 className="h5 col-12 "  style={{marginBottom:"0px"}}>Variantes</h3>
-        <div className="col-12  col-md-8 col-sm-6 inputterceroleft inputretencion padingtopcol" >
-                       <div className="d-flex  flex-wrap flex-column " style={{position:"relative",height: "100%"}}   >
-                          <ul  className="d-flex container1  flex-wrap" >
+        <div className={`${multivariable ?  "col-12  col-md-8 col-sm-6 inputterceroleft inputretencion padingtopcol":"col-12  col-md-8 col-sm-6 inputterceroleft inputretencion padingtopcol "}`} >
+                       <div className={`${multivariable ? "d-flex  flex-wrap flex-column ":"d-flex  flex-wrap flex-column divinputdisabled"}`} style={{position:"relative",height: "100%"}}   >
+                          <ul  className={`${multivariable ? "d-flex container1  flex-wrap":"d-flex container1  flex-wrap divinputdisabled"}`} >
                          
-                        <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className="inputestilotercero " placeholder="Tipo caracteristica" /> <div ><img  src="imgs/togle.svg"  className={`${'rotate'} `} onClick={()=>{
-                          setrotate4(!rotate4)
+                        <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className={`${multivariable ?  "inputestilotercero ":"inputestilotercero inputdisabled"}`}  disabled={!multivariable} placeholder="Tipo caracteristica" /> <div ><img  src="imgs/togle.svg"  className={`${'rotate'} `} onClick={()=>{
+                          if(multivariable){
+                            setrotate4(!rotate4)
+                          }
+                          
                         }}/></div> <div style={{alignSelf:'1'}}  className="botoncerrarall"><button className="botoncerrar botoncerrarall" type="button" ></button></div>  </li >
                           </ul>
 
@@ -131,7 +195,7 @@ const agregarVariante = () => {
                                              {
                           atributos.map((item)=>{
                         return <>
-                               <li className="licheckterceros" > <input type="checkbox" id={`idretencion${item}`} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
+                               <li className="licheckterceros" > <input type="checkbox" id={`idretencion${item}`}  onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{
                                                                  if (e.target.checked) {
                                      // el checkbox está seleccionado
 
@@ -156,18 +220,21 @@ const agregarVariante = () => {
                        </div>
                     </div>
                     <div className="col-12  col-md-4 col-sm-6  d-flex justify-content-md-end justify-content-center padingtopcol" style={{height:"fit-content"}}>
-                       <button className="botoncontinuarguardar botonagregarvariante" onClick={agregarVariante} style={{ marginBottom: "0px" }}>
+                       <button className={`${multivariable ? "botoncontinuarguardar botonagregarvariante":"botoncontinuarguardar botonagregarvariante botondisabled"}`} onClick={agregarVariante} style={{ marginBottom: "0px" }} disabled={!multivariable}>
         Agregar
       </button>
                     </div>
         
       </div>
      
-    
+  
    {
-    variantes.length>0 && ( <CTable>
+    variantes.length>0  && multivariable && ( 
+      <div className="tabla-wrappervariante ">
+<CTable className="tablavariantes">
         <CTableHead>
           <CTableRow>
+             <CTableHeaderCell>Imagen</CTableHeaderCell>
             {atributoscelda.map(attr => (
       <CTableHeaderCell key={attr}>{attr}</CTableHeaderCell>
     ))}
@@ -177,11 +244,67 @@ const agregarVariante = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-            {variantes.map((v, i) => (
+            {variantes.map((v, i) =>     {
+            
+             
+              return(
+
     <CTableRow key={i}>
+        <CTableDataCell >
+          <div
+               onClick={() => fileRefs.current[i]?.click()}
+                   onDrop={(e) => handleDrop(e, i)}     
+
+  onDragOver={handleDragOver}
+  style={{
+    width: "55px",
+    height: "55px",
+    background: "#F3F4F7",
+    borderRadius: "6px",
+    position: "relative",
+    overflow: "hidden",
+    border: "2px dashed #bbb",
+    cursor: "pointer"
+  }}
+  className="d-flex justify-content-center align-items-center"
+>
+  {v.imagen ? (
+    <img
+      src={v.imagen}
+      alt="Preview"
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  ) : (
+    <>
+      <Iconfoto width={20} height={20} color={"#555"} />
+      <div className="icondown">
+        <Downloadimg width={10} height={10} color={"#555"} />
+      </div>
+    </>
+  )}
+    <input
+           ref={(el) => (fileRefs.current[i] = el)}
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  actualizarVariante(i, "imagen", reader.result as string);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+</div>
+
+        </CTableDataCell>
       {atributoscelda.map(attr => (
         <CTableDataCell key={attr}>
-          <CFormInput
+             <div className="d-flex justify-content-center column-gap-3 flex-wrap h-100 position-relative containerinputvariante" >
+               <CFormInput
             value={v.atributos[attr] || ""}
             onChange={e => {
               const nuevas = [...variantes];
@@ -191,12 +314,16 @@ const agregarVariante = () => {
         
           className="borderinputvariantes"
           />
+             </div>
+         
         </CTableDataCell>
       ))}
 
+      
+
      
   <CTableDataCell >
-                                                       <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
+                                                       <div className="d-flex flex-nowrap justify-content-center align-items-center containerinputvariante" style={{gap:"12px"  }} >
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={()=>{
                                                               setcodigomodal(true)
@@ -222,9 +349,116 @@ const agregarVariante = () => {
                                                        </div>
                                                      </CTableDataCell>
     </CTableRow>
-  ))}
+  )})}
         </CTableBody>
-      </CTable>)
+      </CTable>
+      </div>
+    )
+   }
+
+
+   
+   {
+    !multivariable &&
+
+    <div className="tabla-wrappervariante ">
+<CTable className="tablavariantes">
+        <CTableHead>
+          <CTableRow>
+             <CTableHeaderCell>Imagen</CTableHeaderCell>
+          
+  <CTableHeaderCell>Descripcion</CTableHeaderCell>
+       
+            <CTableHeaderCell>Acciones</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+
+             <CTableDataCell>
+                <div
+        
+              
+  style={{
+    width: "55px",
+    height: "55px",
+    background: "#F3F4F7",
+    borderRadius: "6px",
+    position: "relative",
+    overflow: "hidden",
+    border: "2px dashed #bbb",
+    cursor: "pointer"
+  }}
+  className="d-flex justify-content-center align-items-center"
+>
+  {
+   
+  variantedefault.imagen ? 
+   
+  (
+    <img
+      src={imgdefault}
+      alt="Preview"
+      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+    />
+  ) : (
+    <>
+      <Iconfoto width={20} height={20} color={"#555"} />
+      <div className="icondown">
+        <Downloadimg width={10} height={10} color={"#555"} />
+      </div>
+    </>
+  )}
+    <input
+        
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  actualizarVariante(i, "imagen", reader.result as string);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+          />
+</div>
+
+            
+          </CTableDataCell>
+           <CTableDataCell>{variantedefault.descripcion}</CTableDataCell>
+         <CTableDataCell >
+                                                       <div className="d-flex flex-nowrap justify-content-center align-items-center containerinputvariante" style={{gap:"12px"  }} >
+                                                              <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                              setcodigomodal(true)
+                                                               }} >    <  Iconcodigobarras  width={22} height={22.5} /></CButton>
+                                                           </div>
+                                                           <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                                setmodalbo(true)
+                                                               setBodegaSeleccionada(v.bodega);
+                                                               setindexvariante(i);
+                                                               }} >    <Iconbodega  width={19} height={19.5} color={"#555"}  /></CButton>
+                                                           </div>
+
+                                                         
+                                                         
+               
+                                                          
+               
+                                                          
+               
+               
+                                                        
+                                                       </div>
+                                                     </CTableDataCell>
+        </CTableBody>
+      </CTable>
+      </div>
+
    }
      
       <Bodegasvariantes modalbo={modalbo} setmodalbo={setmodalbo} agregarbodega={agregarbodega} BodegaSeleccionada={bodegaSeleccionada}  setBodegaSeleccionada={setBodegaSeleccionada} indexvariante={indexvariante} variantes={variantes} setvariantes={setVariantes} setindexvariante={setindexvariante}  />

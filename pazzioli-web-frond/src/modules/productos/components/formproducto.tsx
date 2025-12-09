@@ -4,35 +4,36 @@ import Ojoquetodolove from "../../../icons/ojoquetodolove";
 import { useState } from "react";
 import Formprobasico from "./formprobasico/formprobasico";
 import Variantes from "./variantes";
-
+interface Variantedfault {
+ descripcion:string,
+ imagen:  File | null;
+}
 function Formproduct({modalformproducto,setmodalformproducto}:any) {
-
+const [multivariable,setmultivariable]=useState<boolean>(false)
+    const [variantedefault,setvariantedefault]=useState<Variantedfault>({
+ descripcion:"",
+ imagen:null
+       
+      })
      const methods = useForm({
                mode: 'onSubmit',
                 shouldUnregister: false,
               defaultValues: {
-               Actividadeconomica: "",
-          correoempresa:"",
-          celularempresa:"",
-          codigopostal:"",
-          digitodeverificacion:"",
+              tipoproducto: "",
+         codigo:"",
+        descripcion:"",
+         referencia:"",
+          unidadmedida:"",
           departamento:"",
-          municipio:"",
-          nombrecomercial:"",
-          numeroidentificacion:"",
-          pais:"",
-          primerapellido:"",
-          primernombre: "",
-          razonsocial:"",
-          regimen:"",
-          segundoapellido:"",
-          segundonombre:"",
-          telefonofijo:"",
-          tipodeidentificacion: "",
-          tipodepersona:"",
-          archivoLogo:null,
-          impuestos:[],
-          sucursales:[],
+          impuesto:"",
+         codigobarra:"",
+          costo:0,
+        nanifesto:"",
+          linea:"",
+          grupo: "",
+        listaprecios:[],
+        variantes:[],
+         imagenproducto:null
           
                 // Agrega todos los campos que usas en todos los pasos
               },
@@ -67,15 +68,15 @@ function Formproduct({modalformproducto,setmodalformproducto}:any) {
                         
                       
                       {
-                        tap===1 &&
-                        <Formprobasico/>
+                        
+                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}/>
                        
                       }
 
 
                        {
                         tap===2?
-                        <Variantes/>
+                        <Variantes  variantedefault={variantedefault} multivariable={multivariable} setmultivariable={setmultivariable}/>
                         :null
                       }
 
@@ -84,6 +85,7 @@ function Formproduct({modalformproducto,setmodalformproducto}:any) {
                     </CModalBody>
 
                     <CModalFooter style={{justifyContent: 'center',display:'flex'}} className="fottersucursal">
+                      
                                <button type="button"  className="botonretroceder" onClick={()=>
                        settap((prev) => (prev - 1))
                       } style={tap<2 ? {display:'none'}:{display:''}}>Atras</button>
@@ -91,6 +93,9 @@ function Formproduct({modalformproducto,setmodalformproducto}:any) {
                     
                            {tap>=2 ?  botonupdateu ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={methods.handleSubmit(onSubmit, onError)}>Actualizar</button>:<button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={methods.handleSubmit(onSubmit, onError)}>Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={(e)=>{
                        settap((prev) => (prev + 1))
+                       if(!multivariable){
+                         setvariantedefault(prev=>({...prev,descripcion:methods.getValues("descripcion"),imagen:methods.getValues("imagenproducto")}))
+                       }
                       e.stopPropagation();}
                       }>Continuar</button>}
                             </CModalFooter>

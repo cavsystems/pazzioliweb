@@ -115,7 +115,7 @@ max-width: 208px;
   width: fit-content;
     position: absolute;
     right: 45px;
-    top:28px;
+    top:40px;
     border: none;
    
 /* UI Properties */
@@ -137,7 +137,7 @@ opacity: 1;
 
 .ojocodigobarra{
     right: 15px;
-    top:25px;
+    top:36px;
 }
 
 .botoncodigobarra:active{
@@ -483,3 +483,174 @@ top: 0;
 }
 
 
+.containerinputvariante{
+  height: 50px !important;
+  align-items: center;
+  min-width: 90px;
+}
+
+
+.containerinputvariante input{
+  max-height: 40px;
+}
+
+
+.tablevariantes{
+  margin: 0 !important;
+}
+
+
+/* estilos tabla variantes */
+
+
+
+.tablavariantes th:last-child,
+.tablavariantes td:last-child {
+width: 90px;
+text-align: left !important;
+  position: sticky;
+  right: 0;
+  border-left: 1px solid #cccccc;
+  background: white; /* Asegura que el contenido no se superponga */
+   z-index: 2; /* Eleva la columna por encima de las demás */
+   box-sizing: border-box !important;
+   
+}
+
+ 
+ .tablavariantes th {
+padding-left: 12px !important;
+padding: 12px 15px 12px 15px !important;
+ }
+.tablavariantes td{
+padding: 5px 12px 5px 12px !important;
+}
+.tablavariantes th:last-child {
+padding-left: 12px !important;
+padding: 12px 15px 12px 21px !important;
+ }
+
+.tablavariantes th:last-child::before,
+.tablavariantes td:last-child::before {
+  
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;  /* ajusta según ancho del borde */
+  width: 1px;
+  background-color: #cccccc;
+  z-index: 3;   /* encima del contenido de la celda */
+}
+
+
+
+.tablavariantes{
+    margin:0
+}
+
+
+
+
+.tablavariantes th,
+.tablavariantes td {
+  white-space: nowrap !important; /* ✅ evita que el texto expanda filas */
+  
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* esticon contenerdor wrapper producto */
+
+
+.tabla-wrappervariante {
+    background: var(--blanco) 0% 0% no-repeat padding-box;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.0509803922);
+    border-radius: 7px;
+    opacity: 1;
+    max-height: 170px !important;
+}
+
+.tabla-wrappervariante {
+    padding: 0 !important;
+    overflow-x: auto;
+    max-width: 100% !important;
+    height: fit-content;
+    background: #FFFFFF 0% 0% no-repeat padding-box !important;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.0509803922) !important;
+    border-radius: 8px !important;
+    opacity: 1 !important;
+    border-collapse: separate !important;
+    /* max-height: 400px; */
+}
+
+.toglemulti{
+  width: 50px;
+  height: 20px;
+  border-radius: 10px ;
+ background: #00000029;
+ position: relative;
+}
+
+.circulotogle{
+position: absolute;
+width: 20px;
+height:  20px;
+border-radius: 50px;
+background: #fff;
+z-index: 20;
+border: 1px solid var(--gris-bordes) !important;
+left: 0;
+
+}
+
+.circulotoglerigh{
+  position: absolute;
+width: 20px;
+height:  20px;
+border-radius: 50px;
+background: #fff;
+z-index: 20;
+ border: 1px solid var(--gris-bordes) !important;
+right: 0;
+}
+
+.toglemultirigh{
+   width: 50px;
+  height: 20px;
+  border-radius: 10px ;
+   background:#5AADDC;
+ position: relative;
+
+}
+
+.botondisabled{
+  background: #D3D4D4;
+}
+
+
+.divinputdisabled{
+  background:#0000001A !important;
+}
+
+.inputdisabled:disabled{
+    background:#0000001A !important;
+     background-color: transparent !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+
+.containernone{
+  display: none !important;
+}

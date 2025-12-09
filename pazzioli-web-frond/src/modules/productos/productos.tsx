@@ -42,9 +42,11 @@ function Productos() {
      telefonofijo:"",
      tipodeidentificacion: "",
      tipodepersona:"",
+    
      archivoLogo:null,
      impuestos:[],
      sucursales:[],
+      
      
            // Agrega todos los campos que usas en todos los pasos
          },
