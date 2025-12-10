@@ -1,5 +1,5 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CTab, CTabContent, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTabList, CTabPanel, CTabs } from "@coreui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Datosgeneralesproduct from "./components/Datosgeneralesproduct";
 import Variantes from "./components/variantes";
@@ -11,6 +11,7 @@ import u from "./components/formproducto";
 import "./product.scss"
 import Providercodigobarras, { codigosbarrascontex } from "./contextcodigobarras";
 import Formproduct from "./components/formproducto";
+import api from "../../apicofig";
 
 function Productos() {
   
@@ -18,7 +19,16 @@ function Productos() {
      const [modalproducto,setmodalproducto]=useState(true)
      const {codigomodal,setcodigomodal, setcodigobarra}=codigosbarrascontex()
      const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
-
+     const traerproductos=async()=>{
+      const productos= await api.get(`productos/listar`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }});
+      console.log("productos lista",productos)
+     }
+      useEffect(()=>{
+        //  traerproductos()
+      },[])
       const methods = useForm({
           mode: 'onSubmit',
            shouldUnregister: false,

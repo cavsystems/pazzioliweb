@@ -8,6 +8,8 @@ import Iconcodigobarras from "../../../icons/iconcodigobarras";
 import { codigosbarrascontex } from "../contextcodigobarras";
 import Iconfoto from "../../../icons/iconfoto";
 import Downloadimg from "../../../icons/icondonwloadimg";
+import { createPortal } from "react-dom";
+import api from "../../../apicofig";
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
@@ -19,7 +21,17 @@ ubicacion?:string;
 existencias?:number;
 }
 
-
+interface valorescara{
+  caracteristicaId
+: 
+number
+nombre
+: 
+string
+tipo
+: 
+{tipoCaracteristicaId: number, nombre: string}
+}
 
 interface Variante {
   codigovariante: number;
@@ -27,15 +39,20 @@ interface Variante {
   
   atributos: { [key: string]: string }; // <--- dinámico
   bodega: bodegas[];
-  codigobarras:string
+  codigobarras:string,
+  
 }
 function Variantes({variantedefault,multivariable,setmultivariable}:any) {
     //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
   const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
+  const [evitandoBlur, setEvitandoBlur] = useState(false);
   const [variantes, setVariantes] = useState<Variante[]>([]);
   const [atributos, setAtributos] = useState<string[]>(["Talla","Color","Material"]);
   const [imgdefault,setimgdefault]=useState<string>("");
+  const [atrractual,setatrractual]=useState<string>("");
   const [rotate4,setrotate4]=useState<boolean>(false);
+  const [valorescaracteristicas,setvalorescaracteristicas]=useState<valorescara[]>([]);
   const [atributoscelda, setAtributoscelda] = useState<string[]>([]);
  const [bodegaSeleccionada, setBodegaSeleccionada] = useState<{nombre:string;
   stockMaximo:number;
@@ -305,15 +322,111 @@ const agregarVariante = () => {
         <CTableDataCell key={attr}>
              <div className="d-flex justify-content-center column-gap-3 flex-wrap h-100 position-relative containerinputvariante" >
                <CFormInput
+               
+               onFocus={async (e)=>{
+                const inputdom=document.getElementById(`idinputvariante${attr}`)  as HTMLInputElement;
+                  const lleg=await api.get(`caracteristicas/listar/tipocaracte`,{
+                  params: {
+    ca: inputdom.value,
+    tipo: attr.toUpperCase()
+  },
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            console.log("caracteristica",lleg)
+            setvalorescaracteristicas(lleg.data.content)
+                /*  obtener cordenadas del elemento en el dom */
+                  
+                  const rect = e.target.getBoundingClientRect();
+  setCoords({
+    x: rect.left,
+    y: rect.bottom,  // justo debajo del input
+    width: rect.width
+  });
+
+                setatrractual(attr)
+               }}
+               onBlur={()=>{
+
+                  if (evitandoBlur) {
+    setEvitandoBlur(false);
+    return;
+  }
+                   const inputdom=document.getElementById(`idinputvariante${attr}`)  as HTMLInputElement;
+                  const buscarvalor=valorescaracteristicas.some((item=> item.nombre!==inputdom.value))
+                  if( buscarvalor){
+                     const nuevas = [...variantes];
+              nuevas[i].atributos[attr] = "";
+                       setVariantes(nuevas);
+                  }
+                   setatrractual("")
+               }}
             value={v.atributos[attr] || ""}
-            onChange={e => {
+            onChange={ async e => {
               const nuevas = [...variantes];
               nuevas[i].atributos[attr] = e.target.value;
+              
+    
+
+
+
+              const lleg=await api.get(`caracteristicas/listar/tipocaracte`,{
+                  params: {
+    ca: e.target.value,
+    tipo: attr.toUpperCase()
+  },
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            console.log("caracteristica",lleg)
+            setvalorescaracteristicas(lleg.data.content)
+
               setVariantes(nuevas);
             }}
-        
-          className="borderinputvariantes"
+           id={`idinputvariante${attr}`}
+          className="borderinputvariantes "
           />
+         {atrractual === attr &&
+createPortal(
+    <div
+      className="displayatrr-portal"
+      style={{
+        /* Cuando digo “superior + alto”, me refiero a cómo se calcula el valor de:
+ rect.bottom
+
+Es la suma de:
+rect.top  (la distancia desde el borde superior del navegador)
++ rect.height  (el tamaño del elemento)
+
+Distancia desde el borde superior del viewport
+*/
+        top: coords.y,
+        left: coords.x,
+        width: coords.width
+      }}
+    >
+      <ul className="ulvariante">
+        {
+          valorescaracteristicas.map((item)=>{
+            return <>
+            <li   onMouseDown={()=>{
+              setEvitandoBlur(true)
+                    const nuevas = [...variantes];
+    nuevas[i].atributos[attr] = item.nombre;
+
+    setVariantes(nuevas);     // ← React actualiza el input
+    setatrractual("");        // cerrar portal
+            }}>{item.nombre}</li>
+            </>
+          })
+        }
+      </ul>
+    </div>,
+    document.body
+  )
+}
              </div>
          
         </CTableDataCell>

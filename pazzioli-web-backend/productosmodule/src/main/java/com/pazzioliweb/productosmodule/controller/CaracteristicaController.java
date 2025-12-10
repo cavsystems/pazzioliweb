@@ -53,6 +53,22 @@ public class CaracteristicaController {
     public ResponseEntity<Caracteristica> obtener(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
+    
+    @GetMapping("/listar/tipocaracte")
+    public ResponseEntity<PaginationResponse<CaracteristicaDTO>> obtenercaractritica(   @RequestParam(name = "ca") String ca,
+            @RequestParam(name = "tipo") String tipo, @RequestParam(name = "page",defaultValue = "0") int page,
+            @RequestParam(name = "size",defaultValue = "10") int size,
+            @RequestParam(name = "sortField",defaultValue = "nombre") String sortField,
+            @RequestParam(name = "sortDirection",defaultValue = "asc") String sortDirection) {
+    	  Sort sort = sortDirection.equalsIgnoreCase("asc")
+                  ? Sort.by(sortField).ascending()
+                  : Sort.by(sortField).descending();
+
+          Pageable pageable = PageRequest.of(page, size, sort);
+          Page<CaracteristicaDTO> resultado = service.buscarPornombretipo( ca,
+        	     tipo,pageable);
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<PaginationResponse<Caracteristica>> listar(
@@ -93,7 +109,7 @@ public class CaracteristicaController {
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
     
-    @GetMapping("/listar-detalle")
+   /* @GetMapping("/listar-detalle")
     public ResponseEntity<PaginationResponse<CaracteristicaDTO>> listarCaracteristicasDetalle(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -110,5 +126,5 @@ public class CaracteristicaController {
         Page<CaracteristicaDTO> resultado = service.traerCaracteristicasDetale(pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
-    }
+    }*/
 }

@@ -9,18 +9,37 @@ import FormLabel from "@mui/material/FormLabel";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import Switch from "@mui/material/Switch";
+import api from "../../../../apicofig";
+import Iconupdate from "../../../../icons/iconupdate";
+import Iconeliminar from "../../../../icons/iconeliminar";
+import Modalconfirmar from "../../../../components/alertconfimacion";
 
 interface Variantedfault {
  descripcion:string,
  imagen:string
+}
+
+interface listaprecio {
+  precioId:number, descripcion?: string
+}
+
+interface precioob {
+  precioId:number, valor?: string
 }
 function Formprobasico({multivariable,setmultivariable,style}:any) {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const fileimagen= useRef<HTMLInputElement | null>(null);
     const [imagenproduct,setimagenproduct]=useState<string | null>(null)
     const [substrinfinal,setsubstringfinal]=useState<number>(0)
-  
-   
+    const [mensajeerror,setmensajeerror]=useState<string>("")
+   const [listaprecios,setlistaprecio]=useState<listaprecio[]>([])
+   const [numeroinputprecio,setnumeroinputprescio]=useState<number>(0)
+  const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
+   const [precioactual,setprecioactual]=useState<precioob>({
+    precioId:0,
+    valor:""
+   })
+     const [guardar,setguardar]=useState<boolean>(false)
     const [responsivemodalva,setresponsivemodalva]=useState<boolean>(false)
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
   e.preventDefault();
@@ -37,9 +56,17 @@ function Formprobasico({multivariable,setmultivariable,style}:any) {
   }
 };
 
+const traerlistasprecios=async()=>{
+  const listaprecios= await api.get(`precios/listar`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
 
+ setlistaprecio(listaprecios.data.content)
+}
 
 useEffect(() => {
+  traerlistasprecios()
   const prevent = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -89,7 +116,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     };
      const [rotate,setrotate]=useState(false);
        const [archivotitulo,setarchivotitulo]=useState("");
-                     const { register,control,setValue, formState: { errors } } =useFormContext();
+                     const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
 
                          const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log(e)
@@ -359,8 +386,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                                     
                                                         <CTableHeaderCell scope="col">Tipo precio</CTableHeaderCell>
                                                     <CTableHeaderCell scope="col" >Valor</CTableHeaderCell>
-                                                   
-                                                    
+                                                   <CTableHeaderCell scope="col" >Estado</CTableHeaderCell>
+                                                       <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
                                         
                                                       
                                                     </CTableRow>
@@ -373,21 +400,70 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                       
                                          
                                             
-                                             
+                                            { Array.from({length: numeroinputprecio}).map((_, index) => ( 
                                             
                                                      <CTableRow>
-                                                      <CTableDataCell>   <select className="iteminput1">
-                                <option value={""} id="slectform1">Detal</option>
-                                  <option value={""} id="slectform1">Por mayoreo</option>
+                                               
+                                                      <CTableDataCell>   <select className="iteminput1" onChange={(e)=>{
+
+                                                            const pre=getValues("listaprecios")
+                                                            const lista=pre.some(item=> item.precioId===Number(e.target.value))
+                                                            console.log("lista", lista)
+                                                            if(lista){
+                                                            
+                                                              setmensajeerror("Este precio ya ha sido seleccionado")
+                                                          setFuncionDinamica(() => () => {
+  setmensajeerror("");
+});
+                                                        
+                                                           e.target.value=""
+
+                                                            }else{
+                                                            setprecioactual(prev=> ({...prev,precioId:Number(e.target.value)}))
+                                                            }
+
+                                                           
+                                                      }} disabled={numeroinputprecio>getValues("listaprecios").length && index!=numeroinputprecio-1}>
+                                                           <option value={""} id="slectform1">Elige una opcion</option>
+                                {
+                                  listaprecios.map((item)=>{
+                                    return <>
+                                          <option value={item.precioId} id="slectform1">{item.descripcion}</option>
+                                    </>
+                                  })
+                                }
+                             
+                                 
                                </select></CTableDataCell>
-                                      <CTableDataCell><input placeholder="0" className="iteminput1"/></CTableDataCell>
-                                     
-                                      
+                                      <CTableDataCell><input placeholder="0" className="iteminput1" onChange={(e)=>{
+                                          setprecioactual(prev=> ({...prev,valor:e.target.value}))
+                                      }}/></CTableDataCell>
+                                      <CTableDataCell>   <select className="iteminput1"  style={{width:"80px"}}>
+                                                           <option value={"Activo"} id="slectform1">Activo</option>
+                                                          <option value={"Inactivo"} id="slectform1">Inactivo</option>
+                                
+                             
+                                 
+                               </select></CTableDataCell>    
+                                      <CTableDataCell>
+                                          <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
+                                                                                                   <div className="col-6" style={{ maxWidth: 'fit-content' }} >
+                                                                                                       <CButton  className="buttoniconnormal">
+                                                                                                         <Iconupdate  width={16} height={18} color={"#555"}/> 
+                                                                                                       </CButton>
+                                                                                                   </div>
+
+                                                                                                          <div   style={{ maxWidth: 'fit-content' }} >
+                                                                                                                                                                                                                                          <CButton  className="buttoniconnormaleliminar"  >      <Iconeliminar  width={16} height={16} color={"#555"}/>  </CButton>
+                                                                                                                                                                                 </div>  
+                                                                                                  
+                                                </div>
+                                      </CTableDataCell>
                                             
-                                          
+                                      
                                               </CTableRow>
 
-                                        
+                                        ))}
                                               
                                                 
                                                
@@ -407,8 +483,27 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                                 </div>
                                
                                 
-                                       <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"   >Agregar</button>  
+                                       {
+                                        !guardar && <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
+                                        setnumeroinputprescio(prev=> prev+1)
+                                        setguardar(true)
+                                        
+                                        }} >Agregar</button>  
                                
+                                       }
+
+                                       {
+                                        guardar &&    <button className="botoncontinuarguardar"  key="guardar" onClick={()=>{
+                                          
+                                          setguardar(false)
+                                          const precios=getValues("listaprecios")
+                                          precios.push(precioactual)
+                                             setValue("listaprecios",  precios)
+                                          console.log(precios)
+                                          setprecioactual({precioId:0,valor:""})
+
+                                        }}>Guardar</button> 
+                                       }
                                
                              </div>
 
@@ -484,8 +579,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                         }}
                                       />
                             </div>
-
-
+                       {
+                        mensajeerror!=="" && <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true} textoboton={"Aceptar"}  funcion={funcionDinamica}/>
+                       } 
                          </div>}
     </>);
 }

@@ -14,10 +14,12 @@ public interface CaracteristicaService {
     void eliminar(Long id);
 
     Caracteristica buscarPorId(Long id);
+    Page<CaracteristicaDTO> buscarPornombretipo(  String ca,
+          String tipo,Pageable pageable);
 
     Page<Caracteristica> listar(Pageable pageable);
 
     Page<Caracteristica> listarPorTipo(Long tipoId, Pageable pageable);
     
-    Page<CaracteristicaDTO> traerCaracteristicasDetale(Pageable pageable);
+   /* Page<CaracteristicaDTO> traerCaracteristicasDetale(Pageable pageable);*/
 }
