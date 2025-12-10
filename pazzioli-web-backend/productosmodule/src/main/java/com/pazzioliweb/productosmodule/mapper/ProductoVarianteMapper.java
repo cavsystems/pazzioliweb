@@ -21,6 +21,7 @@ public class ProductoVarianteMapper {
         pv.setReferenciaVariantes(dto.getReferenciaVariantes());
         pv.setCodigoBarras(dto.getCodigoBarras());
         pv.setActivo(true);
+        pv.setPredeterminada(dto.getPredeterminada());
         return pv;
     }
 
@@ -35,6 +36,7 @@ public class ProductoVarianteMapper {
         dto.setReferenciaVariantes(pv.getReferenciaVariantes());
         dto.setCodigoBarras(pv.getCodigoBarras());
         dto.setActivo(pv.getActivo());
+        dto.setPredeterminada(pv.getPredeterminada());
         return dto;
     }
 
@@ -54,5 +56,8 @@ public class ProductoVarianteMapper {
 
         if (dto.getActivo() != null)
             pv.setActivo(dto.getActivo());
+        
+        if (dto.getPredeterminada() != null)
+        	pv.setPredeterminada(dto.getPredeterminada());
     }
 }

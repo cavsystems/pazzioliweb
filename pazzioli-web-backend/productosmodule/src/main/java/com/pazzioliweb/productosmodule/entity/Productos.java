@@ -208,6 +208,9 @@ public class Productos {
     public Lineas getLinea() { return linea; }
     public Grupos getGrupo() { return grupo; }
     public Usuario getUsuario() { return usuario; }
+    
+    @Column(name = "maneja_variantes")
+    private Boolean manejaVariantes = false;
 
 	public List<ProductoVariante> getVariantes() {
 		return variantes;
@@ -225,4 +228,13 @@ public class Productos {
 		this.unidadesMedidaProducto = unidadesMedidaProducto;
 	}
 
+	public Boolean getManejaVariantes() {
+		return manejaVariantes;
+	}
+
+	public void setManejaVariantes(Boolean manejaVariantes) {
+		this.manejaVariantes = manejaVariantes;
+	}
+	
+	
 }

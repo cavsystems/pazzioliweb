@@ -73,9 +73,11 @@ public class ProductoMasterService {
         // 2. Crea Unidad medida Producto
         asignarUnidadesMedida(producto, productoDTO.getUnidadesMedida());
         
+        boolean manejarVariantes = productoDTO.getManejaVariantes();// respondería true
+        
         // 3. Por cada variante en el JSON
         for (ProductoVarianteMasterDTO masterDTO : variantesDTO) {
-
+        	
             // 🔹 A. Setear productoId en variante
             ProductoVarianteCreateDTO varianteDTO = masterDTO.getVariante();
             varianteDTO.setProductoId(producto.getProductoId());
@@ -86,10 +88,12 @@ public class ProductoMasterService {
             Long varianteId = variante.getProductoVarianteId(); // IMPORTANTE
 
             // 🔹 B. Crear detalles
-            for (ProductoVarianteDetalleCreateDTO d : masterDTO.getDetalles()) {
-                d.setProductoVarianteId(varianteId);
+            if(manejarVariantes) {
+            	for (ProductoVarianteDetalleCreateDTO d : masterDTO.getDetalles()) {
+                    d.setProductoVarianteId(varianteId);
+                }
+                detalleService.crear(masterDTO.getDetalles());
             }
-            detalleService.crear(masterDTO.getDetalles());
 
             // 🔹 C. Crear existencias
             for (ExistenciasCreateDTO e : masterDTO.getExistencias()) {
@@ -176,7 +180,8 @@ public class ProductoMasterService {
         // 3. Actualizar o asignar unidad de medida
         actualizarUnidadMedida(producto, productoDTO.getUnidadesMedida());
 
-
+        boolean manejarVariantes = productoDTO.getManejaVariantes();// respondería true
+        
         // 4. Manejar variantes -----------------------------------------------
         for (ProductoVarianteMasterUpdateDTO master : variantesDTO) {
 
@@ -199,23 +204,23 @@ public class ProductoMasterService {
 
 
             // --- DETALLES ----------------------------------------------------
-
-            // Crear nuevos detalles
-            if (master.getDetalles() != null) {
-                for (ProductoVarianteDetalleCreateDTO d : master.getDetalles()) {
-                    d.setProductoVarianteId(varianteId);
+            if(manejarVariantes) {
+            	// Crear nuevos detalles
+                if (master.getDetalles() != null) {
+                    for (ProductoVarianteDetalleCreateDTO d : master.getDetalles()) {
+                        d.setProductoVarianteId(varianteId);
+                    }
+                    detalleService.crear(master.getDetalles());
                 }
-                detalleService.crear(master.getDetalles());
-            }
 
-            // Actualizar detalles existentes
-            if (master.getDetallesUpdate() != null) {
-                for (ProductoVarianteDetalleUpdateDTO d : master.getDetallesUpdate()) {
-                    d.setProductoVarianteId(varianteId);
-                    detalleService.actualizarDesdeDTO(d.getProductoVariantesDetalleId(), d);
+                // Actualizar detalles existentes
+                if (master.getDetallesUpdate() != null) {
+                    for (ProductoVarianteDetalleUpdateDTO d : master.getDetallesUpdate()) {
+                        d.setProductoVarianteId(varianteId);
+                        detalleService.actualizarDesdeDTO(d.getProductoVariantesDetalleId(), d);
+                    }
                 }
             }
-
 
             // --- PRECIOS ----------------------------------------------------
 
