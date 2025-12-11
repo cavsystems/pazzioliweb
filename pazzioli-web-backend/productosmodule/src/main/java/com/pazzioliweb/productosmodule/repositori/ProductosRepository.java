@@ -25,7 +25,8 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer>{
 		    "grupo",
 		    "linea",
 		    "impuestos",
-		    "usuario"
+		    "usuario",
+		    "tipoProducto"
 		})
 		@Query("SELECT p FROM Productos p WHERE p.productoId = :id")
 		Optional<Productos> findByIdWithRelations(@Param("id") Integer id);
@@ -34,7 +35,8 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer>{
 		    "impuestos",
 		    "linea",
 		    "grupo",
-		    "usuario"
+		    "usuario",
+		    "tipoProducto"
 		})
 		@Query("SELECT p FROM Productos p")
 		Page<Productos> traerProductos(Pageable pageable);
@@ -43,7 +45,8 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer>{
 		    "impuestos",
 		    "linea",
 		    "grupo",
-		    "usuario"
+		    "usuario",
+		    "tipoProducto"
 		})
 		@Query("""
 		    SELECT p FROM Productos p

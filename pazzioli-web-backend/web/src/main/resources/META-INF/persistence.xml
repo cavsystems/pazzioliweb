@@ -46,6 +46,7 @@
         <class>com.pazzioliweb.productosmodule.entity.ProductoVarianteDetalle</class>
         <class>com.pazzioliweb.productosmodule.entity.TipoCaracteristica</class>
         <class>com.pazzioliweb.productosmodule.entity.Caracteristica</class>
+        <class>com.pazzioliweb.productosmodule.entity.TipoProducto</class>
         
         <!-- Terceros -->
         <class>com.pazzioliweb.tercerosmodule.entity.ClasificacionTercero</class>    

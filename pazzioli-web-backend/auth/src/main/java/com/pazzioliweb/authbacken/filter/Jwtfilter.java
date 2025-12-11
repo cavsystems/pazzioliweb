@@ -106,7 +106,7 @@ public class Jwtfilter extends OncePerRequestFilter {
                 || path.startsWith("/api/usuario") || path.startsWith("/api/clasificacionesTerceros") || path.startsWith("/api/sedeTercero") || path.startsWith("/api/retencion")
                 || path.startsWith("/api/contactos") || path.startsWith("/api/tipos-caracteristica") || path.startsWith("/api/caracteristicas") || path.startsWith("/api/variantes")
                 || path.startsWith("/api/variante-detalle") || path.startsWith("/api/precios-producto-variante") || path.startsWith("/api/productoMaster")
-                || path.startsWith("/api/unidadesMedida") || path.startsWith("/api/unidadesMedidaProducto");
+                || path.startsWith("/api/unidadesMedida") || path.startsWith("/api/unidadesMedidaProducto") || path.startsWith("/api/tipo-producto");
 	}
 	
 

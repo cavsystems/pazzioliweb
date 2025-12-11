@@ -13,6 +13,7 @@ public class ProductoResponseDTO {
     private String linea;
     private String impuesto;
     private String usuarioCreo;
+    private String tipoProducto;
 	public Integer getProductoId() {
 		return productoId;
 	}
@@ -78,6 +79,12 @@ public class ProductoResponseDTO {
 	}
 	public void setUsuarioCreo(String usuarioCreo) {
 		this.usuarioCreo = usuarioCreo;
+	}
+	public String getTipoProducto() {
+		return tipoProducto;
+	}
+	public void setTipoProducto(String tipoProducto) {
+		this.tipoProducto = tipoProducto;
 	}
     
     

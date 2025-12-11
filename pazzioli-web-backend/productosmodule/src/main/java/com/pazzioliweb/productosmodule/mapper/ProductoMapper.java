@@ -8,6 +8,7 @@ import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.entity.Grupos;
 import com.pazzioliweb.productosmodule.entity.Lineas;
 import com.pazzioliweb.productosmodule.entity.Productos;
+import com.pazzioliweb.productosmodule.entity.TipoProducto;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
 
 @Component
@@ -18,7 +19,8 @@ public class ProductoMapper {
             Grupos grupo,
             Lineas linea,
             Impuestos impuesto,
-            Usuario usuario
+            Usuario usuario,
+            TipoProducto tipoProducto
     ) {
         Productos p = new Productos();
         p.setReferencia(dto.getReferencia());
@@ -32,6 +34,7 @@ public class ProductoMapper {
         p.setLinea(linea);
         p.setImpuestos(impuesto);
         p.setUsuario(usuario);
+        p.setTipoProducto(tipoProducto);
 
         return p;
     }
@@ -51,6 +54,7 @@ public class ProductoMapper {
         dto.setLinea(p.getLinea().getDescripcion());
         dto.setImpuesto(p.getImpuestos().getNombre());
         dto.setUsuarioCreo(p.getUsuario().getNombre());
+        dto.setTipoProducto(p.getTipoProducto().getNombre());
 
         return dto;
     }
