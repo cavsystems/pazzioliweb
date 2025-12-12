@@ -97,6 +97,7 @@ transition: background-color 0.3s ease;
     top: 0;
     z-index: 200;
     left: 0;
+    backdrop-filter:blur(3px);
 }
 
 .containeralert{

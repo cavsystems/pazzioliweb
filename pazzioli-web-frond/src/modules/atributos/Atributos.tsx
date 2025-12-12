@@ -3,6 +3,8 @@ import { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import Lineas from "./components/Lineas/Lineas";
 import "./estilosatributos.scss"
+import Grupos from "./components/grupos/grupos";
+import Caracteristicas from "./components/caracteristicas/caracteristicas";
 function Atributos() {
     const [itemsformempresa, setitemsformempresa] = useState(1)
   return (  
@@ -10,9 +12,9 @@ function Atributos() {
         
                 <div  className="containerformen">
 
-        <div className="d-flex justify-content-center">
-        <div className={itemsformempresa==3 ? "containerempresasucur":"containerempresa"}>
-          <div className={`d-flex justify-content-center w-100 ${ itemsformempresa===3 ? "containerimgempresasucu":"containerimgempresa"}  flex-column align-items-center`}>
+        <div className="d-flex justify-content-center align-items-center">
+        <div className={itemsformempresa==3 ? "containerempresa":"containerempresa"}>
+          <div className={`d-flex justify-content-center w-100 ${ itemsformempresa===3 ? "containerimgempresa":"containerimgempresa"}  flex-column align-items-center`}>
 
             <img src="/imgs/logocreaempresa.svg" style={{maxWidth:'48px', maxHeight:'48px'}}/>
             <div className="d-flex">
@@ -46,12 +48,14 @@ function Atributos() {
         </CTabPanel>
         <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
         
-      
+       < Grupos
+       />
           
         </CTabPanel>
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
-       
+            
+          <Caracteristicas/>
         </CTabPanel>)}
         </CTabContent>
          </CTabs>

@@ -1,5 +1,8 @@
 package com.pazzioliweb.productosmodule.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
+import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.service.CaracteristicaService;
 
 @RestController
 @RequestMapping("/api/caracteristicas")
 public class CaracteristicaController {
-	
+	 @Autowired
+	    private CaracteristicaRepository repoca;
 	private final CaracteristicaService service;
 
     public CaracteristicaController(CaracteristicaService service) {
@@ -53,6 +58,22 @@ public class CaracteristicaController {
     public ResponseEntity<Caracteristica> obtener(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
+    
+    @GetMapping("/listar/tipocaracte")
+    public ResponseEntity<PaginationResponse<CaracteristicaDTO>> obtenercaractritica(   @RequestParam(name = "ca") String ca,
+            @RequestParam(name = "tipo") String tipo, @RequestParam(name = "page",defaultValue = "0") int page,
+            @RequestParam(name = "size",defaultValue = "10") int size,
+            @RequestParam(name = "sortField",defaultValue = "nombre") String sortField,
+            @RequestParam(name = "sortDirection",defaultValue = "asc") String sortDirection) {
+    	  Sort sort = sortDirection.equalsIgnoreCase("asc")
+                  ? Sort.by(sortField).ascending()
+                  : Sort.by(sortField).descending();
+
+          Pageable pageable = PageRequest.of(page, size, sort);
+          Page<CaracteristicaDTO> resultado = service.buscarPornombretipo( ca,
+        	     tipo,pageable);
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
 
     @GetMapping("/listar")
     public ResponseEntity<PaginationResponse<Caracteristica>> listar(
@@ -73,6 +94,11 @@ public class CaracteristicaController {
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
 
+    
+    
+    
+ 
+    
     @GetMapping("/tipo/{tipoId}")
     public ResponseEntity<PaginationResponse<Caracteristica>> listarPorTipo(
             @PathVariable Long tipoId,
@@ -93,7 +119,15 @@ public class CaracteristicaController {
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
     
-    @GetMapping("/listar-detalle")
+    
+    @PostMapping("/buscarIds")
+    public ResponseEntity<List<Long>> obtenerIds(@RequestBody List<String> valores) {
+        return  ResponseEntity.ok( repoca.findByNombreIn(valores)       // Busca por lista
+                .stream()
+                .map(Caracteristica::getCaracteristicaId)         // Extrae IDs
+                .toList());
+    }
+   /* @GetMapping("/listar-detalle")
     public ResponseEntity<PaginationResponse<CaracteristicaDTO>> listarCaracteristicasDetalle(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -110,5 +144,5 @@ public class CaracteristicaController {
         Page<CaracteristicaDTO> resultado = service.traerCaracteristicasDetale(pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
-    }
+    }*/
 }

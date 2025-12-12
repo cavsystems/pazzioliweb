@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2025/12/12-15:54:16.953 3c3c Reusing MANIFEST C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
 2025/12/12-15:54:16.959 3c3c Recovering log #3
 2025/12/12-15:54:16.962 3c3c Reusing old log C:\Users\Espinosa Delgado\Documents\JUAN\CAV\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/000003.log 
+=======
+2025/12/12-16:06:54.415 4280 Reusing MANIFEST C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
+2025/12/12-16:06:54.489 4280 Recovering log #3
+2025/12/12-16:06:54.498 4280 Reusing old log C:\Users\cavsistem\Desktop\pazzioliweb\pazzioliweb\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/000003.log 
+>>>>>>> 6797a2faf2456a4eccaa28988ec6f04eed957d74

@@ -2,6 +2,7 @@ import { useEffect, useState, type JSX } from "react";
 import Iconadvertencia from "../icons/iconadvertencia";
 import "./styloscon.scss"
 import Iconsucces from "../icons/iconsucces";
+import Iconerror from "../icons/iconerror";
 function Modalconfirmar({ modalconfir, setmodalconfirmar,confirmar,setconfirmar,tipoicon="alerta",boton1,boton2,boton3,texto,textoboton,funcion}:any) {
 
 const [iconhtml,setiocnhtml]=useState<JSX.Element | null>()
@@ -15,6 +16,10 @@ useEffect(()=>{
         case "success":
             setiocnhtml(<Iconsucces  width={80} height={80} color={" #97BD13"}/>)
          break;
+
+
+         case "Error":
+           setiocnhtml(<Iconerror width={80} height={80}/>)
         default:
             break;
     }
@@ -43,7 +48,7 @@ useEffect(()=>{
 
 
 
-         { boton3 && <button className="botoncontinuarguardar"  onClick={funcion}>{textoboton}</button>}
+         { boton3 && <button className={`${tipoicon==="Error"? "botonagregarcon":"botoncontinuarguardar"}`}  onClick={funcion}>{textoboton}</button>}
      
       </div>
       </div>
