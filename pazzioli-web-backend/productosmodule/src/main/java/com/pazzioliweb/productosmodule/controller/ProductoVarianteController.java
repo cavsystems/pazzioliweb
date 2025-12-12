@@ -1,5 +1,7 @@
 package com.pazzioliweb.productosmodule.controller;
 
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,20 +10,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.ProductoVariante;
+import com.pazzioliweb.productosmodule.repositori.ProductoVarianteRepository;
 import com.pazzioliweb.productosmodule.service.ProductoVarianteService;
 
 @RestController
 @RequestMapping("/api/variantes")
 public class ProductoVarianteController {
-
+	private final ProductoVarianteRepository varianteRepository;
     private final ProductoVarianteService varianteService;
 
-    public ProductoVarianteController(ProductoVarianteService varianteService) {
-        this.varianteService = varianteService;
+    public ProductoVarianteController(ProductoVarianteService varianteService,ProductoVarianteRepository varianteRepository) {
+        this.varianteRepository = varianteRepository;
+		this.varianteService = varianteService;
     }
 
     // -------------------------------------------------------
@@ -101,4 +106,43 @@ public class ProductoVarianteController {
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
+    
+    @GetMapping("/listarInventarioBasico")
+    public ResponseEntity<PaginationResponse<ProductoInventarioDTO>> listarInventarioBasico(
+        	@RequestParam(defaultValue = "0") int page,
+        	@RequestParam(defaultValue = "10") int size,
+        	@RequestParam(defaultValue = "varianteId") String sortField,
+        	@RequestParam(defaultValue = "asc") String sortDirection
+    ){
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ProductoInventarioDTO> resultado =
+                varianteService.listarInventarioBasico(pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+        
+        
+    }
+    
+    
+    @GetMapping("/existecodigobarra")
+    public ResponseEntity<Boolean> existecodigobarras(
+            @RequestParam(defaultValue = "") String codigobarra) {
+    	System.out.println("barra"+codigobarra);
+    	Optional<ProductoVariante> opvariante=varianteRepository.findByCodigoBarras(codigobarra);
+    	System.out.println("barra"+codigobarra+opvariante.isPresent()+opvariante.isEmpty());
+    	if(opvariante.isPresent()) {
+    		return ResponseEntity.ok(false);
+    	}else {
+    		return ResponseEntity.ok(true);
+    	
+    	
+    }
+    }
+
 }
+

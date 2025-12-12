@@ -1,6 +1,8 @@
 package com.pazzioliweb.productosmodule.repositori;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.idcaracteristicasDTOS;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 
 public interface CaracteristicaRepository extends JpaRepository<Caracteristica, Long>{
@@ -28,5 +31,6 @@ public interface CaracteristicaRepository extends JpaRepository<Caracteristica, 
 	Page<CaracteristicaDTO> traerCaracteristicasDetalle(  @Param("ca") String ca,
 	        @Param("tipo") String tipo,Pageable pageable);
 	
-	
+
+    List<Caracteristica> findByNombreIn(List<String> valores);
 }

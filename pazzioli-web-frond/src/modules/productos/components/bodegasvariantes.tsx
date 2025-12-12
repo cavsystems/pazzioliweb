@@ -1,10 +1,19 @@
 import { CAlert, CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { useEffect, useState } from "react";
 import Iconeliminar from "../../../icons/iconeliminar";
-
+interface bodegaselect{
+  bodegaId:number,
+  nombre:string
+}
 function Bodegasvariantes({modalbo,setmodalbo,agregarbodega,BodegaSeleccionada ,setBodegaSeleccionada,indexvariante,variantes,setvariantes, setindexvariante}:any) {
     const [numeroinputbodega,setnumeroinputbodega]=useState<number>(1)
-    const [bodegas,setbodegas]=useState<{nombre:string;
+
+    const [bodegasselect,setbodegasselect]=useState<bodegaselect[]>([{ bodegaId:1,
+  nombre:"Bodegasur"},{ bodegaId:2,
+  nombre:"BodegaNorte"}])
+    const [bodegas,setbodegas]=useState<{
+    bodegaId:number,
+      nombre:string;
       stockMaximo:number;
     stockMinimo:number;
 ubicacion:string;
@@ -12,11 +21,15 @@ existencias:number}[]>([])
     const [indexactulizar,setindexactulizar]=useState<number>(0)
     const [bodegaguardar,setbodegaguardar]=useState<string>("")
     const [indexactulizarbodega,setindexactulizarbodega]=useState<boolean>(false)
-    const [bodegasguardadas,setbodegasguardadas]=useState<{nombre:string;
+    const [bodegasguardadas,setbodegasguardadas]=useState<{
+          bodegaId:number,
+
+      nombre:string;
       stockMaximo:number;
     stockMinimo:number;
-ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
+ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
     useEffect(()=>{
+
       console.log("BodegaSeleccionada",BodegaSeleccionada)
       if(BodegaSeleccionada){
         if(BodegaSeleccionada.length>0){
@@ -116,12 +129,16 @@ ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                              {
                                                                 Array.from({length: numeroinputbodega}).map((_, index) => ( 
                                                                        <CTableRow>
-                                                                   <CTableDataCell>   <select  defaultValue={bodegas[index]?.nombre ?? ""} className="iteminput1" name="nombre" onChange={(e)=>{
+                                                                   <CTableDataCell>   <select  defaultValue={bodegas[index]?.bodegaId ?? ""} className="iteminput1" name="nombre" onChange={(e)=>{
                             
 
                                                                if( variantes[indexvariante].bodega[index]  && variantes[indexvariante].bodega){
-
-                                                                 let bodegatrue=bodegas.find((bodega:any)=>bodega.nombre===e.target.value)
+                                                                      if(e.target.value===""){
+                                                                        return
+                                                                      }
+                                                                let nombrebodega= bodegasselect.find(item=> item.bodegaId === Number(e.target.value))
+                                                          
+                                                                 let bodegatrue=bodegas.find((bodega:any)=>bodega.nombre===nombrebodega?.nombre)
                                                                  if(bodegatrue){
                                                                   alert("Esta bodega ya ha sido seleccionada")
                                                                  e.target.value=""
@@ -130,6 +147,7 @@ ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                                 const bodegaActualizada = [...variantes[indexvariante].bodega];
                                                                 bodegaActualizada[index] = {
                                                                   ...bodegaActualizada[index],
+                                                                  bodegaId:Number(e.target.value),
                                                                   nombre: e.target.value
                                                                 };
                                                                 const variantesActualizadas = [...variantes];
@@ -140,35 +158,49 @@ ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                                const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        nombre: valor
+                                           bodegaId:Number(e.target.value),
+                                         nombre: nombrebodega?.nombre || ""
                                       };
 
                                       setbodegas(copiaSel);
                                                                }else{
-                                                                
-                                                                 let bodegatrue=bodegas.find((bodega:any)=>bodega.nombre===e.target.value)
+                                                                  if(e.target.value===""){
+                                                                        return
+                                                                      }
+                                                                let nombrebodega= bodegasselect.find(item=> item.bodegaId === Number(e.target.value))
+                                                             
+                                                                 let bodegatrue=bodegas.find((bodega)=>bodega.nombre===nombrebodega?.nombre)
+                                                                   console.log("nombre bodega",nombrebodega, bodegatrue,bodegas)
                                                                  if(bodegatrue){
                                                                   alert("Esta bodega ya ha sido seleccionada")
                                                                   e.target.value=""
                                                                   return;
                                                                  }
-                                                                 console.log("detodas maneras sigo")
+                                                                 console.log("detodas maneras sigo",nombrebodega,e.target.value,bodegasselect)
                                                                 setbodegaguardar(e.target.value)
                                                                const valor = e.target.value
                                                                const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        nombre: valor
+                                          bodegaId:Number(e.target.value),
+                                        nombre: nombrebodega?.nombre || ""
                                       };
 
                                      setbodegas(copiaSel);
-                                                               setbodegasguardadas({...bodegasguardadas,  [e.target.name]:e.target.value})  
+                                                               setbodegasguardadas({...bodegasguardadas,   bodegaId:Number(e.target.value), [e.target.name]:   nombrebodega?.nombre})  
                                                                }
                                                                  
                                                    }} >
                                                <option value={""} id="slectform1">Elige una opción</option>
-                                             <option value={"Bodega sur"} id="slectform1">Bodega sur</option>
-                                               <option value={"Bodega Norte"} id="slectform1"  >Bodega Norte</option>
+                                               {
+                                                bodegasselect.map((item)=>{
+                                                    return <>
+                                                      <option value={item.bodegaId} id="slectform1">{item.nombre}</option>
+                                                    </>
+                                                })
+                                               }
+                                           
+                                              
                                             </select></CTableDataCell>
                                                    <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMaximo ?? ""}  name="stockMaximo" onChange={(e)=>{
                                                      const valor = Number(e.target.value);
@@ -335,7 +367,7 @@ ubicacion:string}>({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                   {
                                                     bodegaguardar !=="" &&   <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
                                                         agregarbodega(bodegasguardadas,indexvariante)
-                                                         setbodegasguardadas({nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
+                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
                                                         setbodegaguardar('')
                                                     }}  >Guardar</button> 
                                                   }

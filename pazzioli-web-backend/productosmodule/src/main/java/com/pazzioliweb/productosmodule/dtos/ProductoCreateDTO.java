@@ -16,6 +16,8 @@ public class ProductoCreateDTO {
     
     private List<Integer> unidadesMedida;
     
+    private Boolean manejaVariantes;
+    
 	public String getReferencia() {
 		return referencia;
 	}
@@ -81,6 +83,12 @@ public class ProductoCreateDTO {
 	}
 	public void setUnidadesMedida(List<Integer> unidadesMedida) {
 		this.unidadesMedida = unidadesMedida;
+	}
+	public Boolean getManejaVariantes() {
+		return manejaVariantes;
+	}
+	public void setManejaVariantes(Boolean manejaVariantes) {
+		this.manejaVariantes = manejaVariantes;
 	}
     
 	

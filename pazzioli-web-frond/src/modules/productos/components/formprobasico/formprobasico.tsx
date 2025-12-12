@@ -27,12 +27,50 @@ interface precioob {
   precioId:number, valor?: string
 }
 function Formprobasico({multivariable,setmultivariable,style}:any) {
+     const [unidadmedida,setunidadmedida]=useState<{descripcion
+: 
+string,
+sigla
+: string
+unidadMedidaId
+: number}[]>([])
+      const [impuesto,setimpuesto]=useState<{base
+: 
+number,
+codigo
+: 
+number,
+estado
+: 
+string,
+nombre
+: 
+string,
+sigla
+: 
+string,
+tarifa
+: 
+number}[]>([])
+      const [lineas,setlineas]=useState<{descripcion
+: 
+string,
+id
+: 
+number}[]>([])
+      const [grupo,setgrupo]=useState<{descripcion
+: 
+string
+id
+: number
+      }[]>([])
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const fileimagen= useRef<HTMLInputElement | null>(null);
     const [imagenproduct,setimagenproduct]=useState<string | null>(null)
     const [substrinfinal,setsubstringfinal]=useState<number>(0)
     const [mensajeerror,setmensajeerror]=useState<string>("")
    const [listaprecios,setlistaprecio]=useState<listaprecio[]>([])
+   const [listaprecioson,setlistaprecioon]=useState<precioob[]>([])
    const [numeroinputprecio,setnumeroinputprescio]=useState<number>(0)
   const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
    const [precioactual,setprecioactual]=useState<precioob>({
@@ -56,6 +94,43 @@ function Formprobasico({multivariable,setmultivariable,style}:any) {
   }
 };
 
+
+const traerinformacion=async()=>{
+  const unidadmedidas=await api.get(`unidadesMedida/listar`,{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+
+
+  const impuestoss=await api.get("empresa/traerimpuestos",{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+  const lineas=await api.get(`lineas/listar`,{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+ const grupos=await api.get(`grupos/listar`,{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+
+
+setimpuesto(impuestoss.data.datosimpuestos)
+ setunidadmedida(unidadmedidas.data.content)
+ setgrupo(grupos.data.content)
+ setlineas(lineas.data.content)
+  console.log("unidades medidas",unidadmedidas)
+  console.log("lineas",lineas)
+  console.log("grupos",grupos)
+  console.log("impuestos",impuestoss)
+
+}
+
 const traerlistasprecios=async()=>{
   const listaprecios= await api.get(`precios/listar`,{
             headers: {
@@ -64,9 +139,13 @@ const traerlistasprecios=async()=>{
 
  setlistaprecio(listaprecios.data.content)
 }
-
+    const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
 useEffect(() => {
+  traerinformacion()
   traerlistasprecios()
+setlistaprecioon(getValues("listaprecios"))
+  console.log("lista",getValues("listaprecios"))
+  setnumeroinputprescio(getValues("listaprecios").length)
   const prevent = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -116,7 +195,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     };
      const [rotate,setrotate]=useState(false);
        const [archivotitulo,setarchivotitulo]=useState("");
-                     const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
+                 
 
                          const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log(e)
@@ -167,6 +246,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                   <label form="slectform1" className="titulospro" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>
                                     <select className="selctproduct" {...register("tipoproducto",{required:true})} >
                                 <option value={""} id="slectform1">Elige una opcion</option>
+                                   <option value={"1"} id="slectform1">Servicio</option>
+                                    <option value={"2"} id="slectform1">Producto</option>
                                </select>
                             </div>
                          
@@ -219,6 +300,14 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Unidad de medida *</label>
                                <select className="selctproduct" {...register("unidadmedida",{required:true})}>
                                 <option value={""} id="slectform1" >Elige una opcion</option>
+                                {
+                                  unidadmedida.map((item=>{
+                                    return <>
+                                    <option value={item.unidadMedidaId} id="slectform1">{item.descripcion}</option>
+
+                                    </>
+                                  }))
+                                }
                                </select>
 
 
@@ -235,6 +324,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Impuesto *</label>
                                <select className="selctproduct" {...register("Impuesto",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
+                                 {
+                                  impuesto.map(item=> (<><option value={item.codigo}>{item.nombre}</option></>))
+                                }
                                </select>
 
 
@@ -310,6 +402,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Linea *</label>
                                <select className="selctproduct">
                                 <option value={""} id="slectform1">Elige una opcion</option>
+                                {
+                                  lineas.map(item=> (<><option value={item.id}>{item.descripcion}</option></>))
+                                }
                                </select>
 
 
@@ -322,6 +417,10 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>
                                <select className="selctproduct">
                                 <option value={""} id="slectform1">Elige una opcion</option>
+                                 {
+
+                                  grupo.map(item=> (<><option value={item.id}>{item.descripcion}</option></>))
+                                }
                                </select>
 
 
@@ -404,17 +503,16 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                             
                                                      <CTableRow>
                                                
-                                                      <CTableDataCell>   <select className="iteminput1" onChange={(e)=>{
-
+                                                      <CTableDataCell>   <select className="iteminput1" value={listaprecioson[index]?.precioId ?? precioactual.precioId} onChange={(e)=>{
+                                                      console.log(listaprecioson[index]?.precioId)
+                                                        
                                                             const pre=getValues("listaprecios")
                                                             const lista=pre.some(item=> item.precioId===Number(e.target.value))
-                                                            console.log("lista", lista)
+                                                            console.log("lista precio onchange", lista)
                                                             if(lista){
                                                             
                                                               setmensajeerror("Este precio ya ha sido seleccionado")
-                                                          setFuncionDinamica(() => () => {
-  setmensajeerror("");
-});
+                                                          setFuncionDinamica(() => () => setmensajeerror(""));
                                                         
                                                            e.target.value=""
 
@@ -435,7 +533,14 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                              
                                  
                                </select></CTableDataCell>
-                                      <CTableDataCell><input placeholder="0" className="iteminput1" onChange={(e)=>{
+                                      <CTableDataCell><input placeholder="0" value={listaprecioson[index]?.valor ?? precioactual.valor} className="iteminput1" onChange={(e)=>{
+                                             if(listaprecios && listaprecioson[index].precioId!==undefined){
+                                                       const lista=[...listaprecioson]
+                                                       lista[index].valor=e.target.value     
+                                                       setValue("listaprecios",lista)  
+                                                       setlistaprecioon(lista)
+                                                       return
+                                                             }
                                           setprecioactual(prev=> ({...prev,valor:e.target.value}))
                                       }}/></CTableDataCell>
                                       <CTableDataCell>   <select className="iteminput1"  style={{width:"80px"}}>
@@ -484,21 +589,25 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                
                                 
                                        {
-                                        !guardar && <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
+                                        !guardar && <button type="button" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
                                         setnumeroinputprescio(prev=> prev+1)
                                         setguardar(true)
-                                        
+                                        console.log("precio actual",precioactual,listaprecios)
+                                         setprecioactual({precioId:0,valor:""})
                                         }} >Agregar</button>  
                                
                                        }
 
                                        {
-                                        guardar &&    <button className="botoncontinuarguardar"  key="guardar" onClick={()=>{
+                                        guardar &&    <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={()=>{
                                           
                                           setguardar(false)
                                           const precios=getValues("listaprecios")
+
                                           precios.push(precioactual)
                                              setValue("listaprecios",  precios)
+                                             const list=[...listaprecios]
+                                             
                                           console.log(precios)
                                           setprecioactual({precioId:0,valor:""})
 

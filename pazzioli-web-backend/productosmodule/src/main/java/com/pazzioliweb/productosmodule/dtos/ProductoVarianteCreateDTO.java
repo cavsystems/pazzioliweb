@@ -5,6 +5,14 @@ public class ProductoVarianteCreateDTO {
     private String sku;
     private String referenciaVariantes;
     private String codigoBarras;
+    private Boolean predeterminada;
+    
+	public Boolean getPredeterminada() {
+		return predeterminada;
+	}
+	public void setPredeterminada(Boolean predeterminada) {
+		this.predeterminada = predeterminada;
+	}
 	public Integer getProductoId() {
 		return productoId;
 	}

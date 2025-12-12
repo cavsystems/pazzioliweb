@@ -14,9 +14,10 @@ import api from "../../../apicofig";
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
 interface bodegas{
+    bodegaId:number;
   nombre:string;
-  stockMaximo:number;
-stockMinimo:number;
+  stockMax:number;
+stockMin:number;
 ubicacion?:string;
 existencias?:number;
 }
@@ -34,20 +35,22 @@ tipo
 }
 
 interface Variante {
-  codigovariante: number;
+  productoVarianteId: number;
   imagen:"";
   
-  atributos: { [key: string]: string }; // <--- dinámico
+  atributos: { [key: string]:string}; // <--- dinámico
   bodega: bodegas[];
   codigobarras:string,
-  
+
 }
-function Variantes({variantedefault,multivariable,setmultivariable}:any) {
+function Variantes({variantedefault,multivariable,setmultivariable,variantes, setVariantes,setceldaatributos}:any) {
     //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
+ 
   const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
+  const [codigoidvariante,setcodigoidvariante]=useState<number>(0);
   const [evitandoBlur, setEvitandoBlur] = useState(false);
-  const [variantes, setVariantes] = useState<Variante[]>([]);
+
   const [atributos, setAtributos] = useState<string[]>(["Talla","Color","Material"]);
   const [imgdefault,setimgdefault]=useState<string>("");
   const [atrractual,setatrractual]=useState<string>("");
@@ -55,11 +58,15 @@ function Variantes({variantedefault,multivariable,setmultivariable}:any) {
   const [valorescaracteristicas,setvalorescaracteristicas]=useState<valorescara[]>([]);
   const [atributoscelda, setAtributoscelda] = useState<string[]>([]);
  const [bodegaSeleccionada, setBodegaSeleccionada] = useState<{nombre:string;
-  stockMaximo:number;
-stockMinimo:number;}[]>([]);
+  stockMax:number;
+stockMin:number;}[]>([]);
 useEffect(() => {
   fileRefs.current = fileRefs.current.slice(0, variantes.length);
 }, [variantes.length]);
+useEffect(() => {
+  setceldaatributos(atributoscelda)
+}, [atributoscelda]);
+
 //use efect para controlar el drag drop
 /* Si haces drop sobre un elemento que no tiene preventDefault() 
 en los eventos dragover y drop, el navegador tratará de abrir ese 
@@ -69,6 +76,11 @@ Y en tu caso, aunque lo aplicas en el contenedor, el img dentro del dropzone
  también recibe el evento, y ahí no estás previniendo el comportamiento. */
 
 useEffect(() => {
+     if (variantes.length>0){
+    
+      const claves = Object.keys(variantes[0].atributos);
+      setAtributoscelda(claves)
+     }
     if(variantedefault.imagen){
      convertiraurl(variantedefault.imagen)
   }
@@ -112,14 +124,26 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 };
  const [modalbo,setmodalbo]=useState<boolean>(false);
  const [indexvariante,setindexvariante]=useState<number>(0);
- const [codigovariante,
-       setcodigovariante]=useState<number>(0)
+ 
  const {codigomodal,setcodigomodal,  Codigobarra,
        setcodigobarra ,  actulizarbarra,
        setactulizarbarras,
        guardar,
-       setguardar
+       setguardar,codigovariante,
+       setcodigovariante , codigobarraonchange,
+    setcodigobarraonchange
      }=codigosbarrascontex()
+
+     useEffect(()=>{console.log("varianteinicio",variantes)
+         if(Codigobarra!==undefined && Codigobarra!=="" && codigoidvariante>0){
+          console.log("codigo variante", codigoidvariante)
+          const nuevavariante=[...variantes]
+          const codigobavariante=nuevavariante.findIndex(item=> item.productoVarianteId === codigoidvariante)
+          nuevavariante[codigobavariante].codigobarras=Codigobarra
+          setVariantes(nuevavariante)
+
+         }
+     },[Codigobarra])
        useEffect(()=>{
         if(actulizarbarra){
           console.log(Codigobarra)
@@ -147,7 +171,7 @@ const agregarVariante = () => {
   let codigovariante=0;
   const maxCodigo = variantes.length === 0 
   ? 1 
-  : Math.max(...variantes.map(v => v.codigovariante)) + 1;
+  : Math.max(...variantes.map(v => v.productoVarianteId)) + 1;
   const nuevosAtributos:{ [key: string]: string } = {};
   atributoscelda.forEach(a => {
     nuevosAtributos[a] = "";  // cada atributo tendrá un input
@@ -156,7 +180,7 @@ const agregarVariante = () => {
   setVariantes(prev => [
     ...prev,
     {
-      codigovariante:maxCodigo,
+      productoVarianteId:maxCodigo,
       imagen:"",
       atributos: nuevosAtributos,
       bodega: [],
@@ -167,10 +191,11 @@ const agregarVariante = () => {
 
   // Agregar nueva variante vacía
  
- const agregarbodega=(nombrebodega:{nombre: string, stockMaximo: number, stockMinimo: number,ubicacion:string,existencias:number},index:number)=>{
+ const agregarbodega=(nombrebodega:{bodegaId:number,nombre: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
     let existebodega=variantes[index].bodega.find(b=>b.nombre===nombrebodega.nombre);
+    
     if(!existebodega){
-      const nuevaBodega: bodegas = { nombre: nombrebodega.nombre, stockMaximo: nombrebodega.stockMaximo, stockMinimo: nombrebodega.stockMinimo, ubicacion:nombrebodega.ubicacion,existencias:0 };
+      const nuevaBodega: bodegas = { bodegaId:nombrebodega.bodegaId,nombre: nombrebodega.nombre, stockMax: nombrebodega.stockMax, stockMin: nombrebodega.stockMin, ubicacion:nombrebodega.ubicacion,existencias:0 };
       const nuevasVariantes = [...variantes];
       nuevasVariantes[index].bodega = [...nuevasVariantes[index].bodega, nuevaBodega];
       setVariantes(nuevasVariantes);
@@ -237,7 +262,7 @@ const agregarVariante = () => {
                        </div>
                     </div>
                     <div className="col-12  col-md-4 col-sm-6  d-flex justify-content-md-end justify-content-center padingtopcol" style={{height:"fit-content"}}>
-                       <button className={`${multivariable ? "botoncontinuarguardar botonagregarvariante":"botoncontinuarguardar botonagregarvariante botondisabled"}`} onClick={agregarVariante} style={{ marginBottom: "0px" }} disabled={!multivariable}>
+                       <button type="button" className={`${multivariable ? "botoncontinuarguardar botonagregarvariante":"botoncontinuarguardar botonagregarvariante botondisabled"}`} onClick={agregarVariante} style={{ marginBottom: "0px" }} disabled={!multivariable}>
         Agregar
       </button>
                     </div>
@@ -414,7 +439,7 @@ Distancia desde el borde superior del viewport
             <li   onMouseDown={()=>{
               setEvitandoBlur(true)
                     const nuevas = [...variantes];
-    nuevas[i].atributos[attr] = item.nombre;
+    nuevas[i].atributos[attr] =item.nombre;
 
     setVariantes(nuevas);     // ← React actualiza el input
     setatrractual("");        // cerrar portal
@@ -439,13 +464,18 @@ Distancia desde el borde superior del viewport
                                                        <div className="d-flex flex-nowrap justify-content-center align-items-center containerinputvariante" style={{gap:"12px"  }} >
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={()=>{
+                                                              setcodigobarraonchange(v.codigobarras)
+                                                              setcodigovariante(v.productoVarianteId)
                                                               setcodigomodal(true)
+                                                              setcodigoidvariante(v.productoVarianteId)
+
                                                                }} >    <  Iconcodigobarras  width={22} height={22.5} /></CButton>
                                                            </div>
                                                            <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={()=>{
                                                                 setmodalbo(true)
                                                                setBodegaSeleccionada(v.bodega);
+
                                                                setindexvariante(i);
                                                                }} >    <Iconbodega  width={19} height={19.5} color={"#555"}  /></CButton>
                                                            </div>

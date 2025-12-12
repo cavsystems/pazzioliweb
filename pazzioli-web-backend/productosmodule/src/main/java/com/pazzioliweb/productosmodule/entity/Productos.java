@@ -201,10 +201,16 @@ public class Productos {
 	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductoVariante> variantes = new ArrayList<>();
     
+	@OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<UnidadesMedidaProducto> unidadesMedidaProducto = new ArrayList<>();
+	
     public Impuestos getImpuestos() { return impuestos; }
     public Lineas getLinea() { return linea; }
     public Grupos getGrupo() { return grupo; }
     public Usuario getUsuario() { return usuario; }
+    
+    @Column(name = "maneja_variantes")
+    private Boolean manejaVariantes = false;
 
 	public List<ProductoVariante> getVariantes() {
 		return variantes;
@@ -213,6 +219,22 @@ public class Productos {
 	public void setVariantes(List<ProductoVariante> variantes) {
 		this.variantes = variantes;
 	}
-    
-    
+
+	public List<UnidadesMedidaProducto> getUnidadesMedidaProducto() {
+		return unidadesMedidaProducto;
+	}
+
+	public void setUnidadesMedidaProducto(List<UnidadesMedidaProducto> unidadesMedidaProducto) {
+		this.unidadesMedidaProducto = unidadesMedidaProducto;
+	}
+
+	public Boolean getManejaVariantes() {
+		return manejaVariantes;
+	}
+
+	public void setManejaVariantes(Boolean manejaVariantes) {
+		this.manejaVariantes = manejaVariantes;
+	}
+	
+	
 }

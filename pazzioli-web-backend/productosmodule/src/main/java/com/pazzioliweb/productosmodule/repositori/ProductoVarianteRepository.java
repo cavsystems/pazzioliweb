@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
 import com.pazzioliweb.productosmodule.entity.ProductoVariante;
 
@@ -114,5 +115,44 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 	
 	
 	Page<ProductoVariante> findByProductoProductoId(Integer productoId, Pageable pageable);
+	
+	@Query(
+		  value = """
+		        SELECT
+		  		    p.producto_id AS productoId,
+		  		    p.referencia,
+		            pv.producto_variantes_id AS varianteId,
+		            p.codigo_contable AS codigoContable,
+		            CONCAT(p.descripcion, ' - ', pv.referencia_variantes) AS descripcion,
+		            COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
+		            p.costo AS costo,
+		            u.sigla AS unidadMedida,
+		            l.descripcion AS linea,
+		            g.descripcion AS grupo,
+		            p.fecha_ultima_compra AS fechaUltimaCompra,
+		            p.fecha_ultima_venta AS fechaUltimaVenta
+		        FROM producto_variantes pv
+		        JOIN productos p ON p.producto_id = pv.producto_id
+		        LEFT JOIN unidades_medida_producto ump 
+				       ON ump.producto_id = p.producto_id
+				LEFT JOIN unidades_medida u 
+				       ON u.unidad_medida_id = ump.unidad_medida_id
+		        LEFT JOIN lineas l ON l.linea_id = p.linea_id
+		        LEFT JOIN grupos g ON g.grupo_id = p.grupo_id
+		        LEFT JOIN (
+		            SELECT 
+		                e.producto_variantes_id AS varianteId,
+		                SUM(e.existencia) AS totalExistencia
+		            FROM existencias e
+		            GROUP BY e.producto_variantes_id
+		        ) ex ON ex.varianteId = pv.producto_variantes_id
+		        """,
+		  countQuery = "SELECT COUNT(*) FROM producto_variantes",
+		  nativeQuery = true
+		)
+		Page<ProductoInventarioDTO> listarInventario(Pageable pageable);
+	
+	
+	Optional<ProductoVariante> findByCodigoBarras(String codigobarras);
 	
 }

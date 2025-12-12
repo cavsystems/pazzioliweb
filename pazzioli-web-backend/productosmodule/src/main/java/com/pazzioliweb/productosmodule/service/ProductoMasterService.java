@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
@@ -16,10 +17,14 @@ import com.pazzioliweb.productosmodule.dtos.ProductoVarianteDetalleUpdateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteMasterDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteMasterUpdateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
+import com.pazzioliweb.productosmodule.entity.Bodegas;
+import com.pazzioliweb.productosmodule.entity.Existencias;
+import com.pazzioliweb.productosmodule.entity.ProductoVariante;
 import com.pazzioliweb.productosmodule.entity.Productos;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedida;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedidaProducto;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedidaProductoId;
+import com.pazzioliweb.productosmodule.repositori.ExistenciasRepository;
 import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaProductoRepository;
 import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaRepository;
 
@@ -36,6 +41,7 @@ public class ProductoMasterService {
     private final ExistenciasService existenciasService;
     private final UnidadesMedidaRepository unidadMedidaRepository;
     private final UnidadesMedidaProductoRepository unidadesMedidaProductoRepository;
+    private final ExistenciasRepository existenciasRepository;
 
     public ProductoMasterService(
             ProductosService productosService,
@@ -44,7 +50,8 @@ public class ProductoMasterService {
             PreciosProductoVarianteService preciosService,
             ExistenciasService existenciasService,
             UnidadesMedidaRepository unidadMedidaRepository,
-            UnidadesMedidaProductoRepository unidadesMedidaProductoRepository
+            UnidadesMedidaProductoRepository unidadesMedidaProductoRepository,
+            ExistenciasRepository existenciasRepository
     ) {
         this.productosService = productosService;
         this.productoVarianteService = productoVarianteService;
@@ -53,6 +60,7 @@ public class ProductoMasterService {
         this.existenciasService = existenciasService;
         this.unidadMedidaRepository = unidadMedidaRepository;
         this.unidadesMedidaProductoRepository = unidadesMedidaProductoRepository;
+        this.existenciasRepository = existenciasRepository;
     }
 
     @Transactional
@@ -65,9 +73,11 @@ public class ProductoMasterService {
         // 2. Crea Unidad medida Producto
         asignarUnidadesMedida(producto, productoDTO.getUnidadesMedida());
         
+        boolean manejarVariantes = productoDTO.getManejaVariantes();// respondería true
+        
         // 3. Por cada variante en el JSON
         for (ProductoVarianteMasterDTO masterDTO : variantesDTO) {
-
+        	
             // 🔹 A. Setear productoId en variante
             ProductoVarianteCreateDTO varianteDTO = masterDTO.getVariante();
             varianteDTO.setProductoId(producto.getProductoId());
@@ -78,10 +88,12 @@ public class ProductoMasterService {
             Long varianteId = variante.getProductoVarianteId(); // IMPORTANTE
 
             // 🔹 B. Crear detalles
-            for (ProductoVarianteDetalleCreateDTO d : masterDTO.getDetalles()) {
-                d.setProductoVarianteId(varianteId);
+            if(manejarVariantes) {
+            	for (ProductoVarianteDetalleCreateDTO d : masterDTO.getDetalles()) {
+                    d.setProductoVarianteId(varianteId);
+                }
+                detalleService.crear(masterDTO.getDetalles());
             }
-            detalleService.crear(masterDTO.getDetalles());
 
             // 🔹 C. Crear existencias
             for (ExistenciasCreateDTO e : masterDTO.getExistencias()) {
@@ -168,7 +180,8 @@ public class ProductoMasterService {
         // 3. Actualizar o asignar unidad de medida
         actualizarUnidadMedida(producto, productoDTO.getUnidadesMedida());
 
-
+        boolean manejarVariantes = productoDTO.getManejaVariantes();// respondería true
+        
         // 4. Manejar variantes -----------------------------------------------
         for (ProductoVarianteMasterUpdateDTO master : variantesDTO) {
 
@@ -191,23 +204,23 @@ public class ProductoMasterService {
 
 
             // --- DETALLES ----------------------------------------------------
-
-            // Crear nuevos detalles
-            if (master.getDetalles() != null) {
-                for (ProductoVarianteDetalleCreateDTO d : master.getDetalles()) {
-                    d.setProductoVarianteId(varianteId);
+            if(manejarVariantes) {
+            	// Crear nuevos detalles
+                if (master.getDetalles() != null) {
+                    for (ProductoVarianteDetalleCreateDTO d : master.getDetalles()) {
+                        d.setProductoVarianteId(varianteId);
+                    }
+                    detalleService.crear(master.getDetalles());
                 }
-                detalleService.crear(master.getDetalles());
-            }
 
-            // Actualizar detalles existentes
-            if (master.getDetallesUpdate() != null) {
-                for (ProductoVarianteDetalleUpdateDTO d : master.getDetallesUpdate()) {
-                    d.setProductoVarianteId(varianteId);
-                    detalleService.actualizarDesdeDTO(d.getProductoVariantesDetalleId(), d);
+                // Actualizar detalles existentes
+                if (master.getDetallesUpdate() != null) {
+                    for (ProductoVarianteDetalleUpdateDTO d : master.getDetallesUpdate()) {
+                        d.setProductoVarianteId(varianteId);
+                        detalleService.actualizarDesdeDTO(d.getProductoVariantesDetalleId(), d);
+                    }
                 }
             }
-
 
             // --- PRECIOS ----------------------------------------------------
 
@@ -225,6 +238,38 @@ public class ProductoMasterService {
             }
 
             // 🚫 Existencias NO se actualizan aquí
+            
+            // --- ACTUALIZAR EXISTENCIAS ---
+            for (ExistenciasUpdateDTO exDTO : master.getExistencias()) {
+
+            	// Buscar existencia por variante + bodega
+                Existencias existencia = existenciasRepository
+                        .findByProductoVarianteProductoVarianteIdAndBodegaCodigo(varianteId, exDTO.getBodega())
+                        .orElse(null);
+
+                if (existencia == null) {
+
+                    existencia = new Existencias();
+
+                    // referencia ligera a la variante
+                    ProductoVariante varianteRef = new ProductoVariante();
+                    varianteRef.setProductoVarianteId(varianteId);
+                    existencia.setProductoVariante(varianteRef);
+
+                    // referencia ligera a la bodega
+                    Bodegas bodega = new Bodegas();
+                    bodega.setCodigo(exDTO.getBodega());
+                    existencia.setBodega(bodega);
+                }
+
+                // Actualizar valores
+                //existencia.setExistencia(exDTO.getExistencia()); // este cmapo no lo actualizamos desde acá
+                existencia.setStockMin(exDTO.getStockMin());
+                existencia.setStockMax(exDTO.getStockMax());
+                existencia.setUbicacion(exDTO.getUbicacion());
+
+                existenciasRepository.save(existencia);
+            }
         }
 
         return producto;

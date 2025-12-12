@@ -1,5 +1,6 @@
 package com.pazzioliweb.productosmodule.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pazzioliweb.commonbacken.entity.Impuestos;
 import com.pazzioliweb.commonbacken.repositorio.ImpuestosRepositori;
+import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
@@ -228,5 +230,15 @@ public class ProductosServiceImpl implements ProductosService{
         }
 
         return productosRepository.save(existente);
+    }
+    
+    @Override
+    public Page<LineaProductosDTO> listarTotalesPorLineaTodasBodegas(Pageable pageable){
+    	return productosRepository.getTotalesPorLineaTodasBodegas(pageable);
+    }
+    
+    @Override
+    public Page<LineaProductosDTO> listarTotalesPorLineaXBodegaId(Integer bodegaId, Pageable pageable){
+    	return productosRepository.getTotalesPorLineaPorBodegaId(bodegaId, pageable);
     }
 }

@@ -16,4 +16,7 @@ public interface PreciosProductoVarianteRepository extends JpaRepository<Precios
 	        Long productoVarianteId,
 	        Integer precioId
 	);
+	
+	
+
 }

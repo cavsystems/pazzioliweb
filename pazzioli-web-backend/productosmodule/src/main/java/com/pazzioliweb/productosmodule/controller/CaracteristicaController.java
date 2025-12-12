@@ -1,5 +1,8 @@
 package com.pazzioliweb.productosmodule.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,12 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
+import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.service.CaracteristicaService;
 
 @RestController
 @RequestMapping("/api/caracteristicas")
 public class CaracteristicaController {
-	
+	 @Autowired
+	    private CaracteristicaRepository repoca;
 	private final CaracteristicaService service;
 
     public CaracteristicaController(CaracteristicaService service) {
@@ -89,6 +94,11 @@ public class CaracteristicaController {
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
 
+    
+    
+    
+ 
+    
     @GetMapping("/tipo/{tipoId}")
     public ResponseEntity<PaginationResponse<Caracteristica>> listarPorTipo(
             @PathVariable Long tipoId,
@@ -109,6 +119,14 @@ public class CaracteristicaController {
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
     
+    
+    @PostMapping("/buscarIds")
+    public ResponseEntity<List<Long>> obtenerIds(@RequestBody List<String> valores) {
+        return  ResponseEntity.ok( repoca.findByNombreIn(valores)       // Busca por lista
+                .stream()
+                .map(Caracteristica::getCaracteristicaId)         // Extrae IDs
+                .toList());
+    }
    /* @GetMapping("/listar-detalle")
     public ResponseEntity<PaginationResponse<CaracteristicaDTO>> listarCaracteristicasDetalle(
             @RequestParam(defaultValue = "0") int page,

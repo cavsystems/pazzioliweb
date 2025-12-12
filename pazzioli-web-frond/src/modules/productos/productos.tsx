@@ -1,5 +1,5 @@
 import { CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CTab, CTabContent, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CTabList, CTabPanel, CTabs } from "@coreui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import Datosgeneralesproduct from "./components/Datosgeneralesproduct";
 import Variantes from "./components/variantes";
@@ -12,12 +12,18 @@ import "./product.scss"
 import Providercodigobarras, { codigosbarrascontex } from "./contextcodigobarras";
 import Formproduct from "./components/formproducto";
 import api from "../../apicofig";
+import Modalconfirmar from "../../components/alertconfimacion";
 
 function Productos() {
-  
+    const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
+
      const [itemsformempresa, setitemsformempresa] = useState(1)
      const [modalproducto,setmodalproducto]=useState(true)
-     const {codigomodal,setcodigomodal, setcodigobarra}=codigosbarrascontex()
+      const [modalerror,setmodalerror]=useState(false)
+    const [mensajeerror,setmensajeerror]=useState("")
+     const {codigomodal,setcodigomodal, setcodigobarra,codigobarraonchange,
+    setcodigobarraonchange,codigovariante,
+       setcodigovariante,}=codigosbarrascontex()
      const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
      const traerproductos=async()=>{
       const productos= await api.get(`productos/listar`,{
@@ -63,7 +69,7 @@ function Productos() {
        });
 
       const onSubmit=(data:any)=>{
-
+       console.log("variantes guardar",Variantes)
       }
       const onError=(data:any)=>{
 
@@ -176,8 +182,9 @@ function Productos() {
                                                                                        <CInputGroup >
                                                           <CFormFloating className="margeniputempresa">
                                          
-                                                       <CFormInput placeholder=""  className="inputdatosempresa fontletre"  onChange={(e)=>{
-                                                        setcodigobarra(e.target.value)
+                                                       <CFormInput placeholder=""  value={codigobarraonchange}  className="inputdatosempresa fontletre"  onChange={(e)=>{
+                                                     
+                                                        setcodigobarraonchange(e.target.value)
                                                        }}  />
                                                      
                                           
@@ -193,7 +200,23 @@ function Productos() {
                                                                                        }}>Cancelar</button>
                                          
                                                   
-                                               <button type="button" className="botoncontinuar"  >Guardar</button>
+                                               <button type="button" className="botoncontinuar" onClick={async ()=>{
+                                                const isNotcodigo=await api.get(`variantes/existecodigobarra?codigobarra=${codigobarraonchange}`,{  headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+                                                //setcodigobarra(codigobarraonchange)
+                                               console.log("es codigo de barras",isNotcodigo)
+                                               if(isNotcodigo.data){
+                                                setcodigobarra(codigobarraonchange)
+                                                setcodigomodal(false)
+                                                setcodigobarraonchange("")
+                                               }else{
+                                                setmensajeerror("Codigo de barras ya asignado")
+                                                setmodalerror(true)
+                                           setFuncionDinamica(() => () => setmodalerror(false));
+                                               }
+                                               
+                                               }}  >Guardar</button>
                                          
                                                                              </div>
                                                                      </div>
@@ -209,7 +232,9 @@ function Productos() {
                            <Formproduct  modalformproducto={modalformproducto} setmodalformproducto={setmodalformproducto}/>  
                
                    </div>
-                  
+                  {
+                       modalerror && <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true} textoboton={"Aceptar"}  funcion={funcionDinamica}/>
+                       } 
                    </div>  
                  
            

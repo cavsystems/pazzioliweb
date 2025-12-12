@@ -1,10 +1,12 @@
 package com.pazzioliweb.productosmodule.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
@@ -29,4 +31,8 @@ public interface ProductosService {
     Productos actualizarDesdeDTO(Integer id, ProductoUpdateDTO dto);
     
     ProductoResponseDTO convertirAResponse(Productos peoductos);
+    
+    Page<LineaProductosDTO> listarTotalesPorLineaTodasBodegas(Pageable pageable);
+    
+    Page<LineaProductosDTO> listarTotalesPorLineaXBodegaId(Integer bodegaId, Pageable pageable);
 }

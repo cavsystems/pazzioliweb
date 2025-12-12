@@ -7,6 +7,7 @@ public class ProductoVarianteResponseDTO {
     private String referenciaVariantes;
     private String codigoBarras;
     private Boolean activo;
+    private Boolean predeterminada;
     
 	public Long getProductoVarianteId() {
 		return productoVarianteId;
@@ -44,6 +45,11 @@ public class ProductoVarianteResponseDTO {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
-    
+	public Boolean getPredeterminada() {
+		return predeterminada;
+	}
+	public void setPredeterminada(Boolean predeterminada) {
+		this.predeterminada = predeterminada;
+	}
     
 }

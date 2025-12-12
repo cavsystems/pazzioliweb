@@ -47,6 +47,8 @@ public class ProductoVariante {
 	@OneToMany(mappedBy = "productoVariante", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PreciosProductoVariante> precios = new ArrayList<>();
 	
+	private Boolean predeterminada = false;
+	
 	public Long getProductoVarianteId() {
 		return productoVarianteId;
 	}
@@ -106,4 +108,14 @@ public class ProductoVariante {
 
 	public List<Existencias> getExistencias() {return existencias;}
     public void setExistencias(List<Existencias> existencias) {this.existencias = existencias;}
+
+	public Boolean getPredeterminada() {
+		return predeterminada;
+	}
+
+	public void setPredeterminada(Boolean predeterminada) {
+		this.predeterminada = predeterminada;
+	}
+    
+    
 }
