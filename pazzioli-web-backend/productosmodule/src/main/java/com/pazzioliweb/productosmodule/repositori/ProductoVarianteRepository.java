@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
 import com.pazzioliweb.productosmodule.entity.ProductoVariante;
 
@@ -113,7 +114,7 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		""")
 		List<LineaProductosDTO> getTotalesPorLineaXBodegastotal();
 	
-	
+	@EntityGraph(attributePaths = {"detalles", "detalles.caracteristica", "detalles.caracteristica.tipo"})
 	Page<ProductoVariante> findByProductoProductoId(Integer productoId, Pageable pageable);
 	
 	@Query(

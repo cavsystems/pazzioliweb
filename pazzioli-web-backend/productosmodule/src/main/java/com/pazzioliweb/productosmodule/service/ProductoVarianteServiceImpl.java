@@ -1,11 +1,14 @@
 package com.pazzioliweb.productosmodule.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
@@ -107,5 +110,36 @@ public class ProductoVarianteServiceImpl implements ProductoVarianteService{
     public Page<ProductoInventarioDTO> listarInventarioBasico(Pageable pageable){
     	Page<ProductoInventarioDTO> pagina = varianteRepository.listarInventario(pageable);
     	return pagina;
+    }
+    
+    @Override
+    public Page<ProductoVarianteConDetallesDTO> listarConDetallesPorProducto(Integer productoId, Pageable pageable){
+    	Page<ProductoVariante> variantes =
+                varianteRepository.findByProductoProductoId(productoId, pageable);
+
+    	return variantes.map(variant -> {
+    	    ProductoVarianteConDetallesDTO dto = new ProductoVarianteConDetallesDTO();
+    	    dto.setProductoVarianteId(variant.getProductoVarianteId());
+    	    dto.setSku(variant.getSku());
+    	    dto.setReferenciaVariantes(variant.getReferenciaVariantes());
+    	    dto.setCodigoBarras(variant.getCodigoBarras());
+    	    dto.setActivo(variant.getActivo());
+
+    	    // MAPEO de entidad → DTO
+    	    List<ProductoVarianteConDetallesDTO.DetalleDTO> detalleDTOs =
+    	        variant.getDetalles().stream().map(det -> {
+    	            ProductoVarianteConDetallesDTO.DetalleDTO d = 
+    	                new ProductoVarianteConDetallesDTO.DetalleDTO();
+    	            d.setDetalleId(det.getProductoVariantesDetalleId());
+    	            d.setCaracteristicaId(det.getCaracteristica().getCaracteristicaId());
+    	            d.setCaracteristicaNombre(det.getCaracteristica().getNombre());
+    	            d.setTipo(det.getCaracteristica().getTipo().getNombre());
+    	            return d;
+    	        }).toList();
+
+    	    dto.setDetalles(detalleDTOs);
+
+    	    return dto;
+    	});
     }
 }

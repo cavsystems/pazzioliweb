@@ -1,7 +1,11 @@
 package com.pazzioliweb.productosmodule.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
+import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO.DetalleDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteUpdateDTO;
@@ -59,5 +63,28 @@ public class ProductoVarianteMapper {
         
         if (dto.getPredeterminada() != null)
         	pv.setPredeterminada(dto.getPredeterminada());
+    }
+    
+    public ProductoVarianteConDetallesDTO toDtoConDetalles(ProductoVariante pv) {
+        ProductoVarianteConDetallesDTO dto = new ProductoVarianteConDetallesDTO();
+
+        dto.setProductoVarianteId(pv.getProductoVarianteId());
+        dto.setSku(pv.getSku());
+        dto.setReferenciaVariantes(pv.getReferenciaVariantes());
+        dto.setCodigoBarras(pv.getCodigoBarras());
+        dto.setActivo(pv.getActivo());
+
+        List<DetalleDTO> detalles = pv.getDetalles().stream()
+            .map(d -> {
+                DetalleDTO dd = new DetalleDTO();
+                dd.setDetalleId(d.getProductoVariantesDetalleId());
+                dd.setCaracteristicaId(d.getCaracteristica().getCaracteristicaId());
+                dd.setCaracteristicaNombre(d.getCaracteristica().getNombre());
+                return dd;
+            }).toList();
+
+        dto.setDetalles(detalles);
+
+        return dto;
     }
 }

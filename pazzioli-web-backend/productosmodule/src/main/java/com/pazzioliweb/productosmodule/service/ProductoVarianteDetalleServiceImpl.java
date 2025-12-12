@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteDetalleCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteDetalleResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteDetalleUpdateDTO;
