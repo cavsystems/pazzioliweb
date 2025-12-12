@@ -534,7 +534,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                  
                                </select></CTableDataCell>
                                       <CTableDataCell><input placeholder="0" value={listaprecioson[index]?.valor ?? precioactual.valor} className="iteminput1" onChange={(e)=>{
-                                             if(listaprecios && listaprecioson[index].precioId!==undefined){
+                                             if(  listaprecioson &&
+  listaprecioson[index] &&
+  listaprecioson[index].precioId !== undefined){
                                                        const lista=[...listaprecioson]
                                                        lista[index].valor=e.target.value     
                                                        setValue("listaprecios",lista)  

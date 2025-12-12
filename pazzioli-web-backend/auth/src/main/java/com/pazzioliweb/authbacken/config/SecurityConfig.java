@@ -59,8 +59,8 @@ public class SecurityConfig {
             		.permitAll().requestMatchers("/api/sedeTercero/**").permitAll().requestMatchers("/api/retencion/**").permitAll().requestMatchers("/api/contactos/**")
             		.permitAll().requestMatchers("/api/tipos-caracteristica/**").permitAll().requestMatchers("/api/caracteristicas/**").permitAll().requestMatchers("/api/variantes/**")
             		.permitAll().requestMatchers("/api/variante-detalle/**").permitAll().requestMatchers("/api/precios-producto-variante/**").permitAll().requestMatchers("/api/productoMaster/**")
-            		.permitAll().requestMatchers("/api/unidadesMedida/**").permitAll().requestMatchers("/api/unidadesMedidaProducto/**").permitAll()
-                    .anyRequest().authenticated()).exceptionHandling(ex -> ex
+            		.permitAll().requestMatchers("/api/unidadesMedida/**").permitAll().requestMatchers("/api/unidadesMedidaProducto/**").permitAll().requestMatchers("/api/tipo-producto/**")
+            		.permitAll().anyRequest().authenticated()).exceptionHandling(ex -> ex
                     	    .accessDeniedHandler((request, response, accessDeniedException) -> {
                     	    	if (!response.isCommitted()) {
                     	    		response.setStatus(HttpServletResponse.SC_FORBIDDEN);

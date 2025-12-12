@@ -77,6 +77,10 @@ public class Productos {
     private LocalDateTime fechaUltimaCompra;
 	
     String manifiesto;
+    
+    @ManyToOne
+    @JoinColumn(name = "tipo_producto_id", nullable = false)
+    private TipoProducto tipoProducto;
 	
 	public Integer getProductoId() {
 		return productoId;
@@ -235,6 +239,13 @@ public class Productos {
 	public void setManejaVariantes(Boolean manejaVariantes) {
 		this.manejaVariantes = manejaVariantes;
 	}
-	
+
+	public TipoProducto getTipoProducto() {
+		return tipoProducto;
+	}
+
+	public void setTipoProducto(TipoProducto tipoProducto) {
+		this.tipoProducto = tipoProducto;
+	}
 	
 }

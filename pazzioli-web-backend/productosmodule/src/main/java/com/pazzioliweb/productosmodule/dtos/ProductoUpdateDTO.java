@@ -14,6 +14,7 @@ public class ProductoUpdateDTO {
     private Integer linea_id;
     private Integer impuesto_id;
     private List<Integer> unidadesMedida;
+    private Integer tipo_producto_id;
     
     private Boolean manejaVariantes;
     
@@ -82,6 +83,12 @@ public class ProductoUpdateDTO {
 	}
 	public void setManejaVariantes(Boolean manejaVariantes) {
 		this.manejaVariantes = manejaVariantes;
+	}
+	public Integer getTipo_producto_id() {
+		return tipo_producto_id;
+	}
+	public void setTipo_producto_id(Integer tipo_producto_id) {
+		this.tipo_producto_id = tipo_producto_id;
 	}
     
 }

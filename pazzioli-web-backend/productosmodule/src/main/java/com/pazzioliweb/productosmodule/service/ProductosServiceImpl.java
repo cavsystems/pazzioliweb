@@ -17,10 +17,12 @@ import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Grupos;
 import com.pazzioliweb.productosmodule.entity.Lineas;
 import com.pazzioliweb.productosmodule.entity.Productos;
+import com.pazzioliweb.productosmodule.entity.TipoProducto;
 import com.pazzioliweb.productosmodule.mapper.ProductoMapper;
 import com.pazzioliweb.productosmodule.repositori.GrupoRepositori;
 import com.pazzioliweb.productosmodule.repositori.LineasRepositori;
 import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
+import com.pazzioliweb.productosmodule.repositori.TipoProductoRepository;
 import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaProductoRepository;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
 import com.pazzioliweb.usuariosbacken.repositorio.UsuarioRepository;
@@ -38,10 +40,12 @@ public class ProductosServiceImpl implements ProductosService{
 	private final UsuarioRepository usuarioRepository;
 	private final ProductoMapper mapper;
 	private final UnidadesMedidaProductoRepository unidadesMedidaProductoRepository;
+	private final TipoProductoRepository tipoProductoRepository;
 	
 	public ProductosServiceImpl(ProductosRepository productosRepository, GrupoRepositori grupoRepository,
 			LineasRepositori lineaRepository,ImpuestosRepositori impuestoRepository,UsuarioRepository usuarioRepository,
-			ProductoMapper mapper,UnidadesMedidaProductoRepository unidadesMedidaProductoRepository) {
+			ProductoMapper mapper,UnidadesMedidaProductoRepository unidadesMedidaProductoRepository,
+			TipoProductoRepository tipoProductoRepository) {
 		this.productosRepository = productosRepository;
 		this.grupoRepository = grupoRepository;
 		this.lineaRepository = lineaRepository;
@@ -49,6 +53,7 @@ public class ProductosServiceImpl implements ProductosService{
 		this.usuarioRepository = usuarioRepository;
 		this.mapper = mapper;
 		this.unidadesMedidaProductoRepository = unidadesMedidaProductoRepository;
+		this.tipoProductoRepository = tipoProductoRepository;
 	}
 
     // ---------------------------------------------
@@ -77,8 +82,11 @@ public class ProductosServiceImpl implements ProductosService{
 
         Usuario usuario = usuarioRepository.findById(dto.getUsuario_creo_id())
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+        
+        TipoProducto tipoProducto = tipoProductoRepository.findById(dto.getTipo_producto_id())
+        		.orElseThrow(() -> new EntityNotFoundException("TipoProducto no encontrado"));
 
-        Productos entidad = mapper.fromCreateDto(dto, grupo, linea, impuesto, usuario);
+        Productos entidad = mapper.fromCreateDto(dto, grupo, linea, impuesto, usuario, tipoProducto);
 
         return productosRepository.save(entidad);
     }

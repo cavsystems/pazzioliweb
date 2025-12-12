@@ -13,6 +13,7 @@ public class ProductoCreateDTO {
     private Integer grupo_id;
     private Integer usuario_creo_id;
     private String manifiesto;
+    private Integer tipo_producto_id;
     
     private List<Integer> unidadesMedida;
     
@@ -89,6 +90,12 @@ public class ProductoCreateDTO {
 	}
 	public void setManejaVariantes(Boolean manejaVariantes) {
 		this.manejaVariantes = manejaVariantes;
+	}
+	public Integer getTipo_producto_id() {
+		return tipo_producto_id;
+	}
+	public void setTipo_producto_id(Integer tipo_producto_id) {
+		this.tipo_producto_id = tipo_producto_id;
 	}
     
 	

@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.pazzioliweb.commonbacken.util.PasswordUtils;
-import com.pazzioliweb.tercerosmodule.dtos.SedeTerceroDTOImpl;
 import com.pazzioliweb.usuariosbacken.dtos.CrearpermisoroDTOS;
 import com.pazzioliweb.usuariosbacken.dtos.CrearusuarioDTOS;
 import com.pazzioliweb.usuariosbacken.dtos.CrearusuariorolDTOS;

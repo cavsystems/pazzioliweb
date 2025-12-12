@@ -10,6 +10,7 @@ import Iconfoto from "../../../icons/iconfoto";
 import Downloadimg from "../../../icons/icondonwloadimg";
 import { createPortal } from "react-dom";
 import api from "../../../apicofig";
+import { useFormContext } from "react-hook-form";
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
@@ -47,6 +48,7 @@ function Variantes({variantedefault,multivariable,setmultivariable,variantes, se
     //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
  
   const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [varianteselect,setvarianteselect]=useState<Variante>();
   const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
   const [codigoidvariante,setcodigoidvariante]=useState<number>(0);
   const [evitandoBlur, setEvitandoBlur] = useState(false);
@@ -215,7 +217,7 @@ const agregarVariante = () => {
   const eliminarVariante = (index: number) => {
     setVariantes(prev => prev.filter((_, i) => i !== index));
   };
-
+  const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
   return (
     <div>
       <div className="row" style={{padding:"12px 20px 12px 20px"}}>
@@ -349,7 +351,8 @@ const agregarVariante = () => {
                <CFormInput
                
                onFocus={async (e)=>{
-                const inputdom=document.getElementById(`idinputvariante${attr}`)  as HTMLInputElement;
+                setvarianteselect(v)
+                const inputdom=document.getElementById(`idinputvariante${attr}${i}`)  as HTMLInputElement;
                   const lleg=await api.get(`caracteristicas/listar/tipocaracte`,{
                   params: {
     ca: inputdom.value,
@@ -378,7 +381,7 @@ const agregarVariante = () => {
     setEvitandoBlur(false);
     return;
   }
-                   const inputdom=document.getElementById(`idinputvariante${attr}`)  as HTMLInputElement;
+                   const inputdom=document.getElementById(`idinputvariante${attr}${i}`)  as HTMLInputElement;
                   const buscarvalor=valorescaracteristicas.some((item=> item.nombre!==inputdom.value))
                   if( buscarvalor){
                      const nuevas = [...variantes];
@@ -389,6 +392,7 @@ const agregarVariante = () => {
                }}
             value={v.atributos[attr] || ""}
             onChange={ async e => {
+               console.log("item variante",v,i)
               const nuevas = [...variantes];
               nuevas[i].atributos[attr] = e.target.value;
               
@@ -410,7 +414,7 @@ const agregarVariante = () => {
 
               setVariantes(nuevas);
             }}
-           id={`idinputvariante${attr}`}
+           id={`idinputvariante${attr}${i}`}
           className="borderinputvariantes "
           />
          {atrractual === attr &&
@@ -439,7 +443,11 @@ Distancia desde el borde superior del viewport
             <li   onMouseDown={()=>{
               setEvitandoBlur(true)
                     const nuevas = [...variantes];
-    nuevas[i].atributos[attr] =item.nombre;
+                    const varianteactual=variantes.findIndex(item=> item.productoVarianteId===varianteselect?.productoVarianteId)
+                    console.log("item variante",varianteactual,variantes,v,i)
+                    
+                    nuevas[varianteactual].atributos[attr]=item.nombre;
+    //nuevas[i].atributos[attr] =item.nombre;
 
     setVariantes(nuevas);     // ← React actualiza el input
     setatrractual("");        // cerrar portal
@@ -463,7 +471,23 @@ Distancia desde el borde superior del viewport
   <CTableDataCell >
                                                        <div className="d-flex flex-nowrap justify-content-center align-items-center containerinputvariante" style={{gap:"12px"  }} >
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                               <CButton  className="buttoniconnormal" onClick={async ()=>{
+                                                                if(v.codigobarras===""){
+                                                                  let contrefe=Object.values(v.atributos)
+                                                                  let barrarformada;
+                                                                      const listaid= await api.post("caracteristicas/buscarIds", contrefe,{headers: {
+                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                                              }});
+                                                                listaid.data.forEach(item3=>{
+                                                                barrarformada+=item3.toString()
+                                                                })
+                                                                    
+                                                                  setcodigobarra(getValues("codigo")+barrarformada)
+                                                                   setcodigobarraonchange(getValues("codigo")+barrarformada)
+                                                                     setcodigomodal(true)
+                                                              setcodigoidvariante(v.productoVarianteId)
+                                                                  return
+                                                                }
                                                               setcodigobarraonchange(v.codigobarras)
                                                               setcodigovariante(v.productoVarianteId)
                                                               setcodigomodal(true)
