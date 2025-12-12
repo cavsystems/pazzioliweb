@@ -40,6 +40,7 @@
         <module>cajasmodule</module>
         <module>vendedoresmodule</module>
         <module>metodospagomodule</module>
+        <module>movimientosinventariomodule</module>
     </modules>
 <!--configuracion para gestionar versiones de dependencias configuramos el bom bill 
 el cual es org.springframework.boot  esto lo hacemos esto para gestionar  las versiones de despendencias
@@ -128,7 +129,10 @@ que contiene la clase entyti que sirve para crear los modelos nesesarios para la
     <scope>runtime</scope>
 </dependency>
 
-
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
 
 
    </dependencies>

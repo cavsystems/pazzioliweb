@@ -22,4 +22,5 @@ public interface ProductoVarianteDetalleService {
     Page<ProductoVarianteDetalleResponseDTO> listar(Pageable pageable);
 
     Page<ProductoVarianteDetalleResponseDTO> listarPorVariante(Long varianteId, Pageable pageable);
+    
 }
