@@ -149,7 +149,6 @@ public class ProductoVarianteController {
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
-}
     
     @GetMapping("/existecodigobarra")
     public ResponseEntity<Boolean> existecodigobarras(
