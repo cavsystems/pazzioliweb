@@ -33,7 +33,7 @@ function Productos() {
       console.log("productos lista",productos)
      }
       useEffect(()=>{
-        //  traerproductos()
+         traerproductos()
       },[])
       const methods = useForm({
           mode: 'onSubmit',

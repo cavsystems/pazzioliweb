@@ -75,7 +75,7 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
             const [rotate,setrotate]=useState(false);
              const [tap,settap]=useState(1);
              const [  botonupdateu,setbotonupdateu]=useState(false);
-             const onSubmit=(data:{
+             const onSubmit=async (data:{
                tipoproducto: string,
          codigo:string,
         descripcion:string,
@@ -92,29 +92,30 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
         variantes:[],
          imagenproducto:string | null
              })=>{
-              console.log("variante",variantes)
+              console.log("variante",variantes,"data",data)
 
               let productobody={
                 codigo_contable:data.codigo,
-    codigo_barras:data.codigobarra,
-    referencia: data.referencia,
+    codigo_barras:data.codigobarra==="" ? data.codigo:data.codigobarra ,
+    referencia: data.referencia==="" ? data.codigo: data.referencia,
     descripcion: data.descripcion,
     costo:data.costo,
-   
+      usuario_creo_id: 2,
+    tipo_producto_id:data.tipoproducto,
     impuesto_id:data.impuesto!=="" ? Number(data.impuesto):0 ,
     linea_id:data.linea!=="" ?  Number(data.linea):0,
     grupo_id: data.grupo!=="" ?  Number(data.grupo):0,
     manifiesto: "",
-    maneja_variantes: multivariable,
-    unidadesMedida: [1] ,
-    variantes:[]
+    manejaVariantes: multivariable,
+    unidadesMedida: [Number(data.unidadmedida)] ,
+   
 
               }
                const Variantesback=[
 
                ]
-
-               variantes.forEach( async item=>{
+               let codigbarradefault=data.codigo
+       await Promise.all( variantes.map( async item=>{
                 /* armar skunvaliante*/
                 let skun=methods.getValues("referencia")
                 let referencia=""
@@ -122,8 +123,8 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                const listaid= await api.post("caracteristicas/buscarIds", valores,{headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
-
-            console.log(listaid,item)
+               listaid.data.forEach((item3:any)=> codigbarradefault+=item3)
+            
                 celdasatributos.forEach((item2,index)=>{
                   skun+="-"+ item.atributos[item2].substring(0,2)
                  
@@ -138,18 +139,22 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                 )
                  
                 const variantedifiniva={
+                  variante:{
                    skun:skun,
                    referenciaVariantes:referencia,
-                   codigoBarras:item.codigobarras,
+                   codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
                    predeterminada:multivariable,
-                    productoId: null,
-                    detalles:{
-                       productoVarianteId: null,
-                       caracteristicaId:listaid.data
-                    },
+                    
+                    productoId: null
+                  },
+                    detalles:[
+                      { productoVarianteId: null,
+                       caracteristicaId:listaid.data}
+                    ],
 
                     existencias:item.bodega,
                     precios:data.listaprecios
+                   
 
                 }
 
@@ -158,16 +163,20 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                
                   Variantesback.push(variantedifiniva)
                
-               })
+               }))
 
 
 
 
 
-                 productobody={
-                  ...productobody,variantes:Variantesback
-                 }
-                 console.log(productobody)
+              console.log({producto:productobody,variantes:Variantesback})
+           
+
+                 const produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            console.log(produ)
              }
 
               const onError=(error)=>{

@@ -68,10 +68,12 @@ id
      const fileimagen= useRef<HTMLInputElement | null>(null);
     const [imagenproduct,setimagenproduct]=useState<string | null>(null)
     const [substrinfinal,setsubstringfinal]=useState<number>(0)
+    
     const [mensajeerror,setmensajeerror]=useState<string>("")
    const [listaprecios,setlistaprecio]=useState<listaprecio[]>([])
    const [listaprecioson,setlistaprecioon]=useState<precioob[]>([])
    const [numeroinputprecio,setnumeroinputprescio]=useState<number>(0)
+   const [tipoproducto,setTipoproducto]=useState<{tipoProductoId: number, nombre: string, descripcion: boolean, estado: true}[]>([])
   const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
    const [precioactual,setprecioactual]=useState<precioob>({
     precioId:0,
@@ -139,10 +141,21 @@ const traerlistasprecios=async()=>{
 
  setlistaprecio(listaprecios.data.content)
 }
+
+const traertipoproducto=async()=>{
+    const tipoproducto= await api.get(`tipo-producto/listar`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            setTipoproducto(tipoproducto.data.content)
+            console.log("tipo producto",tipoproducto)
+}
     const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
 useEffect(() => {
   traerinformacion()
   traerlistasprecios()
+  traertipoproducto()
 setlistaprecioon(getValues("listaprecios"))
   console.log("lista",getValues("listaprecios"))
   setnumeroinputprescio(getValues("listaprecios").length)
@@ -245,9 +258,15 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                             <div className="inputprocttex" style={{paddingTop:"12px"}}>
                                   <label form="slectform1" className="titulospro" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>
                                     <select className="selctproduct" {...register("tipoproducto",{required:true})} >
-                                <option value={""} id="slectform1">Elige una opcion</option>
-                                   <option value={"1"} id="slectform1">Servicio</option>
-                                    <option value={"2"} id="slectform1">Producto</option>
+                              
+                                {
+                                  tipoproducto.map((item)=>{
+                                    return <>
+                                        <option value={item.tipoProductoId} id="slectform1">{item.nombre}</option>
+                                    </>
+                                  })
+                                }
+                                 
                                </select>
                             </div>
                          
@@ -322,7 +341,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                             <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Impuesto *</label>
-                               <select className="selctproduct" {...register("Impuesto",{required:true})}>
+                               <select className="selctproduct" {...register("impuesto",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
                                   impuesto.map(item=> (<><option value={item.codigo}>{item.nombre}</option></>))
@@ -340,7 +359,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                              
                             <div className="inputprocttex inputcodigosbarra paddingleftformpro"   >
                                  <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Codigo de barra</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("codigodebarras",{required:true})}/>
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("codigodebarras")}/>
                                
                             </div>
                           
@@ -400,7 +419,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Linea *</label>
-                               <select className="selctproduct">
+                               <select className="selctproduct" {...register("linea",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                 {
                                   lineas.map(item=> (<><option value={item.id}>{item.descripcion}</option></>))
@@ -414,8 +433,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                             </div>
                              <div className="col-12 col-md-6  paddingleftformpro" >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                              <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>
-                               <select className="selctproduct">
+                              <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}  >Grupo *</label>
+                               <select className="selctproduct" {...register("grupo",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
 

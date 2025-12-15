@@ -189,6 +189,8 @@ const agregarVariante = () => {
       codigobarras:""
     }
   ]);
+
+  setrotate4(false)
 };
 
   // Agregar nueva variante vacía
@@ -473,17 +475,23 @@ Distancia desde el borde superior del viewport
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={async ()=>{
                                                                 if(v.codigobarras===""){
+                                                                  let codigocontable
+                                                                  if(!getValues("codigo")){
+                                                                       codigocontable=""                                          
+                                                                  }else{
+                                                                      codigocontable=getValues("codigo")
+                                                                  }
                                                                   let contrefe=Object.values(v.atributos)
-                                                                  let barrarformada;
+                                                                  let barrarformada="";
                                                                       const listaid= await api.post("caracteristicas/buscarIds", contrefe,{headers: {
                                                                  'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                                                               }});
                                                                 listaid.data.forEach(item3=>{
                                                                 barrarformada+=item3.toString()
                                                                 })
-                                                                    
-                                                                  setcodigobarra(getValues("codigo")+barrarformada)
-                                                                   setcodigobarraonchange(getValues("codigo")+barrarformada)
+                                                                    console.log("codigobarra formado",codigocontable+barrarformada,codigocontable,barrarformada)
+                                                                  setcodigobarra(codigocontable+barrarformada)
+                                                                   setcodigobarraonchange(codigocontable+barrarformada)
                                                                      setcodigomodal(true)
                                                               setcodigoidvariante(v.productoVarianteId)
                                                                   return
