@@ -1,6 +1,7 @@
 import { CAlert, CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { useEffect, useState } from "react";
 import Iconeliminar from "../../../icons/iconeliminar";
+import api from "../../../apicofig";
 interface bodegaselect{
   bodegaId:number,
   nombre:string
@@ -14,8 +15,8 @@ function Bodegasvariantes({modalbo,setmodalbo,agregarbodega,BodegaSeleccionada ,
     const [bodegas,setbodegas]=useState<{
     bodegaId:number,
       nombre:string;
-      stockMaximo:number;
-    stockMinimo:number;
+      stockMax:number;
+    stockMin:number;
 ubicacion:string;
 existencias:number}[]>([])
     const [indexactulizar,setindexactulizar]=useState<number>(0)
@@ -25,11 +26,23 @@ existencias:number}[]>([])
           bodegaId:number,
 
       nombre:string;
-      stockMaximo:number;
-    stockMinimo:number;
-ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
-    useEffect(()=>{
+      stockMax:number;
+    stockMin:number;
+ubicacion:string}>({ bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:""})
 
+const traerbodegas=async()=>{
+  const apibodega=await api.get("bodegas/listar",{
+        headers: {
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+        }})
+
+        const newarraybodega:bodegaselect[]=[]
+        apibodega.data.data.forEach(item=> newarraybodega.push({bodegaId:item.codigo,nombre:item.nombre}))
+        console.log("bodega traer",apibodega)
+        setbodegasselect(newarraybodega)
+}
+    useEffect(()=>{
+traerbodegas()
       console.log("BodegaSeleccionada",BodegaSeleccionada)
       if(BodegaSeleccionada){
         if(BodegaSeleccionada.length>0){
@@ -202,7 +215,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                            
                                               
                                             </select></CTableDataCell>
-                                                   <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMaximo ?? ""}  name="stockMaximo" onChange={(e)=>{
+                                                   <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMax ?? ""}  name="stockMax" onChange={(e)=>{
                                                      const valor = Number(e.target.value);
                                                      console.log("valor",valor)
                                                     console.log("index",index, variantes)
@@ -210,7 +223,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                                                const bodegaActualizada = [...variantes[indexvariante].bodega];
                                                                 bodegaActualizada[index] = {
                                                                   ...bodegaActualizada[index],
-                                                                stockMaximo:Number(e.target.value)
+                                                                stockMax:Number(e.target.value)
                                                                 };
                                                                   const variantesActualizadas = [...variantes];
                                                                 variantesActualizadas[indexvariante].bodega = bodegaActualizada;
@@ -220,7 +233,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        stockMaximo: valor
+                                        stockMax: valor
                                       };
 
                                       setbodegas(copiaSel);
@@ -230,7 +243,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        stockMaximo: valor
+                                        stockMax: valor
                                       };
 
                                       setbodegas(copiaSel);
@@ -238,7 +251,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                                           }
                                                                  
                                                    }}/></CTableDataCell>
-                                                     <CTableDataCell  ><input placeholder="0" className="iteminput1" name="stockMinimo" value={bodegas[index]?.stockMinimo ?? ""}  onChange={(e)=>{
+                                                     <CTableDataCell  ><input placeholder="0" className="iteminput1" name="stockMin" value={bodegas[index]?.stockMin ?? ""}  onChange={(e)=>{
                                                      const valor = Number(e.target.value);
                                                      console.log("valor",valor)
                                                     console.log("index",index, variantes)
@@ -246,7 +259,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                                                const bodegaActualizada = [...variantes[indexvariante].bodega];
                                                                 bodegaActualizada[index] = {
                                                                   ...bodegaActualizada[index],
-                                                                stockMinimo:Number(e.target.value)
+                                                                stockMin:Number(e.target.value)
                                                                 };
                                                                   const variantesActualizadas = [...variantes];
                                                                 variantesActualizadas[indexvariante].bodega = bodegaActualizada;
@@ -256,7 +269,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        stockMinimo: valor
+                                        stockMin: valor
                                       };
 
                                       setbodegas(copiaSel);
@@ -266,7 +279,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
-                                        stockMinimo: valor
+                                        stockMin: valor
                                       };
 
                                       setbodegas(copiaSel);
@@ -316,7 +329,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                                    
                                                          
                                                        <CTableDataCell>
-                                                        <input placeholder="0" className="iteminput1"  value={bodegas[index]?.existencias ?? ""}  disabled={true} name="stockMaximo"/>
+                                                        <input placeholder="0" className="iteminput1"  value={bodegas[index]?.existencias ?? ""}  disabled={true} name="stockMax"/>
                                                        </CTableDataCell>
 
                                                        <CTableDataCell>
@@ -367,7 +380,7 @@ ubicacion:string}>({ bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:
                                                   {
                                                     bodegaguardar !=="" &&   <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
                                                         agregarbodega(bodegasguardadas,indexvariante)
-                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMaximo:0,stockMinimo:0,ubicacion:""})
+                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:""})
                                                         setbodegaguardar('')
                                                     }}  >Guardar</button> 
                                                   }
