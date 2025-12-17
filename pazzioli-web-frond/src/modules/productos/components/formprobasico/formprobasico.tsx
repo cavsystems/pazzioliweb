@@ -256,7 +256,10 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                              
                              
                             <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                                  <label form="slectform1" className="titulospro" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>
+                              {
+                                errors.tipoproducto ? <label form="slectform1" className="titulosproerror" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>:<label form="slectform1" className="titulospro" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>
+                              }
+                                  
                                     <select className="selctproduct" {...register("tipoproducto",{required:true})} >
                               
                                 {
@@ -282,7 +285,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                   
                              
                             <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                                 <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}  >Código *</label>
+                              {
+                                errors.codigo ?    <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}}  >Código *</label>: <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}  >Código *</label>
+                              }
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}  {...register("codigo",{required:true})}/>
                             </div>
                            
@@ -299,8 +304,10 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 
                             <div className="col-12">
                                 <div className="d-flex flex-column" style={{paddingTop:"12px"}}>
-                                 
-                           <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Descripción *</label>
+                                 {
+                                errors.descripcion ? <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}} >Descripción *</label>:<label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Descripción *</label>
+                                 }  
+                           
                                  
                                  <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("descripcion",{required:true})}/>
                                </div>
@@ -316,7 +323,12 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 
                                 <div className="col-12  col-md-6 column-gap-3 paddingleftformpro"  >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                              <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Unidad de medida *</label>
+                                 {
+                                errors.unidadmedida ?   <label form="slectform1" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}} >Unidad de medida *</label>: <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Unidad de medida *</label>
+
+
+                                 }
+                          
                                <select className="selctproduct" {...register("unidadmedida",{required:true})}>
                                 <option value={""} id="slectform1" >Elige una opcion</option>
                                 {
@@ -418,7 +430,11 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 
                                <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                              <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Linea *</label>
+                                 {
+                                errors.linea ? <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}} >Linea *</label>:<label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Linea *</label>
+                                 }  
+                           
+                             
                                <select className="selctproduct" {...register("linea",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                 {
@@ -433,7 +449,10 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                             </div>
                              <div className="col-12 col-md-6  paddingleftformpro" >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
-                              <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}  >Grupo *</label>
+                                          {
+                                errors.grupo ? <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>:<label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>
+                                 }  
+                            
                                <select className="selctproduct" {...register("grupo",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
@@ -451,6 +470,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                               
  <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"15px" ,marginLeft:"5px"}}>
+                                 
+                           
                                       <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px",marginLeft:"0"}} >Multivariante *</label>
                                      <div className={`${multivariable ? "toglemultirigh":"toglemulti"}`} onClick={()=>{
                                         setmultivariable(!multivariable)

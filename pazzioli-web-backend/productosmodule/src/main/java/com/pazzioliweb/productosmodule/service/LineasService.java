@@ -14,6 +14,6 @@ public interface LineasService {
 	
 	Lineas buscarPorId(Integer id);
 	
-	Page<Lineas> listar(Pageable pageable);
+	Page<Lineas> listar(String descripcion,Pageable pageable);
 	
 }

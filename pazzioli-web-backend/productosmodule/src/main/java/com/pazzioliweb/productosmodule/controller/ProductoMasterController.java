@@ -39,7 +39,7 @@ public class ProductoMasterController {
             @RequestBody ProductoMasterCreateDTO dto) {
     	
     	System.out.println("DTO PRODUCTO: " + dto.getProducto());
-    	System.out.println("DTO VARIANTES: " + dto.getVariantes());
+    	System.out.println("DTO VARIANTES: " + dto.getVariantes().getFirst());
 
         // Llamamos al service con los dos argumentos que requiere
         Productos producto = productoMasterService.crearProductoMaster(

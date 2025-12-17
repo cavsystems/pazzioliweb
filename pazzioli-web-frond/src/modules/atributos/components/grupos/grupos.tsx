@@ -2,17 +2,55 @@ import { CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CTable, CT
 import Iconlupa from "../../../../icons/iconlupabuscar";
 import Iconupdate from "../../../../icons/iconupdate";
 import Iconeliminar from "../../../../icons/iconeliminar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../../../apicofig";
 
 function Grupos() {
    const [codigomodal,setcodigomodal]=useState<boolean>(false)
+   const [actulizar,setactulizar]=useState<boolean>(false)
+      const [descripciongrupo,setdescripciongrupo]=useState<string>("")
+           const [codigogrupo,setcodigogrupo]=useState<number>(0)
+       const [grupo,setgrupo]=useState<string>("")
+         const [grupos,setgrupos]=useState<{
+          descripcion
+: 
+string,
+id
+: 
+number
+         }[]>([])
+
+        const traergrupos=async ()=>{
+       
+            
+                 const grupos=await api.get(`grupos/listar?page=0&size=10&sortField=id&sortDirection=desc&descripcion=${descripciongrupo}
+       `,{
+                   headers: {
+                           'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                         }
+               })
+
+             setgrupos(grupos.data.content)
+                //setlineas(lineas.data.content)
+        
+            
+               
+           }
+
+
+           useEffect(()=>{
+               traergrupos()
+           },[descripciongrupo])
     return ( 
         <>
           <div className="row  paddingcointainertable">
                  <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6  "  >
         
                              <div className="inputsearch">
-                                  <input type="text" className="inputlinea" />
+                                  <input type="text" className="inputlinea"  value={descripciongrupo} onChange={(e)=>{
+                            
+                              setdescripciongrupo(e.target.value)
+                          }} />
                                   <label className="labellinea">Grupos</label>
                                   <div className="diviconlupainventario">
                                     <Iconlupa width={17} height={17} />
@@ -50,17 +88,25 @@ function Grupos() {
                                                                       </CTableHead>
                                                                       <CTableBody>
                                                                       
-                                                                      <CTableRow>
+
+                                                                      {
+                                                                        grupos.map((item)=>{
+                                                                          return      <CTableRow>
                                                                     <CTableDataCell>
-                                                                     1   
+                                                                     {item.id} 
                                                                     </CTableDataCell>
                                                                     <CTableDataCell>
-                                                                     Calvin 
+                                                                     {item.descripcion}
                                                                     </CTableDataCell>
                                                                       <CTableDataCell>
                                                                   <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
                                                             <div className="col-6" style={{ maxWidth: 'fit-content' }} >
-                                                                <CButton title="Actulizar"  className="buttoniconnormal" >
+                                                                <CButton title="Actulizar"  className="buttoniconnormal"  onClick={()=>{
+                                                               setcodigogrupo(item.id)
+                                                               setgrupo(item.descripcion)
+                                                               setactulizar(true)
+                                                               setcodigomodal(true)
+                                                                }} >
                                                                   <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                                 </CButton>
                                                             </div>
@@ -77,6 +123,9 @@ function Grupos() {
                                                         </div>
                                                                     </CTableDataCell>
                                                                       </CTableRow>
+                                                                        })
+                                                                      }
+                                                                 
                                                                      
                                           
                                                           
@@ -99,6 +148,7 @@ function Grupos() {
                                                                     </CTable>
                                                              </div>
                    <CButton className="botonagregarsucursal fitcontentinferior" onClick={()=>{
+                    
                     setcodigomodal(true)
                    }}>Agregar</CButton>                                                         
                 </div>
@@ -110,7 +160,10 @@ function Grupos() {
                                                                                                                  <CInputGroup >
                                                                                     <CFormFloating className="margeniputempresa">
                                                                    
-                                                                                 <CFormInput placeholder=""  className="inputdatosempresa fontletre"   />
+                                                                                 <CFormInput placeholder=""  className="inputdatosempresa fontletre"  value={grupo}  onChange={(e)=>{
+                                                                                   
+                                                                                   setgrupo(e.target.value)
+                                                                                 }}/>
                                                                                
                                                                     
                                                                    <CFormLabel>Linea</CFormLabel>
@@ -121,11 +174,44 @@ function Grupos() {
                                                                    
                                                                                                        <div className="card-footer d-flex justify-content-center"  >
                                                                                                                  <button type="button"  className="botonretroceder" onClick={()=>{
+                                                                                                                  setcodigogrupo(0)
+                                                                                                                  setactulizar(false)
+                                                                                                                  setgrupo("")
                                                                                                                  setcodigomodal(false)
                                                                                                                  }}>Cancelar</button>
-                                                                   
+                                                                   {
+                                                                   !actulizar &&        <button type="button" className="botoncontinuar" onClick={async()=>{
+
+                                                                          const crearlinea=await api.post(`grupos`,{descripcion:grupo},{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+        await traergrupos()
+                                               setcodigomodal(false)
+                                               setgrupo("")
+                                               
+                                                                         }} >Guardar</button>
+                                                                   }
+
+                                                                   {
+                                                                    actulizar &&       <button type="button" className="botoncontinuar" onClick={async()=>{
+
+                                                                          const crearlinea=await api.put(`grupos/${codigogrupo}`,{descripcion:grupo},{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+        await traergrupos()
+                                               setcodigomodal(false)
+                                               setcodigogrupo(0)
+                                               setactulizar(false)
+                                               setgrupo("")
+                                               
+                                                                         }} >Actulizar</button>
+                                                                   }
                                                                             
-                                                                         <button type="button" className="botoncontinuar"  >Guardar</button>
+                                                                   
                                                                    
                                                                                                        </div>
                                                                                                </div>

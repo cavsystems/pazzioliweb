@@ -54,19 +54,20 @@ private final GruposServiceImpl service;
 	
 	@GetMapping("/listar")
     public ResponseEntity<PaginationResponse<Grupos>> listar(
+    		@RequestParam(defaultValue = "") String descripcion,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sortField,
-            @RequestParam(defaultValue = "asc") String sortDirection
+            @RequestParam(defaultValue = "desc") String sortDirection
     ) {
 
-        Sort sort = sortDirection.equalsIgnoreCase("asc")
+        Sort sort = sortDirection.equalsIgnoreCase("desc")
                 ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Grupos> resultado = service.listar(pageable);
+        Page<Grupos> resultado = service.listar(descripcion,pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

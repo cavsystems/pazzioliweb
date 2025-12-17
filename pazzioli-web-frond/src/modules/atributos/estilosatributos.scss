@@ -77,6 +77,10 @@ padding-left: 12px !important;
 padding: 12px 15px 12px 21px !important;
  }
 
+ .tablainventario th:last-child{
+     z-index:10 !important; /* Eleva la columna por encima de las demás */
+ }
+
 .tablainventario th:last-child::before,
 .tablainventario td:last-child::before {
   
@@ -260,6 +264,13 @@ opacity: 1 !important;
  
 }
 
+.tablainventario thead th {
+  position: sticky;
+  top: 0;
+  background: #fff; /* Fondo para que no se vea transparente */
+  z-index: 5;      /* Para que quede por encima de las filas */
+  text-align: center;
+}
 
 .tablainventariovalores th:last-child{
 text-align: center !important;

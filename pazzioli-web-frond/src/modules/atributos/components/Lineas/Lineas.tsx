@@ -3,30 +3,69 @@ import Iconupdate from "../../../../icons/iconupdate";
 import Usuariosicon from "../../../../icons/Isuarios";
 import Iconeliminar from "../../../../icons/iconeliminar";
 import Iconlupa from "../../../../icons/iconlupabuscar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modalconfirmar from "../../../../components/alertconfimacion";
+import api from "../../../../apicofig";
+import { Await } from "react-router";
 interface Lineas{
-  codigolinea:number,
-  nombre:string
+ descripcion
+: 
+string,
+id
+: 
+number
 }
 function Lineas() {
     const [codigomodal,setcodigomodal]=useState<boolean>(false)
      const [modalconfirmar,setmodalconfimar]=useState<boolean>(false)
     const [linea,setlinea]=useState<string>("")
      const [error,seterror]=useState<boolean>(false)
+     const [descripcionlinea,setdescripcionlinea]=useState<string>("")
       const [codigolinea,setcodigolinea]=useState<number>(0)
     const [actulizar,setactulizar]=useState<boolean>(false)
-    const [lineas,setlineas]=useState<Lineas[]>([{codigolinea:1,nombre:"aseo"},{codigolinea:2,nombre:"ropa"}])
+    
+    const [lineas,setlineas]=useState<Lineas[]>([])
     const cambiarestadomodal=()=>{
     setmodalconfimar(false)
     }
+     const traerlineasonchange=async (descrip="")=>{
+         const lineas=await api.get(`lineas/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
+`,{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+         setlineas(lineas.data.content)
+ 
+     }
+
+    const traerlineas=async ()=>{
+
+     
+          const lineas=await api.get(`lineas/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
+`,{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+         setlineas(lineas.data.content)
+ 
+     
+        
+    }
+    useEffect(()=>{
+          traerlineas()
+    },[descripcionlinea])
     return ( <>
     <div className="row  paddingcointainertable">
          <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6  "  >
 
                      <div className="inputsearch">
-                          <input type="text" className="inputlinea" />
-                          <label className="labellinea">Linea</label>
+                          <input type="text" className="inputlinea" value={descripcionlinea} onChange={(e)=>{
+                            
+                              setdescripcionlinea(e.target.value)
+                          }}/>
+                          <label className="labellinea" >Linea</label>
                           <div className="diviconlupainventario">
                             <Iconlupa width={17} height={17} />
                           </div>
@@ -68,10 +107,10 @@ function Lineas() {
                                                               lineas.map((item)=>{
                                                                 return   <CTableRow>
                                                             <CTableDataCell>
-                                                        {item.codigolinea}  
+                                                        {item.id}  
                                                             </CTableDataCell>
                                                             <CTableDataCell>
-                                                             {item.nombre}
+                                                             {item.descripcion}
                                                             </CTableDataCell>
                                                               <CTableDataCell>
                                                           <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
@@ -79,8 +118,8 @@ function Lineas() {
                                                         <CButton  className="buttoniconnormal" onClick={()=>{
                                                           setactulizar(true)
                                                           setcodigomodal(true)
-                                                          setlinea(item.nombre)
-                                                          setcodigolinea(item.codigolinea)
+                                                          setlinea(item.descripcion)
+                                                          setcodigolinea(item.id)
                                                         }} >
                                                           <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                         </CButton>
@@ -154,23 +193,27 @@ function Lineas() {
                                                                                        }}>Cancelar</button>
                                          
                                                   
-                                              {!actulizar && <button type="button" className="botoncontinuar"   onClick={()=>{
-                                                let codigomaximo=lineas.length === 0  ? 1:Math.max(...lineas.map(v => v.codigolinea)) + 1
-                                                setlineas(prev=> [...prev,{codigolinea:codigomaximo,nombre:linea}])
+                                              {!actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
+                                               /* let codigomaximo=lineas.length === 0  ? 1:Math.max(...lineas.map(v => v.codigolinea)) + 1
+                                                setlineas(prev=> [...prev,{codigolinea:codigomaximo,nombre:linea}])*/
+                                                const crearlinea=await api.post(`lineas`,{descripcion:linea},{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+        await traerlineas()
                                                setcodigomodal(false)
                                                setlinea("")
                                                }} >Guardar</button>}
 
 
-                                                       {actulizar && <button type="button" className="botoncontinuar"   onClick={()=>{
-                                                 const lineaupdate=lineas.find((item=>item.codigolinea===codigolinea))
-                                              setlineas(prev =>
-  prev.map(item =>
-    item.codigolinea === codigolinea
-      ? { ...item, nombre: linea }
-      : item
-  )
-)
+                                                       {actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
+                                                       const actulizarlinea=await api.put(`lineas/${codigolinea}`,{descripcion:linea},{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }
+        })
+        await traerlineas()
                                                setcodigomodal(false)
                                                setactulizar(false)
                                                setlinea("")

@@ -55,8 +55,9 @@ public class LineasController {
 	@GetMapping("/listar")
     public ResponseEntity<PaginationResponse<Lineas>> listar(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "20") int size,
             @RequestParam(defaultValue = "id") String sortField,
+            @RequestParam(defaultValue = "") String descripcion,
             @RequestParam(defaultValue = "asc") String sortDirection
     ) {
 
@@ -66,7 +67,7 @@ public class LineasController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Lineas> resultado = service.listar(pageable);
+        Page<Lineas> resultado = service.listar(descripcion,pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

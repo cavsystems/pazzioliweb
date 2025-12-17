@@ -46,7 +46,11 @@ public class LineasServiceImpl implements LineasService{
     }
 	
 	@Override
-	public Page<Lineas> listar(Pageable pageable) {
-        return repo.findAll(pageable);
+	public Page<Lineas> listar(String descripcion,Pageable pageable) {
+		   if (descripcion == null || descripcion.isBlank()) {
+		        return repo.findAll(pageable);
+		    }
+		    return repo.findByDescripcionContainingIgnoreCase(descripcion, pageable);
+		         
     }
 }

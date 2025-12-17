@@ -2,10 +2,25 @@ import { CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CModal, CM
 import Iconojovariante from "../../../../icons/iconojovariante";
 import Iconeliminar from "../../../../icons/iconeliminar";
 import Iconupdate from "../../../../icons/iconupdate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import api from "../../../../apicofig";
 
-function Valorescaracteristicas({modalvalores,setmodalvalores,setcodigomodalvalores}:any) {
+function Valorescaracteristicas({modalvalores,setmodalvalores,codigotipoca, setcodigotipoca}:any) {
     const [codigomodal,setcodigomodal]=useState<boolean>(false)
+    const valorescarateristicasfun=async(codigotipocar:number)=>{
+         const traercara=await api.get(`caracteristicas/tipo/${codigotipocar}`,{
+            headers: {
+                    'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                  }})
+
+                  console.log("traer tipo caracteristica",traercara)
+    }
+    useEffect(()=>{
+       if(codigotipoca>0){
+        valorescarateristicasfun(codigotipoca)
+
+       }
+    },[codigotipoca])
     return (  <>
       <CModal
             alignment="center"

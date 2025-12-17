@@ -14,5 +14,5 @@ public interface GruposService {
 	
 	Grupos buscarPorId(Integer id);
 	
-	Page<Grupos> listar(Pageable pageable);
+	Page<Grupos> listar(String descripcion,	Pageable pageable);
 }
