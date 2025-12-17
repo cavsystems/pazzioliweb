@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 
 public interface CaracteristicaService {
@@ -19,7 +20,7 @@ public interface CaracteristicaService {
 
     Page<Caracteristica> listar(Pageable pageable);
 
-    Page<Caracteristica> listarPorTipo(Long tipoId, Pageable pageable);
+    Page<CaracteristicaDTO_basico> listarPorTipo(Long tipoId, Pageable pageable);
     
    /* Page<CaracteristicaDTO> traerCaracteristicasDetale(Pageable pageable);*/
 }

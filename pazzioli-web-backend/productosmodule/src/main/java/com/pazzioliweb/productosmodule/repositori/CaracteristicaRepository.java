@@ -10,10 +10,28 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.dtos.idcaracteristicasDTOS;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 
 public interface CaracteristicaRepository extends JpaRepository<Caracteristica, Long>{
+	
+	@Query("""
+		    SELECT NEW com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico(
+			    c.caracteristicaId,
+			    c.nombre,
+			    t.tipoCaracteristicaId,
+			    t.nombre
+			)
+			FROM Caracteristica c
+			JOIN c.tipo t
+			WHERE t.tipoCaracteristicaId = :tipoId
+		""")
+		Page<CaracteristicaDTO_basico> findByTipoIdDTO(
+		    @Param("tipoId") Long tipoId,
+		    Pageable pageable
+		);
+	
 	Page<Caracteristica> findByTipoTipoCaracteristicaId(Long tipoId, Pageable pageable);
 	
 	@Query("""

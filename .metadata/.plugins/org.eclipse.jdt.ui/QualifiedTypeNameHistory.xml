@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.movimientosinventariomodule.service.MovimientoInventarioService"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.movimientosinventariomodule.entity.MovimientoInventarioDetalle"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.movimientosinventariomodule.entity.Kardex"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.comprobantesmodule.repositori.ComprobantesRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.productosmodule.entity.Precios"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.productosmodule.entity.Caracteristica"/>
+    <fullyQualifiedTypeName name="com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico"/>
+</qualifiedTypeNameHistroy>

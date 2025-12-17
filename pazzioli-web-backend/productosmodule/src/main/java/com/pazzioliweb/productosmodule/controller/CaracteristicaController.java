@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.service.CaracteristicaService;
@@ -100,7 +101,7 @@ public class CaracteristicaController {
  
     
     @GetMapping("/tipo/{tipoId}")
-    public ResponseEntity<PaginationResponse<Caracteristica>> listarPorTipo(
+    public ResponseEntity<PaginationResponse<CaracteristicaDTO_basico>> listarPorTipo(
             @PathVariable Long tipoId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -114,7 +115,7 @@ public class CaracteristicaController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Caracteristica> resultado = service.listarPorTipo(tipoId, pageable);
+        Page<CaracteristicaDTO_basico> resultado = service.listarPorTipo(tipoId, pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

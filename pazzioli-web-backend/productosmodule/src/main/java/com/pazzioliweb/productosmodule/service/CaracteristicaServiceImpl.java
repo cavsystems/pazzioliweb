@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.repositori.TipoCaracteristicaRepository;
@@ -71,8 +72,8 @@ public class CaracteristicaServiceImpl implements CaracteristicaService {
 	}
 
 	@Override
-	public Page<Caracteristica> listarPorTipo(Long tipoId, Pageable pageable) {
-		return repo.findByTipoTipoCaracteristicaId(tipoId, pageable);
+	public Page<CaracteristicaDTO_basico> listarPorTipo(Long tipoId, Pageable pageable) {
+		return repo.findByTipoIdDTO(tipoId, pageable);
 	}
 
 	/*@Override
