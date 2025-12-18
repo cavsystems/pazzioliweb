@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
 import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.service.CaracteristicaService;
@@ -36,16 +38,18 @@ public class CaracteristicaController {
     }
 
     @PostMapping
-    public ResponseEntity<Caracteristica> crear(@RequestBody Caracteristica c) {
-        return ResponseEntity.ok(service.crear(c));
+    public ResponseEntity<ApiResponse<Caracteristica>> crear(@RequestBody Caracteristica c) {
+    	ApiResponse<Caracteristica> respuesta = service.crear(c); 
+        return ResponseEntity.ok(respuesta);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Caracteristica> actualizar(
+    public ResponseEntity<ApiResponse<Caracteristica>> actualizar(
             @PathVariable Long id,
             @RequestBody Caracteristica c
     ) {
-        return ResponseEntity.ok(service.actualizar(id, c));
+    	ApiResponse<Caracteristica> respuesta = service.actualizar(id,c); 
+        return ResponseEntity.ok(respuesta);
     }
 
     @DeleteMapping("/{id}")
@@ -100,7 +104,7 @@ public class CaracteristicaController {
  
     
     @GetMapping("/tipo/{tipoId}")
-    public ResponseEntity<PaginationResponse<Caracteristica>> listarPorTipo(
+    public ResponseEntity<PaginationResponse<CaracteristicaDTO_basico>> listarPorTipo(
             @PathVariable Long tipoId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -114,7 +118,7 @@ public class CaracteristicaController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Caracteristica> resultado = service.listarPorTipo(tipoId, pageable);
+        Page<CaracteristicaDTO_basico> resultado = service.listarPorTipo(tipoId, pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

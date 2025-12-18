@@ -33,6 +33,9 @@ public class Comprobantes {
     @Column(name = "afecta_inventario", columnDefinition = "ENUM('SI','NO') default 'SI'")
     private String afecta_inventario;
 
+    public Comprobantes() {
+    }
+    
 	public Integer getComprobante_id() {
 		return comprobante_id;
 	}

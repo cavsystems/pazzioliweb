@@ -1,11 +1,19 @@
 package com.pazzioliweb.productosmodule.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
+import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
+import com.pazzioliweb.productosmodule.entity.TipoCaracteristica;
 import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.repositori.TipoCaracteristicaRepository;
 
@@ -23,33 +31,56 @@ public class CaracteristicaServiceImpl implements CaracteristicaService {
 	}
 
 	@Override
-	public Caracteristica crear(Caracteristica c) {
+	public ApiResponse<Caracteristica> crear(Caracteristica c) {
 
 		if (c.getTipo() == null || c.getTipo().getTipoCaracteristicaId() == null) {
-			throw new IllegalArgumentException("Debe asociar un tipo de característica");
+			
+			return   ApiResponse.failure("Debe asociar un tipo de característica");
+			
 		}
 
 		tipoRepo.findById(c.getTipo().getTipoCaracteristicaId())
 				.orElseThrow(() -> new EntityNotFoundException("El tipo de característica no existe"));
-
-		return repo.save(c);
+		
+	 List<Caracteristica> tipocara= repo.findBynombretipo(c.getNombre(),c.getTipo().getTipoCaracteristicaId());
+	 if(tipocara.size()>0) {
+		   return ApiResponse.failure("Caracteristica ya existente");
+	 }
+	    Caracteristica  ca=repo.save(c);
+		return ApiResponse.success("Caracteristica creada correctamente",ca);
 	}
-
+	@Transactional
 	@Override
-	public Caracteristica actualizar(Long id, Caracteristica c) {
+	public ApiResponse<Caracteristica> actualizar(Long id, Caracteristica c) {
 
-		Caracteristica existente = buscarPorId(id);
+		
 
-		existente.setNombre(c.getNombre());
+		
 
-		if (c.getTipo() != null) {
-			tipoRepo.findById(c.getTipo().getTipoCaracteristicaId())
-					.orElseThrow(() -> new EntityNotFoundException("El tipo de característica no existe"));
+	
+		List<Caracteristica> tipocara= repo.findBynombretipo(c.getNombre(),c.getTipo().getTipoCaracteristicaId());
+		System.out.println(tipocara.size()+c.getNombre()+c.getTipo().getTipoCaracteristicaId());
+		 if(tipocara.size()>0) {
+			 System.out.println(tipocara.size()+c.getNombre()+c.getTipo().getTipoCaracteristicaId());
+			   return ApiResponse.failure("Caracteristica ya existente");
+		 }
+		 Caracteristica existente = buscarPorId(id);
+	
+		 System.out.println("continuo");
+		 existente.setNombre(c.getNombre());
+			if (c.getTipo() != null) {
+				TipoCaracteristica tipo =	tipoRepo.findById(c.getTipo().getTipoCaracteristicaId())
+						.orElseThrow(() -> new EntityNotFoundException("El tipo de característica no existe"));
 
-			existente.setTipo(c.getTipo());
-		}
-
-		return repo.save(existente);
+				existente.setTipo(tipo);
+			}
+			 
+		 Caracteristica  ca=repo.save(existente);
+			// forzar carga de la relación tipo
+		 if (ca.getTipo() != null) {
+		     ca.getTipo().getNombre(); // <--- aquí Hibernate carga `tipo` completamente
+		 }
+			return ApiResponse.success("Caracteristica Actulizada correctamente",null);
 	}
 
 	@Override
@@ -71,8 +102,8 @@ public class CaracteristicaServiceImpl implements CaracteristicaService {
 	}
 
 	@Override
-	public Page<Caracteristica> listarPorTipo(Long tipoId, Pageable pageable) {
-		return repo.findByTipoTipoCaracteristicaId(tipoId, pageable);
+	public Page<CaracteristicaDTO_basico> listarPorTipo(Long tipoId, Pageable pageable) {
+		return repo.findByTipoIdDTO(tipoId, pageable);
 	}
 
 	/*@Override
