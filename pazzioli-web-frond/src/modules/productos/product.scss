@@ -86,6 +86,16 @@ max-width: 208px;
     color: var(--gris-pazzioli);
     margin-left: 12px;
 }
+.titulosproerror{
+   font-family: var(--unnamed-font-family-open-sans);
+    font-style: var(--unnamed-font-style-normal);
+    font-weight: var(--unnamed-font-weight-normal);
+    font-size: var(--unnamed-font-size-14);
+    line-height: var(--unnamed-line-spacing-17);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--rojo);
+    margin-left: 12px;
+}
 
 .containertipospro{
     column-gap: 0px !important;

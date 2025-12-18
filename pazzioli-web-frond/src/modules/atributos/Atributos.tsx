@@ -7,6 +7,7 @@ import Grupos from "./components/grupos/grupos";
 import Caracteristicas from "./components/caracteristicas/caracteristicas";
 function Atributos() {
     const [itemsformempresa, setitemsformempresa] = useState(1)
+   
   return (  
         <>
         
@@ -43,15 +44,21 @@ function Atributos() {
       </div>
 
         <CTabContent>
-          <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
+        {
+          itemsformempresa===1 && <CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={1} style={itemsformempresa===1 ? {display:''}:{display:'none'}}>
        <Lineas/>
         </CTabPanel>
-        <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
+        }  
+
+        {
+          itemsformempresa===2 &&  <CTabPanel className="p-3"  aria-labelledby="home-tab-pane" itemKey={2} style={itemsformempresa===2 ? {display:''}:{display:'none'}}>
         
        < Grupos
        />
           
         </CTabPanel>
+        }
+       
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
             

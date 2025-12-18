@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pazzioliweb.commonbacken.dtos.response.ApiResponse;
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
@@ -37,16 +38,18 @@ public class CaracteristicaController {
     }
 
     @PostMapping
-    public ResponseEntity<Caracteristica> crear(@RequestBody Caracteristica c) {
-        return ResponseEntity.ok(service.crear(c));
+    public ResponseEntity<ApiResponse<Caracteristica>> crear(@RequestBody Caracteristica c) {
+    	ApiResponse<Caracteristica> respuesta = service.crear(c); 
+        return ResponseEntity.ok(respuesta);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Caracteristica> actualizar(
+    public ResponseEntity<ApiResponse<Caracteristica>> actualizar(
             @PathVariable Long id,
             @RequestBody Caracteristica c
     ) {
-        return ResponseEntity.ok(service.actualizar(id, c));
+    	ApiResponse<Caracteristica> respuesta = service.actualizar(id,c); 
+        return ResponseEntity.ok(respuesta);
     }
 
     @DeleteMapping("/{id}")

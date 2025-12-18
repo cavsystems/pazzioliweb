@@ -65,4 +65,18 @@ public interface CaracteristicaRepository extends JpaRepository<Caracteristica, 
 	
 
     List<Caracteristica> findByNombreIn(List<String> valores);
+    @Query("""
+		    SELECT  c
+		    FROM Caracteristica c 
+		    JOIN c.tipo t
+		    WHERE c.nombre = :nombre
+		      AND t.tipoCaracteristicaId=:tipocara
+		""")
+    List<Caracteristica>  findBynombretipo(
+    		@Param("nombre") String nombre,
+    		 @Param("tipocara")    Long Tipo
+    		);
 }
+
+
+

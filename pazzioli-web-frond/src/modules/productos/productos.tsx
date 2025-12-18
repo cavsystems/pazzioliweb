@@ -13,7 +13,39 @@ import Providercodigobarras, { codigosbarrascontex } from "./contextcodigobarras
 import Formproduct from "./components/formproducto";
 import api from "../../apicofig";
 import Modalconfirmar from "../../components/alertconfimacion";
+interface productolista{
+  cantidadGlobal
+: 
+0
+codigoContable
+: 
+"0006"
+costo
+: 
+35000
+descripcion
+: 
+"Balon futbol grande - uygy"
+fechaUltimaCompra
+: string
+fechaUltimaVenta
+:string 
 
+grupo
+:string 
+
+linea
+: string
+
+productoId
+: number
+
+referencia
+: string
+
+unidadMedida
+: number | null
+}
 function Productos() {
     const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
 
@@ -26,7 +58,7 @@ function Productos() {
        setcodigovariante,}=codigosbarrascontex()
      const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
      const traerproductos=async()=>{
-      const productos= await api.get(`productos/listar`,{
+      const productos= await api.get(`variantes/listarInventarioBasico`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});

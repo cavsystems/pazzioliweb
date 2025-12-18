@@ -178,6 +178,24 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
 
             console.log(produ)
              }
+function cambiarPestana() {
+ settap((prev) => (prev + 1))
+                       if(!multivariable){
+                         setvariantedefault(prev=>({...prev,descripcion:methods.getValues("descripcion"),imagen:methods.getValues("imagenproducto")}))
+                       }
+                     // e.stopPropagation();
+}
+
+             const onValid = (data: any) => {
+               console.log("Formulario OK:", data);
+               // aquí *solo si está validado* puedes cambiar de pestaña
+               cambiarPestana();
+             }
+             
+             const onInvalid = (errors: any) => {
+               console.log("Faltan campos obligatorios:", errors);
+             
+             }
 
               const onError=(error)=>{
  console.log("variante",variantes,error)
@@ -227,13 +245,7 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                       } style={tap<2 ? {display:'none'}:{display:''}}>Atras</button>
                     
                     
-                           {tap>=2 ?  botonupdateu ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={() => fileInputRef.current?.click()}>Actualizar</button>:<button type="button" className="botoncontinuarguardar"  key="guardar"    onClick={submitForm}>Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={(e)=>{
-                       settap((prev) => (prev + 1))
-                       if(!multivariable){
-                         setvariantedefault(prev=>({...prev,descripcion:methods.getValues("descripcion"),imagen:methods.getValues("imagenproducto")}))
-                       }
-                      e.stopPropagation();}
-                      }>Continuar</button>}
+                           {tap>=2 ?  botonupdateu ? <button type="submit" className="botoncontinuarguardar"  key="guardar"    onClick={() => fileInputRef.current?.click()}>Actualizar</button>:<button type="button" className="botoncontinuarguardar"  key="guardar"    onClick={submitForm}>Guardar</button> :     <button type="button" className="botoncontinuar"  key="continuar" onClick={methods.handleSubmit(onValid, onInvalid)}>Continuar</button>}
                             </CModalFooter>
 
           </CModal>
@@ -242,3 +254,5 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
 }
 
 export default Formproduct;
+
+

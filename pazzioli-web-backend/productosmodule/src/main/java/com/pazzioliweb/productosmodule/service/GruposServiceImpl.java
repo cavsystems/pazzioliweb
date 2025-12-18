@@ -46,7 +46,7 @@ private final GrupoRepositori repo;
     }
 	
 	@Override
-	public Page<Grupos> listar(Pageable pageable) {
-        return repo.findAll(pageable);
+	public Page<Grupos> listar(String descripcion,Pageable pageable) {
+        return repo.findByDescripcionContainingIgnoreCase(descripcion,pageable);
     }
 }
