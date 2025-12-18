@@ -18,7 +18,7 @@ public interface CaracteristicaService {
     Page<CaracteristicaDTO> buscarPornombretipo(  String ca,
           String tipo,Pageable pageable);
 
-    Page<Caracteristica> listar(Pageable pageable);
+    Page<CaracteristicaDTO_basico> listar(Pageable pageable);
 
     Page<CaracteristicaDTO_basico> listarPorTipo(Long tipoId, Pageable pageable);
     

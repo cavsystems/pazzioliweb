@@ -77,7 +77,7 @@ public class CaracteristicaController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<PaginationResponse<Caracteristica>> listar(
+    public ResponseEntity<PaginationResponse<CaracteristicaDTO_basico>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "caracteristicaId") String sortField,
@@ -90,7 +90,7 @@ public class CaracteristicaController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<Caracteristica> resultado = service.listar(pageable);
+        Page<CaracteristicaDTO_basico> resultado = service.listar(pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
