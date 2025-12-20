@@ -116,4 +116,24 @@ public class ExistenciasController {
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
+    @GetMapping("/variante-bodega/{varianteId}")
+    public ResponseEntity<PaginationResponse<ExistenciasBodegaDTO>> listarConBodegaPorVariante(
+            @PathVariable Integer varianteId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "existenciaId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ExistenciasBodegaDTO> resultado =
+        		service.listarExistenciasConNombreBodegaPorVariante(varianteId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
 }

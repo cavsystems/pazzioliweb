@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
@@ -127,5 +128,9 @@ public class ExistenciasServiceImpl implements ExistenciasService{
     public Page<ExistenciasResponseDTO> listarPorBodega(Integer bodegaId, Pageable pageable) {
         return repo.findByBodega_Codigo(bodegaId, pageable)
                 .map(mapper::toResponseDto);
+    }
+    @Override
+    public Page<ExistenciasBodegaDTO> listarExistenciasConNombreBodegaPorVariante(Integer varianteId, Pageable pageable) {
+        return repo.listadoExistenciasNombreBodegaVariante(varianteId, pageable);
     }
 }
