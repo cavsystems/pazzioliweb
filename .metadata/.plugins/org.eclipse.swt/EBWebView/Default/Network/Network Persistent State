@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-{"net":{"http_server_properties":{"servers":[],"supports_quic":{"address":"192.168.1.19","used_quic":true},"version":5},"network_qualities":{"CAASABiAgICA+P////8B":"4G","CAESABiAgICA+P////8B":"4G"}}}
-=======
-{"net":{"http_server_properties":{"servers":[],"supports_quic":{"address":"192.168.1.40","used_quic":true},"version":5},"network_qualities":{"CAASABiAgICA+P////8B":"3G"}}}
->>>>>>> ffd2b42ac7069bf6768eb0c91f355ee851a247fc
+{"net":{"http_server_properties":{"servers":[],"supports_quic":{"address":"192.168.1.19","used_quic":true},"version":5},"network_qualities":{"CAASABiAgICA+P////8B":"4G","CAESABiAgICA+P////8B":"4G","CAISABiAgICA+P////8B":"4G"}}}
