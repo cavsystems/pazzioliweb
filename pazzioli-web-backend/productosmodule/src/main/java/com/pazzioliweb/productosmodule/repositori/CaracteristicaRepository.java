@@ -25,6 +25,20 @@ public interface CaracteristicaRepository extends JpaRepository<Caracteristica, 
 			)
 			FROM Caracteristica c
 			JOIN c.tipo t
+		""")
+		Page<CaracteristicaDTO_basico> traerTodasCaracteristicas(
+		    Pageable pageable
+		);
+		
+	@Query("""
+		    SELECT NEW com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico(
+			    c.caracteristicaId,
+			    c.nombre,
+			    t.tipoCaracteristicaId,
+			    t.nombre
+			)
+			FROM Caracteristica c
+			JOIN c.tipo t
 			WHERE t.tipoCaracteristicaId = :tipoId
 		""")
 		Page<CaracteristicaDTO_basico> findByTipoIdDTO(

@@ -97,8 +97,8 @@ public class CaracteristicaServiceImpl implements CaracteristicaService {
 	}
 
 	@Override
-	public Page<Caracteristica> listar(Pageable pageable) {
-		return repo.findAll(pageable);
+	public Page<CaracteristicaDTO_basico> listar(Pageable pageable) {
+		return repo.traerTodasCaracteristicas(pageable);
 	}
 
 	@Override

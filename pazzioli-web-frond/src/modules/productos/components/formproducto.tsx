@@ -65,16 +65,22 @@ const traervariantes=async ()=>{
   bodega: bodegas[];
   
   codigobarras:string,}[]=[]
- variantback.data.content.map(item=>{
+  await Promise.all(variantback.data.content.map( async (item)=>{
     item.detalles.forEach(item2=>{
       atribu={...atribu,[item2.tipo]:item2.caracteristicaNombre }
     })
-        
+         const productbodega=await api.get(`existencias/variante-bodega/${item.productoVarianteId}`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            console.log("bodegas variante",productbodega)
+
     multiva.push({
     productoVarianteId: item.productoVarianteId,
     imagen: "",
     atributos:atribu,
-    bodega: [],
+    bodega: productbodega.data.content,
     codigobarras: item.codigobarras ?? ""
   });
 
@@ -82,7 +88,7 @@ const traervariantes=async ()=>{
 
   
     
-  })
+  }))
 
   console.log( "multiva variante",variantback)
  setVariantes(multiva)

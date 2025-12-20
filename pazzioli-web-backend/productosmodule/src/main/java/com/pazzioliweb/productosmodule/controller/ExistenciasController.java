@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;
@@ -113,6 +114,26 @@ public class ExistenciasController {
 
         Page<ExistenciasResponseDTO> resultado =
         		service.listarPorBodega(bodegaId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+    @GetMapping("/variante-bodega/{varianteId}")
+    public ResponseEntity<PaginationResponse<ExistenciasBodegaDTO>> listarConBodegaPorVariante(
+            @PathVariable Integer varianteId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "existenciaId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ExistenciasBodegaDTO> resultado =
+        		service.listarExistenciasConNombreBodegaPorVariante(varianteId, pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

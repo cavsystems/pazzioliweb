@@ -248,7 +248,9 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
      useEffect(()=>{
                   if(productoid>0 && product  && grupo.length > 0  && unidadmedida.length > 0 && impuesto.length > 0 && lineas.length > 0 && tipoproducto.length > 0){
                       const inud=unidadmedida.find(item=> item.sigla === product.unidadMedida
-)                       
+)                     
+
+
                   console.log("grupo id",product)
                    console.log("und medida",inud)
                     let descripcionfinal

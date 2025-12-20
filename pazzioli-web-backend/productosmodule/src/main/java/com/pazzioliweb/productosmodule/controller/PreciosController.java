@@ -37,6 +37,7 @@ public class PreciosController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
             @RequestParam(defaultValue = "precioId") String sortField,
+            
             @RequestParam(defaultValue = "asc") String sortDirection
     ) {
     	
@@ -50,6 +51,28 @@ public class PreciosController {
     	
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
+    
+    
+    @GetMapping("/listar/{id}")
+    public ResponseEntity<PaginationResponse<PrecioResponseDTO>> listarprecioproduct(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "0") String id,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "precioId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+    	
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        
+        Page<PrecioResponseDTO> resultado = service.listar(pageable);
+    	
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<PrecioResponseDTO> obtener(@PathVariable Integer id) {
