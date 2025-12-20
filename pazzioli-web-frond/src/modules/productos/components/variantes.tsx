@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type SetStateAction,type Dispatch } from "react";
 import { CTable, CTableHead, CTableBody, CTableRow, CTableHeaderCell, CTableDataCell, CFormSelect, CFormInput, CButton } from "@coreui/react";
 import Iconupdate from "../../../icons/iconupdate";
 import Iconbodega from "../../../icons/Iconbodega";
@@ -11,6 +11,7 @@ import Downloadimg from "../../../icons/icondonwloadimg";
 import { createPortal } from "react-dom";
 import api from "../../../apicofig";
 import { useFormContext } from "react-hook-form";
+
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
@@ -37,14 +38,24 @@ tipo
 
 interface Variante {
   productoVarianteId: number;
-  imagen:"";
+  imagen:string;
   
   atributos: { [key: string]:string}; // <--- dinámico
   bodega: bodegas[];
   codigobarras:string,
 
 }
-function Variantes({variantedefault,multivariable,setmultivariable,variantes, setVariantes,setceldaatributos}:any) {
+
+
+interface Variantedfault {
+ descripcion:string,
+ imagen?:  File | null;
+}
+
+
+
+
+function Variantes({variantedefault,multivariable,setmultivariable,variantes, setVariantes,setceldaatributos}:{variantedefault:Variantedfault,multivariable:boolean,setmultivariable: Dispatch<SetStateAction<boolean>>,variantes:Variante[],setVariantes:Dispatch<SetStateAction<Variante[]>>,setceldaatributos:Dispatch<SetStateAction<string[]>> }) {
     //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
  
   const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -76,16 +87,58 @@ archivo como si lo arrastraras sobre la página, causando la ventana emergente o
 
 Y en tu caso, aunque lo aplicas en el contenedor, el img dentro del dropzone
  también recibe el evento, y ahí no estás previniendo el comportamiento. */
+const establecerdefaulva=async()=>{
+  console.log("variante de fault",variantedefault)
+ setAtributoscelda(["Descripción"])
+ const nuevosAtributos:{ [key: string]: string } = {};
+console.log("estableciendo variante por defecto")
+    nuevosAtributos["Descripción"] =variantedefault.descripcion;  // cada atributo tendrá un input
+    const result=await crearproductodefault()
+    setVariantes([
+    {
+      productoVarianteId:0,
+      imagen:result,
+      atributos: nuevosAtributos,
+      bodega: [],
+      codigobarras:""
+    }])
+}
 
 useEffect(() => {
-     if (variantes.length>0){
+
+  if(atributos.length>0){
+
+       if (variantes.length>0){
     
       const claves = Object.keys(variantes[0].atributos);
+
+      claves.map(item=>{
+        
+        const element=document.getElementById(`idretencion${item}`) as HTMLInputElement | null;
+        console.log(element)
+          
+  if (element) {
+    element.checked = true; // ejemplo
+  }
+
+      })
       setAtributoscelda(claves)
+
+      
      }
+if(variantedefault.descripcion!=""){
+ 
+   establecerdefaulva()
+
+}
+
     if(variantedefault.imagen){
      convertiraurl(variantedefault.imagen)
   }
+  }
+},[atributos])
+useEffect(() => {
+  
   
   const prevent = (e: DragEvent) => {
     e.preventDefault();
@@ -107,6 +160,35 @@ const convertiraurl = (file: File) => {
     reader.readAsDataURL(file);
  
 };
+
+const crearproductodefault = ( ):Promise<string> => {
+
+   return new Promise((resolve, reject) => {
+    if(variantedefault.imagen){
+const reader = new FileReader();
+
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+      } else {
+        reject(new Error("Resultado no es string"));
+      }
+    };
+
+    reader.onerror = () => {
+      reject(reader.error);
+    };
+
+    reader.readAsDataURL(variantedefault.imagen);
+    }else{
+       resolve("");
+    }
+    
+  });
+ 
+ 
+ 
+};
 // Manejar archivos arrastrados
 const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
   e.preventDefault();
@@ -119,6 +201,8 @@ const handleDrop = (e: React.DragEvent<HTMLDivElement>, index: number) => {
     reader.readAsDataURL(file);
   }
 };
+
+
 
 
 const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -392,7 +476,7 @@ const agregarVariante = () => {
                   }
                    setatrractual("")
                }}
-            value={v.atributos[attr] || ""}
+           value={v.atributos[attr] || ""}
             onChange={ async e => {
                console.log("item variante",v,i)
               const nuevas = [...variantes];
@@ -533,26 +617,34 @@ Distancia desde el borde superior del viewport
 
 
    
-   {
-    !multivariable &&
-
-    <div className="tabla-wrappervariante ">
+      {
+     !multivariable && ( 
+      <div className="tabla-wrappervariante ">
 <CTable className="tablavariantes">
         <CTableHead>
           <CTableRow>
              <CTableHeaderCell>Imagen</CTableHeaderCell>
-          
-  <CTableHeaderCell>Descripcion</CTableHeaderCell>
+            {atributoscelda.map(attr => (
+      <CTableHeaderCell key={attr}>{attr}</CTableHeaderCell>
+    ))}
+ 
        
             <CTableHeaderCell>Acciones</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
         <CTableBody>
+            {variantes.map((v, i) =>     {
+            
+             
+              return(
 
-             <CTableDataCell>
-                <div
-        
-              
+    <CTableRow key={i}>
+        <CTableDataCell >
+          <div
+               onClick={() => fileRefs.current[i]?.click()}
+                   onDrop={(e) => handleDrop(e, i)}     
+
+  onDragOver={handleDragOver}
   style={{
     width: "55px",
     height: "55px",
@@ -565,13 +657,9 @@ Distancia desde el borde superior del viewport
   }}
   className="d-flex justify-content-center align-items-center"
 >
-  {
-   
-  variantedefault.imagen ? 
-   
-  (
+  {v.imagen ? (
     <img
-      src={imgdefault}
+      src={v.imagen}
       alt="Preview"
       style={{ width: "100%", height: "100%", objectFit: "cover" }}
     />
@@ -584,7 +672,7 @@ Distancia desde el borde superior del viewport
     </>
   )}
     <input
-        
+           ref={(el) => (fileRefs.current[i] = el)}
             type="file"
             accept="image/*"
             style={{ display: "none" }}
@@ -601,20 +689,54 @@ Distancia desde el borde superior del viewport
           />
 </div>
 
-            
-          </CTableDataCell>
-           <CTableDataCell>{variantedefault.descripcion}</CTableDataCell>
-         <CTableDataCell >
+        </CTableDataCell>
+      {atributoscelda.map(attr => (
+        <CTableDataCell key={attr}>
+          {v.atributos[attr]}
+        </CTableDataCell>
+      ))}
+
+      
+
+     
+  <CTableDataCell >
                                                        <div className="d-flex flex-nowrap justify-content-center align-items-center containerinputvariante" style={{gap:"12px"  }} >
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                               <CButton  className="buttoniconnormal" onClick={async ()=>{
+                                                                if(v.codigobarras===""){
+                                                                  let codigocontable
+                                                                  if(!getValues("codigo")){
+                                                                       codigocontable=""                                          
+                                                                  }else{
+                                                                      codigocontable=getValues("codigo")
+                                                                  }
+                                                                  let contrefe=Object.values(v.atributos)
+                                                                  let barrarformada="";
+                                                                      const listaid= await api.post("caracteristicas/buscarIds", contrefe,{headers: {
+                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                                              }});
+                                                                listaid.data.forEach(item3=>{
+                                                                barrarformada+=item3.toString()
+                                                                })
+                                                                    console.log("codigobarra formado",codigocontable+barrarformada,codigocontable,barrarformada)
+                                                                  setcodigobarra(codigocontable+barrarformada)
+                                                                   setcodigobarraonchange(codigocontable+barrarformada)
+                                                                     setcodigomodal(true)
+                                                              setcodigoidvariante(v.productoVarianteId)
+                                                                  return
+                                                                }
+                                                              setcodigobarraonchange(v.codigobarras)
+                                                              setcodigovariante(v.productoVarianteId)
                                                               setcodigomodal(true)
+                                                              setcodigoidvariante(v.productoVarianteId)
+
                                                                }} >    <  Iconcodigobarras  width={22} height={22.5} /></CButton>
                                                            </div>
                                                            <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={()=>{
                                                                 setmodalbo(true)
                                                                setBodegaSeleccionada(v.bodega);
+
                                                                setindexvariante(i);
                                                                }} >    <Iconbodega  width={19} height={19.5} color={"#555"}  /></CButton>
                                                            </div>
@@ -630,11 +752,14 @@ Distancia desde el borde superior del viewport
                                                         
                                                        </div>
                                                      </CTableDataCell>
+    </CTableRow>
+  )})}
         </CTableBody>
       </CTable>
       </div>
-
+    )
    }
+
      
       <Bodegasvariantes modalbo={modalbo} setmodalbo={setmodalbo} agregarbodega={agregarbodega} BodegaSeleccionada={bodegaSeleccionada}  setBodegaSeleccionada={setBodegaSeleccionada} indexvariante={indexvariante} variantes={variantes} setvariantes={setVariantes} setindexvariante={setindexvariante}  />
     </div>

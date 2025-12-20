@@ -775,3 +775,7 @@ color: var(--blanco) !important;
 .inputradios{
     border-radius: 6px !important;
 }
+
+ .paddingbottom{
+    padding-bottom: 15px !important;
+ }

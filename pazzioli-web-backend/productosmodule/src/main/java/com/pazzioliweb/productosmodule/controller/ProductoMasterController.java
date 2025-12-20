@@ -39,8 +39,9 @@ public class ProductoMasterController {
             @RequestBody ProductoMasterCreateDTO dto) {
     	
     	System.out.println("DTO PRODUCTO: " + dto.getProducto());
+    	System.out.println("DTO PRODUCTO: " + dto.getProducto().getManejaVariantes());
     	System.out.println("DTO VARIANTES: " + dto.getVariantes().getFirst());
-
+    	//ProductoResponseDTO
         // Llamamos al service con los dos argumentos que requiere
         Productos producto = productoMasterService.crearProductoMaster(
                 dto.getProducto(),      // ProductoCreateDTO
@@ -51,6 +52,7 @@ public class ProductoMasterController {
         ProductoResponseDTO response = productoMapper.toResponseDto(producto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    	 //return ResponseEntity.status(HttpStatus.CREATED).body("algo");
     }
     
     @DeleteMapping("/eliminar/{productoId}")

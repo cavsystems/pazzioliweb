@@ -1,7 +1,7 @@
 import { CButton, CFormFloating, CFormLabel, CFormSelect, CInputGroup, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from "@coreui/react";
 import { Controller, FormProvider, useForm, useFormContext } from "react-hook-form";
 import Ojoquetodolove from "../../../icons/ojoquetodolove";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Formprobasico from "./formprobasico/formprobasico";
 import Variantes from "./variantes";
 import api from "../../../apicofig";
@@ -39,7 +39,7 @@ interface Variante {
   codigobarras:string,
 
 }
-function Formproduct({modalformproducto,setmodalformproducto}:any) {
+function Formproduct({modalformproducto,setmodalformproducto,productoid, setproductoid,product, setproduct,traerproductos}:any) {
 const [multivariable,setmultivariable]=useState<boolean>(false)
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const [celdasatributos,setceldaatributos]=useState<string[]>([])
@@ -49,6 +49,51 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
        
       })
         const [variantes, setVariantes] = useState<Variante[]>([]);
+const traervariantes=async ()=>{
+  const atributocelda:string[]=[]
+   
+             const variantback=await api.get(`variantes/detalles-producto/${productoid}`,{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+  let atribu:{[key:string]:string}
+  const multiva:{ productoVarianteId: number;
+  imagen:string;
+  
+  atributos: { [key: string]:string}; // <--- dinámico
+  bodega: bodegas[];
+  
+  codigobarras:string,}[]=[]
+  variantback.data.content.forEach(item=>{
+    item.detalles.forEach(item2=>{
+      atribu={...atribu,[item2.tipo]:item2.caracteristicaNombre }
+    })
+
+    multiva.push({
+    productoVarianteId: item.productoVarianteId,
+    imagen: "",
+    atributos:atribu,
+    bodega: [],
+    codigobarras: item.codigobarras ?? ""
+  });
+
+  
+
+  
+    
+  })
+  console.log( "multiva variante",variantback)
+ setVariantes(multiva)
+
+  
+
+
+          } 
+
+          
+
+     
      const methods = useForm({
                mode: 'onSubmit',
                 shouldUnregister: false,
@@ -72,9 +117,20 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                 // Agrega todos los campos que usas en todos los pasos
               },
             });
+
+            
             const [rotate,setrotate]=useState(false);
              const [tap,settap]=useState(1);
              const [  botonupdateu,setbotonupdateu]=useState(false);
+
+             
+                  useEffect(()=>{
+                               if(productoid>0 ){
+                                    traervariantes()
+                          
+                               }
+                   
+                       },[productoid])
              const onSubmit=async (data:{
                tipoproducto: string,
          codigo:string,
@@ -143,14 +199,14 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
                    skun:skun,
                    referenciaVariantes:referencia,
                    codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
-                   predeterminada:multivariable,
+                   predeterminada:!multivariable,
                     
                     productoId: null
                   },
-                    detalles:[
+                    detalles:listaid.data.length>0 ? [
                       { productoVarianteId: null,
                        caracteristicaId:listaid.data}
-                    ],
+                    ]:[],
 
                     existencias:item.bodega,
                     precios:data.listaprecios
@@ -167,15 +223,35 @@ const [multivariable,setmultivariable]=useState<boolean>(false)
 
 
 
-
+                        console.log("varaintes back",Variantesback)
 
               console.log({producto:productobody,variantes:Variantesback})
            
 
-                 const produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
+               const produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-
+               traerproductos()
+               methods.reset({
+        ...methods.getValues(),
+        tipoproducto: "",
+         codigo:"",
+        descripcion:"",
+         referencia:"",
+          unidadmedida:"",
+          departamento:"",
+          impuesto:"",
+         codigobarra:"",
+          costo:0,
+        nanifesto:"",
+          linea:"",
+          grupo: "",
+        listaprecios:[],
+        variantes:[],
+         imagenproducto:null
+          
+      });
+            setmodalformproducto(false)
             console.log(produ)
              }
 function cambiarPestana() {
@@ -210,6 +286,27 @@ function cambiarPestana() {
             scrollable
             visible={modalformproducto}
            onClose={()=>{
+            setproductoid(0)
+            setproduct(null)
+             methods.reset({
+        ...methods.getValues(),
+        tipoproducto: "",
+         codigo:"",
+        descripcion:"",
+         referencia:"",
+          unidadmedida:"",
+          departamento:"",
+          impuesto:"",
+         codigobarra:"",
+          costo:0,
+        nanifesto:"",
+          linea:"",
+          grupo: "",
+        listaprecios:[],
+        variantes:[],
+         imagenproducto:null
+          
+      });
             setmodalformproducto(false)
            }}
             aria-labelledby="VerticallyCenteredScrollableExample2"
@@ -223,7 +320,7 @@ function cambiarPestana() {
                       
                       {
                         
-                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}/>
+                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}  productoid={productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}/>
                        
                       }
 
