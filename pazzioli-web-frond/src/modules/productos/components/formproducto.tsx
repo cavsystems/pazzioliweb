@@ -65,11 +65,11 @@ const traervariantes=async ()=>{
   bodega: bodegas[];
   
   codigobarras:string,}[]=[]
-  variantback.data.content.forEach(item=>{
+ variantback.data.content.map(item=>{
     item.detalles.forEach(item2=>{
       atribu={...atribu,[item2.tipo]:item2.caracteristicaNombre }
     })
-
+        
     multiva.push({
     productoVarianteId: item.productoVarianteId,
     imagen: "",
@@ -83,6 +83,7 @@ const traervariantes=async ()=>{
   
     
   })
+
   console.log( "multiva variante",variantback)
  setVariantes(multiva)
 

@@ -735,6 +735,7 @@ Distancia desde el borde superior del viewport
                                                            <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                <CButton  className="buttoniconnormal" onClick={()=>{
                                                                 setmodalbo(true)
+                                                                
                                                                setBodegaSeleccionada(v.bodega);
 
                                                                setindexvariante(i);
