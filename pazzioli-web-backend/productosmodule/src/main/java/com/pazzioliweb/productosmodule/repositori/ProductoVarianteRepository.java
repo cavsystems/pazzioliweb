@@ -120,11 +120,17 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 	@Query(
 		  value = """
 		        SELECT
+		  		     pv.producto_variantes_id as productoVarianteId,
 		  		    p.producto_id AS productoId,
 		  		    p.referencia,
+		  		     p.grupo_id As grupoid,
+		  		     p.linea_id As lineaid,
+		  		     p.maneja_variantes As manejavariante,
+		  		     p.tipo_producto_id As tipoproductid,
+		  		     p.impuesto_id As impuestoid,
 		            pv.producto_variantes_id AS varianteId,
 		            p.codigo_contable AS codigoContable,
-		            CONCAT(p.descripcion, ' - ', pv.referencia_variantes) AS descripcion,
+		            IF(pv.predeterminada=0,CONCAT(p.descripcion, ' - ', pv.referencia_variantes),p.descripcion) AS descripcion,
 		            COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
 		            p.costo AS costo,
 		            u.sigla AS unidadMedida,

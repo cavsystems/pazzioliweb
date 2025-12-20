@@ -29,7 +29,7 @@ public class ProductoMapper {
         p.setDescripcion(dto.getDescripcion());
         p.setCosto(dto.getCosto());
         p.setManifiesto(dto.getManifiesto());
-
+         p.setManejaVariantes(dto.getManejaVariantes());
         p.setGrupo(grupo);
         p.setLinea(linea);
         p.setImpuestos(impuesto);

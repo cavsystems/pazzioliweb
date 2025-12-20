@@ -26,7 +26,7 @@ interface listaprecio {
 interface precioob {
   precioId:number, valor?: string
 }
-function Formprobasico({multivariable,setmultivariable,style}:any) {
+function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct}:any) {
      const [unidadmedida,setunidadmedida]=useState<{descripcion
 : 
 string,
@@ -68,7 +68,8 @@ id
      const fileimagen= useRef<HTMLInputElement | null>(null);
     const [imagenproduct,setimagenproduct]=useState<string | null>(null)
     const [substrinfinal,setsubstringfinal]=useState<number>(0)
-    
+    const [actulizar,setactulizar]=useState<boolean>(false)
+     const [codigoactulizar,setcodigoactulizar]=useState<number>(0)
     const [mensajeerror,setmensajeerror]=useState<string>("")
    const [listaprecios,setlistaprecio]=useState<listaprecio[]>([])
    const [listaprecioson,setlistaprecioon]=useState<precioob[]>([])
@@ -126,10 +127,7 @@ setimpuesto(impuestoss.data.datosimpuestos)
  setunidadmedida(unidadmedidas.data.content)
  setgrupo(grupos.data.content)
  setlineas(lineas.data.content)
-  console.log("unidades medidas",unidadmedidas)
-  console.log("lineas",lineas)
-  console.log("grupos",grupos)
-  console.log("impuestos",impuestoss)
+  
 
 }
 
@@ -151,7 +149,7 @@ const traertipoproducto=async()=>{
             setTipoproducto(tipoproducto.data.content)
             console.log("tipo producto",tipoproducto)
 }
-    const { register,control,setValue,getValues, formState: { errors } } =useFormContext();
+    const { register,control,setValue,getValues,reset, formState: { errors } } =useFormContext();
 useEffect(() => {
   traerinformacion()
   traerlistasprecios()
@@ -246,6 +244,43 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     // Guardar archivo en el form
     //setValue("archivoLogo", file);
   };
+
+     useEffect(()=>{
+                  if(productoid>0 && product  && grupo.length > 0  && unidadmedida.length > 0 && impuesto.length > 0 && lineas.length > 0 && tipoproducto.length > 0){
+                      const inud=unidadmedida.find(item=> item.sigla === product.unidadMedida
+)                       
+                  console.log("grupo id",product)
+                   console.log("und medida",inud)
+                    let descripcionfinal
+                   let indice = product.descripcion.indexOf("-");
+                   if(indice &&  product.manejavariante){
+                     descripcionfinal=product.descripcion.substring(0,indice)
+                   }else{
+                     descripcionfinal=product.descripcion
+                   }
+                 
+                           reset({
+        ...getValues(),
+        grupo: product.grupoid.toString(),
+          tipoproducto:product.tipoproductid.toString()
+,
+         codigo:product.codigoContable,
+        descripcion:descripcionfinal,
+         referencia:product.referencia,
+          unidadmedida:inud?.unidadMedidaId,
+          departamento:"",
+          impuesto:product.impuestoid,
+         codigobarra:product.codigoContable,
+          costo:product.costo,
+        nanifesto:"",
+          linea:product.lineaid,
+          
+      });
+setmultivariable(product.manejavariante)
+      
+                  }
+      
+          },[productoid,product,grupo,unidadmedida,impuesto,lineas,tipoproducto])
     return (  <>
       <div  className="row containertipospro" style={{padding:"0px 20px 0px 20px",display:`${style}`}}>
                                
@@ -356,7 +391,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                <select className="selctproduct" {...register("impuesto",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
-                                  impuesto.map(item=> (<><option value={item.codigo}>{item.nombre}</option></>))
+                                  impuesto.map(item=> (<><option value={item.codigo}>{item.nombre}  {item.tarifa<0 ?  "":`${item.tarifa}%`}</option></>))
                                 }
                                </select>
 
@@ -371,7 +406,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                              
                             <div className="inputprocttex inputcodigosbarra paddingleftformpro"   >
                                  <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Codigo de barra</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("codigodebarras")}/>
+                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("codigobarra")}/>
                                
                             </div>
                           
@@ -543,9 +578,11 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                             
                                                      <CTableRow>
                                                
-                                                      <CTableDataCell>   <select className="iteminput1" value={listaprecioson[index]?.precioId ?? precioactual.precioId} onChange={(e)=>{
-                                                      console.log(listaprecioson[index]?.precioId)
-                                                        
+                                                      <CTableDataCell>   <select className="iteminput1"   value={listaprecioson[index]?.precioId ?? precioactual.precioId} onChange={(e)=>{
+                                                      console.log(e.target.value)
+                                                            if(listaprecioson[index]?.precioId===Number(e.target.value)){
+                                                              return
+                                                            }
                                                             const pre=getValues("listaprecios")
                                                             const lista=pre.some(item=> item.precioId===Number(e.target.value))
                                                             console.log("lista precio onchange", lista)
@@ -557,6 +594,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                                            e.target.value=""
 
                                                             }else{
+                                                              console.log("precio actual")
                                                             setprecioactual(prev=> ({...prev,precioId:Number(e.target.value)}))
                                                             }
 
@@ -573,10 +611,16 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                              
                                  
                                </select></CTableDataCell>
-                                      <CTableDataCell><input placeholder="0" value={listaprecioson[index]?.valor ?? precioactual.valor} className="iteminput1" onChange={(e)=>{
-                                             if(  listaprecioson &&
+                                      <CTableDataCell><input placeholder="0"  value={listaprecioson[index]?.valor ?? precioactual.valor} className="iteminput1" onChange={(e)=>{
+                             console.log(( listaprecioson[index]?.precioId !== undefined &&
+  codigoactulizar !== listaprecioson[index]?.precioId))    
+  console.log(( listaprecioson[index]?.precioId,
+ listaprecioson[index]?.precioId))    
+
+    
+    if(  listaprecioson &&
   listaprecioson[index] &&
-  listaprecioson[index].precioId !== undefined){
+  listaprecioson[index].precioId !== undefined ){
                                                        const lista=[...listaprecioson]
                                                        lista[index].valor=e.target.value     
                                                        setValue("listaprecios",lista)  
@@ -595,7 +639,10 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                       <CTableDataCell>
                                           <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
                                                                                                    <div className="col-6" style={{ maxWidth: 'fit-content' }} >
-                                                                                                       <CButton  className="buttoniconnormal">
+                                                                                                       <CButton  className="buttoniconnormal"  onClick={()=>{
+                                                                                                        setactulizar(true)
+                                                                                                        setcodigoactulizar(listaprecioson[index]?.precioId)
+                                                                                                       }}>
                                                                                                          <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                                                                        </CButton>
                                                                                                    </div>
@@ -631,7 +678,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                
                                 
                                        {
-                                        !guardar && <button type="button" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
+                                        !guardar && !actulizar && <button type="button" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
                                         setnumeroinputprescio(prev=> prev+1)
                                         setguardar(true)
                                         console.log("precio actual",precioactual,listaprecios)
@@ -641,13 +688,14 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
                                        }
 
                                        {
-                                        guardar &&    <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={()=>{
+                                        guardar &&  !actulizar &&  <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={()=>{
                                           
                                           setguardar(false)
                                           const precios=getValues("listaprecios")
 
                                           precios.push(precioactual)
                                              setValue("listaprecios",  precios)
+                                             setlistaprecioon(precios)
                                              const list=[...listaprecios]
                                              
                                           console.log(precios)
@@ -655,6 +703,26 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
 
                                         }}>Guardar</button> 
                                        }
+
+
+
+                                        {
+                                        actulizar &&  <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={()=>{
+                                          
+                                          setguardar(false)
+                                          const precios=getValues("listaprecios")
+
+                                          precios.push(precioactual)
+                                             setValue("listaprecios",  precios)
+                                             setlistaprecioon(precios)
+                                             const list=[...listaprecios]
+                                             
+                                          console.log(precios)
+                                          setprecioactual({precioId:0,valor:""})
+
+                                        }}>Actulizar</button> 
+                                       }
+                               
                                
                              </div>
 
