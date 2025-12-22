@@ -27,10 +27,13 @@ public interface PreciosProductoVarianteRepository extends JpaRepository<Precios
 	  		        SELECT
 	  		  			pp.valor,
 	  		  			pp.producto_variantes_id as productoVarianteId,
-	  		  		    pp.precios_producto_id as productoVarianteId,
+	  		  		    pp.precios_producto_id as preciosProductoId,
 	  		  		    p.precio_id as precioId,
-	  		  		    p.descripcion
-	  		        FROM precios_producto_variante as pp
+	  		  		    p.descripcion as precio,
+	  		  		    pp.fecha_creacion as fechaCreacion,
+	  		  		    pp.fecha_inicio as fechaInicio,
+	  		  		    pp.fecha_fin as fechaFin
+	  		        FROM precios_producto_variante pp
 	  		        JOIN precios p ON p.precio_id = pp.precio_id
 	  		        WHERE pp.producto_variantes_id = :varianteId
 	  		        """,
