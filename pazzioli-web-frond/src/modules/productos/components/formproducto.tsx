@@ -39,8 +39,13 @@ interface Variante {
   codigobarras:string,
 
 }
+
+interface precioob {
+  precioId:number, valor?: string
+}
 function Formproduct({modalformproducto,setmodalformproducto,productoid, setproductoid,product, setproduct,traerproductos}:any) {
 const [multivariable,setmultivariable]=useState<boolean>(false)
+const [preciosva,setpreciosva]=useState<number>(0)
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const [celdasatributos,setceldaatributos]=useState<string[]>([])
     const [variantedefault,setvariantedefault]=useState<Variantedfault>({
@@ -57,6 +62,14 @@ const traervariantes=async ()=>{
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }
   })
+  
+if(variantback.data.content.length>0){
+const preciosidva= variantback.data.content[0]
+
+ setpreciosva(preciosidva.productoVarianteId)
+}
+ 
+
   let atribu:{[key:string]:string}
   const multiva:{ productoVarianteId: number;
   imagen:string;
@@ -327,7 +340,7 @@ function cambiarPestana() {
                       
                       {
                         
-                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}  productoid={productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}/>
+                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}  productoid={productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}  preciosva={preciosva} setpreciosva={setpreciosva}/>
                        
                       }
 

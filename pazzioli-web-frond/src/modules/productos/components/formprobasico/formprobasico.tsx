@@ -26,7 +26,7 @@ interface listaprecio {
 interface precioob {
   precioId:number, valor?: string
 }
-function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct}:any) {
+function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct,preciosva,setpreciosva}:any) {
      const [unidadmedida,setunidadmedida]=useState<{descripcion
 : 
 string,
@@ -138,6 +138,7 @@ const traerlistasprecios=async()=>{
             }})
 
  setlistaprecio(listaprecios.data.content)
+
 }
 
 const traertipoproducto=async()=>{
@@ -245,6 +246,22 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     //setValue("archivoLogo", file);
   };
 
+  const establecerpreciosupdate= async()=>{
+const productbodega=await api.get(`precios-producto-variante/variante/${preciosva}`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+            console.log("precios variantes updata",productbodega)
+            setlistaprecioon(productbodega.data.content)
+            setnumeroinputprescio(productbodega.data.content.length)
+  }
+ useEffect(()=>{
+if(preciosva>0){
+   establecerpreciosupdate()
+
+}
+ },[preciosva])
      useEffect(()=>{
                   if(productoid>0 && product  && grupo.length > 0  && unidadmedida.length > 0 && impuesto.length > 0 && lineas.length > 0 && tipoproducto.length > 0){
                       const inud=unidadmedida.find(item=> item.sigla === product.unidadMedida

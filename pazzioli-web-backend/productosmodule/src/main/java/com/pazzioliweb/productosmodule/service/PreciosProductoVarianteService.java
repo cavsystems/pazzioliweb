@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteUpdateDTO;
 
@@ -21,4 +22,6 @@ public interface PreciosProductoVarianteService {
     List<PreciosProductoVarianteResponseDTO> actualizar(List<PreciosProductoVarianteUpdateDTO> dto);
 
     boolean eliminar(Long id);
+    
+    Page<PreciosProductoVarianteDTO> listarPreciosVariantesProducto(Integer varianteId, Pageable pageable);
 }

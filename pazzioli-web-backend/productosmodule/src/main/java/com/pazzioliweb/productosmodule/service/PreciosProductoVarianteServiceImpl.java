@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Precios;
@@ -132,5 +134,10 @@ public class PreciosProductoVarianteServiceImpl implements PreciosProductoVarian
             repository.delete(entity);
             return true;
         }).orElse(false);
+    }
+    
+    @Override
+    public Page<PreciosProductoVarianteDTO> listarPreciosVariantesProducto(Integer varianteId, Pageable pageable) {
+        return repository.preciosPrpductoVariante(varianteId, pageable);
     }
 }

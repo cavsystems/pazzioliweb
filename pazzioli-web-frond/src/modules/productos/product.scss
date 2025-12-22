@@ -716,7 +716,45 @@ top: 100%;
 
 .modalproductbodega .modal-content {
   max-width: 500px !important;
+  max-height: 400px !important
 }
 .modalproductbodega div{
   justify-content: center !important;
 }
+
+
+
+ 
+ .tablapreciovariante th {
+padding-left: 12px !important;
+padding: 12px 15px 12px 15px !important;
+ }
+.tablainventariovalores th{
+
+}
+.tablapreciovariante th:last-child {
+padding-left: 12px !important;
+padding: 12px 15px 12px 21px !important;
+ }
+
+
+
+
+
+.tablapreciovariante{
+    margin:0
+}
+
+
+
+
+.tablainventariovalores th,
+.tablainventariovalores td {
+  white-space: nowrap !important; /* ✅ evita que el texto expanda filas */
+  
+ 
+}
+.tablainventariovalores td{
+    padding-left: 12px  !important;
+}
+

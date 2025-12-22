@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteCreateDTO;
+import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteUpdateDTO;
 import com.pazzioliweb.productosmodule.service.PreciosProductoVarianteService;
@@ -78,5 +79,26 @@ public class PreciosProductoVarianteController {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         boolean eliminado = service.eliminar(id);
         return eliminado ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
+    
+    @GetMapping("/variante/{varianteId}")
+    public ResponseEntity<PaginationResponse<PreciosProductoVarianteDTO>> listarPreciosVariantes(
+            @PathVariable Integer varianteId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int size,
+            @RequestParam(defaultValue = "precioId") String sortField,
+            @RequestParam(defaultValue = "asc") String sortDirection
+    ) {
+
+        Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<PreciosProductoVarianteDTO> resultado =
+        		service.listarPreciosVariantesProducto(varianteId, pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
     }
 }
