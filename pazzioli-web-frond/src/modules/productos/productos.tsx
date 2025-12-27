@@ -125,7 +125,7 @@ function Productos() {
            // Agrega todos los campos que usas en todos los pasos
          },
        });
-
+  
       const onSubmit=(data:any)=>{
        console.log("variantes guardar",Variantes)
       }
@@ -245,7 +245,7 @@ function Productos() {
                                                              <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
                                                                < CButton  className="buttoniconnormal" onClick={()=>{
                                                                     setmodalprecio(true)
-                                                                    setprecioid(item.productoVarianteId)
+                                                                    setprecioidvariante(item.productoVarianteId)
                                                                }}  >    <Iconprecio width={19} height={19.5} color={"#555" }/></CButton>
                                                            </div>
                

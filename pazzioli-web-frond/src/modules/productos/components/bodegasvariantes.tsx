@@ -2,12 +2,15 @@ import { CAlert, CButton, CFormFloating, CFormInput, CFormLabel, CInputGroup, CM
 import { useEffect, useState } from "react";
 import Iconeliminar from "../../../icons/iconeliminar";
 import api from "../../../apicofig";
+import Iconupdate from "../../../icons/iconupdate";
+import { useFormContext } from "react-hook-form";
+import Modalconfirmar from "../../../components/alertconfimacion";
 interface bodegaselect{
   bodegaId:number,
   nombre:string
 }
 function Bodegasvariantes({modalbo,setmodalbo,agregarbodega,BodegaSeleccionada ,setBodegaSeleccionada,indexvariante,variantes,setvariantes, setindexvariante}:any) {
-    const [numeroinputbodega,setnumeroinputbodega]=useState<number>(1)
+    const [numeroinputbodega,setnumeroinputbodega]=useState<number>(0)
 
     const [bodegasselect,setbodegasselect]=useState<bodegaselect[]>([{ bodegaId:1,
   nombre:"Bodegasur"},{ bodegaId:2,
@@ -19,16 +22,29 @@ function Bodegasvariantes({modalbo,setmodalbo,agregarbodega,BodegaSeleccionada ,
     stockMin:number;
 ubicacion:string;
 existencias:number}[]>([])
+const [guardar,setguardar]=useState<boolean>(false)
+ 
     const [indexactulizar,setindexactulizar]=useState<number>(0)
     const [bodegaguardar,setbodegaguardar]=useState<string>("")
+    const [mensajeerror,setmensajeerror]=useState<string>("")
+    const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
+    const [confirmaractulizacion,setconfirmaractulizacion]=useState<boolean>(false)
+    const [funncionDinamica2,setfunncionDinamica2]=useState<()=>void>(()=>{})
+    const [funcionDinamica,setFuncionDinamica]=useState<()=>void>(()=>{})
+    const [actulizar,setactulizar]=useState<boolean>(false)
+  
+    const [codigoactulizar,setcodigoactulizar]=useState<number>(0)
+
     const [indexactulizarbodega,setindexactulizarbodega]=useState<boolean>(false)
+      const { register,control,setValue,getValues,reset, formState: { errors } } =useFormContext();
     const [bodegasguardadas,setbodegasguardadas]=useState<{
           bodegaId:number,
 
       nombre:string;
       stockMax:number;
     stockMin:number;
-ubicacion:string}>({ bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:""})
+ubicacion:string
+existencias:number}>({ bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"" ,existencias:0})
 
 const traerbodegas=async()=>{
   const apibodega=await api.get("bodegas/listar",{
@@ -52,6 +68,21 @@ traerbodegas()
       
       }
     },[BodegaSeleccionada])
+const actulizarbodega=async()=>{
+
+   agregarbodega({...bodegasguardadas,},indexvariante)
+  setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
+ setbodegaguardar('')
+ setguardar(false)
+}
+    useEffect(()=>{
+      if(confirmaractulizacion){
+      actulizarbodega()
+      }else{
+        
+        
+      }
+    },[confirmaractulizacion])
     return ( 
         <>
         
@@ -191,6 +222,7 @@ traerbodegas()
                                                                  }
                                                                  console.log("detodas maneras sigo",nombrebodega,e.target.value,bodegasselect)
                                                                 setbodegaguardar(e.target.value)
+                                                                
                                                                const valor = e.target.value
                                                                const copiaSel = [...bodegas];
                                       copiaSel[index] = {
@@ -215,7 +247,7 @@ traerbodegas()
                                            
                                               
                                             </select></CTableDataCell>
-                                                   <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMax ?? ""}  name="stockMax" onChange={(e)=>{
+                                                   <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMax ?? "" }  name="stockMax" onChange={(e)=>{
                                                      const valor = Number(e.target.value);
                                                      console.log("valor",valor)
                                                     console.log("index",index, variantes)
@@ -337,11 +369,41 @@ traerbodegas()
                                                                                         
                                                                                                                                       
                                                                                                                                                         
-                                                                                        
+                                                                                       <div className="col-6" style={{ maxWidth: 'fit-content' }} >
+                                         <CButton  className="buttoniconnormal"  onClick={()=>{
+                                          setcodigoactulizar(bodegas[index]?.bodegaId ?? 0)
+                                         setmensajeerror("Seguro desea actulizar el precio")
+                                         setmodaladvertencia(true)
+                                          setfunncionDinamica2(()=>{
+                                           return ()=>{ console.log("funciones modla actuliza")
+                                            setmensajeerror("")
+                                            setconfirmaractulizacion(false)
+                                            setcodigoactulizar(0)
+                                            setactulizar(false)
+                                            setmodaladvertencia(false)
+                                            console.log(getValues("listaprecios"))
+                                            setbodegas(getValues("listaprecios"))
+                                              setValue("listaprecios",getValues("listaprecios"))
+                                                  setnumeroinputbodega(numeroinputbodega)
+                                               }
+                                   
+                                          })
+
+                                          setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmaractulizacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+                                                                                                                                                                                            }}>
+                                                                                                                                                                                              <Iconupdate  width={16} height={18} color={"#555"}/> 
+                                                                                                                                                                                            </CButton>
+                                                                                                                                                                                        </div>   
                                                         
                                                                                       <div   style={{ maxWidth: 'fit-content' }} >
                                                                                                                                        <CButton  className="buttoniconnormaleliminar"  >      <Iconeliminar  width={16} height={16} color={"#555"}/>  </CButton>
-                                                                              </div>                                         
+                                                                              </div>      
+
                                                                                      </div>
                                                        </CTableDataCell>
                                                            </CTableRow>
@@ -371,19 +433,29 @@ traerbodegas()
                                             
                                              
                                                   {
-                                                    bodegaguardar==="" &&   <button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"   onClick={()=>{
+                                                    !guardar&&  !actulizar &&<button type="submit" className="botoncontinuarguardar botonagregarcon"  key="guardar"   onClick={()=>{
                                                    
                                                         setnumeroinputbodega(numeroinputbodega+1)
+                                                        setguardar(true)
                                                     }}>Agregar</button>
                                                   }   
 
                                                   {
-                                                    bodegaguardar !=="" &&   <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
+                                                    guardar  &&   !actulizar &&  <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
                                                         agregarbodega(bodegasguardadas,indexvariante)
-                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:""})
+                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
                                                         setbodegaguardar('')
+                                                        setguardar(false)
                                                     }}  >Guardar</button> 
                                                   }
+
+
+                                                    {
+                                                   !guardar  &&   actulizar &&  <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
+                                                      
+                                                    }}  >Actulizar</button> 
+                                                  }
+                                            
                                             
                                             
                                           </div>
@@ -402,7 +474,10 @@ traerbodegas()
              
              
                                     
-             
+                  
+                                   {
+                       modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeerror} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                       } 
              
              
                             

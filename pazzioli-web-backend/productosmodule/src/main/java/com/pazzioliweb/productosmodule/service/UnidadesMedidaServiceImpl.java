@@ -16,6 +16,7 @@ import com.pazzioliweb.productosmodule.dtos.UnidadMedidaResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.UnidadMedidaUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedida;
 import com.pazzioliweb.productosmodule.mapper.UnidadesMedidaMapper;
+import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
 import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -25,10 +26,11 @@ public class UnidadesMedidaServiceImpl implements UnidadesMedidaService {
 
     private final UnidadesMedidaRepository repo;
     private final UnidadesMedidaMapper mapper;
-    
-    public UnidadesMedidaServiceImpl(UnidadesMedidaRepository repo, UnidadesMedidaMapper mapper) {
+    private final ProductosRepository product;
+    public UnidadesMedidaServiceImpl(UnidadesMedidaRepository repo, UnidadesMedidaMapper mapper,ProductosRepository product) {
     	this.repo = repo;
     	this.mapper = mapper;
+    	this.product=product;
     }
 
     @Override
@@ -64,18 +66,30 @@ public class UnidadesMedidaServiceImpl implements UnidadesMedidaService {
     }
 
     @Override
-    public Page<UnidadMedidaResponseDTO> listar(Pageable pageable) {
-
-        Page<UnidadesMedida> pagina = repo.findAll(pageable);
+    public Page<UnidadMedidaResponseDTO> listar(String descripcion ,Pageable pageable) {
+    	 Page<UnidadesMedida>  pagina ;
+    	   if (descripcion == null || descripcion.isBlank()) {
+    		   pagina  = repo.findAll(pageable);
+		    }else {
+		    	   pagina=repo.findByDescripcionContainingIgnoreCase(descripcion, pageable);
+		    }
+    	
 
         return pagina.map(mapper::toResponse);
     }
 
     @Override
     public void eliminar(Integer id) {
-        if (!repo.existsById(id)) {
-            throw new EntityNotFoundException("Unidad de medida no existe");
-        }
+    	
+    	if(!repo.existsById(id)) {
+			throw new EntityNotFoundException("Unidad de medida no existe");
+		}
+	    if (product.existsByUnidadesMedidaProducto_UnidadMedida_UnidadMedidaId(id)) {
+	        throw new IllegalStateException(
+	            "Esta unidad de medidad no puede ser eliminada"
+	        );
+	    }
+      
         repo.deleteById(id);
     }
 }

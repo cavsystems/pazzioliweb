@@ -3,7 +3,7 @@ import Iconadvertencia from "../icons/iconadvertencia";
 import "./styloscon.scss"
 import Iconsucces from "../icons/iconsucces";
 import Iconerror from "../icons/iconerror";
-function Modalconfirmar({ modalconfir, setmodalconfirmar,confirmar,setconfirmar,tipoicon="alerta",boton1,boton2,boton3,texto,textoboton,funcion}:any) {
+function Modalconfirmar({ modalconfir, setmodalconfirmar,confirmar,setconfirmar,tipoicon="alerta",boton1,boton2,boton3,boton4,funcion2,texto,textoboton,funcion}:any) {
 
 const [iconhtml,setiocnhtml]=useState<JSX.Element | null>()
 useEffect(()=>{
@@ -45,11 +45,13 @@ useEffect(()=>{
         setconfirmar(false)
         setmodalconfirmar(false)
        }}>Cancelar</button>}
-
-
+       
 
          { boton3 && <button className={`${tipoicon==="Error"? "botonagregarcon":"botoncontinuarguardar"}`}  onClick={funcion}>{textoboton}</button>}
-     
+            {
+          boton4 && <button className="botonagregarcon"  onClick={funcion2}>Cancelar</button>
+         }
+
       </div>
       </div>
 

@@ -11,6 +11,7 @@ import Downloadimg from "../../../icons/icondonwloadimg";
 import { createPortal } from "react-dom";
 import api from "../../../apicofig";
 import { useFormContext } from "react-hook-form";
+import Iconeliminar from "../../../icons/iconeliminar";
 
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
@@ -103,7 +104,15 @@ console.log("estableciendo variante por defecto")
       codigobarras:""
     }])
 }
-
+const eleiminarvariante= async (idvariante:number)=>{
+  const eliminar=await api.delete(`variante-detalle/${idvariante}`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+  console.log("eliminar variante",eliminar)
+const nuevasvariantes=variantes.filter(item=> item.productoVarianteId !== idvariante)
+setVariantes(nuevasvariantes)
+}
 useEffect(() => {
 
   if(atributos.length>0){
@@ -279,7 +288,8 @@ const agregarVariante = () => {
 
   // Agregar nueva variante vacía
  
- const agregarbodega=(nombrebodega:{bodegaId:number,nombre: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
+ const agregarbodega=(nombrebodega:{ existenciaId
+:number,bodegaId:number,nombre: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
     let existebodega=variantes[index].bodega.find(b=>b.nombre===nombrebodega.nombre);
     
     if(!existebodega){
@@ -287,6 +297,17 @@ const agregarVariante = () => {
       const nuevasVariantes = [...variantes];
       nuevasVariantes[index].bodega = [...nuevasVariantes[index].bodega, nuevaBodega];
       setVariantes(nuevasVariantes);
+    }else{
+    if(nombrebodega.existenciaId!==null){
+      const nuevasVariantes = [...variantes];
+      const indexbodega=nuevasVariantes[index].bodega.findIndex(b=>b.bodegaId===nombrebodega.bodegaId);
+      nuevasVariantes[index].bodega[indexbodega].existencias=nombrebodega.existencias;
+      nuevasVariantes[index].bodega[indexbodega].ubicacion=nombrebodega.ubicacion;
+      nuevasVariantes[index].bodega[indexbodega].stockMax=nombrebodega.stockMax;
+      nuevasVariantes[index].bodega[indexbodega].stockMin=nombrebodega.stockMin;
+      
+      setVariantes(nuevasVariantes);
+    }
     }
  }
   // Actualizar variante
@@ -602,7 +623,9 @@ Distancia desde el borde superior del viewport
                                                           
                
                                                           
-               
+                                                        <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
+                                                             <CButton  className="buttoniconnormaleliminar"    onClick={()=> eleiminarvariante(v.productoVarianteId)} >      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
+                                                         </div>  
                
                                                         
                                                        </div>
@@ -741,6 +764,8 @@ Distancia desde el borde superior del viewport
                                                                setindexvariante(i);
                                                                }} >    <Iconbodega  width={19} height={19.5} color={"#555"}  /></CButton>
                                                            </div>
+
+                                                           
 
                                                          
                                                          

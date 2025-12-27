@@ -70,7 +70,7 @@ const preciosidva= variantback.data.content[0]
 }
  
 
-  let atribu:{[key:string]:string}
+ 
   const multiva:{ productoVarianteId: number;
   imagen:string;
   
@@ -79,16 +79,19 @@ const preciosidva= variantback.data.content[0]
   
   codigobarras:string,}[]=[]
   await Promise.all(variantback.data.content.map( async (item)=>{
+     let atribu:{[key:string]:string}={}
     item.detalles.forEach(item2=>{
-      atribu={...atribu,[item2.tipo]:item2.caracteristicaNombre }
+       atribu[item2.tipo] = item2.caracteristicaNombre
     })
+    console.log("atributosantes",atribu)
+  
          const productbodega=await api.get(`existencias/variante-bodega/${item.productoVarianteId}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
 
             console.log("bodegas variante",productbodega)
-
+  console.log("atributos",atribu,variantback)
     multiva.push({
     productoVarianteId: item.productoVarianteId,
     imagen: "",
@@ -103,7 +106,7 @@ const preciosidva= variantback.data.content[0]
     
   }))
 
-  console.log( "multiva variante",variantback)
+  console.log( "multiva variante",multiva)
  setVariantes(multiva)
 
   
@@ -326,8 +329,19 @@ function cambiarPestana() {
         variantes:[],
          imagenproducto:null
           
-      });
+      }); 
+      setvariantedefault({
+ descripcion:"",
+ imagen:null
+})
+      setVariantes([])
+      settap(1)
+      setmultivariable(false)
             setmodalformproducto(false)
+            setproductoid(0)
+            setpreciosva(0)
+            setproduct(null)
+            
            }}
             aria-labelledby="VerticallyCenteredScrollableExample2"
            className="col-12 contproduct"

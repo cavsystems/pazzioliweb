@@ -17,7 +17,7 @@ public interface UnidadesMedidaService {
 	
 	UnidadMedidaResponseDTO obtenerPorId(Integer id);
 	
-	Page<UnidadMedidaResponseDTO> listar(Pageable pageable);
+	Page<UnidadMedidaResponseDTO> listar(String descripcion,Pageable pageable);
 	
 	void eliminar(Integer id);
 }

@@ -14,5 +14,5 @@ public interface TipoCaracteristicaService {
 
 	    TipoCaracteristica buscarPorId(Long id);
 
-	    Page<TipoCaracteristica> listar(Pageable pageable);
+	    Page<TipoCaracteristica> listar(String caracteristica,Pageable pageable);
 }

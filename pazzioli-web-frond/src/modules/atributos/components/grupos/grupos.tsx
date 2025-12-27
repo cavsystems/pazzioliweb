@@ -4,13 +4,21 @@ import Iconupdate from "../../../../icons/iconupdate";
 import Iconeliminar from "../../../../icons/iconeliminar";
 import { useEffect, useState } from "react";
 import api from "../../../../apicofig";
+import Modalconfirmar from "../../../../components/alertconfimacion";
 
 function Grupos() {
    const [codigomodal,setcodigomodal]=useState<boolean>(false)
    const [actulizar,setactulizar]=useState<boolean>(false)
       const [descripciongrupo,setdescripciongrupo]=useState<string>("")
+      const [mensajeerror,setmensajeerror]=useState<string>("")
+        const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
            const [codigogrupo,setcodigogrupo]=useState<number>(0)
        const [grupo,setgrupo]=useState<string>("")
+             const [mensajeadvertencia,setmensajeadvertencia]=useState<string>("")
+               const [confirmareliminacion,setconfirmareliminacion]=useState<boolean>(false)
+          const [funncionDinamica2,setfunncionDinamica2]= useState<() => void>(() => {});
+           const [codigoeliminar,setcodigoeliminar]=useState<number>(0)
+           const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
          const [grupos,setgrupos]=useState<{
           descripcion
 : 
@@ -38,9 +46,39 @@ number
            }
 
 
+
+            const eleiminargrupos=async(itemid:number)=>{
+                  try {
+                    const lineas=await api.delete(`grupos/${itemid}
+           `,{
+                       headers: {
+                               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                             }
+                   })
+                   console.log("linea eliminada",lineas)
+                   traergrupos()
+                  } catch (error) {
+                    console.log("linea eliminada",error.response.data)
+                   setmensajeerror(error.response.data.mensaje)
+                   setFuncionDinamica(()=> ()=> setmensajeerror(""))
+                      
+                  }
+                       
+                }
+
+
            useEffect(()=>{
                traergrupos()
            },[descripciongrupo])
+
+
+           useEffect(()=>{
+                   if(confirmareliminacion){
+                     eleiminargrupos(codigoeliminar)
+                     setmodaladvertencia(false)
+                   setconfirmareliminacion(false)
+                   }
+               },[confirmareliminacion])
     return ( 
         <>
           <div className="row  paddingcointainertable">
@@ -113,7 +151,24 @@ number
                                                             
                 
                                                               <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                                <CButton  title="Eliminar" className="buttoniconnormal"  ><Iconeliminar  width={16} height={16} color={"#555"}/> </CButton>
+                                                                <CButton  title="Eliminar" className="buttoniconnormal"  onClick={()=>{
+                                                        setcodigoeliminar(item.id)
+                                                             setmodaladvertencia(true)
+                                                              setmensajeadvertencia("Seguro desea eliminar esta linea")
+                                                        setFuncionDinamica(()=> ()=> {
+                                                     
+                                                          setconfirmareliminacion(true)
+                                                          
+                                                        })
+
+                                                             setfunncionDinamica2(()=> ()=> {
+                                                     
+                                                          setconfirmareliminacion(false)
+                                                          setmodaladvertencia(false)
+                                                         
+
+                                                        })
+                                                      }}><Iconeliminar  width={16} height={16} color={"#555"}/> </CButton>
                                                             </div>
                 
                                                            
@@ -166,7 +221,7 @@ number
                                                                                  }}/>
                                                                                
                                                                     
-                                                                   <CFormLabel>Linea</CFormLabel>
+                                                                   <CFormLabel>Grupo</CFormLabel>
                                                                       
                                                                                  </CFormFloating>
                                                                                </CInputGroup>
@@ -217,7 +272,15 @@ number
                                                                                                </div>
                                                                                                </div>
                                                                                                
-                                                                                      </div>     
+                                                                                      </div>  
+                  {
+                                                                        mensajeerror!=="" &&  <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true} textoboton={"Aceptar"} funcion={funcionDinamica}/> 
+                                                                        }   
+
+                                                                        
+                                                                                                               {
+                                                                                                   modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeadvertencia} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                                                                                                   }        
             </div>
         </>
      );

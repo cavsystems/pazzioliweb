@@ -20,19 +20,39 @@ stockMin
 ubicacion
 : string
 }
+interface preciosact{
+    
+fechaCreacion
+: string | null,
+fechaFin
+: string | null,
+fechaInicio
+: string | null ,
+precio
+: string,
+precioId
+: number,
+preciosProductoId
+: number,
+productoVarianteId
+: number,
+valor
+: number
+}
 function Precios({modalprecio,setmodalprecio,precioid,setprecioid}:any) {
-    const [preciosvariantes,setpreciosvariantes]=useState<bodegaproducto[]>([])
+    const [preciosvariantes,setpreciosvariantes]=useState<preciosact[]>([])
+
     const traerbodegavariante= async()=>{
- const preciova=await api.get(`existencias/variante/${precioid}`,{
+ const preciova=await api.get(`precios-producto-variante/variante/${precioid}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-
+  setpreciosvariantes(preciova.data.content)
  
     }
   useEffect(()=>{
    if(precioid>0){
-   
+   traerbodegavariante()
    }
   },[precioid])
     return ( <>
@@ -90,7 +110,8 @@ function Precios({modalprecio,setmodalprecio,precioid,setprecioid}:any) {
                                                                                                     {
                                                                                                        preciosvariantes.map((item)=>{
                                                                                                           return      <CTableRow>
-                                                                                               
+                                                                                                    <CTableDataCell>{item.precio}</CTableDataCell>
+                                                                                                     <CTableDataCell>{item.valor}</CTableDataCell>
                                                                                                   </CTableRow>
                                                                                                         })
                                                                                                     }

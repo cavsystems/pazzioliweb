@@ -76,6 +76,8 @@ public interface CaracteristicaRepository extends JpaRepository<Caracteristica, 
     		@Param("nombre") String nombre,
     		 @Param("tipocara")    Long Tipo
     		);
+    
+	boolean existsByTipo_tipoCaracteristicaId(Long grupoaId);
 }
 
 

@@ -159,7 +159,9 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		)
 		Page<ProductoInventarioDTO> listarInventario(Pageable pageable);
 	
-	
+	Optional<ProductoVariante> findByProductoVarianteId(Long id);
 	Optional<ProductoVariante> findByCodigoBarras(String codigobarras);
+	
+	void deleteByProductoVarianteId(Long id);
 	
 }

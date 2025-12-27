@@ -1,20 +1,27 @@
 package com.pazzioliweb.productosmodule.service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.pazzioliweb.productosmodule.entity.Lineas;
 import com.pazzioliweb.productosmodule.repositori.LineasRepositori;
+import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class LineasServiceImpl implements LineasService{
 	private final LineasRepositori repo;
-	
-	public LineasServiceImpl(LineasRepositori repo) {
+	private final ProductosRepository product;
+	public LineasServiceImpl(LineasRepositori repo, ProductosRepository product) {
 		this.repo = repo;
+		this.product=product;
 	}
 	
 	@Override
@@ -32,11 +39,19 @@ public class LineasServiceImpl implements LineasService{
 	}
 	
 	@Override
-	public void eliminar(Integer id) {
+	public void eliminar(Integer id)  {
 		if(!repo.existsById(id)) {
 			throw new EntityNotFoundException("Linea no encontrada");
 		}
-		repo.deleteById(id);
+	    if (product.existsByLinea_Id(id)) {
+	        throw new IllegalStateException(
+	            "Esta linea no puede ser eliminada"
+	        );
+	    }
+
+	    repo.deleteById(id);
+		
+		
 	}
 	
 	@Override
