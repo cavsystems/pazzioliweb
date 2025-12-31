@@ -6,15 +6,17 @@ import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.productosmodule.entity.Grupos;
 import com.pazzioliweb.productosmodule.repositori.GrupoRepositori;
+import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class GruposServiceImpl implements GruposService{
 private final GrupoRepositori repo;
-	
-	public GruposServiceImpl(GrupoRepositori repo) {
+private final ProductosRepository product;	
+	public GruposServiceImpl(GrupoRepositori repo,ProductosRepository product) {
 		this.repo = repo;
+		this.product=product;
 	}
 	
 	@Override
@@ -34,9 +36,15 @@ private final GrupoRepositori repo;
 	@Override
 	public void eliminar(Integer id) {
 		if(!repo.existsById(id)) {
-			throw new EntityNotFoundException("Grupo no encontrado");
+			throw new EntityNotFoundException("Grupo no encontrada");
 		}
-		repo.deleteById(id);
+	    if (product. existsByGrupo_Id(id)) {
+	        throw new IllegalStateException(
+	            "Esta Grupo no puede ser eliminada"
+	        );
+	    }
+
+	    repo.deleteById(id);
 	}
 	
 	@Override

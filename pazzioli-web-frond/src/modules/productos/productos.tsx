@@ -15,6 +15,8 @@ import api from "../../apicofig";
 import Modalconfirmar from "../../components/alertconfimacion";
 import Iconlupa from "../../icons/iconlupabuscar";
 import Bodegasproducto from "./components/Bodegas/Bodegasproducto";
+import Iconprecio from "../../icons/iconprecio";
+import Precios from "./components/precios/precios";
 interface productolista{
   cantidadGlobal
 : 
@@ -64,7 +66,8 @@ productoVarianteId:number
 }
 function Productos() {
     const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
-
+     const [modalprecio,setmodalprecio]=useState<boolean>(false);
+     const [precioidvariante,setprecioidvariante]=useState<number>(0);
      const [itemsformempresa, setitemsformempresa] = useState(1)
      const [productoid,setproductoid]=useState<number>(0)
       const [productoidbodega,setproductoidbodega]=useState<number>(0)
@@ -122,7 +125,7 @@ function Productos() {
            // Agrega todos los campos que usas en todos los pasos
          },
        });
-
+  
       const onSubmit=(data:any)=>{
        console.log("variantes guardar",Variantes)
       }
@@ -240,7 +243,10 @@ function Productos() {
                                                            </div>
                
                                                              <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                               <CButton  className="buttoniconnormal"  >    <Usuariosicon width={19} height={19.5} color={"#555" }/></CButton>
+                                                               < CButton  className="buttoniconnormal" onClick={()=>{
+                                                                    setmodalprecio(true)
+                                                                    setprecioidvariante(item.productoVarianteId)
+                                                               }}  >    <Iconprecio width={19} height={19.5} color={"#555" }/></CButton>
                                                            </div>
                
                                                           
@@ -340,6 +346,7 @@ function Productos() {
                        } 
 
                        <Bodegasproducto  modalbodega={modalbodega}  setmodalbodega={setmodalbodegaa}  productoidbodega={productoidbodega} setproductoidbodega={setproductoidbodega}/>
+                       <Precios modalprecio={modalprecio} setmodalprecio={setmodalprecio} precioid={precioidvariante} setprecioid={setprecioidvariante}/>
                    </div>  
                  
            

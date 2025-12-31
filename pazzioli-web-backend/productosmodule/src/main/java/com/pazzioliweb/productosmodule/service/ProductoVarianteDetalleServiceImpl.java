@@ -2,6 +2,7 @@ package com.pazzioliweb.productosmodule.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -100,13 +101,18 @@ public class ProductoVarianteDetalleServiceImpl implements ProductoVarianteDetal
         ProductoVarianteDetalle actualizado = detalleRepository.save(existente);
         return mapper.toResponseDto(actualizado);
     }
-
+    @Transactional
     @Override
     public void eliminar(Long id) {
-        if (!detalleRepository.existsById(id)) {
+        if (!varianteRepository.existsById(id)) {
             throw new EntityNotFoundException("El detalle no existe");
         }
-        detalleRepository.deleteById(id);
+        
+        
+        Optional<ProductoVariante> varian=varianteRepository.findByProductoVarianteId(id);
+        detalleRepository.deleteByProductoVariante(varian.get());
+        varianteRepository.deleteByProductoVarianteId(id);
+       
     }
 
     @Override

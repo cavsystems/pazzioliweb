@@ -9,4 +9,5 @@ import com.pazzioliweb.productosmodule.entity.Lineas;
 
 public interface GrupoRepositori extends JpaRepository<Grupos,Integer>  {
 	Page<Grupos>  findByDescripcionContainingIgnoreCase(String descripcion,Pageable pageable);
+
 }

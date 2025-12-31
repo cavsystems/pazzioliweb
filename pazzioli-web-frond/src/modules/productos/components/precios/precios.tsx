@@ -20,30 +20,50 @@ stockMin
 ubicacion
 : string
 }
-function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproductoidbodega}:any) {
-    const [bodegasproductos,setbodegasproducto]=useState<bodegaproducto[]>([])
+interface preciosact{
+    
+fechaCreacion
+: string | null,
+fechaFin
+: string | null,
+fechaInicio
+: string | null ,
+precio
+: string,
+precioId
+: number,
+preciosProductoId
+: number,
+productoVarianteId
+: number,
+valor
+: number
+}
+function Precios({modalprecio,setmodalprecio,precioid,setprecioid}:any) {
+    const [preciosvariantes,setpreciosvariantes]=useState<preciosact[]>([])
+
     const traerbodegavariante= async()=>{
- const productbodega=await api.get(`existencias/variante/${productoidbodega}`,{
+ const preciova=await api.get(`precios-producto-variante/variante/${precioid}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-
- setbodegasproducto(productbodega.data.content)
+  setpreciosvariantes(preciova.data.content)
+ 
     }
   useEffect(()=>{
-   if(productoidbodega>0){
-    traerbodegavariante()
+   if(precioid>0){
+   traerbodegavariante()
    }
-  },[productoidbodega])
+  },[precioid])
     return ( <>
      <CModal
                 alignment="center"
                 scrollable
-                visible={modalbodega}
+                visible={modalprecio}
                  backdrop="static"
                  onClick={()=>{
-                    setmodalbodega(false)
-                    setproductoidbodega(0)
+                   setmodalprecio(false)
+                    setprecioid(0)
                  }}
             
                 aria-labelledby="VerticallyCenteredScrollableExample2"
@@ -53,7 +73,7 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
               >
                    <CModalHeader>
                                
-                             <CModalTitle id="VerticallyCenteredScrollableExample2">Bodegas</CModalTitle>
+                             <CModalTitle id="VerticallyCenteredScrollableExample2">Precios</CModalTitle>
                            </CModalHeader>
     
     
@@ -65,19 +85,19 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
                                                         
                                                           
                                                           small
-                                                          align="left" className="tablainventariovalores ">
+                                                          align="left" className="tablapreciovariante ">
                                                                                                   
                                                                                                   <CTableHead>
                                                                                                     <CTableRow>
                                                                                                     
                                                                                                         
-                                                                                                    <CTableHeaderCell scope="col" >Almacen</CTableHeaderCell>
-                                                                                                       <CTableHeaderCell scope="col">Cantidad</CTableHeaderCell>
-                                                                                                     <CTableHeaderCell scope="col">Stock minimo</CTableHeaderCell>
-                                                                                                    <CTableHeaderCell scope="col">Stock maximo</CTableHeaderCell>
+                                                                                                    <CTableHeaderCell scope="col" >Precio</CTableHeaderCell>
+                                                                                                       <CTableHeaderCell scope="col">Valor</CTableHeaderCell>
+                                                                                                    
                                                                                                     
                                                                                                   
-                                                                                                     <CTableHeaderCell scope="col">Ubicación</CTableHeaderCell>
+                                                                                                     
+                                                                                                 
                                                                                                    
                                                                                                    
                                                                                                     
@@ -88,26 +108,10 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
                                                                                                   <CTableBody>
                                                                                                   
                                                                                                     {
-                                                                                                        bodegasproductos.map((item)=>{
+                                                                                                       preciosvariantes.map((item)=>{
                                                                                                           return      <CTableRow>
-                                                                                                <CTableDataCell>
-                                                                                            almacen
-                                                                                                </CTableDataCell>
-
-                                                                                                   <CTableDataCell>
-                                                                                                  {item.existencia ? item.existencia:0}
-                                                                                                </CTableDataCell>
-                                                                                                <CTableDataCell>
-                                                                                                 {item.stockMin}
-                                                                                                </CTableDataCell>
-                                                                                                <CTableDataCell>
-                                                                                                {item.stockMax}
-                                                                                                </CTableDataCell>
-                                                                                                
-                                                                                                 <CTableDataCell>
-                                                                                                  {item.ubicacion}
-                                                                                                </CTableDataCell>
-                                                                                                
+                                                                                                    <CTableDataCell>{item.precio}</CTableDataCell>
+                                                                                                     <CTableDataCell>{item.valor}</CTableDataCell>
                                                                                                   </CTableRow>
                                                                                                         })
                                                                                                     }
@@ -149,4 +153,4 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
     </> );
 }
 
-export default Bodegasproducto;
+export default Precios;

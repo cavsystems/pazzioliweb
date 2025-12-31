@@ -44,6 +44,12 @@ public class PrecioServiceImpl implements PrecioService{
         return repository.findAll(pageable)
                 .map(mapper::toResponseDto);
     }
+    
+    @Override
+    public Page<PrecioResponseDTO> listarporidproduct(int id, Pageable pageable) {
+        return repository.findAll(pageable)
+                .map(mapper::toResponseDto);
+    }
 
     @Override
     @Transactional

@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.pazzioliweb.productosmodule.entity.TipoCaracteristica;
+import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
 import com.pazzioliweb.productosmodule.repositori.TipoCaracteristicaRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -12,9 +13,10 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class TipoCaracteristicaServiceImpl implements TipoCaracteristicaService{
 	private final TipoCaracteristicaRepository repo;
-
-    public TipoCaracteristicaServiceImpl(TipoCaracteristicaRepository repo) {
+  private final CaracteristicaRepository car;
+    public TipoCaracteristicaServiceImpl(TipoCaracteristicaRepository repo,CaracteristicaRepository car) {
         this.repo = repo;
+        this.car=car;
     }
 
     @Override
@@ -36,6 +38,12 @@ public class TipoCaracteristicaServiceImpl implements TipoCaracteristicaService{
         if (!repo.existsById(id)) {
             throw new EntityNotFoundException("Tipo de característica no encontrado");
         }
+        
+        if(car.existsByTipo_tipoCaracteristicaId(id)) {
+        	 throw new IllegalStateException(
+     	            "Tipo de caracteristica no puede ser eliminada"
+     	        );
+        }
         repo.deleteById(id);
     }
 
@@ -46,7 +54,12 @@ public class TipoCaracteristicaServiceImpl implements TipoCaracteristicaService{
     }
 
     @Override
-    public Page<TipoCaracteristica> listar(Pageable pageable) {
-        return repo.findAll(pageable);
+    public Page<TipoCaracteristica> listar(String descripcion,Pageable pageable) {
+    	System.out.println("[" + descripcion + "]");
+    	System.out.println("length = " + descripcion.length()+descripcion.isBlank());
+    	 if (descripcion == null || descripcion.isBlank() || descripcion.equals("")) {
+		        return repo.findAll(pageable);
+		    }
+        return repo.findByNombreContainingIgnoreCase( descripcion,pageable);
     }
 }

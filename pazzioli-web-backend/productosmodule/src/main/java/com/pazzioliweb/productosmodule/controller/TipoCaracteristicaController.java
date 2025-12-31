@@ -57,7 +57,8 @@ public class TipoCaracteristicaController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "tipoCaracteristicaId") String sortField,
-            @RequestParam(defaultValue = "asc") String sortDirection
+            @RequestParam(defaultValue = "asc") String sortDirection,
+            @RequestParam(defaultValue = "") String descripcion
     ) {
 
         Sort sort = sortDirection.equalsIgnoreCase("asc")
@@ -66,7 +67,7 @@ public class TipoCaracteristicaController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
 
-        Page<TipoCaracteristica> resultado = service.listar(pageable);
+        Page<TipoCaracteristica> resultado = service.listar( descripcion,pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;

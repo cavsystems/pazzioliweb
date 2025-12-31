@@ -15,10 +15,24 @@ id
 : 
 number
 }
-function Lineas() {
+
+interface unidadmedid{
+descripcion
+: 
+string,
+sigla
+: 
+string,
+unidadMedidaId
+: number
+
+}
+function Unidadmedida() {
     const [codigomodal,setcodigomodal]=useState<boolean>(false)
      const [modalconfirmar,setmodalconfimar]=useState<boolean>(false)
     const [linea,setlinea]=useState<string>("")
+    const [unidadmedida,setunidadmedida]=useState<string>("")
+        const [sigla,setSigla]=useState<string>("")
      const [error,seterror]=useState<boolean>(false)
      const [descripcionlinea,setdescripcionlinea]=useState<string>("")
          const [confirmareliminacion,setconfirmareliminacion]=useState<boolean>(false)
@@ -27,26 +41,29 @@ function Lineas() {
           const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
        const [mensajeerror,setmensajeerror]=useState<string>("")
            const [mensajeadvertencia,setmensajeadvertencia]=useState<string>("")
-      const [codigolinea,setcodigolinea]=useState<number>(0)
+      const [codigounidadmedida,    setcodigounidadmedida]=useState<number>(0)
     const [actulizar,setactulizar]=useState<boolean>(false)
      const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
+    const [unidadmedidas,setunidadmedidas]=useState<unidadmedid[]>([])
     const [lineas,setlineas]=useState<Lineas[]>([])
     const cambiarestadomodal=()=>{
     setmodalconfimar(false)
     }
      const traerlineasonchange=async (descrip="")=>{
-         const lineas=await api.get(`lineas/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
+         const und=await api.get(`unidadesMedida/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
 `,{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
         })
-         setlineas(lineas.data.content)
+
+        console.log("unidades de medida",und)
+        // setlineas(lineas.data.content)
  
      }
      const eleiminarlineas=async(itemid:number)=>{
        try {
-         const lineas=await api.delete(`lineas/${itemid}
+         const lineas=await api.delete(`unidadesMedida/${itemid}
 `,{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
@@ -65,13 +82,15 @@ function Lineas() {
     const traerlineas=async ()=>{
 
      
-          const lineas=await api.get(`lineas/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
+          const und=await api.get(`unidadesMedida/listar?page=0&size=10&sortField=unidadMedidaId&sortDirection=asc&descripcion=${descripcionlinea}
 `,{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
         })
-         setlineas(lineas.data.content)
+
+         console.log("unidades de medida",und)
+        setunidadmedidas(und.data.content)
  
      
         
@@ -95,7 +114,7 @@ function Lineas() {
                             
                               setdescripcionlinea(e.target.value)
                           }}/>
-                          <label className="labellinea" >Linea</label>
+                          <label className="labellinea" >Unidad de medida</label>
                           <div className="diviconlupainventario">
                             <Iconlupa width={17} height={17} />
                           </div>
@@ -123,8 +142,9 @@ function Lineas() {
                                                                 
                                                                     <CTableHeaderCell scope="col">Codigo</CTableHeaderCell>
                                                                 <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
-                                                               
+                                                                 <CTableHeaderCell scope="col" >Sigla</CTableHeaderCell>
                                                                    <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
+
                                                                 
                                                     
                                                                   
@@ -134,13 +154,16 @@ function Lineas() {
                                                               
                                                              
                                                                 {
-                                                              lineas.map((item)=>{
+                                                              unidadmedidas.map((item)=>{
                                                                 return   <CTableRow>
                                                             <CTableDataCell>
-                                                        {item.id}  
+                                                        {item.unidadMedidaId}  
                                                             </CTableDataCell>
                                                             <CTableDataCell>
                                                              {item.descripcion}
+                                                            </CTableDataCell>
+                                                             <CTableDataCell>
+                                                             {item.sigla}
                                                             </CTableDataCell>
                                                               <CTableDataCell>
                                                           <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
@@ -148,8 +171,9 @@ function Lineas() {
                                                         <CButton  className="buttoniconnormal" onClick={()=>{
                                                           setactulizar(true)
                                                           setcodigomodal(true)
-                                                          setlinea(item.descripcion)
-                                                          setcodigolinea(item.id)
+                                                          setunidadmedida(item.descripcion)
+                                                          setSigla(item.sigla)
+                                                          setcodigounidadmedida(item.unidadMedidaId)
                                                         }} >
                                                           <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                         </CButton>
@@ -158,7 +182,7 @@ function Lineas() {
         
                                                       <div className="col-6"  style={{ maxWidth: 'fit-content' }}  >
                                                         <CButton  className="buttoniconnormal" onClick={()=>{
-                                                        setcodigoeliminar(item.id)
+                                                        setcodigoeliminar(item.unidadMedidaId)
                                                              setmodaladvertencia(true)
                                                               setmensajeadvertencia("Seguro desea eliminar esta linea")
                                                         setFuncionDinamica(()=> ()=> {
@@ -220,13 +244,28 @@ function Lineas() {
                                                                                        <CInputGroup >
                                                           <CFormFloating className="margeniputempresa">
                                          
-                                                       <CFormInput placeholder=""  value={linea}  className="inputdatosempresa fontletre"  onChange={(e)=>{
-                                                        setlinea(e.target.value)
+                                                       <CFormInput placeholder=""  value={unidadmedida}  className="inputdatosempresa fontletre"  onChange={(e)=>{
+                                                        setunidadmedida(e.target.value)
 
                                                        }} />
                                                      
                                           
-                                         <CFormLabel>Linea</CFormLabel>
+                                         <CFormLabel>Unidad de medida</CFormLabel>
+                                            
+                                                       </CFormFloating>
+                                                     </CInputGroup>
+
+
+                                                     <CInputGroup >
+                                                          <CFormFloating className="margeniputempresa">
+                                         
+                                                       <CFormInput placeholder=""  value={sigla}  className="inputdatosempresa fontletre"  onChange={(e)=>{
+                                                        setSigla(e.target.value)
+
+                                                       }} />
+                                                     
+                                          
+                                         <CFormLabel>Sigla</CFormLabel>
                                             
                                                        </CFormFloating>
                                                      </CInputGroup>
@@ -236,26 +275,28 @@ function Lineas() {
                                                                                        <button type="button"  className="botonretroceder" onClick={()=>{
                                                                                        setcodigomodal(false)
                                                                                        setactulizar(false)
-                                                                                       setlinea("")
+                                                                                       setunidadmedida("")
+                                                                                       setSigla("")
                                                                                        }}>Cancelar</button>
                                          
                                                   
                                               {!actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
                                                /* let codigomaximo=lineas.length === 0  ? 1:Math.max(...lineas.map(v => v.codigolinea)) + 1
                                                 setlineas(prev=> [...prev,{codigolinea:codigomaximo,nombre:linea}])*/
-                                                const crearlinea=await api.post(`lineas`,{descripcion:linea},{
+                                                const crearlinea=await api.post(`unidadesMedida/crear-por-dto`,[{descripcion:unidadmedida,sigla:sigla}],{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
         })
         await traerlineas()
                                                setcodigomodal(false)
-                                               setlinea("")
+                                               setunidadmedida("")
+                                                    setSigla("")
                                                }} >Guardar</button>}
 
 
                                                        {actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
-                                                       const actulizarlinea=await api.put(`lineas/${codigolinea}`,{descripcion:linea},{
+                                                       const actulizarlinea=await api.put(`unidadesMedida/${codigounidadmedida}`,{descripcion:unidadmedida,sigla:sigla},{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
@@ -263,7 +304,8 @@ function Lineas() {
         await traerlineas()
                                                setcodigomodal(false)
                                                setactulizar(false)
-                                               setlinea("")
+                                               setunidadmedida("")
+                                                    setSigla("")
                                                }} >Actulizar</button>}
                                          
                                                                              </div>
@@ -282,4 +324,4 @@ function Lineas() {
     </> );
 }
 
-export default Lineas;
+export default Unidadmedida;

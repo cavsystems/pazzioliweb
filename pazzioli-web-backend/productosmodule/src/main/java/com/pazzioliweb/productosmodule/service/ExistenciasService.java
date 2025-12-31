@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;

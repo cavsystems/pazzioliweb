@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pazzioliweb.commonbacken.dtos.response.PaginationResponse;
+import com.pazzioliweb.productosmodule.dtos.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ExistenciasUpdateDTO;

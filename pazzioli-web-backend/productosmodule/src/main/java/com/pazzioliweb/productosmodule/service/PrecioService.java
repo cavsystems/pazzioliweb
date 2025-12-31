@@ -17,6 +17,8 @@ public interface PrecioService {
     Page<PrecioResponseDTO> listar(Pageable pageable);
 
     Optional<PrecioResponseDTO> actualizar(Integer id, PrecioUpdateDTO dto);
+    
+    public Page<PrecioResponseDTO> listarporidproduct(int id, Pageable pageable);
 
     boolean eliminar(Integer id);
 }

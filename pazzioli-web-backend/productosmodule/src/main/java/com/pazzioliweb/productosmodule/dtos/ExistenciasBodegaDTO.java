@@ -1,4 +1,4 @@
-package com.pazzioliweb.productosmodule.controller;
+package com.pazzioliweb.productosmodule.dtos;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

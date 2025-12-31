@@ -87,4 +87,11 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer>{
 		    GROUP BY l.descripcion, b.nombre
 		""")
 		Page<LineaProductosDTO> getTotalesPorLineaPorBodegaId(@Param("bodegaId") Integer bodegaId, Pageable pageable);
+	
+	boolean existsByLinea_Id(Integer lineaId);
+	
+	boolean existsByGrupo_Id(Integer grupoaId);
+	
+	boolean existsByUnidadesMedidaProducto_UnidadMedida_UnidadMedidaId(Integer unidadMedidaId);
+
 }

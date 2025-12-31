@@ -103,7 +103,7 @@ public class PreciosProductoVarianteServiceImpl implements PreciosProductoVarian
 	    List<PreciosProductoVarianteResponseDTO> respuestas = new ArrayList<>();
 
 	    for (PreciosProductoVarianteUpdateDTO dto : dtos) {
-
+             System.out.println(dto.getPreciosProductoId());
 	        PreciosProductoVariante entidad = repository.findById(dto.getPreciosProductoId())
 	                .orElseThrow(() -> new EntityNotFoundException("PrecioProductoVariante no encontrado"));
 

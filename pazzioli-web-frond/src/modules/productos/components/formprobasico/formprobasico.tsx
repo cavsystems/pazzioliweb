@@ -13,6 +13,7 @@ import api from "../../../../apicofig";
 import Iconupdate from "../../../../icons/iconupdate";
 import Iconeliminar from "../../../../icons/iconeliminar";
 import Modalconfirmar from "../../../../components/alertconfimacion";
+import { elGR } from "@mui/x-charts/locales";
 
 interface Variantedfault {
  descripcion:string,
@@ -20,13 +21,13 @@ interface Variantedfault {
 }
 
 interface listaprecio {
-  precioId:number, descripcion?: string
+   precioId:number, descripcion?: string
 }
 
 interface precioob {
   precioId:number, valor?: string
 }
-function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct}:any) {
+function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct,preciosva,setpreciosva}:any) {
      const [unidadmedida,setunidadmedida]=useState<{descripcion
 : 
 string,
@@ -66,13 +67,19 @@ id
       }[]>([])
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const fileimagen= useRef<HTMLInputElement | null>(null);
+     const [funncionDinamica2,setfunncionDinamica2]= useState<() => void>(() => {});
+     const [confirmaractulizacion,setconfirmaractulizacion]=useState<boolean>(false)
+       const [confirmareliminacion,setconfirmareliminacion]=useState<boolean>(false)
+          const [codigoeliminar,setcodigoeliminar]=useState<number>(0)
     const [imagenproduct,setimagenproduct]=useState<string | null>(null)
     const [substrinfinal,setsubstringfinal]=useState<number>(0)
     const [actulizar,setactulizar]=useState<boolean>(false)
      const [codigoactulizar,setcodigoactulizar]=useState<number>(0)
+     const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
     const [mensajeerror,setmensajeerror]=useState<string>("")
    const [listaprecios,setlistaprecio]=useState<listaprecio[]>([])
    const [listaprecioson,setlistaprecioon]=useState<precioob[]>([])
+   const [listaprecioglobal,setlistaprecioglobal]=useState<precioob[]>([])
    const [numeroinputprecio,setnumeroinputprescio]=useState<number>(0)
    const [tipoproducto,setTipoproducto]=useState<{tipoProductoId: number, nombre: string, descripcion: boolean, estado: true}[]>([])
   const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
@@ -131,6 +138,158 @@ setimpuesto(impuestoss.data.datosimpuestos)
 
 }
 
+const eliminarprecio=(precioid:number)=>{
+
+setcodigoeliminar(precioid)
+setmodaladvertencia(true)
+setmensajeerror("Desea eliminar este item")
+   setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmareliminacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+}
+
+const actulizarprecio=async()=>{
+ console.log("entro a confirmar actulizacion actulizo",product)
+    if( codigoactulizar && codigoactulizar>0){
+  
+      const precios=getValues("listaprecios")
+         let variableactulizar=listaprecioson.find(item=>{
+                                              return item.precioId === codigoactulizar
+                                            })
+
+                                                console.log("entro a actulizar precio",codigoactulizar,actulizar,variableactulizar)
+        let varianteactback=listaprecioglobal.find(item=>  item.precioId === codigoactulizar)
+                                          if(actulizar && productoid>0 ){ 
+                                        if(varianteactback){
+                                            const actulizarvaribles= await api.put(`precios-producto-variante/actualizar`,[variableactulizar],{ headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+                                               console.log("variables actulizar realizado",actulizarvaribles)
+                                        }else{
+                                           const preciosup= precios.map(item=>{
+                                                if(item.precioid===variableactulizar?.precioId){
+                                                  return {...item,variableactulizar }
+                                                }
+                                                return item
+                                            })
+
+                                            setValue("listaprecios",preciosup)
+                                        }
+                                              
+                                           setconfirmaractulizacion(false)
+                                          }else{
+                                         
+                                             const preciosup= precios.map(item=>{
+                                                if(item.precioid===variableactulizar?.precioId){
+                                                  return {...item,variableactulizar }
+                                                }
+                                                return item
+                                            })
+ 
+                                          }
+                                         /*setguardar(false)
+                                          const precios=getValues("listaprecios")
+
+                                          precios.push(precioactual)
+                                             setValue("listaprecios",  precios)
+                                             setlistaprecioon(precios)
+                                             const list=[...listaprecios]
+                                             
+                                          console.log(precios)*/
+                                          setprecioactual({precioId:0,valor:""})
+                                                 setguardar(false)
+                                          setactulizar(false)
+                                          setcodigoactulizar(0)
+                                          if(listaprecioson.length<numeroinputprecio){
+                                           setguardar(true)
+                                          }
+    }else{
+      setactulizar(false)
+      setguardar(true)
+    }
+}
+
+
+ const eliminardesdedb=async (eliminar:number)=>{
+  const elimanapre=await api.delete(`precios-producto-variante/${codigoeliminar}`,{
+      headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }
+  })
+
+  if(elimanapre.status===200){
+ console.log("se elimino",elimanapre)
+     const listapreciolista=getValues("listaprecios")
+             console.log("codigo eliminar",eliminar,listapreciolista)
+
+         const precioeliminado= listapreciolista.filter(item=>{
+            return item.precioId!==eliminar
+          })
+
+          setValue("listaprecios",precioeliminado)
+          setlistaprecioon(precioeliminado)
+          setnumeroinputprescio(precioeliminado.length)
+          setguardar(false)
+          setactulizar(false)
+          setconfirmareliminacion(false)
+  }
+ 
+
+ }
+useEffect(()=>{
+  if(confirmaractulizacion){
+   actulizarprecio()
+  }else{
+    
+    if(confirmareliminacion){
+         
+            if(codigoeliminar){
+                  let variableactulizar=listaprecioson.find(item=>{
+                                              return item.precioId === codigoeliminar
+                                            })
+        let varianteactback=listaprecioglobal.find(item=>  item.precioId === codigoeliminar)
+        console.log("codigo eliminar antes",codigoeliminar,varianteactback,actulizar)
+    21
+         if(varianteactback){
+
+
+          eliminardesdedb(codigoeliminar)
+        
+
+         }else{
+             const listapreciolista=getValues("listaprecios")
+             console.log("codigo eliminar",codigoeliminar,listapreciolista)
+
+         const precioeliminado= listapreciolista.filter(item=>{
+            return item.precioId!==codigoeliminar
+          })
+
+         
+          setValue("listaprecios",precioeliminado)
+          setlistaprecioon(precioeliminado)
+          setnumeroinputprescio(precioeliminado.length)
+          setguardar(false)
+          setactulizar(false)
+          setconfirmareliminacion(false)
+         }
+
+      
+            }else{
+              setnumeroinputprescio(prev=> prev-1)
+              setguardar(false)
+            }
+       /* */
+    }else{
+
+    }
+   
+ 
+  }
+},[confirmaractulizacion,confirmareliminacion])
 const traerlistasprecios=async()=>{
   const listaprecios= await api.get(`precios/listar`,{
             headers: {
@@ -138,6 +297,7 @@ const traerlistasprecios=async()=>{
             }})
 
  setlistaprecio(listaprecios.data.content)
+
 }
 
 const traertipoproducto=async()=>{
@@ -204,7 +364,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
   
       fileInputRef.current?.click();
     };
-     const [rotate,setrotate]=useState(false);
+     const [rotate,setrotate]=useState(true);
        const [archivotitulo,setarchivotitulo]=useState("");
                  
 
@@ -245,10 +405,32 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     //setValue("archivoLogo", file);
   };
 
+  const establecerpreciosupdate= async()=>{
+const productbodega=await api.get(`precios-producto-variante/variante/${preciosva}`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+
+
+
+            console.log("precios variantes updata",productbodega)
+            setlistaprecioglobal(productbodega.data.content)
+            setlistaprecioon(productbodega.data.content)
+            setValue("listaprecios",productbodega.data.content)
+            setnumeroinputprescio(productbodega.data.content.length)
+  }
+ useEffect(()=>{
+if(preciosva>0){
+   establecerpreciosupdate()
+
+}
+ },[preciosva])
      useEffect(()=>{
                   if(productoid>0 && product  && grupo.length > 0  && unidadmedida.length > 0 && impuesto.length > 0 && lineas.length > 0 && tipoproducto.length > 0){
                       const inud=unidadmedida.find(item=> item.sigla === product.unidadMedida
-)                       
+)                     
+
+
                   console.log("grupo id",product)
                    console.log("und medida",inud)
                     let descripcionfinal
@@ -587,7 +769,7 @@ setmultivariable(product.manejavariante)
                                                             const lista=pre.some(item=> item.precioId===Number(e.target.value))
                                                             console.log("lista precio onchange", lista)
                                                             if(lista){
-                                                            
+                                                             
                                                               setmensajeerror("Este precio ya ha sido seleccionado")
                                                           setFuncionDinamica(() => () => setmensajeerror(""));
                                                         
@@ -611,23 +793,32 @@ setmultivariable(product.manejavariante)
                              
                                  
                                </select></CTableDataCell>
-                                      <CTableDataCell><input placeholder="0"  value={listaprecioson[index]?.valor ?? precioactual.valor} className="iteminput1" onChange={(e)=>{
-                             console.log(( listaprecioson[index]?.precioId !== undefined &&
-  codigoactulizar !== listaprecioson[index]?.precioId))    
-  console.log(( listaprecioson[index]?.precioId,
- listaprecioson[index]?.precioId))    
-
-    
-    if(  listaprecioson &&
+                                      <CTableDataCell><input placeholder="0"  value={listaprecioson[index]?.valor ?? precioactual.valor}  disabled={ !listaprecioson[index]?.precioId &&
+    actulizar === true &&
+    codigoactulizar !== listaprecioson[index]?.precioId
+}className="iteminput1"   onChange={(e)=>{
+                      console.log("mensaje condicion",listaprecioson[index]?.precioId &&
+    actulizar === true &&
+    codigoactulizar !== listaprecioson[index]?.precioId )
+   
+if(!(listaprecioson[index]?.precioId &&
+    actulizar === true &&
+    codigoactulizar !== listaprecioson[index]?.precioId)){
+          if(  listaprecioson &&
   listaprecioson[index] &&
   listaprecioson[index].precioId !== undefined ){
                                                        const lista=[...listaprecioson]
                                                        lista[index].valor=e.target.value     
-                                                       setValue("listaprecios",lista)  
+                                                     
                                                        setlistaprecioon(lista)
                                                        return
                                                              }
+  
                                           setprecioactual(prev=> ({...prev,valor:e.target.value}))
+    }else{
+
+    }
+                         
                                       }}/></CTableDataCell>
                                       <CTableDataCell>   <select className="iteminput1"  style={{width:"80px"}}>
                                                            <option value={"Activo"} id="slectform1">Activo</option>
@@ -648,7 +839,7 @@ setmultivariable(product.manejavariante)
                                                                                                    </div>
 
                                                                                                           <div   style={{ maxWidth: 'fit-content' }} >
-                                                                                                                                                                                                                                          <CButton  className="buttoniconnormaleliminar"  >      <Iconeliminar  width={16} height={16} color={"#555"}/>  </CButton>
+                                                                                                                                                                                                                                          <CButton  className="buttoniconnormaleliminar"  onClick={()=> eliminarprecio(listaprecioson[index]?.precioId)}>      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
                                                                                                                                                                                  </div>  
                                                                                                   
                                                 </div>
@@ -681,7 +872,7 @@ setmultivariable(product.manejavariante)
                                         !guardar && !actulizar && <button type="button" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
                                         setnumeroinputprescio(prev=> prev+1)
                                         setguardar(true)
-                                        console.log("precio actual",precioactual,listaprecios)
+                                        console.log("precio actual",precioactual,listaprecios,listaprecioson)
                                          setprecioactual({precioId:0,valor:""})
                                         }} >Agregar</button>  
                                
@@ -692,7 +883,7 @@ setmultivariable(product.manejavariante)
                                           
                                           setguardar(false)
                                           const precios=getValues("listaprecios")
-
+                                                      
                                           precios.push(precioactual)
                                              setValue("listaprecios",  precios)
                                              setlistaprecioon(precios)
@@ -707,23 +898,40 @@ setmultivariable(product.manejavariante)
 
 
                                         {
-                                        actulizar &&  <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={()=>{
-                                          
-                                          setguardar(false)
-                                          const precios=getValues("listaprecios")
+                                        actulizar &&  <button className="botoncontinuarguardar" type="button"  key="guardar" onClick={async ()=>{
+                                         setmensajeerror("Seguro desea actulizar el precio")
+                                         setmodaladvertencia(true)
+                                          setfunncionDinamica2(()=>{
+                                           return ()=>{ console.log("funciones modla actuliza")
+                                            setmensajeerror("")
+                                            setconfirmaractulizacion(false)
+                                            setcodigoactulizar(0)
+                                            setactulizar(false)
+                                            setmodaladvertencia(false)
+                                            console.log(getValues("listaprecios"))
+                                              setlistaprecioon(getValues("listaprecios"))
+                                              setValue("listaprecios",getValues("listaprecios"))
+                                                  setnumeroinputprescio(numeroinputprecio)
+                                               }
+                                   
+                                          })
 
-                                          precios.push(precioactual)
-                                             setValue("listaprecios",  precios)
-                                             setlistaprecioon(precios)
-                                             const list=[...listaprecios]
-                                             
-                                          console.log(precios)
-                                          setprecioactual({precioId:0,valor:""})
-
+                                          setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmaractulizacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
                                         }}>Actulizar</button> 
                                        }
                                
-                               
+                                   {
+                       modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeerror} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                       } 
+                          
+                                   {
+                       modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeerror} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                       } 
                              </div>
 
                              
@@ -801,6 +1009,8 @@ setmultivariable(product.manejavariante)
                        {
                         mensajeerror!=="" && <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true} textoboton={"Aceptar"}  funcion={funcionDinamica}/>
                        } 
+
+                     
                          </div>}
     </>);
 }
