@@ -66,6 +66,8 @@ productoVarianteId:number
 }
 function Productos() {
     const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
+    const [pagina,setpagina]=useState<number>(0);
+
      const [modalprecio,setmodalprecio]=useState<boolean>(false);
      const [precioidvariante,setprecioidvariante]=useState<number>(0);
      const [itemsformempresa, setitemsformempresa] = useState(1)
@@ -83,13 +85,48 @@ function Productos() {
        setcodigovariante,}=codigosbarrascontex()
      const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
      const traerproductos=async()=>{
-      const productos= await api.get(`variantes/listarInventarioBasico`,{
+      const productos= await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=5`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
             setproductos(productos.data.content)
       console.log("productos lista",productos)
      }
+
+
+
+     useEffect(()=>{
+      console.log("pagina cambiada",pagina)
+     cargarMasDatos()
+     },[pagina])
+     const handleScroll = (e:any) => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (bottom) {
+          console.log('Llegaste al final de la tabla');
+          setpagina(pagina+1)
+         
+        }
+      };
+      const cargarMasDatos = async () => {
+        let arraynuevo=[]
+        const nuevosProductos = await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=15`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }});
+
+            console.log("nuevos productosback",nuevosProductos)
+         nuevosProductos.data.content.map((item:productolista)=>{
+         
+          if(!productos.find(prod=>prod.productoId===item.productoId)){
+             arraynuevo.push(item)
+          }
+        })
+        setproductos((prevProductos) => [...prevProductos, ...arraynuevo]);
+        console.log("nuevos productos",nuevosProductos)
+       // setproductos((prevProductos) => [...prevProductos, ...nuevosProductos.data.content]);
+      }
+
+    
       useEffect(()=>{
          traerproductos()
       },[])
@@ -179,7 +216,7 @@ function Productos() {
                                                  
                                          
                                                  </div>
-                                                       <div className="tabla-wrapper">
+                                                       <div className="tabla-wrapper" onScroll={(e) => handleScroll(e)}>
                                                           <CTable  
        
                
