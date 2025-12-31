@@ -67,7 +67,7 @@ productoVarianteId:number
 function Productos() {
     const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
     const [pagina,setpagina]=useState<number>(0);
-
+   const [totalglobal,settotalglobal]=useState<number>(0);
      const [modalprecio,setmodalprecio]=useState<boolean>(false);
      const [precioidvariante,setprecioidvariante]=useState<number>(0);
      const [itemsformempresa, setitemsformempresa] = useState(1)
@@ -90,6 +90,7 @@ function Productos() {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
             setproductos(productos.data.content)
+           // settotalglobal(productos.data.totalElements)
       console.log("productos lista",productos)
      }
 
@@ -186,9 +187,10 @@ function Productos() {
                              <div className="col-12">
                                
                                 <div  className="tablesucursalescon" >
-                                   <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6  paddingbottom" style={{paddingBottom:"12px"}} >
-                                     
-                                                          <div className="inputsearch">
+                                   <div className="col-12 " style={{paddingBottom:"12px"}} >
+                                        <div className="d-flex flex-column">
+                                          <div className="row mx-0 ">
+                                            <div className="inputsearch col-12 col-md-6 paddingbottom">
                                                                <input type="text" className="inputlinea" />
                                                                <label className="labellinea">Producto</label>
                                                                <div className="diviconlupainventario">
@@ -197,25 +199,23 @@ function Productos() {
                                                           </div>
                                                              
                                                                       
-                                           
-                                     
-                                     
-                                                 
-                                         
-                                                 </div>
-                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6  paddingbottom" style={{paddingBottom:"12px"}} >
-                                     
-                                                         <div className="d-flex justify-content-start align-items-center">
-                                                                <span className="totalregistrosproduct" >Total: {productos.length}</span>
+                                              <div className="d-flex justify-content-start align-items-center justify-content-md-end justify-content-lg-end col-12 col-md-6 paddingbottom">
+                                                                <span className="totalregistrosproduct" >Total: {productos.length>0 ?productos[0].totalGlobalInventario.toLocaleString("es-CO",{
+                                                style:"currency",
+                                                  currency:"COP",
+                                                  minimumFractionDigits:2,
+                                                  maximumFractionDigits:2
+                                                }):0}</span>
                                                          </div>
-                                                             
-                                                                      
-                                           
+                                         </div>
+                                        </div>
+                                                          
                                      
                                      
                                                  
                                          
                                                  </div>
+                                                
                                                        <div className="tabla-wrapper" onScroll={(e) => handleScroll(e)}>
                                                           <CTable  
        
