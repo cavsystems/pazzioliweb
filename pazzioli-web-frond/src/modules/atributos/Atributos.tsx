@@ -64,15 +64,21 @@ function Atributos() {
         }
        
 
-         {itemsformempresa===4 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
-            
-          <Caracteristicas/>
-        </CTabPanel>)}
+        
 
 
          {itemsformempresa===3 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={3}>
             
           <Unidadmedida/>
+
+
+        </CTabPanel>)}
+
+
+
+         {itemsformempresa===4 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={4}>
+            
+          <Caracteristicas/>
         </CTabPanel>)}
         </CTabContent>
          </CTabs>

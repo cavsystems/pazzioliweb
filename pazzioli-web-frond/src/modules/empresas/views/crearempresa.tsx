@@ -241,7 +241,7 @@ sucursales:[],
     return (  
         <>
          <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(onSubmit,onError)} className="containerformen">
+                <form onSubmit={methods.handleSubmit(onSubmit,onError)} >
 
         <div className="d-flex justify-content-center">
         <div className={itemsformempresa==3 ? "containerempresasucur":"containerempresa"}>

@@ -75,6 +75,7 @@ font: 'normal normal normal 14px/19px Open Sans',
 }}>/</span>
          <a href="#" className="navigationhome">{paginaactual}</a>
        </div>
+       <div className='containerformen'>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Login/>} />
@@ -93,6 +94,7 @@ font: 'normal normal normal 14px/19px Open Sans',
             
     </Routes>
      </BrowserRouter>
+     </div>
    </div>
   )
 }

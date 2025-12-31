@@ -82,6 +82,7 @@ public class Productos {
     @JoinColumn(name = "tipo_producto_id", nullable = false)
     private TipoProducto tipoProducto;
 	
+  
 	public Integer getProductoId() {
 		return productoId;
 	}
@@ -215,6 +216,7 @@ public class Productos {
     
     @Column(name = "maneja_variantes")
     private Boolean manejaVariantes = false;
+    
 
 	public List<ProductoVariante> getVariantes() {
 		return variantes;

@@ -166,6 +166,19 @@ function Productos() {
                                                  
                                          
                                                  </div>
+                                                 <div className="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6  paddingbottom" style={{paddingBottom:"12px"}} >
+                                     
+                                                         <div className="d-flex justify-content-start align-items-center">
+                                                                <span className="totalregistrosproduct" >Total: {productos.length}</span>
+                                                         </div>
+                                                             
+                                                                      
+                                           
+                                     
+                                     
+                                                 
+                                         
+                                                 </div>
                                                        <div className="tabla-wrapper">
                                                           <CTable  
        
@@ -207,7 +220,12 @@ function Productos() {
                                                              <CTableDataCell>{item.codigoContable}</CTableDataCell>
                                              <CTableDataCell>{item.descripcion}</CTableDataCell>
                                                 <CTableDataCell>{item.referencia}</CTableDataCell>
-                                              <CTableDataCell>{item.cantidadGlobal.toLocaleString("es-CO")}</CTableDataCell>
+                                              <CTableDataCell>{item.cantidadGlobal.toLocaleString("es-CO",{
+                                                 
+                                                  style:"decimal",
+                                                  minimumFractionDigits:2,
+                                                  maximumFractionDigits:2
+                                                })}</CTableDataCell>
                                                 <CTableDataCell>{`${item.costo.toLocaleString("es-CO",{
                                                   style:"currency",
                                                   currency:"COP",

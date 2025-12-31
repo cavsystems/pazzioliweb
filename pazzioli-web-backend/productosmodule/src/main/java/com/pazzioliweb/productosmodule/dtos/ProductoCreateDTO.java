@@ -3,6 +3,8 @@ package com.pazzioliweb.productosmodule.dtos;
 import java.util.List;
 
 public class ProductoCreateDTO {
+	private String  estado;
+
 	private String referencia;
 	private String codigo_contable;
 	private String codigo_barras;
@@ -19,6 +21,13 @@ public class ProductoCreateDTO {
     
     private Boolean manejaVariantes;
     
+    
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public String getReferencia() {
 		return referencia;
 	}

@@ -12,13 +12,14 @@ import { createPortal } from "react-dom";
 import api from "../../../apicofig";
 import { useFormContext } from "react-hook-form";
 import Iconeliminar from "../../../icons/iconeliminar";
+import Modalconfirmar from "../../../components/alertconfimacion";
 
 
 const bodegas = ["Bodega 1", "Bodega 2", "Bodega 3"];
 
 interface bodegas{
     bodegaId:number;
-  nombre:string;
+  bodega:string;
   stockMax:number;
 stockMin:number;
 ubicacion?:string;
@@ -29,12 +30,12 @@ interface valorescara{
   caracteristicaId
 : 
 number
-nombre
+bodega
 : 
 string
 tipo
 : 
-{tipoCaracteristicaId: number, nombre: string}
+{tipoCaracteristicaId: number, bodega: string}
 }
 
 interface Variante {
@@ -44,6 +45,7 @@ interface Variante {
   atributos: { [key: string]:string}; // <--- dinámico
   bodega: bodegas[];
   codigobarras:string,
+  estado?:string
 
 }
 
@@ -56,7 +58,7 @@ interface Variantedfault {
 
 
 
-function Variantes({variantedefault,multivariable,setmultivariable,variantes, setVariantes,setceldaatributos}:{variantedefault:Variantedfault,multivariable:boolean,setmultivariable: Dispatch<SetStateAction<boolean>>,variantes:Variante[],setVariantes:Dispatch<SetStateAction<Variante[]>>,setceldaatributos:Dispatch<SetStateAction<string[]>> }) {
+function Variantes({variantedefault,multivariable,setmultivariable,variantes, setVariantes,setceldaatributos  ,variantesdelete, setVariantesdelete,estadoproducto}:{variantedefault:Variantedfault,multivariable:boolean,setmultivariable: Dispatch<SetStateAction<boolean>>,variantes:Variante[],setVariantes:Dispatch<SetStateAction<Variante[]>>,setceldaatributos:Dispatch<SetStateAction<string[]>>,variantesdelete:Variante[], setVariantesdelete:Dispatch<SetStateAction<Variante[]>>,estadoproducto:boolean}) {
     //el hook useRef me crea una referencia para asignarla a un componente y poder identificarlo
  
   const fileRefs = useRef<(HTMLInputElement | null)[]>([]);
@@ -64,14 +66,20 @@ function Variantes({variantedefault,multivariable,setmultivariable,variantes, se
   const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
   const [codigoidvariante,setcodigoidvariante]=useState<number>(0);
   const [evitandoBlur, setEvitandoBlur] = useState(false);
-
+ const [funcionDinamica,setFuncionDinamica]=useState<()=>void>(()=>{})
+  const [confirmareliminacion,setconfirmareliminacion]=useState<boolean>(false)
+       const [mensajeerror,setmensajeerror]=useState<string>("")
+        const [codigoeliminar,setcodigoeliminar]=useState<number>(0)
+          const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
+          const [confirmaractulizacion,setconfirmaractulizacion]=useState<boolean>(false)
+          const [funncionDinamica2,setfunncionDinamica2]=useState<()=>void>(()=>{})
   const [atributos, setAtributos] = useState<string[]>(["Talla","Color","Material"]);
   const [imgdefault,setimgdefault]=useState<string>("");
   const [atrractual,setatrractual]=useState<string>("");
   const [rotate4,setrotate4]=useState<boolean>(false);
   const [valorescaracteristicas,setvalorescaracteristicas]=useState<valorescara[]>([]);
   const [atributoscelda, setAtributoscelda] = useState<string[]>([]);
- const [bodegaSeleccionada, setBodegaSeleccionada] = useState<{nombre:string;
+ const [bodegaSeleccionada, setBodegaSeleccionada] = useState<{bodega:string;
   stockMax:number;
 stockMin:number;}[]>([]);
 useEffect(() => {
@@ -81,6 +89,45 @@ useEffect(() => {
   setceldaatributos(atributoscelda)
 }, [atributoscelda]);
 
+
+const eliminarva=(varianteid:number)=>{
+
+
+setmodaladvertencia(true)
+setmensajeerror("Desea eliminar este item")
+   setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                              setcodigoeliminar(varianteid)
+                                            setconfirmareliminacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+
+    setfunncionDinamica2(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmareliminacion(false)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+}
+
+
+
+useEffect(()=>{
+   
+        
+          if(codigoeliminar && codigoeliminar>0){
+              
+             eleiminarvariante()
+      
+            }else{
+             /* setnumeroinputprescio(prev=> prev-1)
+              setguardar(false)
+            }
+       /* */
+      }
+    
+    },[confirmaractulizacion,confirmareliminacion])
 //use efect para controlar el drag drop
 /* Si haces drop sobre un elemento que no tiene preventDefault() 
 en los eventos dragover y drop, el navegador tratará de abrir ese 
@@ -104,14 +151,16 @@ console.log("estableciendo variante por defecto")
       codigobarras:""
     }])
 }
-const eleiminarvariante= async (idvariante:number)=>{
-  const eliminar=await api.delete(`variante-detalle/${idvariante}`,{
+const eleiminarvariante= async ()=>{
+  /*const eliminar=await api.delete(`variante-detalle/${idvariante}`,{
             headers: {
-              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
             }})
-  console.log("eliminar variante",eliminar)
-const nuevasvariantes=variantes.filter(item=> item.productoVarianteId !== idvariante)
+  console.log("eliminar variante",eliminar)*/
+  setVariantesdelete([...variantesdelete, ...variantes.filter(item=> item.productoVarianteId === codigoeliminar)])
+const nuevasvariantes=variantes.filter(item=> item.productoVarianteId !== codigoeliminar)
 setVariantes(nuevasvariantes)
+setcodigoeliminar(0)
 }
 useEffect(() => {
 
@@ -146,9 +195,25 @@ if(variantedefault.descripcion!=""){
   }
   }
 },[atributos])
+
+const atributosiniciales=async()=>{
+  const atributoslist:string[]=[]
+  const atributosback=await api.get(`tipos-caracteristica/listar`,{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
+            }})
+
+            console.log("atributos iniciales",atributosback)
+atributosback.data.content.map((item:any)=> {
+  atributoslist.push(item.nombre)
+})
+
+setAtributos(atributoslist)
+  
+}
 useEffect(() => {
   
-  
+  atributosiniciales();
   const prevent = (e: DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -258,8 +323,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
       
        },[rotate4])
        
-       const agregarAtributoceldas = (nombre: string) => {
-  setAtributoscelda(prev => [...prev, nombre]); 
+       const agregarAtributoceldas = (bodega: string) => {
+  setAtributoscelda(prev => [...prev, bodega]); 
 };
 
 const agregarVariante = () => {
@@ -279,7 +344,8 @@ const agregarVariante = () => {
       imagen:"",
       atributos: nuevosAtributos,
       bodega: [],
-      codigobarras:""
+      codigobarras:"",
+      estado:estadoproducto?"ACTIVO":"INACTIVO",
     }
   ]);
 
@@ -288,24 +354,48 @@ const agregarVariante = () => {
 
   // Agregar nueva variante vacía
  
- const agregarbodega=(nombrebodega:{ existenciaId
-:number,bodegaId:number,nombre: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
-    let existebodega=variantes[index].bodega.find(b=>b.nombre===nombrebodega.nombre);
+ const agregarbodega= async (nombrebodega:{ existenciaId
+:number,bodegaId:number,bodega: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
+    let existebodega=variantes[index].bodega.find(b=>b.bodega===nombrebodega.bodega);
     
+    console.log("agregar bodega",nombrebodega,existebodega)
     if(!existebodega){
-      const nuevaBodega: bodegas = { bodegaId:nombrebodega.bodegaId,nombre: nombrebodega.nombre, stockMax: nombrebodega.stockMax, stockMin: nombrebodega.stockMin, ubicacion:nombrebodega.ubicacion,existencias:0 };
+      const nuevaBodega: bodegas = { bodegaId:nombrebodega.bodegaId,bodega: nombrebodega.bodega, stockMax: nombrebodega.stockMax, stockMin: nombrebodega.stockMin, ubicacion:nombrebodega.ubicacion,existencias:0 };
       const nuevasVariantes = [...variantes];
       nuevasVariantes[index].bodega = [...nuevasVariantes[index].bodega, nuevaBodega];
       setVariantes(nuevasVariantes);
     }else{
-    if(nombrebodega.existenciaId!==null){
+    if(nombrebodega.existenciaId){
+
       const nuevasVariantes = [...variantes];
+      const upddatebodega=await api.put(`existencias/${nombrebodega.existenciaId}`,{
+        bodegaId:nombrebodega.bodegaId,
+        stockMax:nombrebodega.stockMax,
+        stockMin:nombrebodega.stockMin,
+        ubicacion:nombrebodega.ubicacion,
+      
+      },{
+            headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
+            }})
+
+
+            console.log("actualizar bodega",upddatebodega)
       const indexbodega=nuevasVariantes[index].bodega.findIndex(b=>b.bodegaId===nombrebodega.bodegaId);
       nuevasVariantes[index].bodega[indexbodega].existencias=nombrebodega.existencias;
       nuevasVariantes[index].bodega[indexbodega].ubicacion=nombrebodega.ubicacion;
       nuevasVariantes[index].bodega[indexbodega].stockMax=nombrebodega.stockMax;
       nuevasVariantes[index].bodega[indexbodega].stockMin=nombrebodega.stockMin;
-      
+
+      setVariantes(nuevasVariantes);
+    }else{
+        const nuevasVariantes = [...variantes];
+      const indexbodega=nuevasVariantes[index].bodega.findIndex(b=>b.bodegaId===nombrebodega.bodegaId);
+      nuevasVariantes[index].bodega[indexbodega].existencias=nombrebodega.existencias;
+      nuevasVariantes[index].bodega[indexbodega].ubicacion=nombrebodega.ubicacion;
+      nuevasVariantes[index].bodega[indexbodega].stockMax=nombrebodega.stockMax;
+      nuevasVariantes[index].bodega[indexbodega].stockMin=nombrebodega.stockMin;
+
       setVariantes(nuevasVariantes);
     }
     }
@@ -334,7 +424,7 @@ const agregarVariante = () => {
                           <ul  className={`${multivariable ? "d-flex container1  flex-wrap":"d-flex container1  flex-wrap divinputdisabled"}`} >
                          
                         <li  style={{flex:"1",display:"flex",justifyContent:"center",gap:"12px"}}  className="classiteminput"><input style={{width:"100%"}} className={`${multivariable ?  "inputestilotercero ":"inputestilotercero inputdisabled"}`}  disabled={!multivariable} placeholder="Tipo caracteristica" /> <div ><img  src="imgs/togle.svg"  className={`${'rotate'} `} onClick={()=>{
-                          if(multivariable){
+                          if(multivariable && variantes.length===0){
                             setrotate4(!rotate4)
                           }
                           
@@ -390,7 +480,7 @@ const agregarVariante = () => {
       <CTableHeaderCell key={attr}>{attr}</CTableHeaderCell>
     ))}
  
-       
+         <CTableHeaderCell scope="col" >Estado</CTableHeaderCell>
             <CTableHeaderCell>Acciones</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
@@ -466,7 +556,7 @@ const agregarVariante = () => {
     tipo: attr.toUpperCase()
   },
             headers: {
-              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
             }})
 
             console.log("caracteristica",lleg)
@@ -489,7 +579,7 @@ const agregarVariante = () => {
     return;
   }
                    const inputdom=document.getElementById(`idinputvariante${attr}${i}`)  as HTMLInputElement;
-                  const buscarvalor=valorescaracteristicas.some((item=> item.nombre!==inputdom.value))
+                  const buscarvalor=valorescaracteristicas.some((item=> item.bodega!==inputdom.value))
                   if( buscarvalor){
                      const nuevas = [...variantes];
               nuevas[i].atributos[attr] = "";
@@ -513,7 +603,7 @@ const agregarVariante = () => {
     tipo: attr.toUpperCase()
   },
             headers: {
-              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
             }})
 
             console.log("caracteristica",lleg)
@@ -554,7 +644,7 @@ Distancia desde el borde superior del viewport
                     console.log("item variante",varianteactual,variantes,v,i)
                     
                     nuevas[varianteactual].atributos[attr]=item.nombre;
-    //nuevas[i].atributos[attr] =item.nombre;
+    //nuevas[i].atributos[attr] =item.bodega;
 
     setVariantes(nuevas);     // ← React actualiza el input
     setatrractual("");        // cerrar portal
@@ -571,6 +661,26 @@ Distancia desde el borde superior del viewport
          
         </CTableDataCell>
       ))}
+
+         <CTableDataCell>   <select className="iteminput1" value={v.estado}  onChange={(e)=>{
+          if(!estadoproducto){
+             console.log("variante",variantes,i)
+          let variant=[...variantes]
+          variant[i].estado="INACTIVO"
+          setVariantes(variant)
+            return
+          }
+          console.log("variante",variantes,i)
+          let variant=[...variantes]
+          variant[i].estado=e.target.value
+          setVariantes(variant)
+         }} style={{width:"80px"}}>
+                                                           <option value={"ACTIVO"} id="slectform1">Activo</option>
+                                                          <option value={"INACTIVO"} id="slectform1">Inactivo</option>
+                                
+                             
+                                 
+                               </select></CTableDataCell>   
 
       
 
@@ -589,7 +699,7 @@ Distancia desde el borde superior del viewport
                                                                   let contrefe=Object.values(v.atributos)
                                                                   let barrarformada="";
                                                                       const listaid= await api.post("caracteristicas/buscarIds", contrefe,{headers: {
-                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
                                                               }});
                                                                 listaid.data.forEach(item3=>{
                                                                 barrarformada+=item3.toString()
@@ -624,7 +734,7 @@ Distancia desde el borde superior del viewport
                
                                                           
                                                         <div className="col-6"  style={{ maxWidth: 'fit-content' }} >
-                                                             <CButton  className="buttoniconnormaleliminar"    onClick={()=> eleiminarvariante(v.productoVarianteId)} >      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
+                                                             <CButton  className="buttoniconnormaleliminar"    onClick={()=>  eliminarva(v.productoVarianteId)} >      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
                                                          </div>  
                
                                                         
@@ -736,7 +846,7 @@ Distancia desde el borde superior del viewport
                                                                   let contrefe=Object.values(v.atributos)
                                                                   let barrarformada="";
                                                                       const listaid= await api.post("caracteristicas/buscarIds", contrefe,{headers: {
-                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+                                                                 'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
                                                               }});
                                                                 listaid.data.forEach(item3=>{
                                                                 barrarformada+=item3.toString()
@@ -788,6 +898,11 @@ Distancia desde el borde superior del viewport
 
      
       <Bodegasvariantes modalbo={modalbo} setmodalbo={setmodalbo} agregarbodega={agregarbodega} BodegaSeleccionada={bodegaSeleccionada}  setBodegaSeleccionada={setBodegaSeleccionada} indexvariante={indexvariante} variantes={variantes} setvariantes={setVariantes} setindexvariante={setindexvariante}  />
+
+         {
+                             modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeerror} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                             } 
+                   
     </div>
   );
 }

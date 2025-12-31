@@ -90,6 +90,7 @@ public class ProductoMasterController {
                     .body(ApiResponse.failure(e.getMessage()));
 
         } catch (Exception e) {
+        	System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ApiResponse.failure("Error al actualizar el producto: " + e.getMessage()));
         }

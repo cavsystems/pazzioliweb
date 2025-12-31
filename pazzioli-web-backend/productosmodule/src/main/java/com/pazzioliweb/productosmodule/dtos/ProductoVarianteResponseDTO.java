@@ -8,7 +8,14 @@ public class ProductoVarianteResponseDTO {
     private String codigoBarras;
     private Boolean activo;
     private Boolean predeterminada;
+    private String estado;
     
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public Long getProductoVarianteId() {
 		return productoVarianteId;
 	}

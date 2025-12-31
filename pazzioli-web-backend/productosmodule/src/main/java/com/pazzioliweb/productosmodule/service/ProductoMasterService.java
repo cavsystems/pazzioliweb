@@ -186,6 +186,8 @@ public class ProductoMasterService {
         for (ProductoVarianteMasterUpdateDTO master : variantesDTO) {
 
             Long varianteId = master.getProductoVarianteId();
+            System.out.println( "producto variante id"+master);
+            System.out.println( "producto variante id"+master);
             ProductoVarianteResponseDTO varianteResp;
 
             // -------- VARIANTE EXISTENTE --------
@@ -196,13 +198,14 @@ public class ProductoMasterService {
                 );
             } else {
                 ProductoVarianteCreateDTO createDTO = master.getVarianteCreate();
+                System.out.println( "producto variante nuevo"+master.getVarianteCreate());
                 createDTO.setProductoId(productoId);
 
                 varianteResp = productoVarianteService.crear(createDTO);
                 varianteId = varianteResp.getProductoVarianteId();
             }
 
-
+           if(master.getVariante().getEstadovariante()) {
             // --- DETALLES ----------------------------------------------------
             if(manejarVariantes) {
             	// Crear nuevos detalles
@@ -210,6 +213,7 @@ public class ProductoMasterService {
                     for (ProductoVarianteDetalleCreateDTO d : master.getDetalles()) {
                         d.setProductoVarianteId(varianteId);
                     }
+                   
                     detalleService.crear(master.getDetalles());
                 }
 
@@ -270,6 +274,7 @@ public class ProductoMasterService {
 
                 existenciasRepository.save(existencia);
             }
+        }
         }
 
         return producto;

@@ -95,7 +95,12 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
                                                                                                 </CTableDataCell>
 
                                                                                                    <CTableDataCell>
-                                                                                                  {item.existencia ? item.existencia:0}
+                                                                                                  {item.existencia ? item.existencia.toLocaleString("es-CO",{
+                                                 style:"decimal",
+                                                  
+                                                  minimumFractionDigits:2,
+                                                  maximumFractionDigits:2
+                                                }):0}
                                                                                                 </CTableDataCell>
                                                                                                 <CTableDataCell>
                                                                                                  {item.stockMin}

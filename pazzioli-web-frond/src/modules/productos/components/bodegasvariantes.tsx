@@ -16,8 +16,9 @@ function Bodegasvariantes({modalbo,setmodalbo,agregarbodega,BodegaSeleccionada ,
   nombre:"Bodegasur"},{ bodegaId:2,
   nombre:"BodegaNorte"}])
     const [bodegas,setbodegas]=useState<{
+      existenciaId?:number | null,
     bodegaId:number,
-      nombre:string;
+      bodega:string;
       stockMax:number;
     stockMin:number;
 ubicacion:string;
@@ -25,6 +26,8 @@ existencias:number}[]>([])
 const [guardar,setguardar]=useState<boolean>(false)
  
     const [indexactulizar,setindexactulizar]=useState<number>(0)
+     const [confirmareliminacion,setconfirmareliminacion]=useState<boolean>(false)
+       const [codigoeliminar,setcodigoeliminar]=useState<number>(0)
     const [bodegaguardar,setbodegaguardar]=useState<string>("")
     const [mensajeerror,setmensajeerror]=useState<string>("")
     const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
@@ -38,18 +41,19 @@ const [guardar,setguardar]=useState<boolean>(false)
     const [indexactulizarbodega,setindexactulizarbodega]=useState<boolean>(false)
       const { register,control,setValue,getValues,reset, formState: { errors } } =useFormContext();
     const [bodegasguardadas,setbodegasguardadas]=useState<{
+      existenciaId?:number | null,
           bodegaId:number,
 
-      nombre:string;
+      bodega:string;
       stockMax:number;
     stockMin:number;
 ubicacion:string
-existencias:number}>({ bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"" ,existencias:0})
+existencias:number}>({ bodegaId:0,bodega:"",stockMax:0,stockMin:0,ubicacion:"" ,existencias:0})
 
 const traerbodegas=async()=>{
   const apibodega=await api.get("bodegas/listar",{
         headers: {
-          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+          'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
         }})
 
         const newarraybodega:bodegaselect[]=[]
@@ -57,6 +61,47 @@ const traerbodegas=async()=>{
         console.log("bodega traer",apibodega)
         setbodegasselect(newarraybodega)
 }
+
+    const eliminardesdedb=async(codigo:number)=>{
+      try{
+        const respeliminar= await api.delete(`existencias/${codigo}`,{
+          headers: {
+            'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+          }})
+          console.log("respuesta eliminar",respeliminar)
+          let nuevasbodegas=variantes[indexvariante].bodega.filter(item=> item.existenciaId!==codigo)
+          const nuevasVariantes = [...variantes];
+          nuevasVariantes[indexvariante].bodega=nuevasbodegas
+          
+          setnumeroinputbodega(nuevasbodegas.length)
+          setvariantes(nuevasVariantes)
+          setconfirmareliminacion(false)
+          setcodigoeliminar(0)
+      }catch(error){
+        console.log("error al eliminar bodega",error)
+      }
+    }
+
+    const eliminarbodegava=(bodegaid:number)=>{
+
+setcodigoeliminar(bodegaid)
+setmodaladvertencia(true)
+setmensajeerror("Desea eliminar este item")
+   setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmareliminacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+
+    setfunncionDinamica2(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmareliminacion(false)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+}
+
     useEffect(()=>{
 traerbodegas()
       console.log("BodegaSeleccionada",BodegaSeleccionada)
@@ -71,8 +116,10 @@ traerbodegas()
 const actulizarbodega=async()=>{
 
    agregarbodega({...bodegasguardadas,},indexvariante)
-  setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
+  setbodegasguardadas({bodegaId:0,bodega:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
  setbodegaguardar('')
+ setactulizar(false)
+ setconfirmaractulizacion(false)
  setguardar(false)
 }
     useEffect(()=>{
@@ -80,9 +127,51 @@ const actulizarbodega=async()=>{
       actulizarbodega()
       }else{
         
+          if(codigoeliminar && codigoeliminar>0){
+                  let variableactulizar=variantes[indexvariante].bodega.find(item=>{
+                                              return item.bodegaId === codigoeliminar
+                                            })
+       /* let varianteactback=listaprecioglobal.find(item=>  item.precioId === codigoeliminar)
+        console.log("codigo eliminar antes",codigoeliminar,varianteactback,actulizar)*/
+    21
+         if(variableactulizar && variableactulizar.existenciaId){
+
+
+          eliminardesdedb(variableactulizar.existenciaId)
         
+
+         }else{
+          console.log("eliminar bodega sin db",codigoeliminar,bodegas)
+          const  filterbodegas= bodegas.filter(item=> item.bodegaId!==codigoeliminar)
+          setbodegas(filterbodegas)
+          setnumeroinputbodega(filterbodegas.length)
+          setguardar(false)
+
+            
+         
+           let nuevasbodegas=variantes[indexvariante].bodega.filter(item=> item.bodegaId!==codigoeliminar)
+          const nuevasVariantes = [...variantes];
+          nuevasVariantes[indexvariante].bodega=nuevasbodegas
+          
+          setnumeroinputbodega(nuevasbodegas.length)
+          setvariantes(nuevasVariantes)
+          //setlistaprecioon(precioeliminado)
+          //setnumeroinputprescio(precioeliminado.length)
+          setguardar(false)
+          setactulizar(false)
+          setconfirmareliminacion(false)
+          setcodigoeliminar(0)
+         }
+
+      
+            }else{
+             /* setnumeroinputprescio(prev=> prev-1)
+              setguardar(false)
+            }
+       /* */
       }
-    },[confirmaractulizacion])
+    }
+    },[confirmaractulizacion,confirmareliminacion])
     return ( 
         <>
         
@@ -95,8 +184,10 @@ const actulizarbodega=async()=>{
               setmodalbo(false)
                        setBodegaSeleccionada([]);
                                                                setindexvariante(0);
-                                                               setnumeroinputbodega(1);
+                                                               setnumeroinputbodega(0);
                                                                setbodegas([]);
+                                                               setguardar(false);
+                                                               setactulizar(false);
             }}
             aria-labelledby="VerticallyCenteredScrollableExample2"
            className="col-12 modalbodegasvariantes"
@@ -173,48 +264,17 @@ const actulizarbodega=async()=>{
                                                              {
                                                                 Array.from({length: numeroinputbodega}).map((_, index) => ( 
                                                                        <CTableRow>
-                                                                   <CTableDataCell>   <select  defaultValue={bodegas[index]?.bodegaId ?? ""} className="iteminput1" name="nombre" onChange={(e)=>{
+                                                                   <CTableDataCell>   <select  defaultValue={bodegas[index]?.bodegaId ?? ""} className="iteminput1" name="bodega" onChange={(e)=>{
                             
 
-                                                               if( variantes[indexvariante].bodega[index]  && variantes[indexvariante].bodega){
-                                                                      if(e.target.value===""){
-                                                                        return
-                                                                      }
-                                                                let nombrebodega= bodegasselect.find(item=> item.bodegaId === Number(e.target.value))
-                                                          
-                                                                 let bodegatrue=bodegas.find((bodega:any)=>bodega.nombre===nombrebodega?.nombre)
-                                                                 if(bodegatrue){
-                                                                  alert("Esta bodega ya ha sido seleccionada")
-                                                                 e.target.value=""
-                                                                  return;
-                                                                 }
-                                                                const bodegaActualizada = [...variantes[indexvariante].bodega];
-                                                                bodegaActualizada[index] = {
-                                                                  ...bodegaActualizada[index],
-                                                                  bodegaId:Number(e.target.value),
-                                                                  nombre: e.target.value
-                                                                };
-                                                                const variantesActualizadas = [...variantes];
-                                                                variantesActualizadas[indexvariante].bodega = bodegaActualizada;
-
-                                                                setvariantes(variantesActualizadas);
-                                                                 const valor = e.target.value
-                                                               const copiaSel = [...bodegas];
-                                      copiaSel[index] = {
-                                        ...copiaSel[index],
-                                           bodegaId:Number(e.target.value),
-                                         nombre: nombrebodega?.nombre || ""
-                                      };
-
-                                      setbodegas(copiaSel);
-                                                               }else{
+                                                     
                                                                   if(e.target.value===""){
                                                                         return
                                                                       }
                                                                 let nombrebodega= bodegasselect.find(item=> item.bodegaId === Number(e.target.value))
                                                              
-                                                                 let bodegatrue=bodegas.find((bodega)=>bodega.nombre===nombrebodega?.nombre)
-                                                                   console.log("nombre bodega",nombrebodega, bodegatrue,bodegas)
+                                                                 let bodegatrue=bodegas.find((bodega)=>bodega.bodega===nombrebodega?.nombre)
+                                                                   console.log("bodega bodega",nombrebodega, bodegatrue,bodegas)
                                                                  if(bodegatrue){
                                                                   alert("Esta bodega ya ha sido seleccionada")
                                                                   e.target.value=""
@@ -228,12 +288,12 @@ const actulizarbodega=async()=>{
                                       copiaSel[index] = {
                                         ...copiaSel[index],
                                           bodegaId:Number(e.target.value),
-                                        nombre: nombrebodega?.nombre || ""
+                                        bodega: nombrebodega?.nombre || ""
                                       };
 
                                      setbodegas(copiaSel);
-                                                               setbodegasguardadas({...bodegasguardadas,   bodegaId:Number(e.target.value), [e.target.name]:   nombrebodega?.nombre})  
-                                                               }
+                                                               setbodegasguardadas({...bodegasguardadas,existenciaId: bodegas && bodegas[index] && bodegas[index].existenciaId ? bodegas[index].existenciaId:null, bodegaId:Number(e.target.value), bodega:   nombrebodega?.nombre})  
+                                                               
                                                                  
                                                    }} >
                                                <option value={""} id="slectform1">Elige una opción</option>
@@ -249,28 +309,7 @@ const actulizarbodega=async()=>{
                                             </select></CTableDataCell>
                                                    <CTableDataCell><input placeholder="0" className="iteminput1"  value={bodegas[index]?.stockMax ?? "" }  name="stockMax" onChange={(e)=>{
                                                      const valor = Number(e.target.value);
-                                                     console.log("valor",valor)
-                                                    console.log("index",index, variantes)
-                                                          if( variantes[indexvariante].bodega[index]  && variantes[indexvariante].bodega){
-                                                               const bodegaActualizada = [...variantes[indexvariante].bodega];
-                                                                bodegaActualizada[index] = {
-                                                                  ...bodegaActualizada[index],
-                                                                stockMax:Number(e.target.value)
-                                                                };
-                                                                  const variantesActualizadas = [...variantes];
-                                                                variantesActualizadas[indexvariante].bodega = bodegaActualizada;
-                                                                setvariantes(variantesActualizadas);
-                                                                                         const valor = Number(e.target.value);
-
-                                      const copiaSel = [...bodegas];
-                                      copiaSel[index] = {
-                                        ...copiaSel[index],
-                                        stockMax: valor
-                                      };
-
-                                      setbodegas(copiaSel);
-                                                          }else{
-                                                             const valor = Number(e.target.value);
+                                                
 
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
@@ -280,33 +319,12 @@ const actulizarbodega=async()=>{
 
                                       setbodegas(copiaSel);
                                                             setbodegasguardadas({...bodegasguardadas,  [e.target.name]:e.target.value})     
-                                                          }
+                                                          
                                                                  
                                                    }}/></CTableDataCell>
                                                      <CTableDataCell  ><input placeholder="0" className="iteminput1" name="stockMin" value={bodegas[index]?.stockMin ?? ""}  onChange={(e)=>{
                                                      const valor = Number(e.target.value);
-                                                     console.log("valor",valor)
-                                                    console.log("index",index, variantes)
-                                                          if( variantes[indexvariante].bodega[index]  && variantes[indexvariante].bodega){
-                                                               const bodegaActualizada = [...variantes[indexvariante].bodega];
-                                                                bodegaActualizada[index] = {
-                                                                  ...bodegaActualizada[index],
-                                                                stockMin:Number(e.target.value)
-                                                                };
-                                                                  const variantesActualizadas = [...variantes];
-                                                                variantesActualizadas[indexvariante].bodega = bodegaActualizada;
-                                                                setvariantes(variantesActualizadas);
-                                                                                         const valor = Number(e.target.value);
-
-                                      const copiaSel = [...bodegas];
-                                      copiaSel[index] = {
-                                        ...copiaSel[index],
-                                        stockMin: valor
-                                      };
-
-                                      setbodegas(copiaSel);
-                                                          }else{
-                                                             const valor = Number(e.target.value);
+                                               
 
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
@@ -316,7 +334,7 @@ const actulizarbodega=async()=>{
 
                                       setbodegas(copiaSel);
                                                             setbodegasguardadas({...bodegasguardadas,  [e.target.name]:e.target.value})     
-                                                          }
+                                                          
                                                                  
                                                    }}/></CTableDataCell>
                                                   
@@ -326,27 +344,7 @@ const actulizarbodega=async()=>{
                                                      const valor = e.target.value;
                                                      console.log("valor",valor)
                                                     console.log("index",index, variantes)
-                                                          if( variantes[indexvariante].bodega[index]  && variantes[indexvariante].bodega){
-                                                               const bodegaActualizada = [...variantes[indexvariante].bodega];
-                                                                bodegaActualizada[index] = {
-                                                                  ...bodegaActualizada[index],
-                                                                ubicacion:e.target.value
-                                                                };
-                                                                  const variantesActualizadas = [...variantes];
-                                                                variantesActualizadas[indexvariante].bodega = bodegaActualizada;
-                                                                setvariantes(variantesActualizadas);
-                                                                                         const valor = e.target.value;
-
-                                      const copiaSel = [...bodegas];
-                                      copiaSel[index] = {
-                                        ...copiaSel[index],
-                                        ubicacion: valor
-                                      };
-
-                                      setbodegas(copiaSel);
-                                                          }else{
-                                                             const valor = e.target.value;
-
+                                                 
                                       const copiaSel = [...bodegas];
                                       copiaSel[index] = {
                                         ...copiaSel[index],
@@ -355,7 +353,7 @@ const actulizarbodega=async()=>{
 
                                       setbodegas(copiaSel);
                                                             setbodegasguardadas({...bodegasguardadas,  [e.target.name]:e.target.value})     
-                                                          }
+                                                          
                                                                  
                                                    }}/></CTableDataCell>
                                                    
@@ -370,38 +368,17 @@ const actulizarbodega=async()=>{
                                                                                                                                       
                                                                                                                                                         
                                                                                        <div className="col-6" style={{ maxWidth: 'fit-content' }} >
-                                         <CButton  className="buttoniconnormal"  onClick={()=>{
-                                          setcodigoactulizar(bodegas[index]?.bodegaId ?? 0)
-                                         setmensajeerror("Seguro desea actulizar el precio")
-                                         setmodaladvertencia(true)
-                                          setfunncionDinamica2(()=>{
-                                           return ()=>{ console.log("funciones modla actuliza")
-                                            setmensajeerror("")
-                                            setconfirmaractulizacion(false)
-                                            setcodigoactulizar(0)
-                                            setactulizar(false)
-                                            setmodaladvertencia(false)
-                                            console.log(getValues("listaprecios"))
-                                            setbodegas(getValues("listaprecios"))
-                                              setValue("listaprecios",getValues("listaprecios"))
-                                                  setnumeroinputbodega(numeroinputbodega)
-                                               }
-                                   
-                                          })
-
-                                          setFuncionDinamica(()=>{
-                                             return ()=>{ setmensajeerror("")
-                                            setconfirmaractulizacion(true)
-                                            setmodaladvertencia(false)
-                                            }
-                                          })
-                                                                                                                                                                                            }}>
+                                         <CButton  className="buttoniconnormal" onClick={()=>{
+                                          setactulizar(true)
+                                          setbodegasguardadas(bodegas[index])     
+                                              
+                                         }} >
                                                                                                                                                                                               <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                                                                                                                                                             </CButton>
                                                                                                                                                                                         </div>   
                                                         
                                                                                       <div   style={{ maxWidth: 'fit-content' }} >
-                                                                                                                                       <CButton  className="buttoniconnormaleliminar"  >      <Iconeliminar  width={16} height={16} color={"#555"}/>  </CButton>
+                                                                                                                                       <CButton  className="buttoniconnormaleliminar"  onClick={()=> eliminarbodegava(bodegas[index]?.bodegaId)}  >      <Iconeliminar  width={16} height={16} color={"#555"}/>  </CButton>
                                                                               </div>      
 
                                                                                      </div>
@@ -443,7 +420,7 @@ const actulizarbodega=async()=>{
                                                   {
                                                     guardar  &&   !actulizar &&  <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
                                                         agregarbodega(bodegasguardadas,indexvariante)
-                                                         setbodegasguardadas({bodegaId:0,nombre:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
+                                                         setbodegasguardadas({bodegaId:0,bodega:"",stockMax:0,stockMin:0,ubicacion:"",existencias:0})
                                                         setbodegaguardar('')
                                                         setguardar(false)
                                                     }}  >Guardar</button> 
@@ -451,9 +428,31 @@ const actulizarbodega=async()=>{
 
 
                                                     {
-                                                   !guardar  &&   actulizar &&  <button className="botoncontinuarguardar"  key="guardar"  onClick={()=>{
-                                                      
-                                                    }}  >Actulizar</button> 
+                                                   !guardar  &&   actulizar &&  <button className="botoncontinuarguardar"  key="guardar" onClick={()=>{
+                                      
+                                         setmensajeerror("Seguro desea actulizar el precio")
+                                         setmodaladvertencia(true)
+                                          setfunncionDinamica2(()=>{
+                                           return ()=>{ console.log("funciones modla actuliza")
+                                            setmensajeerror("")
+                                            setconfirmaractulizacion(false)
+                                            setcodigoactulizar(0)
+                                            setactulizar(false)
+                                            setmodaladvertencia(false)
+                                            
+                                                  setbodegas(variantes[indexvariante].bodega)
+                                                  setnumeroinputbodega(numeroinputbodega)
+                                               }
+                                   
+                                          })
+
+                                          setFuncionDinamica(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmaractulizacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+                                                                                                                                                                                            }} >Actulizar</button> 
                                                   }
                                             
                                             

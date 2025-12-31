@@ -191,52 +191,60 @@ public class ProductosServiceImpl implements ProductosService{
         }
 
         // Actualizamos solo si llega un valor distinto de null
-        if (dto.getReferencia() != null) {
-            existente.setReferencia(dto.getReferencia());
-        }
+        if(dto.getEstado().equals("INACTIVO")) {
+        	existente.setEstado(dto.getEstado());
+        }else {
+        	
+        	 if (dto.getReferencia() != null) {
+                 existente.setReferencia(dto.getReferencia());
+             }
 
-        if (dto.getDescripcion() != null) {
-            existente.setDescripcion(dto.getDescripcion());
-        }
+             if (dto.getDescripcion() != null) {
+                 existente.setDescripcion(dto.getDescripcion());
+             }
 
-        if (dto.getCodigo_contable() != null) {
-            existente.setCodigoContable(dto.getCodigo_contable());
-        }
+             if (dto.getCodigo_contable() != null) {
+                 existente.setCodigoContable(dto.getCodigo_contable());
+             }
 
-        if (dto.getCodigo_barras() != null) {
-            existente.setCodigoBarras(dto.getCodigo_barras());
-        }
+             if (dto.getCodigo_barras() != null) {
+                 existente.setCodigoBarras(dto.getCodigo_barras());
+             }
 
-        if (dto.getCosto() != null) {
-            existente.setCosto(dto.getCosto());
-        }
+             if (dto.getCosto() != null) {
+                 existente.setCosto(dto.getCosto());
+             }
 
-        if (dto.getManifiesto() != null) {
-            existente.setManifiesto(dto.getManifiesto());
-        }
+             if (dto.getManifiesto() != null) {
+                 existente.setManifiesto(dto.getManifiesto());
+             }
 
-        // Relaciones
-        if (dto.getGrupo_id() != null) {
-            existente.setGrupo(
-                    grupoRepository.findById(dto.getGrupo_id())
-                            .orElseThrow(() -> new EntityNotFoundException("Grupo no encontrado"))
-            );
-        }
+             // Relaciones
+             if (dto.getGrupo_id() != null) {
+                 existente.setGrupo(
+                         grupoRepository.findById(dto.getGrupo_id())
+                                 .orElseThrow(() -> new EntityNotFoundException("Grupo no encontrado"))
+                 );
+             }
 
-        if (dto.getLinea_id() != null) {
-            existente.setLinea(
-                    lineaRepository.findById(dto.getLinea_id())
-                            .orElseThrow(() -> new EntityNotFoundException("Linea no encontrada"))
-            );
-        }
+             if (dto.getLinea_id() != null) {
+                 existente.setLinea(
+                         lineaRepository.findById(dto.getLinea_id())
+                                 .orElseThrow(() -> new EntityNotFoundException("Linea no encontrada"))
+                 );
+             }
 
-        if (dto.getImpuesto_id() != null) {
-            existente.setImpuestos(
-                    impuestoRepository.findById(dto.getImpuesto_id())
-                            .orElseThrow(() -> new EntityNotFoundException("Impuesto no encontrado"))
-            );
-        }
+             if (dto.getImpuesto_id() != null) {
+                 existente.setImpuestos(
+                         impuestoRepository.findById(dto.getImpuesto_id())
+                                 .orElseThrow(() -> new EntityNotFoundException("Impuesto no encontrado"))
+                 );
+             }
+             
+             existente.setEstado(dto.getEstado());
 
+        }
+       
         return productosRepository.save(existente);
     }
     

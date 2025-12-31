@@ -23,6 +23,7 @@ public class ProductoMapper {
             TipoProducto tipoProducto
     ) {
         Productos p = new Productos();
+        p.setEstado(dto.getEstado());
         p.setReferencia(dto.getReferencia());
         p.setCodigoContable(dto.getCodigo_contable());
         p.setCodigoBarras(dto.getCodigo_barras());

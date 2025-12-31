@@ -37,6 +37,7 @@ interface Variante {
   atributos: { [key: string]: string }; // <--- dinámico
   bodega: bodegas[];
   codigobarras:string,
+  estado:string
 
 }
 
@@ -46,14 +47,18 @@ interface precioob {
 function Formproduct({modalformproducto,setmodalformproducto,productoid, setproductoid,product, setproduct,traerproductos}:any) {
 const [multivariable,setmultivariable]=useState<boolean>(false)
 const [preciosva,setpreciosva]=useState<number>(0)
+const [estadoproducto,setestadoproducto]=useState<boolean>(true)
+const [multivainclude,setmultivainclude]=useState<Variante[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const [celdasatributos,setceldaatributos]=useState<string[]>([])
+
     const [variantedefault,setvariantedefault]=useState<Variantedfault>({
  descripcion:"",
  imagen:null
        
       })
         const [variantes, setVariantes] = useState<Variante[]>([]);
+             const [variantesdelete, setVariantesdelete] = useState<Variante[]>([]);
 const traervariantes=async ()=>{
   const atributocelda:string[]=[]
    
@@ -77,7 +82,9 @@ const preciosidva= variantback.data.content[0]
   atributos: { [key: string]:string}; // <--- dinámico
   bodega: bodegas[];
   
-  codigobarras:string,}[]=[]
+  codigobarras:string,
+  estado:string
+}[]=[]
   await Promise.all(variantback.data.content.map( async (item)=>{
      let atribu:{[key:string]:string}={}
     item.detalles.forEach(item2=>{
@@ -97,7 +104,8 @@ const preciosidva= variantback.data.content[0]
     imagen: "",
     atributos:atribu,
     bodega: productbodega.data.content,
-    codigobarras: item.codigobarras ?? ""
+    codigobarras: item.codigobarras ?? "",
+    estado:item.activo ? "ACTIVO":"INACTIVO"
   });
 
   
@@ -107,6 +115,7 @@ const preciosidva= variantback.data.content[0]
   }))
 
   console.log( "multiva variante",multiva)
+  setmultivainclude(multiva)
  setVariantes(multiva)
 
   
@@ -172,8 +181,11 @@ const preciosidva= variantback.data.content[0]
          imagenproducto:string | null
              })=>{
               console.log("variante",variantes,"data",data)
-
-              let productobody={
+       
+            
+                           let productobody={
+                            estado: estadoproducto ? "ACTIVO":"INACTIVO",
+                  productoid: productoid>0 ? productoid : null,
                 codigo_contable:data.codigo,
     codigo_barras:data.codigobarra==="" ? data.codigo:data.codigobarra ,
     referencia: data.referencia==="" ? data.codigo: data.referencia,
@@ -190,7 +202,11 @@ const preciosidva= variantback.data.content[0]
    
 
               }
-               const Variantesback=[
+               let Variantesback=[
+
+               ]
+
+                const Variantesbackdelete=[
 
                ]
                let codigbarradefault=data.codigo
@@ -216,7 +232,98 @@ const preciosidva= variantback.data.content[0]
                 }
                   
                 )
+                 let variantedifiniva
+                    console.log("listaid",listaid,item.productoVarianteId,productoid)
+                   if(!estadoproducto && productoid>0){
+                 variantedifiniva={
+                
+
+                   productoVarianteId: item.productoVarianteId,
+
+      variante: {
+       estadovariante:item.estado=="ACTIVO" ? true:false,
+      }
+                
+                  
+                    
+
+                }
+
+                   }else{
+                     variantedifiniva={
+                       productoVarianteId: productoid>0 && multivainclude.some(item2 => item2.productoVarianteId === item.productoVarianteId) ? item.productoVarianteId : null,
+                          productoId: productoid>0 ? productoid : null,
+                  variante:{
+                      
+                    estadovariante:item.estado=="ACTIVO" ? true:false,
+                   skun:skun,
+                   referenciaVariantes:referencia,
+                   codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
+                   predeterminada:!multivariable,
+                    
+                    productoId: productoid>0 ? productoid : null,
+                  
+                  },
+
+                   varianteCreate:{
+                     estadovariante:item.estado=="ACTIVO" ? true:false,
+                   skun:skun,
+                   referenciaVariantes:referencia,
+                   codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
+                   predeterminada:!multivariable,
+                    
+                    productoId: productoid>0 ? productoid : null,
+                    productoVarianteId: productoid>0 ? item.productoVarianteId : null,
+                  },
+               
+
+
+                    detalles:listaid.data.length>0 ? [
+                      { productoVarianteId: productoid>0 &&  multivainclude.some(item2 => item2.productoVarianteId === item.productoVarianteId) ? item.productoVarianteId : null,
+                       caracteristicaId:listaid.data,
+                         productoId: productoid>0 ? productoid : null}
+                    ]:[],
+
+                    existencias:item.bodega,
+                    precios:data.listaprecios,
+                    
+
+                }
+
+                   }
+               
+                
+
+                   
+                  Variantesback.push(variantedifiniva)
+               
+               }))
+
+
+
+                 await Promise.all( variantesdelete.map( async item=>{
+                /* armar skunvaliante*/
+                let skun=methods.getValues("referencia")
+                let referencia=""
+                const valores = Object.values(item.atributos); 
+               const listaid= await api.post("caracteristicas/buscarIds", valores,{headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }});
+               listaid.data.forEach((item3:any)=> codigbarradefault+=item3)
+            
+                celdasatributos.forEach((item2,index)=>{
+                  skun+="-"+ item.atributos[item2].substring(0,2)
                  
+                
+                 if(index=== celdasatributos.length-1){
+ referencia+=item.atributos[item2]
+                 }else{
+                   referencia+=item.atributos[item2]+" "
+                 }
+                }
+                  
+                )
+                   
                 const variantedifiniva={
                   variante:{
                    skun:skun,
@@ -224,36 +331,61 @@ const preciosidva= variantback.data.content[0]
                    codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
                    predeterminada:!multivariable,
                     
-                    productoId: null
+                    productoId: productoid>0 ? productoid : null,
+                    productoVarianteId: productoid>0 ? item.productoVarianteId : null,
                   },
+
+                  
                     detalles:listaid.data.length>0 ? [
-                      { productoVarianteId: null,
+                      { productoVarianteId: productoid>0 ? item.productoVarianteId : null,
                        caracteristicaId:listaid.data}
                     ]:[],
 
                     existencias:item.bodega,
-                    precios:data.listaprecios
-                   
+                    precios:data.listaprecios,
+                    
 
                 }
 
                 
 
                
-                  Variantesback.push(variantedifiniva)
+                  Variantesbackdelete.push(variantedifiniva)
                
                }))
 
 
 
                         console.log("varaintes back",Variantesback)
+                      if(!estadoproducto && productoid>0){
+                        productobody={
+                             estado: estadoproducto ? "ACTIVO":"INACTIVO",
+                  productoid: productoid>0 ? productoid : null,
+                   manejaVariantes: multivariable,
+                        }
 
+                        
+
+
+                  
+                 }
               console.log({producto:productobody,variantes:Variantesback})
-           
-
-               const produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
+              let produ;
+                  if(productoid>0){
+ produ=await api.put(`productoMaster/actualizar/${productoid}`,{producto:productobody,variantes:Variantesback},{  headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
+           }else{
+             produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+           }
+
+              /* const produ=await api.post("productoMaster/crear",{producto:productobody,variantes:Variantesback},{  headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})*/
+            
+          
                traerproductos()
                methods.reset({
         ...methods.getValues(),
@@ -274,8 +406,19 @@ const preciosidva= variantback.data.content[0]
          imagenproducto:null
           
       });
+        setproductoid(0)
+        setVariantesdelete([])
+        setceldaatributos([])
+        setvariantedefault({
+ descripcion:"",
+ imagen:null
+})
+        setVariantes([])
+        settap(1)
+        setmultivariable(false)
             setmodalformproducto(false)
-            console.log(produ)
+      
+           console.log(produ)
              }
 function cambiarPestana() {
  settap((prev) => (prev + 1))
@@ -336,6 +479,7 @@ function cambiarPestana() {
 })
       setVariantes([])
       settap(1)
+      setestadoproducto(true)
       setmultivariable(false)
             setmodalformproducto(false)
             setproductoid(0)
@@ -347,21 +491,21 @@ function cambiarPestana() {
            className="col-12 contproduct"
           >
               <CModalHeader>
-                      <CModalTitle id="VerticallyCenteredScrollableExample2">Creación de productos</CModalTitle>
+                      <CModalTitle id="VerticallyCenteredScrollableExample2">{productoid>0 ? "Modificación de productos" : "Creación de productos"}</CModalTitle>
                     </CModalHeader>
                     <CModalBody>
                         <form ref={fileInputRef} onSubmit={methods.handleSubmit(onSubmit,onError)}>
                       
                       {
                         
-                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}  productoid={productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}  preciosva={preciosva} setpreciosva={setpreciosva}/>
+                        <Formprobasico multivariable={multivariable} setmultivariable={setmultivariable} style={`${tap===1 ? "":"none"}`}  productoid={productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}  preciosva={preciosva} setpreciosva={setpreciosva}  estadoproducto={estadoproducto} setestadoproducto={setestadoproducto} variantes={variantes} setVariantes={setVariantes}  submitForm={submitForm} />
                        
                       }
 
 
                        {
                         tap===2?
-                        <Variantes  variantedefault={variantedefault} multivariable={multivariable} setmultivariable={setmultivariable} variantes={variantes} setVariantes={setVariantes}  setceldaatributos={setceldaatributos}/>
+                        <Variantes  variantedefault={variantedefault} multivariable={multivariable} setmultivariable={setmultivariable} variantes={variantes} setVariantes={setVariantes}  setceldaatributos={setceldaatributos}   variantesdelete={variantesdelete} setVariantesdelete={setVariantesdelete} estadoproducto={estadoproducto}/>
                         :null
                       }
 

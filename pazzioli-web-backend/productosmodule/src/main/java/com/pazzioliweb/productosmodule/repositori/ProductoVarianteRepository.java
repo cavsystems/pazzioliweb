@@ -123,6 +123,7 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		  		     pv.producto_variantes_id as productoVarianteId,
 		  		    p.producto_id AS productoId,
 		  		    p.referencia,
+		  		    P.estado AS estado,
 		  		     p.grupo_id As grupoid,
 		  		     p.linea_id As lineaid,
 		  		     p.maneja_variantes As manejavariante,

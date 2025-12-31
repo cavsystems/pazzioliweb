@@ -14,6 +14,13 @@ public class ProductoResponseDTO {
     private String impuesto;
     private String usuarioCreo;
     private String tipoProducto;
+    private String estado;
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public Integer getProductoId() {
 		return productoId;
 	}

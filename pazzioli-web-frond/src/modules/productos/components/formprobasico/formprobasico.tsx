@@ -27,7 +27,7 @@ interface listaprecio {
 interface precioob {
   precioId:number, valor?: string
 }
-function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct,preciosva,setpreciosva}:any) {
+function Formprobasico({multivariable,setmultivariable,style,productoid,setproductoid,product, setproduct,preciosva,setpreciosva,estadoproducto,setestadoproducto,variantes,setVariantes,submitForm}:any) {
      const [unidadmedida,setunidadmedida]=useState<{descripcion
 : 
 string,
@@ -146,6 +146,13 @@ setmensajeerror("Desea eliminar este item")
    setFuncionDinamica(()=>{
                                              return ()=>{ setmensajeerror("")
                                             setconfirmareliminacion(true)
+                                            setmodaladvertencia(false)
+                                            }
+                                          })
+
+    setfunncionDinamica2(()=>{
+                                             return ()=>{ setmensajeerror("")
+                                            setconfirmareliminacion(false)
                                             setmodaladvertencia(false)
                                             }
                                           })
@@ -458,6 +465,8 @@ if(preciosva>0){
           linea:product.lineaid,
           
       });
+      console.log("estado producto",product.estado)
+      setestadoproducto(product.estado==="ACTIVO" ? true:false)
 setmultivariable(product.manejavariante)
       
                   }
@@ -466,7 +475,50 @@ setmultivariable(product.manejavariante)
     return (  <>
       <div  className="row containertipospro" style={{padding:"0px 20px 0px 20px",display:`${style}`}}>
                                
-                             
+<div className="col-12 " >
+                                  <div className="inputprocttex" style={{paddingTop:"15px" ,marginLeft:"5px"}}>
+                                 
+                           
+                                      <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px",marginLeft:"0"}} >{estadoproducto ? "Inativar producto" : "Activar producto"}</label>
+                                     <div className={`${estadoproducto ? "toglemultirigh":"toglemulti"}`} onClick={()=>{
+                                        setestadoproducto(!estadoproducto)
+                                        console.log("cambio de estado producto",productoid)
+                                        if(productoid>0){
+                                          if(estadoproducto){
+                                            console.log("activo a inactivo",variantes)
+                                            const newvariantes=variantes.map((item:any)=>{
+                                              return {...item,estado:"INACTIVO"}
+                                            })
+                                            setVariantes(newvariantes)
+                                          }else{
+                                                 console.log("activo a inactivo",variantes)
+                                            const newvariantes=variantes.map((item:any)=>{
+                                              return {...item,estado:"ACTIVO"}
+                                            })
+                                            setVariantes(newvariantes)
+                                          }
+                                        }else{
+                                        
+                                          if(estadoproducto){
+                                            console.log("activo a inactivo",variantes)
+                                            const newvariantes=variantes.map((item:any)=>{
+                                              return {...item,estado:"INACTIVO"}
+                                            })
+                                            setVariantes(newvariantes)
+                                          }else{
+                                                 console.log("activo a inactivo",variantes)
+                                            const newvariantes=variantes.map((item:any)=>{
+                                              return {...item,estado:"ACTIVO"}
+                                            })
+                                            setVariantes(newvariantes)
+                                          }
+                                        }
+                                      }}>
+                                      <div className={`${estadoproducto ? "circulotoglerigh":"circulotogle"}`} onClick={()=>{
+                                        setestadoproducto(!estadoproducto)
+                                      }}></div>
+                                     </div>
+                                    </div> </div>         
                             
                             <div className="col-12  col-md-6 column-gap-3 "  >
                                
@@ -477,7 +529,7 @@ setmultivariable(product.manejavariante)
                                 errors.tipoproducto ? <label form="slectform1" className="titulosproerror" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>:<label form="slectform1" className="titulospro" style={{padding:"0px 1px 12px 1px"}} >Tipo de producto *</label>
                               }
                                   
-                                    <select className="selctproduct" {...register("tipoproducto",{required:true})} >
+                                    <select className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0} {...register("tipoproducto",{required:true})} >
                               
                                 {
                                   tipoproducto.map((item)=>{
@@ -505,7 +557,7 @@ setmultivariable(product.manejavariante)
                               {
                                 errors.codigo ?    <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}}  >Código *</label>: <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}  >Código *</label>
                               }
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}  {...register("codigo",{required:true})}/>
+                                 <input type="text"  id="inputdescri"  className={`inputproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0}  style={{width:'100%'}}  {...register("codigo",{required:true})}/>
                             </div>
                            
                              
@@ -526,14 +578,14 @@ setmultivariable(product.manejavariante)
                                  }  
                            
                                  
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("descripcion",{required:true})}/>
+                                 <input type="text"  id="inputdescri" className={`inputproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0} style={{width:'100%'}} {...register("descripcion",{required:true})}/>
                                </div>
                                </div>
 
                               <div className="col-12 col-md-6 column-gap-3" >
                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
                                  <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Referencia</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}}  {...register("referencia")}/>
+                                 <input type="text"  id="inputdescri" className={`inputproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0} style={{width:'100%'}}  {...register("referencia")}/>
                             </div>
                               </div>
 
@@ -546,7 +598,7 @@ setmultivariable(product.manejavariante)
 
                                  }
                           
-                               <select className="selctproduct" {...register("unidadmedida",{required:true})}>
+                               <select  className={`selctproduct  ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto}  {...register("unidadmedida",{required:true})}>
                                 <option value={""} id="slectform1" >Elige una opcion</option>
                                 {
                                   unidadmedida.map((item=>{
@@ -570,7 +622,7 @@ setmultivariable(product.manejavariante)
                             <div className="col-12 col-md-6 " >
                                   <div className="inputprocttex" style={{paddingTop:"12px"}}>
                               <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Impuesto *</label>
-                               <select className="selctproduct" {...register("impuesto",{required:true})}>
+                               <select   className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto} {...register("impuesto",{required:true})}  >
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
                                   impuesto.map(item=> (<><option value={item.codigo}>{item.nombre}  {item.tarifa<0 ?  "":`${item.tarifa}%`}</option></>))
@@ -587,8 +639,8 @@ setmultivariable(product.manejavariante)
                                 
                              
                             <div className="inputprocttex inputcodigosbarra paddingleftformpro"   >
-                                 <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Codigo de barra</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("codigobarra")}/>
+                                 <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Codigo de barras</label>
+                                 <input   type="text"  id="inputdescri"  className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`} disabled={!estadoproducto && productoid>0}   style={{width:'100%'}} {...register("codigobarra")}/>
                                
                             </div>
                           
@@ -601,7 +653,7 @@ setmultivariable(product.manejavariante)
                              <div className="col-12 col-md-6 column-gap-3 " >
                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
                                  <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Costo</label>
-                                 <input type="text"  id="inputdescri" className="inputproduct" style={{width:'100%'}} {...register("costo")}/>
+                                 <input type="text"  id="inputdescri" className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0} style={{width:'100%'}} {...register("costo")}/>
                             </div>
                               </div>
 
@@ -609,7 +661,7 @@ setmultivariable(product.manejavariante)
                                  <div className="inputprocttex" style={{paddingTop:"12px"}}>
                                  <label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}}>Manifiesto</label>
                                     <div  style={{width:"100%"}}>
-                    <div style={{width:"100%"  ,display:'flex' ,border:'1px solid #D3D4D4',  borderRadius: '6px' ,gap:'12px'}}>
+                    <div style={{width:"100%"  ,display:'flex' ,border:'1px solid #D3D4D4',  borderRadius: '6px' ,gap:'12px'}}  className={` ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  >
                     <button  type="button"  style={{    
     height: '40px',
     border: 'none',
@@ -618,13 +670,13 @@ setmultivariable(product.manejavariante)
      textAlign: 'left',
     font: 'normal normal normal 14px / 19px Open Sans',
     letterSpacing: '0px',
-    color:'#555555'}} onClick={handleClick}>Archivo manifiesto</button> 
+    color:'#555555'}} onClick={handleClick} disabled={!estadoproducto && productoid>0}>Archivo manifiesto</button> 
        <span  style={{
     textAlign: 'left',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-}} >{ archivotitulo.length>=20 ? archivotitulo.substring(0,substrinfinal)+"...":archivotitulo}</span>
+}}  >{ archivotitulo.length>=20 ? archivotitulo.substring(0,substrinfinal)+"...":archivotitulo}</span>
 
                      </div>
 
@@ -652,7 +704,7 @@ setmultivariable(product.manejavariante)
                                  }  
                            
                              
-                               <select className="selctproduct" {...register("linea",{required:true})}>
+                               <select className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0}{...register("linea",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                 {
                                   lineas.map(item=> (<><option value={item.id}>{item.descripcion}</option></>))
@@ -670,7 +722,7 @@ setmultivariable(product.manejavariante)
                                 errors.grupo ? <label form="inputdescrip" className="titulosproerror"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>:<label form="inputdescrip" className="titulospro"  style={{padding:"0px 1px 12px 1px"}} >Grupo *</label>
                                  }  
                             
-                               <select className="selctproduct" {...register("grupo",{required:true})}>
+                               <select className={`selctproduct ${!estadoproducto && productoid>0 ? "cllassinputdesabled" : ""}`}  disabled={!estadoproducto && productoid>0} {...register("grupo",{required:true})}>
                                 <option value={""} id="slectform1">Elige una opcion</option>
                                  {
 
@@ -691,9 +743,15 @@ setmultivariable(product.manejavariante)
                            
                                       <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px",marginLeft:"0"}} >Multivariante *</label>
                                      <div className={`${multivariable ? "toglemultirigh":"toglemulti"}`} onClick={()=>{
+                                      if (!estadoproducto && productoid>0){
+                                        return
+                                      }
                                         setmultivariable(!multivariable)
                                       }}>
                                       <div className={`${multivariable ? "circulotoglerigh":"circulotogle"}`} onClick={()=>{
+                                                if (!estadoproducto && productoid>0){
+                                        return
+                                      }
                                         setmultivariable(!multivariable)
                                       }}></div>
                                      </div>
@@ -742,7 +800,7 @@ setmultivariable(product.manejavariante)
                                                     
                                                         <CTableHeaderCell scope="col">Tipo precio</CTableHeaderCell>
                                                     <CTableHeaderCell scope="col" >Valor</CTableHeaderCell>
-                                                   <CTableHeaderCell scope="col" >Estado</CTableHeaderCell>
+                                                 
                                                        <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
                                         
                                                       
@@ -820,17 +878,14 @@ if(!(listaprecioson[index]?.precioId &&
     }
                          
                                       }}/></CTableDataCell>
-                                      <CTableDataCell>   <select className="iteminput1"  style={{width:"80px"}}>
-                                                           <option value={"Activo"} id="slectform1">Activo</option>
-                                                          <option value={"Inactivo"} id="slectform1">Inactivo</option>
-                                
-                             
-                                 
-                               </select></CTableDataCell>    
+                                    
                                       <CTableDataCell>
                                           <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
                                                                                                    <div className="col-6" style={{ maxWidth: 'fit-content' }} >
                                                                                                        <CButton  className="buttoniconnormal"  onClick={()=>{
+                                                                                                                                                  if(!estadoproducto && productoid>0){
+                                            return
+                                          }
                                                                                                         setactulizar(true)
                                                                                                         setcodigoactulizar(listaprecioson[index]?.precioId)
                                                                                                        }}>
@@ -839,7 +894,12 @@ if(!(listaprecioson[index]?.precioId &&
                                                                                                    </div>
 
                                                                                                           <div   style={{ maxWidth: 'fit-content' }} >
-                                                                                                                                                                                                                                          <CButton  className="buttoniconnormaleliminar"  onClick={()=> eliminarprecio(listaprecioson[index]?.precioId)}>      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
+                                                                                                                                                                                                                                          <CButton  className="buttoniconnormaleliminar"  onClick={()=> {
+                                                                                                                                                                                                                                                  if(!estadoproducto && productoid>0){
+                                                                                                                                                                                                                                                         return
+                                                                                                                                                                                                                                                                   }
+                                                                                                                                                                                                                                            eliminarprecio(listaprecioson[index]?.precioId)
+                                                                                                                                                                                                                                            }}>      <Iconeliminar  width={16} height={16} color={"#555"} />  </CButton>
                                                                                                                                                                                  </div>  
                                                                                                   
                                                 </div>
@@ -870,6 +930,9 @@ if(!(listaprecioson[index]?.precioId &&
                                 
                                        {
                                         !guardar && !actulizar && <button type="button" className="botoncontinuarguardar botonagregarcon"  key="guardar"  onClick={()=>{
+                                          if(!estadoproducto && productoid>0){
+                                            return
+                                          }
                                         setnumeroinputprescio(prev=> prev+1)
                                         setguardar(true)
                                         console.log("precio actual",precioactual,listaprecios,listaprecioson)

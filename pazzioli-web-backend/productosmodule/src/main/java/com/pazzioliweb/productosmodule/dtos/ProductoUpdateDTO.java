@@ -15,7 +15,7 @@ public class ProductoUpdateDTO {
     private Integer impuesto_id;
     private List<Integer> unidadesMedida;
     private Integer tipo_producto_id;
-    
+    private String estado;
     private Boolean manejaVariantes;
     
 	public String getReferencia() {
@@ -89,6 +89,12 @@ public class ProductoUpdateDTO {
 	}
 	public void setTipo_producto_id(Integer tipo_producto_id) {
 		this.tipo_producto_id = tipo_producto_id;
+	}
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
     
 }

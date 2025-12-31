@@ -111,7 +111,12 @@ function Precios({modalprecio,setmodalprecio,precioid,setprecioid}:any) {
                                                                                                        preciosvariantes.map((item)=>{
                                                                                                           return      <CTableRow>
                                                                                                     <CTableDataCell>{item.precio}</CTableDataCell>
-                                                                                                     <CTableDataCell>{item.valor}</CTableDataCell>
+                                                                                                     <CTableDataCell>{item.valor.toLocaleString("es-CO",{
+                                                  style:"currency",
+                                                  currency:"COP",
+                                                  minimumFractionDigits:2,
+                                                  maximumFractionDigits:2
+                                                })}</CTableDataCell>
                                                                                                   </CTableRow>
                                                                                                         })
                                                                                                     }

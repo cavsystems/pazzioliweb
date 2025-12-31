@@ -18,7 +18,7 @@ public interface ProductoInventarioDTO {
 	    int getTipoproductid();
 	   int getImpuestoid();
 	   boolean getManejavariante();
-	   
+	   String getEstado();
 	LocalDateTime getFechaUltimaCompra();
 	LocalDateTime getFechaUltimaVenta();
 	Integer getProductoVarianteId();

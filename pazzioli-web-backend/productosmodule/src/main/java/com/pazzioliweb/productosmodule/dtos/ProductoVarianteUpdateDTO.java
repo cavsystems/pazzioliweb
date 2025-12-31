@@ -6,7 +6,7 @@ public class ProductoVarianteUpdateDTO {
     private String codigoBarras;
     private Boolean activo;
     private Boolean predeterminada;
-    
+    private Boolean   estadovariante;
 	public String getSku() {
 		return sku;
 	}
@@ -36,6 +36,12 @@ public class ProductoVarianteUpdateDTO {
 	}
 	public void setPredeterminada(Boolean predeterminada) {
 		this.predeterminada = predeterminada;
+	}
+	public Boolean getEstadovariante() {
+		return estadovariante;
+	}
+	public void setEstadovariante(Boolean estadovariante) {
+		this.estadovariante = estadovariante;
 	}
     
     

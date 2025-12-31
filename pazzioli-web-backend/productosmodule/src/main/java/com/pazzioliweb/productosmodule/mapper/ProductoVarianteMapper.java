@@ -24,7 +24,7 @@ public class ProductoVarianteMapper {
         pv.setSku(dto.getSku());
         pv.setReferenciaVariantes(dto.getReferenciaVariantes());
         pv.setCodigoBarras(dto.getCodigoBarras());
-        pv.setActivo(true);
+        pv.setActivo(dto.getEstadovariante());
         pv.setPredeterminada(dto.getPredeterminada());
         return pv;
     }
@@ -34,6 +34,7 @@ public class ProductoVarianteMapper {
     // ---------------------------------------------------------
     public ProductoVarianteResponseDTO toResponseDto(ProductoVariante pv) {
         ProductoVarianteResponseDTO dto = new ProductoVarianteResponseDTO();
+        
         dto.setProductoVarianteId(pv.getProductoVarianteId());
         dto.setProductoId(pv.getProducto().getProductoId());
         dto.setSku(pv.getSku());
@@ -48,21 +49,30 @@ public class ProductoVarianteMapper {
     // Partial Update (NO pisa con null)
     // ---------------------------------------------------------
     public void updateFromDto(ProductoVarianteUpdateDTO dto, ProductoVariante pv) {
+    	if(!dto.getEstadovariante()) {
+    		  if (dto.getEstadovariante() != null)
+  	            pv.setActivo(dto.getEstadovariante());
+    	}else {
+    		   if (dto.getSku() != null)
+    	            pv.setSku(dto.getSku());
 
-        if (dto.getSku() != null)
-            pv.setSku(dto.getSku());
+    	        if (dto.getReferenciaVariantes() != null)
+    	            pv.setReferenciaVariantes(dto.getReferenciaVariantes());
 
-        if (dto.getReferenciaVariantes() != null)
-            pv.setReferenciaVariantes(dto.getReferenciaVariantes());
+    	        if (dto.getCodigoBarras() != null)
+    	            pv.setCodigoBarras(dto.getCodigoBarras());
 
-        if (dto.getCodigoBarras() != null)
-            pv.setCodigoBarras(dto.getCodigoBarras());
+    	        if (dto.getEstadovariante() != null)
+    	            pv.setActivo(dto.getEstadovariante());
+    	        
+    	        if (dto.getPredeterminada() != null)
+    	        	pv.setPredeterminada(dto.getPredeterminada());
+    	        
+    	        if (dto.getEstadovariante() != null)
+      	            pv.setActivo(dto.getEstadovariante());
+    	}
 
-        if (dto.getActivo() != null)
-            pv.setActivo(dto.getActivo());
-        
-        if (dto.getPredeterminada() != null)
-        	pv.setPredeterminada(dto.getPredeterminada());
+     
     }
     
     public ProductoVarianteConDetallesDTO toDtoConDetalles(ProductoVariante pv) {

@@ -6,7 +6,14 @@ public class ProductoVarianteCreateDTO {
     private String referenciaVariantes;
     private String codigoBarras;
     private Boolean predeterminada;
+    private Boolean   estadovariante;
     
+	public Boolean getEstadovariante() {
+		return estadovariante;
+	}
+	public void setEstadovariante(Boolean estadovariante) {
+		this.estadovariante = estadovariante;
+	}
 	public Boolean getPredeterminada() {
 		return predeterminada;
 	}
