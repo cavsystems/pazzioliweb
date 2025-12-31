@@ -13,6 +13,7 @@ public interface ProductoInventarioDTO {
 	String getLinea();
 	String getGrupo();
 	BigDecimal getCantidadGlobal();
+	BigDecimal getTotalGlobalInventario();
 	 int getGrupoid();
 	   int  getLineaid();
 	    int getTipoproductid();

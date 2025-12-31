@@ -132,6 +132,7 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		            p.codigo_contable AS codigoContable,
 		            IF(pv.predeterminada=0,CONCAT(p.descripcion, ' - ', pv.referencia_variantes),p.descripcion) AS descripcion,
 		            COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
+		            SUM(COALESCE(ex.totalExistencia*p.costo, 0)) OVER () AS totalGlobalInventario,
 		            p.costo AS costo,
 		            u.sigla AS unidadMedida,
 		            l.descripcion AS linea,
