@@ -122,6 +122,26 @@ color: #555555;
 opacity: 1;
 }
 
+.agregarentrada{
+      width: 138px;
+height: 40px;
+/* UI Properties */
+background: var(--gris-claro) 0% 0% no-repeat padding-box;
+border: 1px solid var(--gris-textos);
+background:   #555555 0% 0% no-repeat padding-box;
+border: 1px solid #555555;
+border-radius: 7px;
+opacity: 1;
+font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-14)/var(--unnamed-line-spacing-19) var(--unnamed-font-family-open-sans);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--gris-textos);
+text-align: center;
+font: normal normal normal 14px/19px Open Sans;
+letter-spacing: 0px;
+color: #F3F4F7;
+opacity: 1;
+
+}
 .guardarentrada{
 width: 130px;
 height: 41px;
@@ -193,3 +213,16 @@ color: #FFFFFF;
 cursor: pointer;
 }
 
+.disabledselect{
+     background: var(--gris-bordes) !important;
+}
+
+
+
+.inputentradaitemc{
+ text-align: right;
+}
+
+.entradaitemc{
+ text-align: right;
+}

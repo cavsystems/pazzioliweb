@@ -178,6 +178,7 @@ FROM (
       
         pv.producto_variantes_id AS varianteId,
         pv.activo as activo,
+        
         p.producto_id AS productoId,
         ex.bodegaid as bodegaid,
         p.referencia,
@@ -216,8 +217,8 @@ FROM (
        
     ) ex ON ex.varianteId = pv.producto_variantes_id
 ) t
-WHERE LOWER(t.descripcion)LIKE LOWER(CONCAT('%', :productodes, '%'))
-and  t.estado=:estado
+WHERE LOWER(t.descripcion)LIKE LOWER(CONCAT('%', :productodes, '%')) or LOWER(t.)LIKE LOWER(CONCAT('%', :productodes, '%'))
+and  t.estado="ACTIVO"
 and t.activo=:activo
 and t.bodegaid=:bodega
 			        """,

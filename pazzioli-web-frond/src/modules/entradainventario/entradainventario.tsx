@@ -6,6 +6,9 @@ import Iconeliminar from "../../icons/iconeliminar";
 import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import api from "../../apicofig";
+import Modalconfirmar from "../../components/alertconfimacion";
+import ProductoRowcantidad from "./components/cellcantidad";
+import ProductoRowcosto from "./cellcostos";
 interface bodega{
     codigo:number,
     nombre:string
@@ -58,23 +61,81 @@ tipoproductid
 
 productoVarianteId:number
 
+total:0
+}
 
+
+interface productolistaagregar{
+
+  codigobarras:string | null,
+  cantidadGlobal
+: 
+number
+codigoContable
+: 
+string
+costo
+: 
+number
+descripcion
+: 
+string
+fechaUltimaCompra
+: string
+fechaUltimaVenta
+:string 
+
+grupo
+:string 
+
+linea
+: string
+
+productoId
+: number
+
+referencia
+: string
+
+unidadMedida
+: number | null
+
+
+grupoid
+: number,
+lineaid
+: number,
+impuestoid
+:number, 
+tipoproductid
+:number,
+
+productoVarianteId:number
+
+total:number
 }
 function Entradainventario() {
     const [bodegaseleccionada,setbodegaseleccionada]=useState<number>(0)
      const [descripcionproducto,setdescripcionproducto]=useState<string>("")
      const [pagina,setpagina]=useState<number>(0)
+    const [totalglobal,settotalglobal]=useState<number>(0)
+     const [modalerror,setmodalerror]=useState<boolean>(false)
+     const [mensajeerror,setmensajeerror]=useState<String>("")
+     const [Tipomovimiento,setTipomovimiento]=useState<number>(0)
      const [productosentradas,setproductosentradas]=useState<number>(0)
  const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
      const [productos,setproductos]=useState<productolista[]>([])
-     const [productosagregados,setproductosagregados]=useState<productolista[]>([])
+     const [productosagregados,setproductosagregados]=useState<productolistaagregar[]>([])
      const [numeroproductosagregados,setnuproductosagregados]=useState<number>(0)
+     const [funcionDinamica,setFuncionDinamica]=useState<()=>void>(()=>{})
     const [bodegas,setbodegas]=useState<bodega[]>([])
     //Estado para el dropdown activo
     const [activeId, setActiveId] = useState<number | null>(null)
     //solucion al desajuste del desplegable 
    const inputRefs = useRef<Record<number, HTMLInputElement | null>>({})
 //funcion para calcular la posicion por input
+
+
 const updatePosition = (id: number) => {
   const el = inputRefs.current[id]
   if (!el) return
@@ -90,6 +151,20 @@ const updatePosition = (id: number) => {
   setActiveId(id)
 }
 
+
+//actulizar total global
+useEffect(()=>{
+    let total=0
+   productosagregados.forEach((item)=>{
+   
+    total+=item.total
+   })
+   
+  console.log("total actual",total,productosagregados)
+  
+  
+   settotalglobal(total)
+},[productosagregados])
 //recalcular rezise
 useEffect(() => {
   if (activeId === null) return
@@ -106,7 +181,8 @@ useEffect(() => {
 }, [activeId])
 
     const cargarproductos=async()=>{
-            const nuevosProductos = await api.get(`variantes/listarInventarioBasico?page=${0}&size=100&descripproduct=${descripcionproducto}&estadoproducto=${"ACTIVO"}&estadova=${1}&bodega=${bodegaseleccionada.toString()}&consultarentradasalida=${"SI"}`,{
+        console.log("variantes actuales",descripcionproducto,bodegaseleccionada,)
+            const nuevosProductos = await api.get(`variantes/listarInventarioBasicoentra?page=${0}&size=100&descripproduct=${descripcionproducto}&estadoproducto=${"ACTIVO"}&estadova=${1}&bodega=${bodegaseleccionada.toString()}&consultarentradasalida=${"SI"}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
@@ -144,7 +220,13 @@ useEffect(() => {
              <div className="col-12 col-md-4 ">
             <div className="row mx-0 justify-content-center p-4 paddinginputentrada"> 
                         <div className="col-12 col-md-12 inputsearch">
-                                  <select className="iteminput1 inputpaddingselectentrada" >
+                                  <select className="iteminput1 inputpaddingselectentrada"  onChange={(e)=>{
+                                    if(e.target.value===""){
+                                               setTipomovimiento(0)
+                                    }else{
+                                       setTipomovimiento(Number(e.target.value))  
+                                    }
+                                  }}>
                                                            <option value={""} id="slectform1">Movimientos</option>
                                                           <option value={"1"} id="slectform1">Entrada inventario</option>
                                                            <option value={"2"} id="slectform1">Salida inventario</option>
@@ -242,7 +324,7 @@ useEffect(() => {
  <div className="col-12 col-md-3">
             <div className="row mx-0 justify-content-center p-4 paddinginputentrada"> 
                         <div className="col-12 col-md-12 inputsearch">
-                                  <select className="iteminput1 inputpaddingselectentrada" >
+                                  <select className={`iteminput1 inputpaddingselectentrada ${Tipomovimiento!==3 ? "disabledselect":""}`} disabled={Tipomovimiento!==3} >
                                                            <option value={""} id="slectform1">Bodega destino</option>
                                                           <option value={"1"} id="slectform1">Principal</option>
                                                            <option value={"2"} id="slectform1">Almacen sur</option>
@@ -266,6 +348,14 @@ useEffect(() => {
                          
                          small
                          align="left" className="tablaterceros">
+                            <colgroup>
+    <col style={{ width: "120px" }} />   {/* Código */}
+    <col style={{ width: "300px" }} />   {/* Descripción */}
+    <col style={{ width: "100px" }} />   {/* Cantidad */}
+    <col style={{ width: "100px" }} />   {/* Costo */}
+    <col style={{ width: "140px" }} />   {/* Total */}
+    <col style={{ width: "80px" }} />    {/* Acciones */}
+  </colgroup>
                                                                  
                                                                  <CTableHead>
                                                                    <CTableRow>
@@ -304,6 +394,7 @@ useEffect(() => {
     inputRefs.current[productosagregados[index].productoVarianteId] = el
   }} value={productosagregados[index].descripcion} onChange={(e)=>{
                                                                                        let newdes=[...productosagregados]
+                                                                                        let newde=[...productosagregados]
                                                                                     newdes= newdes.map(item=>{
                                                                                         if(item.productoVarianteId === productosagregados[index].productoVarianteId){
                                                                                             return {
@@ -313,6 +404,7 @@ useEffect(() => {
                                                                                         }
                                                                                         return item
                                                                                      })
+                                                                                     console.log("productos agregados onchanga",newde,newdes)
                                                                                      setproductosagregados(newdes)
                                                                                       setdescripcionproducto(e.target.value)
                                                                                      updatePosition(productosagregados[index].productoVarianteId)
@@ -352,15 +444,21 @@ useEffect(() => {
                                                                                        productos.map((item)=>{
                                                                                          return <>
                                                                                          <li  onClick={()=>{
-                                                                                           let productagregado=[...productos]
+                                                                                           let productagregado=[...productosagregados]
+                                                                                            console.log("index producto antex",index,productosagregados, productagregado)
                                                                                            productagregado=productagregado.map((item2,i)=>{
                                                                                              if(i===index){
-                                                                                                return item
+                                                                                            
+                                                                                                return {...item,cantidadGlobal:0,costo:0,total:0}
                                                                                              } 
-                                                                                             return item2                
+                                                                                             
+                                                                                             return item2             
                                                                                             })
-                                                                                            setproductosagregados( productagregado)
+                                                                                            console.log("index producto agregar",index, productagregado)
+                                                                                            setproductosagregados(productagregado)
+
                                                                                             setproductos([])
+                                                                                          
                                                                                          }}>{item.descripcion}</li>
                                                                                          </>
                                                                                        })
@@ -376,18 +474,28 @@ useEffect(() => {
                                                                         </div>
                                                                        
                                                                         }</CTableDataCell>
-                                                                    <CTableDataCell >{productosagregados[index].cantidadGlobal}</CTableDataCell>
-                                                                          <CTableDataCell >{`${productosagregados[index].costo.toLocaleString("es-CO",{
-                                                  style:"currency",
-                                                  currency:"COP",
-                                                  minimumFractionDigits:2,
-                                                  maximumFractionDigits:2
-                                                })}`}</CTableDataCell>
+                                                                    <CTableDataCell >
+                                                                           <div className="row mx-0">
+                                                                            <div className="col-12 position-relative">
+                                                                          
+                                                                        <ProductoRowcantidad item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados}/>
+                                                                          </div>
+                                                                          </div>
+                                                                        {/*productosagregados[index].cantidadGlobal*/}</CTableDataCell>
+                                                                          <CTableDataCell >    <div className="row mx-0">
+                                                                            <div className="col-12 position-relative">
+                                                                          
+                                                                        < ProductoRowcosto item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados}/>
+                                                                          </div>
+                                                                          </div></CTableDataCell>
                                                                         
                                                                           <CTableDataCell >
-                                                                          <div className="d-flex align-items-center gap-2">
+                                                                          <div className="d-flex align-items-center justify-content-end gap-2">
                                                                        
-                                                                          <span> $500.000</span>
+                                                                          <span> ${productosagregados[index].total.toLocaleString("es-CO", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })}</span>
                                                                           </div>
                                                                           </CTableDataCell>
 
@@ -475,47 +583,78 @@ useEffect(() => {
                                                 
                                                 
                                                
-                                                     <button className="importentrada" onClick={()=>{
+                                                     <button className="agregarentrada" onClick={()=>{
+                                                    if(Tipomovimiento===0){
+                                                          setmensajeerror("No especificastes el movimiento")
+                                                            setmodalerror(true)
+                                                           setFuncionDinamica(()=> { return ()=>setmodalerror(false)})
+                                                            return
+                                                    }
+
+                                                     if(Tipomovimiento===1 || Tipomovimiento===2  ){
+                                                           if(Number(bodegaseleccionada)===0){
+                                                             setmensajeerror("Selecciona una bodega")
+                                                            setmodalerror(true)
+                                                           setFuncionDinamica(()=> { return ()=>setmodalerror(false)})
+                                                            return
+                                                           }
+                                                     }
+                                                    if(Tipomovimiento===1){
+                                                        const productoscantidad=productosagregados.map(item=>{
+                                                           
+                                                            if(item.cantidadGlobal===0){
+                                                                return item
+                                                            }
+                                                        })
+                                                         console.log("productos agrgados",productosagregados, productoscantidad)
+                                                        if(productoscantidad[0] && productoscantidad.length>0){
+                                                            setmensajeerror("Hay productos con cantidad cero")
+                                                            setmodalerror(true)
+                                                           setFuncionDinamica(()=> { return ()=>setmodalerror(false)})
+                                                            return
+                                                        }
+                                                    }
                                                     
-                                                        productosagregados.push({
+                                              productosagregados.push({
                                                              codigobarras:"",
-  cantidadGlobal:0,
-codigoContable:"",
-costo
-:0,
-descripcion
-:"",
-fechaUltimaCompra
-:"",
-fechaUltimaVenta
-:"",
+                                                              cantidadGlobal:0,
+                                                              codigoContable:"",
+                                                              costo
+                                                                :0,
+                                                              descripcion
+                                                                :"",
+                                                              fechaUltimaCompra
+                                                                :"",
+                                                              fechaUltimaVenta
+                                                                :"",
 
-grupo
-:"",
+                                                               grupo
+                                                               :"",
 
-linea
-: "",
+                                                              linea
+                                                              : "",
 
-productoId
-:0,
+                                                              productoId
+                                                              :0,
 
-referencia
-:"",
+                                                              referencia
+                                                              :"",
 
-unidadMedida
-: 0,
+                                                              unidadMedida
+                                                              : 0,
 
 
-grupoid
-:0,
-lineaid
-: 0,
-impuestoid
-:0, 
-tipoproductid
-:0,
+                                                              grupoid
+                                                              :0,
+                                                              lineaid
+                                                              : 0,
+                                                              impuestoid
+                                                              :0, 
+                                                              tipoproductid
+                                                              :0,
 
-productoVarianteId:0
+                                                              productoVarianteId:0,
+                                                              total:0
        
                                                         })
 
@@ -523,7 +662,10 @@ productoVarianteId:0
                                                         setnuproductosagregados((prev:number)=>prev+1)
                                                      }}>
               <span className="sumarentrada">+</span>  Agregar
-            </button>             <span className="totalregistrosproduct" >Total: $500.000</span>
+            </button>             <span className="totalregistrosproduct" >Total: ${totalglobal.toLocaleString("es-CO", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })}</span>
                                                        
          </div>
              
@@ -546,6 +688,10 @@ productoVarianteId:0
         
         
     </div>
+
+       {
+                                 modalerror && <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true}   textoboton={"Aceptar"}  funcion={funcionDinamica} />
+                                 } 
     </div>
     </> );
 }
