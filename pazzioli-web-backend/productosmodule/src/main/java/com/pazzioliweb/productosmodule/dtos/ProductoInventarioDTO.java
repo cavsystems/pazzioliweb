@@ -7,6 +7,7 @@ public interface ProductoInventarioDTO {
 	Integer getProductoId();
 	String getCodigoContable();
 	String getReferencia();
+	String getCodigobarras();
 	String getDescripcion();
 	Double getCosto();
 	String getUnidadMedida();

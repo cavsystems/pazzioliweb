@@ -430,7 +430,7 @@ const actulizarbodega=async()=>{
                                                     {
                                                    !guardar  &&   actulizar &&  <button className="botoncontinuarguardar"  key="guardar" onClick={()=>{
                                       
-                                         setmensajeerror("Seguro desea actulizar el precio")
+                                         setmensajeerror("¿ Seguro desea actualizar el precio ?")
                                          setmodaladvertencia(true)
                                           setfunncionDinamica2(()=>{
                                            return ()=>{ console.log("funciones modla actuliza")
@@ -452,7 +452,7 @@ const actulizarbodega=async()=>{
                                             setmodaladvertencia(false)
                                             }
                                           })
-                                                                                                                                                                                            }} >Actulizar</button> 
+                                                                                                                                                                                            }} >Actualizar</button> 
                                                   }
                                             
                                             

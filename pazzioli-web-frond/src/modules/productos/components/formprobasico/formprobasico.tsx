@@ -459,7 +459,7 @@ if(preciosva>0){
           unidadmedida:inud?.unidadMedidaId,
           departamento:"",
           impuesto:product.impuestoid,
-         codigobarra:product.codigoContable,
+         codigobarra:product.codigobarras,
           costo:product.costo,
         nanifesto:"",
           linea:product.lineaid,
@@ -479,7 +479,7 @@ setmultivariable(product.manejavariante)
                                   <div className="inputprocttex" style={{paddingTop:"15px" ,marginLeft:"5px"}}>
                                  
                            
-                                      <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px",marginLeft:"0"}} >{estadoproducto ? "Inativar producto" : "Activar producto"}</label>
+                                      <label form="slectform1" className="titulospro"  style={{padding:"0px 1px 12px 1px",marginLeft:"0"}} >{estadoproducto ? "Inactivar producto" : "Activar producto"}</label>
                                      <div className={`${estadoproducto ? "toglemultirigh":"toglemulti"}`} onClick={()=>{
                                         setestadoproducto(!estadoproducto)
                                         console.log("cambio de estado producto",productoid)

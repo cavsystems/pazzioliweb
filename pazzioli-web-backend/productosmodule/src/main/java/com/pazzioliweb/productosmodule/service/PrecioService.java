@@ -14,7 +14,7 @@ public interface PrecioService {
 
     Optional<PrecioResponseDTO> obtenerPorId(Integer id);
 
-    Page<PrecioResponseDTO> listar(Pageable pageable);
+    Page<PrecioResponseDTO> listar(String preciodes,Pageable pageable);
 
     Optional<PrecioResponseDTO> actualizar(Integer id, PrecioUpdateDTO dto);
     

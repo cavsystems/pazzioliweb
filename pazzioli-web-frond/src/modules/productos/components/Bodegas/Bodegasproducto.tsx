@@ -27,7 +27,7 @@ function Bodegasproducto({modalbodega,setmodalbodega,productoidbodega,setproduct
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-
+   console.log("bodega agregadas",productbodega.data.content)
  setbodegasproducto(productbodega.data.content)
     }
   useEffect(()=>{

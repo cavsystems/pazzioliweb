@@ -107,8 +107,14 @@ public class ProductoVarianteServiceImpl implements ProductoVarianteService{
     }
     
     @Override
-    public Page<ProductoInventarioDTO> listarInventarioBasico(Pageable pageable){
-    	Page<ProductoInventarioDTO> pagina = varianteRepository.listarInventario(pageable);
+    public Page<ProductoInventarioDTO> listarInventarioBasico( String consultarentrada,int bodega,int activo,String estadoproduct,String productodes,Pageable pageable){
+    	Page<ProductoInventarioDTO>  pagina;
+    	if(consultarentrada.equals("NO")) {
+    		 pagina=varianteRepository.listarInventario( activo,productodes,pageable);
+    	}else {
+    		pagina=varianteRepository.listarInventarioentradasalida(activo, bodega, productodes, pageable);
+    	}
+    	
     	return pagina;
     }
     

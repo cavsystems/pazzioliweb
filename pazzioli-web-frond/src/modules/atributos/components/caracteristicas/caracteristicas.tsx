@@ -223,7 +223,7 @@ function Caracteristicas() {
                                                                                  }}/>
                                                                                
                                                                     
-                                                                   <CFormLabel>Linea</CFormLabel>
+                                                                   <CFormLabel>Característica</CFormLabel>
                                                                       
                                                                                  </CFormFloating>
                                                                                </CInputGroup>
@@ -265,7 +265,7 @@ function Caracteristicas() {
                                                setactulizar(false)
                                                setcaracteristica("")
                                                
-                                                                         }} >Actulizar</button>
+                                                                         }} >Actualizar</button>
                                                                    }
                                                                             
                                                                    

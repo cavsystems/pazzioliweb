@@ -119,8 +119,11 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 	
 	@Query(
 		  value = """
+		  		SELECT *
+FROM (
 		        SELECT
 		  		     pv.producto_variantes_id as productoVarianteId,
+		  		       pv.activo as activo,
 		  		    p.producto_id AS productoId,
 		  		    p.referencia,
 		  		    P.estado AS estado,
@@ -131,6 +134,7 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		  		     p.impuesto_id As impuestoid,
 		            pv.producto_variantes_id AS varianteId,
 		            p.codigo_contable AS codigoContable,
+		            P.codigo_barras As codigobarras,
 		            IF(pv.predeterminada=0,CONCAT(p.descripcion, ' - ', pv.referencia_variantes),p.descripcion) AS descripcion,
 		            COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
 		            SUM(COALESCE(ex.totalExistencia*p.costo, 0)) OVER () AS totalGlobalInventario,
@@ -154,12 +158,73 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 		                SUM(e.existencia) AS totalExistencia
 		            FROM existencias e
 		            GROUP BY e.producto_variantes_id
-		        ) ex ON ex.varianteId = pv.producto_variantes_id
+		        ) ex ON ex.varianteId = pv.producto_variantes_id) t 
+		        WHERE LOWER(t.descripcion) LIKE LOWER(CONCAT('%', :productodes, '%')) AND
+ t.activo=:activo 
 		        """,
 		  countQuery = "SELECT COUNT(*) FROM producto_variantes",
 		  nativeQuery = true
 		)
-		Page<ProductoInventarioDTO> listarInventario(Pageable pageable);
+		Page<ProductoInventarioDTO> listarInventario( @Param("activo") int activo,@Param("productodes") String desproduct,Pageable pageable);
+	
+	
+	
+	
+	@Query(
+			  value = """
+			  	SELECT *
+FROM (
+    SELECT
+      
+        pv.producto_variantes_id AS varianteId,
+        pv.activo as activo,
+        p.producto_id AS productoId,
+        ex.bodegaid as bodegaid,
+        p.referencia,
+        p.estado,
+        p.grupo_id AS grupoid,
+        p.linea_id AS lineaid,
+        p.maneja_variantes AS manejavariante,
+        p.tipo_producto_id AS tipoproductid,
+        p.impuesto_id AS impuestoid,
+        p.codigo_contable AS codigoContable,
+        IF(
+          pv.predeterminada = 0,
+          CONCAT(p.descripcion, ' - ', pv.referencia_variantes),
+          p.descripcion
+        ) AS descripcion,
+        COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
+        p.costo,
+        u.sigla AS unidadMedida,
+        l.descripcion AS linea,
+        g.descripcion AS grupo,
+        p.fecha_ultima_compra,
+        p.fecha_ultima_venta
+    FROM producto_variantes pv
+    JOIN productos p ON p.producto_id = pv.producto_id
+    LEFT JOIN unidades_medida_producto ump ON ump.producto_id = p.producto_id
+    LEFT JOIN unidades_medida u ON u.unidad_medida_id = ump.unidad_medida_id
+    LEFT JOIN lineas l ON l.linea_id = p.linea_id
+    LEFT JOIN grupos g ON g.grupo_id = p.grupo_id
+    LEFT JOIN (
+        SELECT
+             
+            e.producto_variantes_id AS varianteId,
+            e.bodega_id as bodegaid,
+            e.existencia AS totalExistencia
+        FROM existencias e
+       
+    ) ex ON ex.varianteId = pv.producto_variantes_id
+) t
+WHERE LOWER(t.descripcion)LIKE LOWER(CONCAT('%', :productodes, '%'))
+and  t.estado=:estado
+and t.activo=:activo
+and t.bodegaid=:bodega
+			        """,
+			  countQuery = "SELECT COUNT(*) FROM producto_variantes",
+			  nativeQuery = true
+			)
+			Page<ProductoInventarioDTO> listarInventarioentradasalida( @Param("activo") int activo, @Param("bodega") int bodega,@Param("productodes") String desproduct,Pageable pageable);
 	
 	Optional<ProductoVariante> findByProductoVarianteId(Long id);
 	Optional<ProductoVariante> findByCodigoBarras(String codigobarras);

@@ -248,7 +248,7 @@ public class ProductoMasterService {
 
             	// Buscar existencia por variante + bodega
                 Existencias existencia = existenciasRepository
-                        .findByProductoVarianteProductoVarianteIdAndBodegaCodigo(varianteId, exDTO.getBodega())
+                        .findByProductoVarianteProductoVarianteIdAndBodegaCodigo(varianteId, exDTO.getBodegaId())
                         .orElse(null);
 
                 if (existencia == null) {
@@ -262,7 +262,7 @@ public class ProductoMasterService {
 
                     // referencia ligera a la bodega
                     Bodegas bodega = new Bodegas();
-                    bodega.setCodigo(exDTO.getBodega());
+                    bodega.setCodigo(exDTO.getBodegaId());
                     existencia.setBodega(bodega);
                 }
 

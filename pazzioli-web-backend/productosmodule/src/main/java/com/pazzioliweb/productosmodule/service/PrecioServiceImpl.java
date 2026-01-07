@@ -12,6 +12,7 @@ import com.pazzioliweb.productosmodule.dtos.PrecioResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.PrecioUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Precios;
 import com.pazzioliweb.productosmodule.mapper.PrecioMapper;
+import com.pazzioliweb.productosmodule.repositori.PreciosProductoVarianteRepository;
 import com.pazzioliweb.productosmodule.repositori.PreciosRepository;
 
 @Service
@@ -19,10 +20,11 @@ public class PrecioServiceImpl implements PrecioService{
 
     private final PreciosRepository repository;
     private final PrecioMapper mapper;
-
-    public PrecioServiceImpl(PreciosRepository repository, PrecioMapper mapper) {
+  private final PreciosProductoVarianteRepository preciore;
+    public PrecioServiceImpl(PreciosRepository repository, PrecioMapper mapper,PreciosProductoVarianteRepository preciore) {
         this.repository = repository;
         this.mapper = mapper;
+        this.preciore=preciore;
     }
 
     @Override
@@ -40,8 +42,8 @@ public class PrecioServiceImpl implements PrecioService{
     }
 
     @Override
-    public Page<PrecioResponseDTO> listar(Pageable pageable) {
-        return repository.findAll(pageable)
+    public Page<PrecioResponseDTO> listar(String preciodes,Pageable pageable) {
+        return repository.findByDescripcionContainingIgnoreCase(preciodes,pageable)
                 .map(mapper::toResponseDto);
     }
     
@@ -65,6 +67,14 @@ public class PrecioServiceImpl implements PrecioService{
     @Override
     @Transactional
     public boolean eliminar(Integer id) {
+    	
+    	
+    	
+    	   if (preciore.existsByPrecio_PrecioId(id)) {
+   	        throw new IllegalStateException(
+   	            "Este precio no puede ser eliminado"
+   	        );
+   	    }
         return repository.findById(id)
                 .map(entity -> {
                     repository.delete(entity);

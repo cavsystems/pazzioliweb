@@ -9,8 +9,9 @@ import org.springframework.data.repository.query.Param;
 import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteDTO;
 import com.pazzioliweb.productosmodule.entity.Precios;
+import com.pazzioliweb.productosmodule.entity.UnidadesMedida;
 
 public interface PreciosRepository extends JpaRepository<Precios, Integer> {
-	
+	Page<Precios>  findByDescripcionContainingIgnoreCase(String descripcion,Pageable pageable);
 
 }

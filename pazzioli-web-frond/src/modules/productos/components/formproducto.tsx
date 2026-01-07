@@ -6,6 +6,7 @@ import Formprobasico from "./formprobasico/formprobasico";
 import Variantes from "./variantes";
 import api from "../../../apicofig";
 interface Variantedfault {
+  varianteid:number,
  descripcion:string,
  imagen:  File | null;
 }
@@ -44,15 +45,17 @@ interface Variante {
 interface precioob {
   precioId:number, valor?: string
 }
-function Formproduct({modalformproducto,setmodalformproducto,productoid, setproductoid,product, setproduct,traerproductos}:any) {
+function Formproduct({modalformproducto,setmodalformproducto,productoid, setproductoid,product, setproduct,traerproductos,setpagina}:any) {
 const [multivariable,setmultivariable]=useState<boolean>(false)
 const [preciosva,setpreciosva]=useState<number>(0)
+const [variantedefaulcodigo,setvariantedefaulcodigo]=useState<number>(0)
 const [estadoproducto,setestadoproducto]=useState<boolean>(true)
 const [multivainclude,setmultivainclude]=useState<Variante[]>([]);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
      const [celdasatributos,setceldaatributos]=useState<string[]>([])
 
     const [variantedefault,setvariantedefault]=useState<Variantedfault>({
+      varianteid:0,
  descripcion:"",
  imagen:null
        
@@ -72,6 +75,11 @@ if(variantback.data.content.length>0){
 const preciosidva= variantback.data.content[0]
 
  setpreciosva(preciosidva.productoVarianteId)
+}
+console.log("variante content",variantback.data.content)
+if(variantback.data.content.length===1){
+  setvariantedefaulcodigo( variantback.data.content[0].productoVarianteId
+)
 }
  
 
@@ -180,7 +188,7 @@ const preciosidva= variantback.data.content[0]
         variantes:[],
          imagenproducto:string | null
              })=>{
-              console.log("variante",variantes,"data",data)
+              console.log("variante",variantes,"data",data,data.codigobarra)
        
             
                            let productobody={
@@ -241,7 +249,8 @@ const preciosidva= variantback.data.content[0]
                    productoVarianteId: item.productoVarianteId,
 
       variante: {
-       estadovariante:item.estado=="ACTIVO" ? true:false,
+          productoVarianteId: item.productoVarianteId,
+       estadovariante: variantedefault.varianteid>0 ? estadoproducto:item.estado=="ACTIVO" ? true:false,
       }
                 
                   
@@ -255,7 +264,7 @@ const preciosidva= variantback.data.content[0]
                           productoId: productoid>0 ? productoid : null,
                   variante:{
                       
-                    estadovariante:item.estado=="ACTIVO" ? true:false,
+                  estadovariante: variantedefault.varianteid>0 ? estadoproducto:item.estado=="ACTIVO" ? true:false,
                    skun:skun,
                    referenciaVariantes:referencia,
                    codigoBarras:item.codigobarras==="" ? codigbarradefault:item.codigobarras,
@@ -372,6 +381,13 @@ const preciosidva= variantback.data.content[0]
               console.log({producto:productobody,variantes:Variantesback})
               let produ;
                   if(productoid>0){
+                    Promise.all( Variantesbackdelete.map( async item=>{
+                      console.log("variante a eliminar",item)
+                     const eliminarvariante= await api.delete(`variantes/${item.variante.productoVarianteId}`,{  headers: {
+              'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
+            }})
+                      console.log("respuesta eliminacion",eliminarvariante)
+                    }))
  produ=await api.put(`productoMaster/actualizar/${productoid}`,{producto:productobody,variantes:Variantesback},{  headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
@@ -386,7 +402,7 @@ const preciosidva= variantback.data.content[0]
             }})*/
             
           
-               traerproductos()
+              
                methods.reset({
         ...methods.getValues(),
         tipoproducto: "",
@@ -406,24 +422,36 @@ const preciosidva= variantback.data.content[0]
          imagenproducto:null
           
       });
+      setvariantedefaulcodigo(0)
         setproductoid(0)
         setVariantesdelete([])
         setceldaatributos([])
         setvariantedefault({
+          varianteid:0,
  descripcion:"",
  imagen:null
 })
+  setpagina(0)
         setVariantes([])
         settap(1)
         setmultivariable(false)
             setmodalformproducto(false)
-      
+         setvariantedefaulcodigo(0)
            console.log(produ)
              }
 function cambiarPestana() {
  settap((prev) => (prev + 1))
-                       if(!multivariable){
-                         setvariantedefault(prev=>({...prev,descripcion:methods.getValues("descripcion"),imagen:methods.getValues("imagenproducto")}))
+                       if(!multivariable ){
+                         setvariantedefault(prev=>({...prev,varianteid:variantedefaulcodigo,descripcion:methods.getValues("descripcion"),imagen:methods.getValues("imagenproducto")}))
+                       }else{
+                        console.log("limpiar default")
+                        if(productoid>0){
+                         // traervariantes()
+                        }else{
+                         setVariantes([])
+                          setceldaatributos([])
+                        }
+                         
                        }
                      // e.stopPropagation();
 }
@@ -474,6 +502,7 @@ function cambiarPestana() {
           
       }); 
       setvariantedefault({
+        varianteid:0,
  descripcion:"",
  imagen:null
 })

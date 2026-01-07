@@ -27,7 +27,16 @@ unidadMedidaId
 : number
 
 }
-function Unidadmedida() {
+
+interface precios{
+   descripcion
+: 
+string,
+precioId
+: 
+number
+}
+function precios() {
     const [codigomodal,setcodigomodal]=useState<boolean>(false)
      const [modalconfirmar,setmodalconfimar]=useState<boolean>(false)
     const [linea,setlinea]=useState<string>("")
@@ -45,6 +54,7 @@ function Unidadmedida() {
     const [actulizar,setactulizar]=useState<boolean>(false)
      const [funcionDinamica, setFuncionDinamica] = useState<() => void>(() => {});
     const [unidadmedidas,setunidadmedidas]=useState<unidadmedid[]>([])
+     const [precios,setprecios]=useState<precios[]>([])
     const [lineas,setlineas]=useState<Lineas[]>([])
     const cambiarestadomodal=()=>{
     setmodalconfimar(false)
@@ -58,12 +68,12 @@ function Unidadmedida() {
         })
 
         console.log("unidades de medida",und)
-        // setlineas(lineas.data.content)
+    setprecios(und.data.content)
  
      }
      const eleiminarlineas=async(itemid:number)=>{
        try {
-         const lineas=await api.delete(`unidadesMedida/${itemid}
+         const lineas=await api.delete(`precios/${itemid}
 `,{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
@@ -82,15 +92,15 @@ function Unidadmedida() {
     const traerlineas=async ()=>{
 
      
-          const und=await api.get(`unidadesMedida/listar?page=0&size=10&sortField=unidadMedidaId&sortDirection=asc&descripcion=${descripcionlinea}
+          const und=await api.get(`precios/listar?page=0&size=10&sortField=descripcion&sortDirection=asc&descripcion=${descripcionlinea}
 `,{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
         })
 
-         console.log("unidades de medida",und)
-        setunidadmedidas(und.data.content)
+        console.log("unidades de medida",und)
+    setprecios(und.data.content)
  
      
         
@@ -114,7 +124,7 @@ function Unidadmedida() {
                             
                               setdescripcionlinea(e.target.value)
                           }}/>
-                          <label className="labellinea" >Unidad de medida</label>
+                          <label className="labellinea" >Precios</label>
                           <div className="diviconlupainventario">
                             <Iconlupa width={17} height={17} />
                           </div>
@@ -142,7 +152,7 @@ function Unidadmedida() {
                                                                 
                                                                     <CTableHeaderCell scope="col">Codigo</CTableHeaderCell>
                                                                 <CTableHeaderCell scope="col" >Nombre</CTableHeaderCell>
-                                                                 <CTableHeaderCell scope="col" >Sigla</CTableHeaderCell>
+
                                                                    <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
 
                                                                 
@@ -154,17 +164,15 @@ function Unidadmedida() {
                                                               
                                                              
                                                                 {
-                                                              unidadmedidas.map((item)=>{
+                                                              precios.map((item)=>{
                                                                 return   <CTableRow>
                                                             <CTableDataCell>
-                                                        {item.unidadMedidaId}  
+                                                        {item.precioId}  
                                                             </CTableDataCell>
                                                             <CTableDataCell>
                                                              {item.descripcion}
                                                             </CTableDataCell>
-                                                             <CTableDataCell>
-                                                             {item.sigla}
-                                                            </CTableDataCell>
+                                                            
                                                               <CTableDataCell>
                                                           <div className="d-flex flex-nowrap" style={{gap:"12px"  }} >
                                                     <div className="col-6" style={{ maxWidth: 'fit-content' }} >
@@ -172,8 +180,8 @@ function Unidadmedida() {
                                                           setactulizar(true)
                                                           setcodigomodal(true)
                                                           setunidadmedida(item.descripcion)
-                                                          setSigla(item.sigla)
-                                                          setcodigounidadmedida(item.unidadMedidaId)
+                                                          
+                                                          setcodigounidadmedida(item.precioId)
                                                         }} >
                                                           <Iconupdate  width={16} height={18} color={"#555"}/> 
                                                         </CButton>
@@ -182,7 +190,7 @@ function Unidadmedida() {
         
                                                       <div className="col-6"  style={{ maxWidth: 'fit-content' }}  >
                                                         <CButton  className="buttoniconnormal" onClick={()=>{
-                                                        setcodigoeliminar(item.unidadMedidaId)
+                                                        setcodigoeliminar(item.precioId)
                                                              setmodaladvertencia(true)
                                                               setmensajeadvertencia("Seguro desea eliminar esta linea")
                                                         setFuncionDinamica(()=> ()=> {
@@ -250,25 +258,13 @@ function Unidadmedida() {
                                                        }} />
                                                      
                                           
-                                         <CFormLabel>Unidad de medida</CFormLabel>
+                                         <CFormLabel>Precio</CFormLabel>
                                             
                                                        </CFormFloating>
                                                      </CInputGroup>
 
 
-                                                     <CInputGroup >
-                                                          <CFormFloating className="margeniputempresa">
-                                         
-                                                       <CFormInput placeholder=""  value={sigla}  className="inputdatosempresa fontletre"  onChange={(e)=>{
-                                                        setSigla(e.target.value)
-
-                                                       }} />
-                                                     
-                                          
-                                         <CFormLabel>Sigla</CFormLabel>
-                                            
-                                                       </CFormFloating>
-                                                     </CInputGroup>
+                                                    
                                                                              </div>
                                          
                                                                              <div className="card-footer d-flex justify-content-center"  >
@@ -283,7 +279,7 @@ function Unidadmedida() {
                                               {!actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
                                                /* let codigomaximo=lineas.length === 0  ? 1:Math.max(...lineas.map(v => v.codigolinea)) + 1
                                                 setlineas(prev=> [...prev,{codigolinea:codigomaximo,nombre:linea}])*/
-                                                const crearlinea=await api.post(`unidadesMedida/crear-por-dto`,[{descripcion:unidadmedida,sigla:sigla}],{
+                                                const crearlinea=await api.post(`precios/crear-por-dto`,{descripcion:unidadmedida},{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
@@ -296,7 +292,7 @@ function Unidadmedida() {
 
 
                                                        {actulizar && <button type="button" className="botoncontinuar"   onClick={async()=>{
-                                                       const actulizarlinea=await api.put(`unidadesMedida/${codigounidadmedida}`,{descripcion:unidadmedida,sigla:sigla},{
+                                                       const actulizarlinea=await api.put(`precios/${codigounidadmedida}`,{descripcion:unidadmedida},{
             headers: {
                     'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
                   }
@@ -324,4 +320,4 @@ function Unidadmedida() {
     </> );
 }
 
-export default Unidadmedida;
+export default precios;

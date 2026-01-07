@@ -263,7 +263,7 @@ number
                                                setactulizar(false)
                                                setgrupo("")
                                                
-                                                                         }} >Actulizar</button>
+                                                                         }} >Actualizar</button>
                                                                    }
                                                                             
                                                                    

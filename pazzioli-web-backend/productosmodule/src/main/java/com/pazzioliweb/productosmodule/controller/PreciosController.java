@@ -36,8 +36,9 @@ public class PreciosController {
     public ResponseEntity<PaginationResponse<PrecioResponseDTO>> listar(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
-            @RequestParam(defaultValue = "precioId") String sortField,
-            
+                      @RequestParam(defaultValue = "precioId") String sortField,
+                      @RequestParam(defaultValue = "") String descripprecio,
+
             @RequestParam(defaultValue = "asc") String sortDirection
     ) {
     	
@@ -47,7 +48,7 @@ public class PreciosController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
         
-        Page<PrecioResponseDTO> resultado = service.listar(pageable);
+        Page<PrecioResponseDTO> resultado = service.listar(descripprecio,pageable);
     	
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

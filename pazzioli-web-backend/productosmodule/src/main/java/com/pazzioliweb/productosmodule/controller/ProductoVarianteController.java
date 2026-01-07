@@ -112,9 +112,14 @@ public class ProductoVarianteController {
     public ResponseEntity<PaginationResponse<ProductoInventarioDTO>> listarInventarioBasico(
         	@RequestParam(defaultValue = "0") int page,
         	@RequestParam(defaultValue = "10") int size,
+           	@RequestParam(defaultValue = "") String descripproduct,
+        	@RequestParam(defaultValue = "ACTIVO") String estadoproducto,
+        	@RequestParam(defaultValue ="1") String estadova,
+          
         	@RequestParam(defaultValue = "varianteId") String sortField,
         	@RequestParam(defaultValue = "asc") String sortDirection
     ){
+    	System.out.println("pagina actual es esta"+page+" "+estadoproducto+" "+estadova);
     	Sort sort = sortDirection.equalsIgnoreCase("asc")
                 ? Sort.by(sortField).ascending()
                 : Sort.by(sortField).descending();
@@ -122,7 +127,37 @@ public class ProductoVarianteController {
         Pageable pageable = PageRequest.of(page, size, sort);
 
         Page<ProductoInventarioDTO> resultado =
-                varianteService.listarInventarioBasico(pageable);
+                varianteService.listarInventarioBasico(Integer.parseInt(estadova),descripproduct,pageable);
+
+        return ResponseEntity.ok(PaginationResponse.of(resultado));
+        
+        
+    }
+    
+    
+    @GetMapping("/listarInventarioBasicoentra")
+    public ResponseEntity<PaginationResponse<ProductoInventarioDTO>> listarInventarioBasicoentrada(
+        	@RequestParam(defaultValue = "0") int page,
+        	@RequestParam(defaultValue = "10") int size,
+           	@RequestParam(defaultValue = "") String descripproduct,
+        	@RequestParam(defaultValue = "ACTIVO") String estadoproducto,
+        	@RequestParam(defaultValue ="1") String estadova,
+        	@RequestParam(defaultValue ="0") String bodega,
+        	@RequestParam(defaultValue ="NO") String consultarentradasalida,
+        	
+          
+        	@RequestParam(defaultValue = "varianteId") String sortField,
+        	@RequestParam(defaultValue = "asc") String sortDirection
+    ){
+    	System.out.println("pagina actual es esta"+page+" "+estadoproducto+" "+estadova);
+    	Sort sort = sortDirection.equalsIgnoreCase("asc")
+                ? Sort.by(sortField).ascending()
+                : Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        Page<ProductoInventarioDTO> resultado =
+                varianteService.listarInventarioBasico(consultarentradasalida,Integer.parseInt(bodega),Integer.parseInt(estadova),estadoproducto,descripproduct,pageable);
 
         return ResponseEntity.ok(PaginationResponse.of(resultado));
         

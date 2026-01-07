@@ -51,6 +51,7 @@ interface Variante {
 
 
 interface Variantedfault {
+ varianteid:number,
  descripcion:string,
  imagen?:  File | null;
 }
@@ -73,7 +74,7 @@ function Variantes({variantedefault,multivariable,setmultivariable,variantes, se
           const [modaladvertencia,setmodaladvertencia]=useState<boolean>(false)
           const [confirmaractulizacion,setconfirmaractulizacion]=useState<boolean>(false)
           const [funncionDinamica2,setfunncionDinamica2]=useState<()=>void>(()=>{})
-  const [atributos, setAtributos] = useState<string[]>(["Talla","Color","Material"]);
+  const [atributos, setAtributos] = useState<string[]>([]);
   const [imgdefault,setimgdefault]=useState<string>("");
   const [atrractual,setatrractual]=useState<string>("");
   const [rotate4,setrotate4]=useState<boolean>(false);
@@ -86,7 +87,7 @@ useEffect(() => {
   fileRefs.current = fileRefs.current.slice(0, variantes.length);
 }, [variantes.length]);
 useEffect(() => {
-  setceldaatributos(atributoscelda)
+    setceldaatributos(atributoscelda)
 }, [atributoscelda]);
 
 
@@ -136,15 +137,13 @@ archivo como si lo arrastraras sobre la página, causando la ventana emergente o
 Y en tu caso, aunque lo aplicas en el contenedor, el img dentro del dropzone
  también recibe el evento, y ahí no estás previniendo el comportamiento. */
 const establecerdefaulva=async()=>{
-  console.log("variante de fault",variantedefault)
- setAtributoscelda(["Descripción"])
+   setAtributoscelda(["Descripción"])
  const nuevosAtributos:{ [key: string]: string } = {};
-console.log("estableciendo variante por defecto")
     nuevosAtributos["Descripción"] =variantedefault.descripcion;  // cada atributo tendrá un input
     const result=await crearproductodefault()
     setVariantes([
     {
-      productoVarianteId:0,
+      productoVarianteId:variantedefault.varianteid,
       imagen:result,
       atributos: nuevosAtributos,
       bodega: [],
@@ -160,6 +159,7 @@ const eleiminarvariante= async ()=>{
   setVariantesdelete([...variantesdelete, ...variantes.filter(item=> item.productoVarianteId === codigoeliminar)])
 const nuevasvariantes=variantes.filter(item=> item.productoVarianteId !== codigoeliminar)
 setVariantes(nuevasvariantes)
+setconfirmareliminacion(false)
 setcodigoeliminar(0)
 }
 useEffect(() => {
@@ -173,8 +173,7 @@ useEffect(() => {
       claves.map(item=>{
         
         const element=document.getElementById(`idretencion${item}`) as HTMLInputElement | null;
-        console.log(element)
-          
+                  
   if (element) {
     element.checked = true; // ejemplo
   }
@@ -184,7 +183,7 @@ useEffect(() => {
 
       
      }
-if(variantedefault.descripcion!=""){
+if(variantedefault.descripcion!="" && !multivariable){
  
    establecerdefaulva()
 
@@ -294,10 +293,8 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     setcodigobarraonchange
      }=codigosbarrascontex()
 
-     useEffect(()=>{console.log("varianteinicio",variantes)
-         if(Codigobarra!==undefined && Codigobarra!=="" && codigoidvariante>0){
-          console.log("codigo variante", codigoidvariante)
-          const nuevavariante=[...variantes]
+     useEffect(()=>{         if(Codigobarra!==undefined && Codigobarra!=="" && codigoidvariante>0){
+                    const nuevavariante=[...variantes]
           const codigobavariante=nuevavariante.findIndex(item=> item.productoVarianteId === codigoidvariante)
           nuevavariante[codigobavariante].codigobarras=Codigobarra
           setVariantes(nuevavariante)
@@ -306,8 +303,7 @@ const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
      },[Codigobarra])
        useEffect(()=>{
         if(actulizarbarra){
-          console.log(Codigobarra)
-        }
+                  }
        },[guardar])
 
  useEffect(()=>{
@@ -358,8 +354,7 @@ const agregarVariante = () => {
 :number,bodegaId:number,bodega: string, stockMax: number, stockMin: number,ubicacion:string,existencias:number},index:number)=>{
     let existebodega=variantes[index].bodega.find(b=>b.bodega===nombrebodega.bodega);
     
-    console.log("agregar bodega",nombrebodega,existebodega)
-    if(!existebodega){
+        if(!existebodega){
       const nuevaBodega: bodegas = { bodegaId:nombrebodega.bodegaId,bodega: nombrebodega.bodega, stockMax: nombrebodega.stockMax, stockMin: nombrebodega.stockMin, ubicacion:nombrebodega.ubicacion,existencias:0 };
       const nuevasVariantes = [...variantes];
       nuevasVariantes[index].bodega = [...nuevasVariantes[index].bodega, nuevaBodega];
@@ -380,8 +375,7 @@ const agregarVariante = () => {
             }})
 
 
-            console.log("actualizar bodega",upddatebodega)
-      const indexbodega=nuevasVariantes[index].bodega.findIndex(b=>b.bodegaId===nombrebodega.bodegaId);
+                  const indexbodega=nuevasVariantes[index].bodega.findIndex(b=>b.bodegaId===nombrebodega.bodegaId);
       nuevasVariantes[index].bodega[indexbodega].existencias=nombrebodega.existencias;
       nuevasVariantes[index].bodega[indexbodega].ubicacion=nombrebodega.ubicacion;
       nuevasVariantes[index].bodega[indexbodega].stockMax=nombrebodega.stockMax;
@@ -559,8 +553,7 @@ const agregarVariante = () => {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
             }})
 
-            console.log("caracteristica",lleg)
-            setvalorescaracteristicas(lleg.data.content)
+                        setvalorescaracteristicas(lleg.data.content)
                 /*  obtener cordenadas del elemento en el dom */
                   
                   const rect = e.target.getBoundingClientRect();
@@ -589,8 +582,7 @@ const agregarVariante = () => {
                }}
            value={v.atributos[attr] || ""}
             onChange={ async e => {
-               console.log("item variante",v,i)
-              const nuevas = [...variantes];
+                             const nuevas = [...variantes];
               nuevas[i].atributos[attr] = e.target.value;
               
     
@@ -606,8 +598,7 @@ const agregarVariante = () => {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
             }})
 
-            console.log("caracteristica",lleg)
-            setvalorescaracteristicas(lleg.data.content)
+                        setvalorescaracteristicas(lleg.data.content)
 
               setVariantes(nuevas);
             }}
@@ -641,8 +632,7 @@ Distancia desde el borde superior del viewport
               setEvitandoBlur(true)
                     const nuevas = [...variantes];
                     const varianteactual=variantes.findIndex(item=> item.productoVarianteId===varianteselect?.productoVarianteId)
-                    console.log("item variante",varianteactual,variantes,v,i)
-                    
+                                        
                     nuevas[varianteactual].atributos[attr]=item.nombre;
     //nuevas[i].atributos[attr] =item.bodega;
 
@@ -664,14 +654,12 @@ Distancia desde el borde superior del viewport
 
          <CTableDataCell>   <select className="iteminput1" value={v.estado}  onChange={(e)=>{
           if(!estadoproducto){
-             console.log("variante",variantes,i)
-          let variant=[...variantes]
+                       let variant=[...variantes]
           variant[i].estado="INACTIVO"
           setVariantes(variant)
             return
           }
-          console.log("variante",variantes,i)
-          let variant=[...variantes]
+                    let variant=[...variantes]
           variant[i].estado=e.target.value
           setVariantes(variant)
          }} style={{width:"80px"}}>
@@ -704,8 +692,7 @@ Distancia desde el borde superior del viewport
                                                                 listaid.data.forEach(item3=>{
                                                                 barrarformada+=item3.toString()
                                                                 })
-                                                                    console.log("codigobarra formado",codigocontable+barrarformada,codigocontable,barrarformada)
-                                                                  setcodigobarra(codigocontable+barrarformada)
+                                                                                                                                      setcodigobarra(codigocontable+barrarformada)
                                                                    setcodigobarraonchange(codigocontable+barrarformada)
                                                                      setcodigomodal(true)
                                                               setcodigoidvariante(v.productoVarianteId)
@@ -851,8 +838,7 @@ Distancia desde el borde superior del viewport
                                                                 listaid.data.forEach(item3=>{
                                                                 barrarformada+=item3.toString()
                                                                 })
-                                                                    console.log("codigobarra formado",codigocontable+barrarformada,codigocontable,barrarformada)
-                                                                  setcodigobarra(codigocontable+barrarformada)
+                                                                                                                                      setcodigobarra(codigocontable+barrarformada)
                                                                    setcodigobarraonchange(codigocontable+barrarformada)
                                                                      setcodigomodal(true)
                                                               setcodigoidvariante(v.productoVarianteId)

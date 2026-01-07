@@ -359,7 +359,7 @@ let traerprecios= await api.get("precios/listar",{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }})
-    console.log("precios datos",traerprecios.data.data)
+    console.log("precios datos",traerprecios.data.data.content)
   
     setprecios(traerprecios.data.data)
       setretenciones(traerretenciones.data)

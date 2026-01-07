@@ -29,6 +29,7 @@ import Terceros from './modules/terceros/views/Terceros';
 import Productos from './modules/productos/productos';
 import Providercodigobarras from './modules/productos/contextcodigobarras';
 import Atributos from './modules/atributos/Atributos';
+import Entradainventario from './modules/entradainventario/entradainventario';
 
 function App() {
     const{  paginaactual,
@@ -91,7 +92,7 @@ font: 'normal normal normal 14px/19px Open Sans',
              <Route path="/atributos" element={<Atributos/>}/>
             
              <Route path='/productos' element={<Providercodigobarras><Productos/></Providercodigobarras>}/>
-            
+            <Route path='/Entrada' element={<Providercodigobarras><Entradainventario/></Providercodigobarras>}/>
     </Routes>
      </BrowserRouter>
      </div>

@@ -16,6 +16,11 @@ public interface PreciosProductoVarianteRepository extends JpaRepository<Precios
 	        Long productoVarianteId,
 	        Integer precioId
 	);
+	
+	boolean existsByPrecio_PrecioId(
+	        
+	        Integer precioId
+	);
 
 	Optional<PreciosProductoVariante> findByProductoVariante_ProductoVarianteIdAndPrecio_PrecioId(
 	        Long productoVarianteId,

@@ -216,7 +216,7 @@ backdropFilter: "blur(3px)"}} id="modalrol">
                                                                                                                                                          setactulizar(false)
                                                                                                                                                          setnombresca("")
                                                                                                                                                          setcodigovalores(0)
-                                                                                                                        }} >Actulizar</button>
+                                                                                                                        }} >Actualizar</button>
                                                                                                                        }
 
                                                                                                                        {

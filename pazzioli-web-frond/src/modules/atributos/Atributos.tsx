@@ -6,6 +6,7 @@ import "./estilosatributos.scss"
 import Grupos from "./components/grupos/grupos";
 import Caracteristicas from "./components/caracteristicas/caracteristicas";
 import Unidadmedida from "./components/unidadesmedida/unidadmedida";
+import Precios from "./components/precios/Precios";
 function Atributos() {
     const [itemsformempresa, setitemsformempresa] = useState(1)
    
@@ -40,7 +41,11 @@ function Atributos() {
          <CTab className="tapitemsempresa" itemKey={3}>
        Unidades de medida
         </CTab>
-        <CTab className="tapitemsempresa" itemKey={4}>
+
+           <CTab className="tapitemsempresa" itemKey={4}>
+        Precios
+        </CTab>
+        <CTab className="tapitemsempresa" itemKey={5}>
       Caracteristicas
         </CTab>
       </CTabList>
@@ -73,10 +78,15 @@ function Atributos() {
 
 
         </CTabPanel>)}
+       
+
+           {itemsformempresa===4 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={4}>
+            
+          <Precios/>
+        </CTabPanel>)}
 
 
-
-         {itemsformempresa===4 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={4}>
+         {itemsformempresa===5 && (<CTabPanel className="p-3" aria-labelledby="home-tab-pane" itemKey={5}>
             
           <Caracteristicas/>
         </CTabPanel>)}

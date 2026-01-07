@@ -23,7 +23,7 @@ public interface ProductoVarianteService {
 
     Page<ProductoVarianteResponseDTO> listarPorProducto(Integer productoId, Pageable pageable);
     
-    Page<ProductoInventarioDTO> listarInventarioBasico(Pageable pageable);
+    Page<ProductoInventarioDTO> listarInventarioBasico(String consultarentrada,int bodega,int estadova,String estadoproduct,String productodes,Pageable pageable);
     
     Page<ProductoVarianteConDetallesDTO> listarConDetallesPorProducto(Integer productoId, Pageable pageable);
 }

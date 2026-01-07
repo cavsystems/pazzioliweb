@@ -18,6 +18,8 @@ import Bodegasproducto from "./components/Bodegas/Bodegasproducto";
 import Iconprecio from "../../icons/iconprecio";
 import Precios from "./components/precios/precios";
 interface productolista{
+
+  codigobarras:string | null,
   cantidadGlobal
 : 
 number
@@ -72,20 +74,24 @@ function Productos() {
      const [precioidvariante,setprecioidvariante]=useState<number>(0);
      const [itemsformempresa, setitemsformempresa] = useState(1)
      const [productoid,setproductoid]=useState<number>(0)
+     const [descripcionproducto,setdescripcionproducto]=useState<string>("")
       const [productoidbodega,setproductoidbodega]=useState<number>(0)
     const [modalbodega,setmodalbodegaa]=useState<boolean>(false)
       const [product,setproduct]=useState<productolista | null>(null)
      const [modalproducto,setmodalproducto]=useState(true)
      const [actulizar,setactulizar]=useState<boolean>(false)
+     const [esperaasync,setesperaasync]=useState<boolean>(false)
       const [modalerror,setmodalerror]=useState(false)
       const [productos,setproductos]=useState<productolista[]>([])
+      const [estadoproducto,setestadoproducto]=useState<string>("ACTIVO")
+      const [estadovariante,setestadovariante]=useState<number>(1)
     const [mensajeerror,setmensajeerror]=useState("")
      const {codigomodal,setcodigomodal, setcodigobarra,codigobarraonchange,
     setcodigobarraonchange,codigovariante,
        setcodigovariante,}=codigosbarrascontex()
      const [modalformproducto,setmodalformproducto]=useState<boolean>(false)
      const traerproductos=async()=>{
-      const productos= await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=5`,{
+      const productos= await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=5&descripproduct=${descripcionproducto}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
@@ -97,25 +103,52 @@ function Productos() {
 
 
      useEffect(()=>{
-      console.log("pagina cambiada",pagina)
-     cargarMasDatos()
-     },[pagina])
+    
+    
+ cargarMasDatos()
+      
+    
+     },[pagina,descripcionproducto,estadoproducto])
+
+
+      useEffect(()=>{
+    
+    
+ cargarMasDatos()
+      
+    
+     },[estadoproducto])
+
+    useEffect(()=>{
+    
+    
+ cargarMasDatos()
+      
+    
+     },[estadovariante])
+
+       
      const handleScroll = (e:any) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (bottom) {
           console.log('Llegaste al final de la tabla');
+          if(esperaasync==false){
           setpagina(pagina+1)
+          }
          
         }
       };
       const cargarMasDatos = async () => {
         let arraynuevo=[]
-        const nuevosProductos = await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=15`,{
+          console.log("pagina cambiada",pagina)
+          setesperaasync(true)
+        const nuevosProductos = await api.get(`variantes/listarInventarioBasico?page=${pagina}&size=5&descripproduct=${descripcionproducto}&estadoproducto=${estadoproducto}&estadova=${estadovariante}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
-
-            console.log("nuevos productosback",nuevosProductos)
+            setesperaasync(false)
+          if(pagina>0){
+               console.log("nuevos productosback actual",nuevosProductos)
          nuevosProductos.data.content.map((item:productolista)=>{
          
           if(!productos.find(prod=>prod.productoId===item.productoId)){
@@ -125,12 +158,18 @@ function Productos() {
         setproductos((prevProductos) => [...prevProductos, ...arraynuevo]);
         console.log("nuevos productos",nuevosProductos)
        // setproductos((prevProductos) => [...prevProductos, ...nuevosProductos.data.content]);
+          }else{
+              console.log("nuevos productosback actual",nuevosProductos)
+             setproductos(nuevosProductos.data.content)
+           // settotalglobal(productos.data.totalElements)
+          }
+         
       }
 
     
-      useEffect(()=>{
+    /*  useEffect(()=>{
          traerproductos()
-      },[])
+      },[])*/
       const methods = useForm({
           mode: 'onSubmit',
            shouldUnregister: false,
@@ -189,17 +228,48 @@ function Productos() {
                                 <div  className="tablesucursalescon" >
                                    <div className="col-12 " style={{paddingBottom:"12px"}} >
                                         <div className="d-flex flex-column">
-                                          <div className="row mx-0 ">
-                                            <div className="inputsearch col-12 col-md-6 paddingbottom">
-                                                               <input type="text" className="inputlinea" />
+                                          <div className="row mx-0 " style={{columnGap:"12px"}}>
+                                            <div className="inputsearch col-12 col-md-4 paddingbottom">
+                                                               <input type="text" className="inputlinea"  value={descripcionproducto} onChange={(e)=>{
+                                                               
+                                                                setdescripcionproducto(e.target.value)
+                                                                 setpagina(0)
+                                                              }
+                                                                
+                                                              }
+                                                                />
                                                                <label className="labellinea">Producto</label>
                                                                <div className="diviconlupainventario">
                                                                  <Iconlupa width={17} height={17} />
                                                                </div>
                                                           </div>
                                                              
-                                                                      
-                                              <div className="d-flex justify-content-start align-items-center justify-content-md-end justify-content-lg-end col-12 col-md-6 paddingbottom">
+                                                   <div className="col-12 col-md-4 paddingbottom selecta">
+                                                      <select className="iteminput1 inputpaddingselectproducto " onChange={(e)=>{
+                                                        if(e.target.value==="ACTIVO"){
+                                                          setestadoproducto("ACTIVO")
+                                                          setestadovariante(1)
+                                                          setpagina(0)
+                                                        }else{
+                                                          console.log("inactivo seleccionado",e.target.value)
+                                                          setestadoproducto("INACTIVO")
+                                                           setestadovariante(0)
+                                                            setpagina(0)
+                                                        }
+                                                      }} defaultValue={"ACTIVO"}>
+                                                           <option value={"ACTIVO"} id="slectform1">Activo</option>
+                                                          <option value={"INACTIVO"} id="slectform1">Inactivo</option>
+                                
+                             
+                                 
+                               </select>
+                                                    </div>       
+                                              <div className="d-flex justify-content-start align-items-center justify-content-md-end justify-content-lg-end col-12 col-md-3 paddingbottom gap-3 ">
+
+
+                                                
+                                                
+                                               
                                                                 <span className="totalregistrosproduct" >Total: {productos.length>0 ?productos[0].totalGlobalInventario.toLocaleString("es-CO",{
                                                 style:"currency",
                                                   currency:"COP",
@@ -340,7 +410,7 @@ function Productos() {
                     
                                          <div className="col-12  justify-content-center " style={{marginTop:'10px' ,display: codigomodal ? "flex":"none"}}>
                                                             
-                                                             <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:9999,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
+                                                             <div   className="d-flex justify-content-center  align-items-center"style={{width:'100vw',height:'100vh',top:0,left:0,zIndex:10000,position:'fixed',background:"rgb(0, 0, 0,0.5)"}} id="modalrol">
                                                                      <div className="card" style={{ width:'400px'}}>
                                                                          <div className="card-body">
                                                                                        <CInputGroup >
@@ -393,7 +463,7 @@ function Productos() {
                                          }}
                                        >Agregar</CButton>
                                   
-                           <Formproduct  modalformproducto={modalformproducto} setmodalformproducto={setmodalformproducto}  productoid= {productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}  traerproductos={traerproductos}/>  
+                           <Formproduct  modalformproducto={modalformproducto} setmodalformproducto={setmodalformproducto}  productoid= {productoid} setproductoid={setproductoid} product={product} setproduct={setproduct}  traerproductos={traerproductos} setpagina={setpagina}/>  
                
                    </div>
                   {

@@ -264,7 +264,7 @@ function Lineas() {
                                                setcodigomodal(false)
                                                setactulizar(false)
                                                setlinea("")
-                                               }} >Actulizar</button>}
+                                               }} >Actualizar</button>}
                                          
                                                                              </div>
                                                                      </div>
