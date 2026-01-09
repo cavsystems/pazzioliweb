@@ -6,7 +6,8 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { Login } from './modules/auth/views/login';
 import { Inicio } from './modules/inicio/views/Inicio';
 import '@coreui/coreui/dist/css/coreui.min.css'
@@ -63,6 +64,7 @@ useEffect(()=>{
 },[dispatch])
 
   return (
+     <BrowserRouter>
      <div className=" bg-back-ground-login overflow-hiddenlogin min-vh-100 containeroot">
            <img src="/imgs/pazziolilogo.svg" className="dimensionesfondo" />
            <Navbar/>
@@ -77,7 +79,7 @@ font: 'normal normal normal 14px/19px Open Sans',
          <a href="#" className="navigationhome">{paginaactual}</a>
        </div>
        <div className='containerformen'>
-    <BrowserRouter>
+   
     <Routes>
       <Route path="/" element={<Login/>} />
       <Route path="/inicio" element={<Inicio/>} />
@@ -94,9 +96,10 @@ font: 'normal normal normal 14px/19px Open Sans',
              <Route path='/productos' element={<Providercodigobarras><Productos/></Providercodigobarras>}/>
             <Route path='/Entrada' element={<Providercodigobarras><Entradainventario/></Providercodigobarras>}/>
     </Routes>
-     </BrowserRouter>
+     
      </div>
    </div>
+   </BrowserRouter>
   )
 }
 

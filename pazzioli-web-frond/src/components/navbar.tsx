@@ -4,7 +4,7 @@ import api from "../apicofig";
 import { chartcontex } from "../modules/inicio/components/contextchart";
 import { useAppSelector } from "../store/store";
 import { appcontex } from "../context";
-
+import { Link } from "react-router-dom";
 function Navbar() {
   
     const {setnav}=navcontex();
@@ -125,7 +125,7 @@ let video= new Blob([new Uint8Array(result)],{type:'video/mp4'})
                               
                                 <li className="listitem"> <div className="contenlist"></div><span>Bodegas</span></li>
                                
-                                <li className="listitem"> <div className="contenlist"></div><span>Movimientos</span></li>
+                                <li className="listitem"> <div className="contenlist"></div><span> <Link to="/entrada">Movimientos</Link></span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Compras</span></li>
                                 <li className="listitem"> <div className="contenlist"></div><span>Recalcular costos</span></li>
                                 <li className="listitem"> <div className="contenlist"></div> <span>Inventario fisico</span></li>

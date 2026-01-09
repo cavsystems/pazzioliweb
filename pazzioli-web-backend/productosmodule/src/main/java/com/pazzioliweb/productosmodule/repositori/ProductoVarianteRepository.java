@@ -178,10 +178,12 @@ FROM (
       
         pv.producto_variantes_id AS varianteId,
         pv.activo as activo,
-        
+        pv.codigo_barras as codigobarravariante,
+        p.codigo_barras as codigobarra,
         p.producto_id AS productoId,
         ex.bodegaid as bodegaid,
         p.referencia,
+       
         p.estado,
         p.grupo_id AS grupoid,
         p.linea_id AS lineaid,
@@ -191,7 +193,7 @@ FROM (
         p.codigo_contable AS codigoContable,
         IF(
           pv.predeterminada = 0,
-          CONCAT(p.descripcion, ' - ', pv.referencia_variantes),
+          CONCAT(p.descripcion, '-', pv.referencia_variantes),
           p.descripcion
         ) AS descripcion,
         COALESCE(ex.totalExistencia, 0) AS cantidadGlobal,
@@ -217,7 +219,7 @@ FROM (
        
     ) ex ON ex.varianteId = pv.producto_variantes_id
 ) t
-WHERE LOWER(t.descripcion)LIKE LOWER(CONCAT('%', :productodes, '%')) or LOWER(t.)LIKE LOWER(CONCAT('%', :productodes, '%'))
+WHERE LOWER(t.descripcion)LIKE LOWER(CONCAT('%', :productodes, '%')) or LOWER(t.codigobarra)LIKE LOWER(CONCAT('%', :productodes, '%')) or  LOWER(t.codigoContable)LIKE LOWER(CONCAT('%', :productodes, '%'))  or  LOWER(t.codigobarravariante)LIKE LOWER(CONCAT('%', :productodes, '%')) or  LOWER(t.referencia)LIKE LOWER(CONCAT('%', :productodes, '%'))  
 and  t.estado="ACTIVO"
 and t.activo=:activo
 and t.bodegaid=:bodega

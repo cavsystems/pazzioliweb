@@ -9,6 +9,8 @@ import api from "../../apicofig";
 import Modalconfirmar from "../../components/alertconfimacion";
 import ProductoRowcantidad from "./components/cellcantidad";
 import ProductoRowcosto from "./cellcostos";
+import Iconupdate from "../../icons/iconupdate";
+import Iconguardar from "../../icons/iconguardar";
 interface bodega{
     codigo:number,
     nombre:string
@@ -115,12 +117,25 @@ productoVarianteId:number
 total:number
 }
 function Entradainventario() {
+    const [visible,setvisible]=useState<boolean>(false)
+     const [indexactulizaricon,setindexactulizaricon]=useState<number>(-1)
+    const [eliminar,seteliminar]=useState<boolean>(false)
+    const [indexeliminar,setindexeliminar]=useState<number>(0)
+    const [costoactulizar,setcostoactulizar]=useState<string>("")
+      const [cantidadactulizar,setcantidadactulizar]=useState<string>("")
+    const [modaladvertencia,setmensajeadvertencia]=useState<boolean>(false)
+    const [guardar,setguardar]=useState<boolean>(false)
+      const [funncionDinamica2,setFuncionDinamica2]=useState<()=>void>(()=>{})
     const [bodegaseleccionada,setbodegaseleccionada]=useState<number>(0)
+    const [actualizar,setactualizar]=useState<boolean>(false)
+      const [actualizaritem,setactualizaritem]=useState<boolean>(false)
+    const [indexactulizar,setindexactulizar]=useState<number>(-1)
      const [descripcionproducto,setdescripcionproducto]=useState<string>("")
      const [pagina,setpagina]=useState<number>(0)
     const [totalglobal,settotalglobal]=useState<number>(0)
      const [modalerror,setmodalerror]=useState<boolean>(false)
      const [mensajeerror,setmensajeerror]=useState<String>("")
+     const [mensajetipomovimiento,setmensajetipomovimiento]=useState<string>("")
      const [Tipomovimiento,setTipomovimiento]=useState<number>(0)
      const [productosentradas,setproductosentradas]=useState<number>(0)
  const [coords, setCoords] = useState({ x: 0, y: 0, width: 0 });
@@ -129,10 +144,13 @@ function Entradainventario() {
      const [numeroproductosagregados,setnuproductosagregados]=useState<number>(0)
      const [funcionDinamica,setFuncionDinamica]=useState<()=>void>(()=>{})
     const [bodegas,setbodegas]=useState<bodega[]>([])
+    const [evitandoBlur,setevitandoBlur]=useState<boolean>(true)
     //Estado para el dropdown activo
     const [activeId, setActiveId] = useState<number | null>(null)
     //solucion al desajuste del desplegable 
    const inputRefs = useRef<Record<number, HTMLInputElement | null>>({})
+    const inputRefscantidad = useRef<Record<number, HTMLInputElement | null>>({})
+    const inputRefscantidadcosto = useRef<Record<number, HTMLInputElement | null>>({})
 //funcion para calcular la posicion por input
 
 
@@ -151,6 +169,87 @@ const updatePosition = (id: number) => {
   setActiveId(id)
 }
 
+useEffect(()=>{
+if(eliminar){
+     productosagregados.splice(indexeliminar,1)
+     settotalglobal(productosagregados.reduce((c,item) => c+item.total,0))
+ setnuproductosagregados(prev=> numeroproductosagregados-1)
+
+setindexeliminar(0)
+seteliminar(false)
+}
+},[eliminar])
+const parseNumberCO = (value: string): number => {
+  if (!value) return 0
+
+  return Number(
+    value
+      .replace(/\./g, '') // quita miles
+      .replace(',', '.')  // cambia decimal
+  )
+}
+
+const parseNumberCOnuber = (value: string): number => {
+  if (!value) return 0
+
+  return Number(
+    value
+      .replace(/\./g, '') // quita miles
+      .replace(',', '.')  // cambia decimal
+  )
+}
+
+
+useEffect(()=>{
+    console.log("entro a usseefect",actualizaritem)
+if(actualizaritem){
+    if(indexactulizar>=0){
+  let productsactulizar=[...productosagregados]
+  let canupdate=parseNumberCO(cantidadactulizar)
+   let cosupudate=parseNumberCO(costoactulizar)
+           productsactulizar=productsactulizar.map((item,index)=>{
+    if(index===indexactulizar){
+        return {...item,cantidadGlobal:Number(canupdate),costo:Number(cosupudate)}
+    }else{
+        return item
+    }
+  })
+  settotalglobal(
+  productsactulizar.reduce((acc, item) => acc + item.total, 0)
+)
+setproductosagregados(productsactulizar)
+setindexactulizar(-1)
+setactualizaritem(false)
+setactualizar(false)
+setindexactulizaricon(-1)
+    }
+
+}else{
+    if(indexactulizar>=0){
+        let total=0
+  let productsactulizar=[...productosagregados]
+  productsactulizar[indexactulizar].total=productsactulizar[indexactulizar].cantidadGlobal * productsactulizar[indexactulizar].costo
+    productsactulizar=productsactulizar.map((item,index)=>{
+    if(index===indexactulizar){
+        return productsactulizar[indexactulizar]
+    }else{
+        return item
+    }
+  })
+settotalglobal(
+  productsactulizar.reduce((acc, item) => acc + item.total, 0)
+)
+  console.log("productos update",productsactulizar,indexactulizar)
+setproductosagregados(productsactulizar)
+setindexactulizar(-1)
+setactualizar(false)
+setindexactulizaricon(-1)
+    }
+  
+
+
+}
+},[actualizaritem,indexactulizar])
 
 //actulizar total global
 useEffect(()=>{
@@ -160,10 +259,7 @@ useEffect(()=>{
     total+=item.total
    })
    
-  console.log("total actual",total,productosagregados)
-  
-  
-   settotalglobal(total)
+     settotalglobal(total)
 },[productosagregados])
 //recalcular rezise
 useEffect(() => {
@@ -181,14 +277,12 @@ useEffect(() => {
 }, [activeId])
 
     const cargarproductos=async()=>{
-        console.log("variantes actuales",descripcionproducto,bodegaseleccionada,)
-            const nuevosProductos = await api.get(`variantes/listarInventarioBasicoentra?page=${0}&size=100&descripproduct=${descripcionproducto}&estadoproducto=${"ACTIVO"}&estadova=${1}&bodega=${bodegaseleccionada.toString()}&consultarentradasalida=${"SI"}`,{
+                    const nuevosProductos = await api.get(`variantes/listarInventarioBasicoentra?page=${0}&size=100&descripproduct=${descripcionproducto}&estadoproducto=${"ACTIVO"}&estadova=${1}&bodega=${bodegaseleccionada.toString()}&consultarentradasalida=${"SI"}`,{
             headers: {
               'X-TenantID':"cavsystems", // suponiendo que data.db contiene el nombre de la base de datos
             }});
 
-            console.log("productos lista nuevos",nuevosProductos)
-            setproductos(nuevosProductos.data.content)
+                        setproductos(nuevosProductos.data.content)
     }
     const traerbodegas=async()=>{
           const apibodega=await api.get("bodegas/listar",{
@@ -196,8 +290,7 @@ useEffect(() => {
                   'X-TenantID':"cavsystems", // suponiendo que data.db contiene el bodega de la base de datos
                 }})
 
-    console.log("apibodegas entrada",apibodega)
-    setbodegas(apibodega.data.data)
+        setbodegas(apibodega.data.data)
     }
 
      useEffect(()=>{
@@ -208,8 +301,7 @@ useEffect(() => {
         if(descripcionproducto.trim()!=="" && bodegaseleccionada>0 ){
             cargarproductos()
         }else{
-            console.log("No hay descripcion")
-         setproductos([])
+                     setproductos([])
         }
      
     },[descripcionproducto,bodegaseleccionada])
@@ -221,6 +313,23 @@ useEffect(() => {
             <div className="row mx-0 justify-content-center p-4 paddinginputentrada"> 
                         <div className="col-12 col-md-12 inputsearch">
                                   <select className="iteminput1 inputpaddingselectentrada"  onChange={(e)=>{
+                                   const movi= e.target.value==="" ? 0:Number(e.target.value)
+                                    switch (movi) {
+                                        case 1:
+                                            setmensajetipomovimiento("Entrada de inventario")
+                                            break;
+                                         case 2:
+                                            setmensajetipomovimiento("Salida de inventario")
+                                            break;
+
+                                          case 3:
+                                            setmensajetipomovimiento("Traslado de inventario")
+                                            break;
+                                    
+                                        default:
+                                             setmensajetipomovimiento("")
+                                            break;
+                                    }
                                     if(e.target.value===""){
                                                setTipomovimiento(0)
                                     }else{
@@ -339,7 +448,9 @@ useEffect(() => {
                      
                                                     
         </div>
-
+       <div className="col-12 paddingcol12entrada">
+         <span className="mensajetipomovimiento" >{mensajetipomovimiento}</span>
+       </div>
      <div className="col-12 paddingcol12entrada">
          <div className="tabla-wrapper" >
                                                                   <CTable  
@@ -347,7 +458,7 @@ useEffect(() => {
                        
                          
                          small
-                         align="left" className="tablaterceros">
+                         align="left" className="tablaterceros tablaentrada">
                             <colgroup>
     <col style={{ width: "120px" }} />   {/* Código */}
     <col style={{ width: "300px" }} />   {/* Descripción */}
@@ -367,8 +478,12 @@ useEffect(() => {
                                                                            <CTableHeaderCell scope="col" > Cantidad</CTableHeaderCell>
                                                                               <CTableHeaderCell scope="col" >Costo</CTableHeaderCell>
                                                                            <CTableHeaderCell scope="col" >Total</CTableHeaderCell>
-                                                                       
-                                                                               <CTableHeaderCell scope="col" >Acciones</CTableHeaderCell>
+                                                                              
+                                                                               <CTableHeaderCell scope="col" >
+                                                                                  <div className="d-flex  justify-content-center flex-nowrap" style={{gap:"12px"  }} >
+                                                                                    Acciones
+                                                                                  </div>
+                                                                                </CTableHeaderCell>
                                                        
                                                        
                                                                      
@@ -388,11 +503,28 @@ useEffect(() => {
                                                                      <CTableDataCell >{
                                                                         <div className="mx-0">
                                                                             <div className="col-12 position-relative">
-                                                                                  <input className="inputentradaitem"   ref={(el) => {
+                                                                                  <input className="inputentradaitem"  disabled={index!==productosagregados.length-1} ref={(el) => {
 
     //guardamos la referncia del input en el ref
-    inputRefs.current[productosagregados[index].productoVarianteId] = el
-  }} value={productosagregados[index].descripcion} onChange={(e)=>{
+    inputRefs.current[index] = el
+  }}
+  onBlur={(e)=>{
+       e.stopPropagation()
+        setvisible(false)
+
+    return
+  }}
+  onFocus={()=>{
+     setvisible(false)
+  }}
+   onKeyDown={(e) => {
+  if (e.key === "Enter") {
+       const elementinput=document.getElementById(`inputcantidad${index}`)
+                                                                                                                                                                                        elementinput?.focus()
+  }
+}}
+ value={productosagregados[index].descripcion} onChange={(e)=>{
+    setvisible(true)
                                                                                        let newdes=[...productosagregados]
                                                                                         let newde=[...productosagregados]
                                                                                     newdes= newdes.map(item=>{
@@ -404,10 +536,9 @@ useEffect(() => {
                                                                                         }
                                                                                         return item
                                                                                      })
-                                                                                     console.log("productos agregados onchanga",newde,newdes)
-                                                                                     setproductosagregados(newdes)
+                                                                                                                                                                          setproductosagregados(newdes)
                                                                                       setdescripcionproducto(e.target.value)
-                                                                                     updatePosition(productosagregados[index].productoVarianteId)
+                                                                                     updatePosition(index)
                                                                                       
                                                                                                        const rect = e.target.getBoundingClientRect();
   setCoords({
@@ -416,11 +547,11 @@ useEffect(() => {
     width: rect.width
   });
                                                                         }}/>
-                                                                        <div  className={`${'rotateitem'} `}><img  src="imgs/togle.svg" /></div> 
+                                                                      
 
                                                                         
 
-                                                                              {productos.length>0 && activeId !== null &&
+                                                                              {productos.length>0 && activeId !== null && visible &&
                                                                              createPortal(
                                                                                  <div
                                                                                    className="displayatrr-portal"
@@ -441,22 +572,33 @@ useEffect(() => {
                                                                                  >
                                                                                    <ul className="ulvariante">
                                                                                      {
+                                                                                      
                                                                                        productos.map((item)=>{
                                                                                          return <>
-                                                                                         <li  onClick={()=>{
+                                                                                         <li  onMouseDown={()=>{
+                                                                                         
                                                                                            let productagregado=[...productosagregados]
-                                                                                            console.log("index producto antex",index,productosagregados, productagregado)
-                                                                                           productagregado=productagregado.map((item2,i)=>{
+                                                                                                                                                                                       productagregado=productagregado.map((item2,i)=>{
                                                                                              if(i===index){
                                                                                             
-                                                                                                return {...item,cantidadGlobal:0,costo:0,total:0}
+                                                                                                return {...item,cantidadGlobal:0,costo:item.costo,total:0}
                                                                                              } 
                                                                                              
                                                                                              return item2             
                                                                                             })
-                                                                                            console.log("index producto agregar",index, productagregado)
-                                                                                            setproductosagregados(productagregado)
+                                                                                                                                                                                        setproductosagregados(productagregado)
+                                                                                            const elementinput=document.getElementById(`inputcantidad${index}`)
+                                                                                                                                                                                       // elementinput?.focus()
+                                                                                           //Esperar a que React pinte el input
+                                                                                           //Usa requestAnimationFrame (mejor que setTimeout):
+                                                                                           //Garantiza que el DOM ya existe
+                                                                                  //Funciona con portales
+                                                                                 // Funciona con refs dinámicos
+                                                                                          requestAnimationFrame(() => {
+  inputRefscantidad.current?.[index]?.focus()
+})
 
+                                                                                                
                                                                                             setproductos([])
                                                                                           
                                                                                          }}>{item.descripcion}</li>
@@ -478,14 +620,14 @@ useEffect(() => {
                                                                            <div className="row mx-0">
                                                                             <div className="col-12 position-relative">
                                                                           
-                                                                        <ProductoRowcantidad item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados}/>
+                                                                        <ProductoRowcantidad item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados}   productosagregados={productosagregados} actualizar={actualizar} codigoactulizar={indexactulizaricon} inputrefcantidad={inputRefscantidad} setcanactu={setcantidadactulizar} />
                                                                           </div>
                                                                           </div>
                                                                         {/*productosagregados[index].cantidadGlobal*/}</CTableDataCell>
                                                                           <CTableDataCell >    <div className="row mx-0">
                                                                             <div className="col-12 position-relative">
                                                                           
-                                                                        < ProductoRowcosto item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados}/>
+                                                                        < ProductoRowcosto item={productosagregados[index]} index={index} setproductosagregados={setproductosagregados} productosagregados={productosagregados} actualizar={actualizar} codigoactulizar={indexactulizaricon} setcostoact={setcostoactulizar}   inputrefcosto={inputRefscantidadcosto}/>
                                                                           </div>
                                                                           </div></CTableDataCell>
                                                                         
@@ -503,12 +645,63 @@ useEffect(() => {
                                                                                                                                     <div className="d-flex  justify-content-center flex-nowrap" style={{gap:"12px"  }} >
                                                                                                                             
                                                                                                                               
-                                                                                  
-                                                                                                                                <div className="col-6"  style={{ maxWidth: 'fit-content' }}  >
-                                                                                                                                  <CButton  className="buttoniconnormal"  ><Iconeliminar  width={16} height={16} color={"#555"}/> </CButton>
-                                                                                                                              </div>
-                                                                                  
+                                                                                                                                     {  index!==indexactulizaricon&& <div className="col-6" style={{ maxWidth: 'fit-content' }} >
+                                                                                                                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                                                                                                                                setactualizar(true)
+                                                                                                                                                                setindexactulizaricon(index)
+                                                                                                                                                               }}>
+                                                                                                                                     <Iconupdate  width={16} height={18} color={"#555"}/> 
+                                                                                                                                 </CButton>
+                                                                                                                              </div> }  
+
+                                                                                                                                        {  index===indexactulizaricon&& <div className="col-6" style={{ maxWidth: 'fit-content' }} >
+                                                                                                                                                               <CButton  className="buttoniconnormal" onClick={()=>{
+                                                                                                                                                                setmensajeadvertencia(true)
+                                                                                                                                                                setmensajeerror("¿ Desea Actualizar este item ?")
+                                                                                                                                                                setFuncionDinamica(()=>{
+                                                                                                                                                                    return ()=>{
+                                                                                                                                                                        setmensajeadvertencia(false),
+                                                                                                                                                                        setactualizaritem(true)
+                                                                                                                                                                          setindexactulizar(index)
+                                                                                                                                                                    }
+                                                                                                                                                                })
+
+                                                                                                                                                                   setFuncionDinamica2(()=>{
+                                                                                                                                                                    return ()=>{
+                                                                                                                                                                        setmensajeadvertencia(false),
+                                                                                                                                                                        setactualizaritem(false)
+                                                                                                                                                                          setindexactulizar(index)
+                                                                                                                                                                    }
+                                                                                                                                                                })
+                                                                                                                                                               }}>
+                                                                                                                                     <Iconguardar width={20} height={20} color={"#555"}/> 
+                                                                                                                                 </CButton>
+                                                                                                                              </div>   }
                                                                                                                              
+                                                                                                                                <div className="col-6"  style={{ maxWidth: 'fit-content' }}  >
+                                                                                                                                  <CButton  className="buttoniconnormal" onClick={()=>{
+                                                                                                                                    setmensajeadvertencia(true)
+                                                                                                                                    setindexeliminar(index)
+                                                                                                                                    setmensajeerror("¿ Deseas eliminar este item ?")
+                                                                                                                                    setFuncionDinamica(()=>{
+                                                                                                                                        return ()=>{
+                                                                                                                                            setmensajeadvertencia(false)
+                                                                                                                                            seteliminar(true)
+                                                                                                                                        }
+                                                                                                                                    })
+
+                                                                                                                                         setFuncionDinamica2(()=>{
+                                                                                                                                        return ()=>{
+                                                                                                                                            setmensajeadvertencia(false)
+                                                                                                                                            seteliminar(false)
+                                                                                                                                            setindexeliminar(0)
+                                                                                                                                        }
+                                                                                                                                    })
+                                                                                                                                    
+                                                                                                                                   
+                                                                                                                                  }}  ><Iconeliminar  width={16} height={16} color={"#555"}/> </CButton>
+                                                                                                                              </div>
+                                                                                                                      
                                                                                   
                                                                                   
                                                                                                                            
@@ -583,7 +776,7 @@ useEffect(() => {
                                                 
                                                 
                                                
-                                                     <button className="agregarentrada" onClick={()=>{
+                                                 <button className="agregarentrada" onClick={()=>{
                                                     if(Tipomovimiento===0){
                                                           setmensajeerror("No especificastes el movimiento")
                                                             setmodalerror(true)
@@ -606,8 +799,7 @@ useEffect(() => {
                                                                 return item
                                                             }
                                                         })
-                                                         console.log("productos agrgados",productosagregados, productoscantidad)
-                                                        if(productoscantidad[0] && productoscantidad.length>0){
+                                                                                                                 if(productoscantidad[0] && productoscantidad.length>0){
                                                             setmensajeerror("Hay productos con cantidad cero")
                                                             setmodalerror(true)
                                                            setFuncionDinamica(()=> { return ()=>setmodalerror(false)})
@@ -662,7 +854,7 @@ useEffect(() => {
                                                         setnuproductosagregados((prev:number)=>prev+1)
                                                      }}>
               <span className="sumarentrada">+</span>  Agregar
-            </button>             <span className="totalregistrosproduct" >Total: ${totalglobal.toLocaleString("es-CO", {
+            </button>           <span className="totalregistrosproduct" >Total: ${totalglobal.toLocaleString("es-CO", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           })}</span>
@@ -677,7 +869,64 @@ useEffect(() => {
                 Importar
             </button>
 
-                <button className="guardarentrada">
+                <button className="guardarentrada" onClick={()=>{
+
+
+                    if(Tipomovimiento===0){
+                        setmodalerror(true)
+                        setmensajeerror("Especifica un movimiento puntual")
+                         setFuncionDinamica(()=>{
+                        return ()=>{
+                            setmodalerror(false)
+                          
+                        }
+                    })
+                    return
+                    }
+
+                     if(bodegaseleccionada===0){
+                        setmodalerror(true)
+                        setmensajeerror("Selecciona una bodega")
+                         setFuncionDinamica(()=>{
+                        return ()=>{
+                            setmodalerror(false)
+                          
+                        }
+                    })
+                    return
+                    }
+                    setmensajeadvertencia(true)
+
+                    switch (Tipomovimiento) {
+                        case 1:
+                               setmensajeerror("Desea realizar esta entreda")
+                            break;
+
+                           case 2:
+                               setmensajeerror("Desea realizar esta salida")
+                            break;
+                           case 2:
+                               setmensajeerror("Desea realizar este traslado")
+                            break;
+                    
+                        default:
+                            break;
+                    }
+                 
+                    setFuncionDinamica2(()=>{
+                        return ()=>{
+                            setmensajeadvertencia(false)
+                            setguardar(false)
+                        }
+                    })
+
+                    setFuncionDinamica(()=>{
+                        return ()=>{
+                            setmensajeadvertencia(false)
+                            setguardar(false)
+                        }
+                    })
+                }}>
                 Guardar
             </button>
            </div>
@@ -688,6 +937,10 @@ useEffect(() => {
         
         
     </div>
+
+      {
+                                 modaladvertencia && <Modalconfirmar tipoicon={"alerta"} texto={mensajeerror} boton3={true}  boton4={true} textoboton={"Aceptar"}  funcion={funcionDinamica} funcion2={funncionDinamica2}/>
+                                 } 
 
        {
                                  modalerror && <Modalconfirmar tipoicon={"Error"} texto={mensajeerror} boton3={true}   textoboton={"Aceptar"}  funcion={funcionDinamica} />
