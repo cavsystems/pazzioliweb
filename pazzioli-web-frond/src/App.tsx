@@ -29,8 +29,12 @@ import Usuarios from './modules/usuarios/Usuarios';
 import Terceros from './modules/terceros/views/Terceros';
 import Productos from './modules/productos/productos';
 import Providercodigobarras from './modules/productos/contextcodigobarras';
+import ventascomprasProvider from "./components/contextcompraventes"
 import Atributos from './modules/atributos/Atributos';
 import Entradainventario from './modules/entradainventario/entradainventario';
+import VentascomprasProvider from './components/contextcompraventes';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 function App() {
     const{  paginaactual,
@@ -88,7 +92,8 @@ font: 'normal normal normal 14px/19px Open Sans',
        <Route path="/facturacion" element={<Facturacion/>} />
        <Route path='/recibocaja' element={<Recibocaja/>}/>
         <Route path='/tomapedidos' element={<Tomapedidos/>}/>
-         <Route path='/compras' element={<Compras/>}/>
+         <Route path='/compras' element={      <LocalizationProvider  dateAdapter={AdapterDayjs}
+  adapterLocale="es"><VentascomprasProvider><Compras/></VentascomprasProvider></LocalizationProvider>}/>
            <Route path='/usuarios' element={<Usuarios/>}/>
              <Route path='/terceros' element={<Terceros/>}/>
              <Route path="/atributos" element={<Atributos/>}/>

@@ -148,6 +148,8 @@ function Entradainventario() {
     //Estado para el dropdown activo
     const [activeId, setActiveId] = useState<number | null>(null)
     //solucion al desajuste del desplegable 
+
+    
    const inputRefs = useRef<Record<number, HTMLInputElement | null>>({})
     const inputRefscantidad = useRef<Record<number, HTMLInputElement | null>>({})
     const inputRefscantidadcosto = useRef<Record<number, HTMLInputElement | null>>({})
