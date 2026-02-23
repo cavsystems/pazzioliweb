@@ -8,13 +8,19 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.pazzioliweb.productosmodule.entity.ProductoVariante;
 import com.pazzioliweb.productosmodule.entity.ProductoVarianteDetalle;
+import com.pazzioliweb.productosmodule.entity.Caracteristica;
+
+import java.util.Optional;
 
 public interface ProductoVarianteDetalleRepository extends JpaRepository<ProductoVarianteDetalle, Long>{
+	
+	Optional<ProductoVarianteDetalle> findByProductoVarianteAndCaracteristica(ProductoVariante variante, Caracteristica caracteristica);
+	
+	void deleteByProductoVariante(ProductoVariante variante);
 	
 	@EntityGraph(attributePaths = { "productoVariante", "caracteristica" })
 	@Query("SELECT pv FROM ProductoVarianteDetalle pv")
 	Page<ProductoVarianteDetalle> traerProductosVariantesDetalles(Pageable pageable);
-	void deleteByProductoVariante(ProductoVariante product);
 	Page<ProductoVarianteDetalle> findByProductoVariante_ProductoVarianteId(Long varianteId, Pageable pageable);
 	
 }

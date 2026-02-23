@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.pazzioliweb.productosmodule.dtos.UnidadMedidaCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.UnidadMedidaResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.UnidadMedidaUpdateDTO;
+import java.util.Optional;
 
 public interface UnidadesMedidaService {
 
@@ -18,6 +19,8 @@ public interface UnidadesMedidaService {
 	UnidadMedidaResponseDTO obtenerPorId(Integer id);
 	
 	Page<UnidadMedidaResponseDTO> listar(String descripcion,Pageable pageable);
+	
+	Optional<UnidadMedidaResponseDTO> buscarPorCodigo(String codigo);
 	
 	void eliminar(Integer id);
 }

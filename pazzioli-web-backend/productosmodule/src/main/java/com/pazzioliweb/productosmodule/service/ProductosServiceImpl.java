@@ -2,7 +2,9 @@ package com.pazzioliweb.productosmodule.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
 
+import com.pazzioliweb.productosmodule.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,14 +16,18 @@ import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
-import com.pazzioliweb.productosmodule.entity.Grupos;
-import com.pazzioliweb.productosmodule.entity.Lineas;
-import com.pazzioliweb.productosmodule.entity.Productos;
-import com.pazzioliweb.productosmodule.entity.TipoProducto;
+import com.pazzioliweb.productosmodule.dtos.ProductoActualizarCrearDTO;
 import com.pazzioliweb.productosmodule.mapper.ProductoMapper;
 import com.pazzioliweb.productosmodule.repositori.GrupoRepositori;
 import com.pazzioliweb.productosmodule.repositori.LineasRepositori;
 import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
+import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaRepository;
+import com.pazzioliweb.productosmodule.repositori.BodegasRepository;
+import com.pazzioliweb.productosmodule.repositori.ExistenciasRepository;
+import com.pazzioliweb.productosmodule.repositori.TipoCaracteristicaRepository;
+import com.pazzioliweb.productosmodule.repositori.CaracteristicaRepository;
+import com.pazzioliweb.productosmodule.repositori.ProductoVarianteRepository;
+import com.pazzioliweb.productosmodule.repositori.ProductoVarianteDetalleRepository;
 import com.pazzioliweb.productosmodule.repositori.TipoProductoRepository;
 import com.pazzioliweb.productosmodule.repositori.UnidadesMedidaProductoRepository;
 import com.pazzioliweb.usuariosbacken.entity.Usuario;
@@ -31,7 +37,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class ProductosServiceImpl implements ProductosService{
 	private final ProductosRepository productosRepository;
 	private final GrupoRepositori grupoRepository;
@@ -41,11 +46,20 @@ public class ProductosServiceImpl implements ProductosService{
 	private final ProductoMapper mapper;
 	private final UnidadesMedidaProductoRepository unidadesMedidaProductoRepository;
 	private final TipoProductoRepository tipoProductoRepository;
-	
+	private final CaracteristicaRepository caracteristicaRepository;
+	private final ProductoVarianteRepository productoVarianteRepository;
+    private final ProductoVarianteDetalleRepository productoVarianteDetalleRepository;
+	private final UnidadesMedidaRepository unidadesMedidaRepository;
+	private final BodegasRepository bodegasRepository;
+	private final ExistenciasRepository existenciasRepository;
+	private final TipoCaracteristicaRepository tipoCaracteristicaRepository;
+
 	public ProductosServiceImpl(ProductosRepository productosRepository, GrupoRepositori grupoRepository,
 			LineasRepositori lineaRepository,ImpuestosRepositori impuestoRepository,UsuarioRepository usuarioRepository,
 			ProductoMapper mapper,UnidadesMedidaProductoRepository unidadesMedidaProductoRepository,
-			TipoProductoRepository tipoProductoRepository) {
+			TipoProductoRepository tipoProductoRepository, CaracteristicaRepository caracteristicaRepository,
+			ProductoVarianteRepository productoVarianteRepository, ProductoVarianteDetalleRepository productoVarianteDetalleRepository, UnidadesMedidaRepository unidadesMedidaRepository,
+            BodegasRepository bodegasRepository, ExistenciasRepository existenciasRepository, TipoCaracteristicaRepository tipoCaracteristicaRepository) {
 		this.productosRepository = productosRepository;
 		this.grupoRepository = grupoRepository;
 		this.lineaRepository = lineaRepository;
@@ -54,6 +68,13 @@ public class ProductosServiceImpl implements ProductosService{
 		this.mapper = mapper;
 		this.unidadesMedidaProductoRepository = unidadesMedidaProductoRepository;
 		this.tipoProductoRepository = tipoProductoRepository;
+		this.caracteristicaRepository = caracteristicaRepository;
+		this.productoVarianteRepository = productoVarianteRepository;
+		this.productoVarianteDetalleRepository = productoVarianteDetalleRepository;
+        this.unidadesMedidaRepository = unidadesMedidaRepository;
+        this.bodegasRepository = bodegasRepository;
+        this.existenciasRepository = existenciasRepository;
+        this.tipoCaracteristicaRepository = tipoCaracteristicaRepository;
 	}
 
     // ---------------------------------------------
@@ -257,4 +278,143 @@ public class ProductosServiceImpl implements ProductosService{
     public Page<LineaProductosDTO> listarTotalesPorLineaXBodegaId(Integer bodegaId, Pageable pageable){
     	return productosRepository.getTotalesPorLineaPorBodegaId(bodegaId, pageable);
     }
+    
+    @Override
+    @Transactional
+    public void actualizarOCrearProducto(List<ProductoActualizarCrearDTO> dtos) {
+        for (ProductoActualizarCrearDTO dto : dtos) {
+        // Find or create product
+        Productos producto = productosRepository.findByCodigo(dto.getCodigo())
+                .orElse(new Productos());
+
+        // Set basic fields
+        producto.setCodigoContable(dto.getCodigo());
+        producto.setDescripcion(dto.getDescripcion());
+        producto.setReferencia(dto.getReferencia());
+        producto.setCosto(dto.getCosto().doubleValue());
+        producto.setCodigoBarras(dto.getCodigoBarras());
+        // Handle precios - TODO: implement logic for dto.getPrecios()
+        producto.setEstado("Activo");
+
+        // Set maneja variantes
+        producto.setManejaVariantes(dto.getVariantes() != null && !dto.getVariantes().isEmpty());
+
+        // Set relations
+        Grupos grupo = grupoRepository.findByDescripcion(dto.getGrupo())
+                .orElseThrow(() -> new EntityNotFoundException("Grupo no encontrado: " + dto.getGrupo()));
+        producto.setGrupo(grupo);
+
+        Lineas linea = lineaRepository.findByDescripcion(dto.getLinea())
+                .orElseThrow(() -> new EntityNotFoundException("Linea no encontrada: " + dto.getLinea()));
+        producto.setLinea(linea);
+
+        Impuestos impuesto = impuestoRepository.findById(dto.getImpuesto())
+                .orElseThrow(() -> new EntityNotFoundException("Impuesto no encontrado: " + dto.getImpuesto()));
+        producto.setImpuestos(impuesto);
+
+        TipoProducto tipoProducto = tipoProductoRepository.findByNombre(dto.getTipoProducto())
+                .orElseThrow(() -> new EntityNotFoundException("TipoProducto no encontrado: " + dto.getTipoProducto()));
+        producto.setTipoProducto(tipoProducto);
+
+        // Assume default usuario, perhaps system
+        Usuario usuario = usuarioRepository.findById(1).orElse(null); // Default
+        producto.setUsuario(usuario);
+
+        producto = productosRepository.save(producto);
+
+        // Handle unidad medida
+        if (dto.getUnidadMedida() != null) {
+            UnidadesMedida unidadesMedida = unidadesMedidaRepository.findByDescripcion(dto.getUnidadMedida())
+                    .orElseThrow(() -> new EntityNotFoundException("UnidadMedida no encontrada: " + dto.getUnidadMedida()));
+            UnidadesMedidaProducto ump = new UnidadesMedidaProducto();
+            UnidadesMedidaProductoId umpId = new UnidadesMedidaProductoId();
+            umpId.setProductoId(producto.getProductoId());
+            umpId.setUnidadMedidaId(unidadesMedida.getUnidadMedidaId()); // Asumiendo que necesita ID
+            ump.setId(umpId);
+            ump.setProducto(producto);
+            ump.setUnidadMedida(unidadesMedida);
+            unidadesMedidaProductoRepository.save(ump);
+        }
+
+        // Handle variants
+        if (dto.getVariantes() != null && !dto.getVariantes().isEmpty()) {
+            for (ProductoActualizarCrearDTO.VarianteDTO varianteDto : dto.getVariantes()) {
+                ProductoVariante variante = productoVarianteRepository.findByCodigoBarras(varianteDto.getCodigoBarraVariante())
+                        .orElse(new ProductoVariante());
+
+                variante.setProducto(producto);
+                variante.setSku(varianteDto.getCodigoBarraVariante());
+                variante.setCodigoBarras(varianteDto.getCodigoBarraVariante());
+                variante.setReferenciaVariantes(varianteDto.getCodigoBarraVariante());
+                variante.setActivo(true);
+                variante.setPredeterminada(false); // Set based on logic, for now false
+
+                variante = productoVarianteRepository.save(variante);
+
+                // Handle existencias
+                if (varianteDto.getExistencias() != null) {
+                    for (ProductoActualizarCrearDTO.ExistenciaDTO existenciaDto : varianteDto.getExistencias()) {
+                        Bodegas bodega = bodegasRepository.findByNombre(existenciaDto.getBodega())
+                                .orElseThrow(() -> new EntityNotFoundException("Bodega no encontrada: " + existenciaDto.getBodega()));
+
+                        Existencias existencia = new Existencias();
+                        existencia.setBodega(bodega);
+                        existencia.setProductoVariante(variante);
+                        existencia.setExistencia(BigDecimal.valueOf(existenciaDto.getCantidad()));
+
+                        existenciasRepository.save(existencia);
+                    }
+                }
+
+                // Handle cantidad directa in variante
+                if (varianteDto.getCantidad() != null && (varianteDto.getExistencias() == null || varianteDto.getExistencias().isEmpty())) {
+                    Bodegas bodegaPrincipal = bodegasRepository.findByNombre("Principal")
+                            .orElseThrow(() -> new EntityNotFoundException("Bodega Principal no encontrada"));
+                    Existencias existencia = new Existencias();
+                    existencia.setBodega(bodegaPrincipal);
+                    existencia.setProductoVariante(variante);
+                    existencia.setExistencia(BigDecimal.valueOf(varianteDto.getCantidad()));
+                    existenciasRepository.save(existencia);
+                }
+
+                // Handle attributes
+                if (varianteDto.getAtributos() != null) {
+                    for (ProductoActualizarCrearDTO.AtributoDTO attrDto : varianteDto.getAtributos()) {
+                        TipoCaracteristica tipo = tipoCaracteristicaRepository.findByNombre(attrDto.getNombre())
+                                .orElse(null); // Or throw if needed
+
+                        Caracteristica caracteristica = caracteristicaRepository.findByNombre(attrDto.getValor())
+                                .orElse(new Caracteristica());
+
+                        caracteristica.setNombre(attrDto.getValor());
+                        caracteristica.setTipo(tipo);
+
+                        caracteristica = caracteristicaRepository.save(caracteristica);
+
+                        ProductoVarianteDetalle detalle = productoVarianteDetalleRepository.findByProductoVarianteAndCaracteristica(variante, caracteristica)
+                                .orElse(new ProductoVarianteDetalle());
+
+                        detalle.setProductoVariante(variante);
+                        detalle.setCaracteristica(caracteristica);
+
+                        productoVarianteDetalleRepository.save(detalle);
+                    }
+                }
+            }
+        } else {
+            // Create default variant
+            ProductoVariante variante = productoVarianteRepository.findByProductoAndPredeterminada(producto, true)
+                    .orElse(new ProductoVariante());
+
+            variante.setProducto(producto);
+            variante.setSku(dto.getCodigo());
+            variante.setCodigoBarras(dto.getCodigoBarras());
+            variante.setReferenciaVariantes(dto.getReferencia());
+            variante.setActivo(true);
+            variante.setPredeterminada(true);
+
+            productoVarianteRepository.save(variante);
+        }
+    }
+}
 }

@@ -9,8 +9,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class PaginationResponse<T> {
 
 	private List<T> content;

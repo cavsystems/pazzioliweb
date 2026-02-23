@@ -21,14 +21,17 @@ import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
+import com.pazzioliweb.productosmodule.dtos.ProductoActualizarCrearDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
 import com.pazzioliweb.productosmodule.service.ProductosService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/productos")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class ProductosController {
 
     private final ProductosService productosService;
@@ -198,6 +201,15 @@ public class ProductosController {
         );
 
         return ResponseEntity.ok(response);
+    }
+    
+    // ------------------------------------------------------
+    // ACTUALIZAR O CREAR PRODUCTO (desde compras)
+    // ------------------------------------------------------
+    @PostMapping("/actualizar-o-crear")
+    public ResponseEntity<Void> actualizarOCrear(@RequestBody List<ProductoActualizarCrearDTO> dtos) {
+        productosService.actualizarOCrearProducto(dtos);
+        return ResponseEntity.ok().build();
     }
     
 }

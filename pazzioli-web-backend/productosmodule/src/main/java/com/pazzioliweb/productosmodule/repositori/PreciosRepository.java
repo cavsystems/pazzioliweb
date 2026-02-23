@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.pazzioliweb.productosmodule.controller.ExistenciasBodegaDTO;
+
 import com.pazzioliweb.productosmodule.dtos.PreciosProductoVarianteDTO;
 import com.pazzioliweb.productosmodule.entity.Precios;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedida;

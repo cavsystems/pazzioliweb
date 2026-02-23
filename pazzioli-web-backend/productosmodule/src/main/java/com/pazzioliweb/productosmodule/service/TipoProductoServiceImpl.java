@@ -8,6 +8,7 @@ import com.pazzioliweb.productosmodule.entity.TipoProducto;
 import com.pazzioliweb.productosmodule.repositori.TipoProductoRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 public class TipoProductoServiceImpl implements TipoProductoService{
@@ -47,6 +48,11 @@ public class TipoProductoServiceImpl implements TipoProductoService{
 	public TipoProducto buscarPorId(Integer id) {
 		return repo.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("TipoProducto no rencontrado"));
+	}
+	
+	@Override
+	public Optional<TipoProducto> buscarPorNombre(String nombre) {
+		return repo.findByNombre(nombre);
 	}
 	
 	@Override

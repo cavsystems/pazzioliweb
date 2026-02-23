@@ -27,7 +27,7 @@ public class ConexionFactory {
 	        		  "?administrador&serverTimezone=America/Bogota");*/
 	        config.setJdbcUrl("jdbc:mysql://localhost:3306/" + nombreConexion);
 	        config.setUsername("root");
-	        config.setPassword("root125");
+	        config.setPassword("root");
 	        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	        
 	        /*config.setJdbcUrl("jdbc:mysql://" + dbHost + ":" + dbPort + "/" + nombreConexion);

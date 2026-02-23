@@ -20,11 +20,9 @@ public class Caracteristica {
 	
 	private String nombre;
 
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tipo_caracteristica_id")
 	private TipoCaracteristica tipo;
-
 
 	public Long getCaracteristicaId() {
 		return caracteristicaId;
@@ -54,6 +52,5 @@ public class Caracteristica {
 	public void setTipo(TipoCaracteristica tipo) {
 		this.tipo = tipo;
 	}
-	
 	
 }

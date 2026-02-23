@@ -268,7 +268,7 @@ public class Usuariocontroller {
 		 response.clear();
 		 List<UsuarioclientesDTOS> usuariopersona=usurepocli.findByUsuariclienteind();
 		 response.put("usuariosclientes", usuariopersona);
-		 System.out.println(usuariopersona.getFirst().getEstado());
+		 System.out.println(usuariopersona.get(0).getEstado());
 		 return ResponseEntity.ok().body( response);
 	 }
 	 

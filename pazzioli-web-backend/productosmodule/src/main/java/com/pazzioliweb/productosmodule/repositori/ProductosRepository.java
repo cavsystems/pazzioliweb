@@ -21,6 +21,8 @@ public interface ProductosRepository extends JpaRepository<Productos, Integer>{
 	boolean existsByCodigoContable(String codigoContable);
 	boolean existsByCodigoBarras(String codigoBarras);
 	
+	Optional<Productos> findByCodigo(String codigo);
+	
 	@EntityGraph(attributePaths = {
 		    "grupo",
 		    "linea",

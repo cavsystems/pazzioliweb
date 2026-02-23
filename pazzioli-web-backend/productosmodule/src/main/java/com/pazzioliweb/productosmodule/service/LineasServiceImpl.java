@@ -1,6 +1,7 @@
 package com.pazzioliweb.productosmodule.service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -59,6 +60,11 @@ public class LineasServiceImpl implements LineasService{
         return repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Linea no encontrada"));
     }
+	
+	@Override
+	public Optional<Lineas> buscarPorNombre(String nombre) {
+		return repo.findByDescripcion(nombre);
+	}
 	
 	@Override
 	public Page<Lineas> listar(String descripcion,Pageable pageable) {

@@ -50,9 +50,11 @@ public class LineasController {
         return ResponseEntity.noContent().build();
     }
 	
-	@GetMapping("/{id}")
-    public ResponseEntity<Lineas> obtener(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
+	@GetMapping("/id/{nombre}")
+    public ResponseEntity<Integer> getIdByNombre(@PathVariable String nombre) {
+        return service.buscarPorNombre(nombre)
+                .map(l -> ResponseEntity.ok(l.getId()))
+                .orElse(ResponseEntity.notFound().build());
     }
 	
 	@GetMapping("/listar")

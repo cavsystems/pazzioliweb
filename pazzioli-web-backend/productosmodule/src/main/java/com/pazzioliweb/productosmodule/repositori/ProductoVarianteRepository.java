@@ -14,6 +14,7 @@ import com.pazzioliweb.productosmodule.dtos.LineaProductosDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoInventarioDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoVarianteConDetallesDTO;
 import com.pazzioliweb.productosmodule.dtos.TotalInventarioDTO;
+import com.pazzioliweb.productosmodule.entity.Productos;
 import com.pazzioliweb.productosmodule.entity.ProductoVariante;
 
 public interface ProductoVarianteRepository extends JpaRepository<ProductoVariante, Long> {
@@ -22,6 +23,8 @@ public interface ProductoVarianteRepository extends JpaRepository<ProductoVarian
 	
 	boolean existsBySku(String sku);
 	boolean existsByCodigoBarras(String codigoBarras);
+	
+	Optional<ProductoVariante> findByProductoAndPredeterminada(Productos producto, Boolean predeterminada);
 	
 	@EntityGraph(attributePaths = { "producto" })
 	@Query("SELECT p FROM ProductoVariante p")

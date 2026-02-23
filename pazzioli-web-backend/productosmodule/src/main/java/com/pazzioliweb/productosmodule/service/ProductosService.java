@@ -11,6 +11,7 @@ import com.pazzioliweb.productosmodule.dtos.ProductoCreateDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoResponseDTO;
 import com.pazzioliweb.productosmodule.dtos.ProductoUpdateDTO;
 import com.pazzioliweb.productosmodule.entity.Productos;
+import com.pazzioliweb.productosmodule.dtos.ProductoActualizarCrearDTO;
 
 public interface ProductosService {
 
@@ -35,4 +36,6 @@ public interface ProductosService {
     Page<LineaProductosDTO> listarTotalesPorLineaTodasBodegas(Pageable pageable);
     
     Page<LineaProductosDTO> listarTotalesPorLineaXBodegaId(Integer bodegaId, Pageable pageable);
+    
+    void actualizarOCrearProducto(List<ProductoActualizarCrearDTO> dtos);
 }
