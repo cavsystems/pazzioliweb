@@ -6,10 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pazzioliweb.productosmodule.entity.Lineas;
 import com.pazzioliweb.productosmodule.entity.UnidadesMedida;
+import java.util.Optional;
 
 public interface UnidadesMedidaRepository extends JpaRepository<UnidadesMedida, Integer>{
-	UnidadesMedida findByDescripcion(String descripcion);
+	Optional<UnidadesMedida> findByDescripcion(String descripcion);
 	Page<UnidadesMedida>  findByDescripcionContainingIgnoreCase(String descripcion,Pageable pageable);
+	
+	Optional<UnidadesMedida> findBySigla(String sigla);
 
 	
 }

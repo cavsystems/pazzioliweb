@@ -1,6 +1,5 @@
 package com.pazzioliweb.productosmodule.repositori;
 
-
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,8 +12,11 @@ import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO;
 import com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico;
 import com.pazzioliweb.productosmodule.dtos.idcaracteristicasDTOS;
 import com.pazzioliweb.productosmodule.entity.Caracteristica;
+import java.util.Optional;
 
 public interface CaracteristicaRepository extends JpaRepository<Caracteristica, Long>{
+	
+	Optional<Caracteristica> findByNombre(String nombre);
 	
 	@Query("""
 		    SELECT NEW com.pazzioliweb.productosmodule.dtos.CaracteristicaDTO_basico(

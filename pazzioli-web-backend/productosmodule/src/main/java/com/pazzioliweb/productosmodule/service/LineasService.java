@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.pazzioliweb.productosmodule.entity.Lineas;
+import java.util.Optional;
 
 public interface LineasService {
 	Lineas crear(Lineas l);
@@ -13,6 +14,8 @@ public interface LineasService {
 	void eliminar(Integer id);
 	
 	Lineas buscarPorId(Integer id);
+	
+	Optional<Lineas> buscarPorNombre(String nombre);
 	
 	Page<Lineas> listar(String descripcion,Pageable pageable);
 	

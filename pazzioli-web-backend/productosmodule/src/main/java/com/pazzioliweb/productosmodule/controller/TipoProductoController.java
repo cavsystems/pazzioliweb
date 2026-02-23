@@ -46,11 +46,18 @@ public class TipoProductoController {
 		service.eliminar(id);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<TipoProducto> obtener(@PathVariable Integer id){
 		return ResponseEntity.ok(service.buscarPorId(id));
 	}
+	
+	@GetMapping("/id/{nombre}")
+    public ResponseEntity<Integer> getIdByNombre(@PathVariable String nombre) {
+        return service.buscarPorNombre(nombre)
+                .map(tp -> ResponseEntity.ok(tp.getTipoProductoId()))
+                .orElse(ResponseEntity.notFound().build());
+    }
 	
 	@GetMapping("/listar")
 	public ResponseEntity<PaginationResponse<TipoProducto>> listar(

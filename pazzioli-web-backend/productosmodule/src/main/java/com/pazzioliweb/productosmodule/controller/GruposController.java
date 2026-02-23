@@ -41,17 +41,18 @@ private final GruposServiceImpl service;
         return ResponseEntity.ok(service.actualizar(id, grupo));
     }
 	
-	@DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        service.eliminar(id);
-        return ResponseEntity.noContent().build();
+	@GetMapping("/id/{nombre}")
+    public ResponseEntity<Integer> getIdByNombre(@PathVariable String nombre) {
+        return service.buscarPorNombre(nombre)
+                .map(g -> ResponseEntity.ok(g.getId()))
+                .orElse(ResponseEntity.notFound().build());
     }
 	
 	@GetMapping("/{id}")
     public ResponseEntity<Grupos> obtener(@PathVariable Integer id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
-	
+
 	@GetMapping("/listar")
     public ResponseEntity<PaginationResponse<Grupos>> listar(
     		@RequestParam(defaultValue = "") String descripcion,

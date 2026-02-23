@@ -69,7 +69,7 @@ public class PreciosController {
 
         Pageable pageable = PageRequest.of(page, size, sort);
         
-        Page<PrecioResponseDTO> resultado = service.listar(pageable);
+        Page<PrecioResponseDTO> resultado = service.listar("",pageable);
     	
         return ResponseEntity.ok(PaginationResponse.of(resultado));
     }

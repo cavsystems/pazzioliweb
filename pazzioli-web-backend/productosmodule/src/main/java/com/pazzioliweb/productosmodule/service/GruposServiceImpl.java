@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.pazzioliweb.productosmodule.entity.Grupos;
 import com.pazzioliweb.productosmodule.repositori.GrupoRepositori;
 import com.pazzioliweb.productosmodule.repositori.ProductosRepository;
+import java.util.Optional;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -52,6 +53,11 @@ private final ProductosRepository product;
         return repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Grupo no encontrado"));
     }
+	
+	@Override
+	public Optional<Grupos> buscarPorNombre(String nombre) {
+		return repo.findByDescripcion(nombre);
+	}
 	
 	@Override
 	public Page<Grupos> listar(String descripcion,Pageable pageable) {

@@ -94,5 +94,12 @@ public class UnidadesMedidaController {
 	
         return ResponseEntity.ok(unidadMedidaService.actualizar(id, medida));
     }
+    
+    @GetMapping("/id/{codigo}")
+    public ResponseEntity<Integer> getIdByCodigo(@PathVariable String codigo) {
+        return unidadMedidaService.buscarPorCodigo(codigo)
+                .map(um -> ResponseEntity.ok(um.getUnidadMedidaId()))
+                .orElse(ResponseEntity.notFound().build());
+    }
 	
 }

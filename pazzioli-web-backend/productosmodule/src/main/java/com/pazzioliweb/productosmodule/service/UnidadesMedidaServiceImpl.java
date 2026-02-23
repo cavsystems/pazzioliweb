@@ -2,6 +2,7 @@ package com.pazzioliweb.productosmodule.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -91,5 +92,10 @@ public class UnidadesMedidaServiceImpl implements UnidadesMedidaService {
 	    }
       
         repo.deleteById(id);
+    }
+    
+    @Override
+    public Optional<UnidadMedidaResponseDTO> buscarPorCodigo(String codigo) {
+    	return repo.findBySigla(codigo).map(mapper::toResponse);
     }
 }
